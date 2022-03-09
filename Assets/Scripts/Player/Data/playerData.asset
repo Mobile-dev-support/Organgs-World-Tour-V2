@@ -12,20 +12,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65ca48738a7a0264884c833183f68271, type: 3}
   m_Name: playerData
   m_EditorClassIdentifier: 
-  movementVelocity: 10
-  jumpVelocity: 15
+  movementVelocity: 7
+  CandymovementVelocity: 12
+  jumpVelocity: 17
+  defaultJumpVelocity: 17
+  cheeseJumpVelocity: 7
   amountOfJumps: 1
   wallJumpVelocity: 20
+  defaultWallJumpVelocity: 20
+  cheeseWallJumpVelocity: 10
   wallJumpTime: 0.4
   wallJumpAngle: {x: 1, y: 2}
   coyoteTime: 0.2
   variableJumpHeightMultiplier: 0.5
-  wallSlideVelocity: 2
+  wallSlideVelocity: 1.5
   wallClimbVelocity: 3
-  startOffset: {x: 0.4, y: 0.9}
-  stopOffset: {x: 0.4, y: 0.75}
-  groundCheckRadius: 0.3
-  wallCheckDistance: 0.5
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
+  startOffset: {x: 0.42, y: 0.45}
+  stopOffset: {x: 0.15, y: 0.5}
+  dashCooldown: 0.5
+  maxHoldTime: 1
+  holdTimeScale: 0.25
+  dashTime: 0.2
+  dashVelocity: 30
+  drag: 10
+  dashEndYMultiplier: 0.2
+  distBetweenAfterImages: 0.5
+  distBetweenAfterDustImage: 0.3
+  crouchMovementVelocity: 5
+  crouchColliderHeight: 0.3
+  standColliderHeight: 1.05
+  slideSpeed: 55
+  slideTime: 0.3
+  slideAgainTimer: 0.1
+  health: -10
+  deathChunk: {fileID: 1962614393226834858, guid: 3d13ef1f52d189642930444f906fc622,
+    type: 3}
+  deathCheckRadiusSlide: 0.3
+  deathCheckRadiusIdle: 0.55
+  knockbackAngle: {x: 270, y: 90}
+  knockbackStrength: 30
+  speedOnIce: 3
+  NormalMovementVelocity: 7
+  slipperyMultiplier: 20
+  platformDetectionRadius: 1
+  cheeseTimer: 2
+  candyTimer: 5
+  DrinkTimer: 2
+  afterShockTimer: 2

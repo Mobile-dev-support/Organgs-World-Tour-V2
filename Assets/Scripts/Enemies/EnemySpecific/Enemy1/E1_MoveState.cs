@@ -29,7 +29,7 @@ public class E1_MoveState : MoveState
         {
             stateMachine.ChangeState(enemy.playerDetectedState);
         }
-        else if(isDetectingWall || !isDetectingLedge)
+        else if(isDetectingWall && isGrounded)
         {
             enemy.idleState.SetFlipAfterIdle(true);
             stateMachine.ChangeState(enemy.idleState);

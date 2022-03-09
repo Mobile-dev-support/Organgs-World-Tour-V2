@@ -12,6 +12,8 @@ public class Enemy1 : Entity
     public E1_MeleeAttackState meleeAttackState { get; private set; }
     public E1_StunState stunState { get; private set; }
     public E1_DeadState deadState { get; private set; }
+    public E1_JumpState jumpState { get; private set; }
+
 
     [SerializeField]
     private D_IdleState idleStateData;
@@ -29,7 +31,10 @@ public class Enemy1 : Entity
     private D_StunState stunStateData;
     [SerializeField]
     private D_DeadState deadStateData;
+    [SerializeField]
+    private D_JumpState jumpStateData;
 
+    public Rigidbody2D RB { get; private set; }
 
     [SerializeField]
     private Transform meleeAttackPosition;
@@ -46,13 +51,15 @@ public class Enemy1 : Entity
         meleeAttackState = new E1_MeleeAttackState(this, stateMachine, "meleeAttack", meleeAttackPosition, meleeAttackStateData, this);
         stunState = new E1_StunState(this, stateMachine, "stun", stunStateData, this);
         deadState = new E1_DeadState(this, stateMachine, "dead", deadStateData, this);
+        jumpState = new E1_JumpState(this, stateMachine, "jumping", jumpStateData, this);
 
-       
+
     }
 
     private void Start()
     {
-        stateMachine.Initialize(moveState);        
+        stateMachine.Initialize(moveState);
+        RB = GetComponent<Rigidbody2D>();
     }
 
     public override void OnDrawGizmos()

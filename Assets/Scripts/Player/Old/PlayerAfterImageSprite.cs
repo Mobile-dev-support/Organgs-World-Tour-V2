@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAfterImageSprite : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField] 
     private float activeTime = 0.1f;
     private float timeActivated;
     private float alpha;
@@ -13,24 +13,34 @@ public class PlayerAfterImageSprite : MonoBehaviour
     [SerializeField]
     private float alphaDecay = 0.85f;
 
-    private Transform player;
+    private GameObject player;
 
     private SpriteRenderer SR;
     private SpriteRenderer playerSR;
 
     private Color color;
+    public bool isAfterImage;
+    [Header("DUST SCALE")]
+    public float minScale, maxScale;
 
     private void OnEnable()
     {
-        SR = GetComponent<SpriteRenderer>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        float random = Random.Range(minScale, maxScale);
+        player = GameManager.Instance.Rplayer;
         playerSR = player.GetComponent<SpriteRenderer>();
-
+        SR = GetComponent<SpriteRenderer>();
         alpha = alphaSet;
-        SR.sprite = playerSR.sprite;
-        transform.position = player.position;
-        transform.rotation = player.rotation;
         timeActivated = Time.time;
+        transform.position = player.transform.position;
+        transform.rotation = player.transform.rotation;
+        if (isAfterImage)
+        {
+            SR.sprite = playerSR.sprite;
+        }
+        else
+        {
+            transform.localScale = new Vector2(random, random);
+        }
     }
 
     private void Update()
@@ -41,7 +51,15 @@ public class PlayerAfterImageSprite : MonoBehaviour
 
         if(Time.time >= (timeActivated + activeTime))
         {
-            PlayerAfterImagePool.Instance.AddToPool(gameObject);
+            if (isAfterImage)
+            {
+                PlayerAfterImagePool.Instance.AddToPool(gameObject);
+            }
+            else
+            {
+                trailPool.Instance.AddToPool(gameObject);
+            }
+
         }
 
     }

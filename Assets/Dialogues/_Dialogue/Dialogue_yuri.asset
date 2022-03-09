@@ -1,0 +1,515 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8299565964867456645
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: End
+  children: []
+  _uniqueId: e941922e-f699-4bd8-a4a6-c8a15894d6d1
+--- !u!114 &-8069217125709188682
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: End
+  children: []
+  _uniqueId: b37eb38a-f475-4ead-bf7d-6bcb43c5377b
+--- !u!114 &-7078002458302809802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: e0c923a7-2dcf-47da-beef-a869cac146d5
+  rect:
+    serializedVersion: 2
+    x: 50453
+    y: 50428
+    width: 200
+    height: 182
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices:
+  - {fileID: -3274431849956370940}
+  - {fileID: 320839884049481341}
+  actor: {fileID: 11400000, guid: 0dc033516a5503b4aa70e9ec8422c2a9, type: 2}
+  dialogue: Yo, the world needs you, Yuri. You can do this. We believe in you!
+--- !u!114 &-6297314653340944222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 82a49fee-1e21-4a53-8eb8-9f12447def44
+  rect:
+    serializedVersion: 2
+    x: 50463
+    y: 50197
+    width: 200
+    height: 182
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices:
+  - {fileID: 7877578901854811010}
+  - {fileID: 8058990609202792612}
+  actor: {fileID: 11400000, guid: f876a18afebc9a6419e189f69343acf7, type: 2}
+  dialogue: "O-Oliver! Oh my goodness, you\u2019re f-finally here!"
+--- !u!114 &-5672782653839027317
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: Next
+  children:
+  - {fileID: -6297314653340944222}
+  _uniqueId: 238e48c0-d567-414d-aaf8-f73f3e522938
+--- !u!114 &-5158277280717922231
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: Next
+  children:
+  - {fileID: -4121168725379820369}
+  _uniqueId: 6c86bc29-af89-4bb9-9907-87bdadf8381d
+--- !u!114 &-4448068066016387280
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: End
+  children: []
+  _uniqueId: 0a0c313e-ba99-44a2-8b89-4f57177e6201
+--- !u!114 &-4121168725379820369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: c7af432c-e61e-41e2-bd0f-662f24ed8fb4
+  rect:
+    serializedVersion: 2
+    x: 50203
+    y: 50424
+    width: 200
+    height: 182
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices:
+  - {fileID: 5581402003314909972}
+  - {fileID: -8299565964867456645}
+  actor: {fileID: 11400000, guid: 05b8c356b24081c4eadabaee6c9e5188, type: 2}
+  dialogue: "Uhhh\u2026 I\u2019m nervous. I don\u2019t think I can do this... "
+--- !u!114 &-3422306076964346817
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: Next
+  children:
+  - {fileID: 299368489109015712}
+  _uniqueId: 62634a9e-a531-4b97-acb9-c16a886128dc
+--- !u!114 &-3274431849956370940
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: Next
+  children:
+  - {fileID: -3198287856351304181}
+  _uniqueId: a0f8784c-2ab7-4d76-9702-3edd100b83b7
+--- !u!114 &-3198287856351304181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 47535b24-4e92-4a56-ac08-e9020ca4ff4c
+  rect:
+    serializedVersion: 2
+    x: 50695
+    y: 50430
+    width: 200
+    height: 182
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices:
+  - {fileID: -1364121873128044893}
+  - {fileID: 401457514582296353}
+  actor: {fileID: 11400000, guid: f876a18afebc9a6419e189f69343acf7, type: 2}
+  dialogue: "Okay! I-I\u2019ll try my best!"
+--- !u!114 &-2656063796696588624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: ea930f29-26f8-4048-9f23-670449ae15e6
+  rect:
+    serializedVersion: 2
+    x: 50924
+    y: 50428
+    width: 200
+    height: 162
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices:
+  - {fileID: -4448068066016387280}
+  actor: {fileID: 11400000, guid: df04eb026b700af4d9007d1f9c4827bb, type: 2}
+  dialogue: As long as I have the Organgs by my side, I can do anything!
+--- !u!114 &-1364121873128044893
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: Next
+  children:
+  - {fileID: -2656063796696588624}
+  _uniqueId: 1e7b5ba7-738e-4cbc-909f-09be90209fde
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b35851dfd8754a74b333944d50d05bbd, type: 3}
+  m_Name: Dialogue_yuri
+  m_EditorClassIdentifier: 
+  _nodes:
+  - {fileID: 4147968344412948369}
+  - {fileID: 7643796379120246510}
+  - {fileID: -6297314653340944222}
+  - {fileID: 1352553957622764974}
+  - {fileID: 299368489109015712}
+  - {fileID: -4121168725379820369}
+  - {fileID: -7078002458302809802}
+  - {fileID: -3198287856351304181}
+  - {fileID: -2656063796696588624}
+  root: {fileID: 4147968344412948369}
+  scrollPosition: {x: 49926, y: 50089}
+--- !u!114 &299368489109015712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 4198d464-4fed-4e6e-8e64-cc98bcc84a64
+  rect:
+    serializedVersion: 2
+    x: 50916
+    y: 50196
+    width: 200
+    height: 182
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices:
+  - {fileID: -5158277280717922231}
+  - {fileID: 4485619777917272708}
+  actor: {fileID: 11400000, guid: a5a0c565a954f2b4faad87d09cbda22c, type: 2}
+  dialogue: Can you take this to the Totem Land and meet with the others?
+--- !u!114 &320839884049481341
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: End
+  children: []
+  _uniqueId: 5de91a57-9916-487f-bf44-47fd73784723
+--- !u!114 &401457514582296353
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: End
+  children: []
+  _uniqueId: e9807508-7fd3-46d7-9fbf-d45a3b880017
+--- !u!114 &1352553957622764974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 2c44beb9-a01f-417e-a9df-1c0891b1331a
+  rect:
+    serializedVersion: 2
+    x: 50689
+    y: 50197
+    width: 200
+    height: 182
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices:
+  - {fileID: -3422306076964346817}
+  - {fileID: 5891803174530685748}
+  actor: {fileID: 11400000, guid: 0dc033516a5503b4aa70e9ec8422c2a9, type: 2}
+  dialogue: "I found one of the Mighty Health Totem\u2019s shards on the way here,
+    yo!"
+--- !u!114 &4147968344412948369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d8d0566afe4d5fa9596c80df966df6, type: 3}
+  m_Name: Root
+  m_EditorClassIdentifier: 
+  _uniqueId: fae53f38-504a-4c80-b622-1dc92d46035e
+  rect:
+    serializedVersion: 2
+    x: 50050
+    y: 50200
+    width: 100
+    height: 57
+  nodeTitle: 
+  children:
+  - {fileID: 7643796379120246510}
+  conditions: []
+  enterActions: []
+  exitActions: []
+--- !u!114 &4485619777917272708
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: End
+  children: []
+  _uniqueId: 5760895a-1aab-4efe-bc60-474b2861adec
+--- !u!114 &5581402003314909972
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: Next
+  children:
+  - {fileID: -7078002458302809802}
+  _uniqueId: 2d0821de-ab60-4e73-afe8-1618baf06eb0
+--- !u!114 &5891803174530685748
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: End
+  children: []
+  _uniqueId: a23c5595-c72a-4ffd-bf24-18cfc69e3c26
+--- !u!114 &7643796379120246510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 217ecb69-fd6a-4d9f-86b4-0e6683d34806
+  rect:
+    serializedVersion: 2
+    x: 50211
+    y: 50198
+    width: 200
+    height: 182
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices:
+  - {fileID: -5672782653839027317}
+  - {fileID: -8069217125709188682}
+  actor: {fileID: 11400000, guid: 0dc033516a5503b4aa70e9ec8422c2a9, type: 2}
+  dialogue: '*GASP!* Yuri!'
+--- !u!114 &7877578901854811010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: Next
+  children:
+  - {fileID: 1352553957622764974}
+  _uniqueId: 776ff31a-e091-4e36-8bce-ea97ca8864f9
+--- !u!114 &8058990609202792612
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: End
+  children: []
+  _uniqueId: f80ca4f2-c2ce-4bb2-8b7b-2df3c9445584

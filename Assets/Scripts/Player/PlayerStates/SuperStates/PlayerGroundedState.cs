@@ -8,13 +8,20 @@ public class PlayerGroundedState : PlayerState
     protected int yInput;
 
     protected bool isTouchingCeiling;
+    protected bool isTouchingWall;
+    protected bool isTouchingWallBack;
+    protected bool isSlippery;
+    protected bool isSugarPlatform;
+    protected bool isCurrentlySliding;
 
     private bool JumpInput;
-    private bool grabInput;
     private bool isGrounded;
-    private bool isTouchingWall;
-    private bool isTouchingLedge;
-    private bool dashInput;
+    private bool isDead;
+    private bool isStickingToPlatform;
+    private bool isTouchingCeilingSolidPlatform;
+
+    private bool isThroughPlatform;
+
 
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
@@ -23,11 +30,23 @@ public class PlayerGroundedState : PlayerState
     public override void DoChecks()
     {
         base.DoChecks();
-
+        isDead = core.CollisionSenses.Trap;
         isGrounded = core.CollisionSenses.Ground;
         isTouchingWall = core.CollisionSenses.WallFront;
-        isTouchingLedge = core.CollisionSenses.LedgeHorizontal;
+        isTouchingWallBack = core.CollisionSenses.WallBack;
+        isThroughPlatform = core.CollisionSenses.ThroughPlatform;
         isTouchingCeiling = core.CollisionSenses.Ceiling;
+        isSlippery = core.CollisionSenses.SlipperyPlatform;
+        isStickingToPlatform = core.CollisionSenses.SolidPlatform;
+        isTouchingCeilingSolidPlatform = core.CollisionSenses.SolidPlatformCeiling;
+        isSugarPlatform = core.CollisionSenses.SugarPlatform;
+        player.Anim.SetBool("isTouchingWall", isTouchingWall);
+
+        if (isSugarPlatform && !player.isCandied)
+        {
+            playerData.candyTimer = 5f;
+            player.isCandied = true;
+        }
     }
 
     public override void Enter()
@@ -35,7 +54,6 @@ public class PlayerGroundedState : PlayerState
         base.Enter();
 
         player.JumpState.ResetAmountOfJumpsLeft();
-        player.DashState.ResetCanDash();
     }
 
     public override void Exit()
@@ -46,35 +64,27 @@ public class PlayerGroundedState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
         xInput = player.InputHandler.NormInputX;
         yInput = player.InputHandler.NormInputY;
         JumpInput = player.InputHandler.JumpInput;
-        grabInput = player.InputHandler.GrabInput;
-        dashInput = player.InputHandler.DashInput;
 
-        if (player.InputHandler.AttackInputs[(int)CombatInputs.primary] && !isTouchingCeiling)
-        {
-            stateMachine.ChangeState(player.PrimaryAttackState);
-        }
-        else if (player.InputHandler.AttackInputs[(int)CombatInputs.secondary] && !isTouchingCeiling)
-        {
-            stateMachine.ChangeState(player.SecondaryAttackState);
-        }
-        else if (JumpInput && player.JumpState.CanJump())
+        if (JumpInput && player.JumpState.CanJump() && !isDead && !player.afterShock && !player.isDrinking)
         {
             stateMachine.ChangeState(player.JumpState);
-        }else if (!isGrounded)
+        }
+        else if (!isGrounded && !isSlippery && !isStickingToPlatform && !isThroughPlatform && !isSugarPlatform && !isDead)
         {
             player.InAirState.StartCoyoteTime();
             stateMachine.ChangeState(player.InAirState);
-        }else if(isTouchingWall && grabInput && isTouchingLedge)
-        {
-            stateMachine.ChangeState(player.WallGrabState);
         }
-        else if (dashInput && player.DashState.CheckIfCanDash() && !isTouchingCeiling)
+        else if ((isGrounded || isSlippery || isStickingToPlatform || isThroughPlatform || isSugarPlatform) && isTouchingWall && !isTouchingCeiling && !isDead)
         {
-            stateMachine.ChangeState(player.DashState);
+            stateMachine.ChangeState(player.IdleState);
+        }
+        else if (isDead || ( !isCurrentlySliding && (isTouchingCeiling || isTouchingCeilingSolidPlatform) && (isGrounded || isSlippery || isStickingToPlatform || isSugarPlatform))
+            || (isTouchingWall && isTouchingWallBack && (isGrounded || isSlippery || !isThroughPlatform || isSugarPlatform)) || player.transform.rotation.z != 0)
+        {
+            stateMachine.ChangeState(player.DeathState);
         }
     }
 

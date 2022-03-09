@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerTouchingWallState : PlayerState
 {
     protected bool isGrounded;
+    protected bool isDead;
     protected bool isTouchingWall;
     protected bool grabInput;
     protected bool jumpInput;
@@ -29,7 +30,7 @@ public class PlayerTouchingWallState : PlayerState
     public override void DoChecks()
     {
         base.DoChecks();
-
+        isDead = core.CollisionSenses.Trap;
         isGrounded = core.CollisionSenses.Ground;
         isTouchingWall = core.CollisionSenses.WallFront;
         isTouchingLedge = core.CollisionSenses.LedgeHorizontal;
@@ -38,6 +39,11 @@ public class PlayerTouchingWallState : PlayerState
         {
             player.LedgeClimbState.SetDetectedPosition(player.transform.position);
         }
+        else if (isDead)
+        {
+            stateMachine.ChangeState(player.DeathState);
+        }
+
     }
 
     public override void Enter()
@@ -59,22 +65,26 @@ public class PlayerTouchingWallState : PlayerState
         grabInput = player.InputHandler.GrabInput;
         jumpInput = player.InputHandler.JumpInput;
 
-        if (jumpInput)
+        if (jumpInput && !isDead)
         {            
             player.WallJumpState.DetermineWallJumpDirection(isTouchingWall);
             stateMachine.ChangeState(player.WallJumpState);
         }
-        else if (isGrounded && !grabInput)
+        else if (isGrounded && !grabInput && !isDead)
         {
             stateMachine.ChangeState(player.IdleState);
         }
-        else if(!isTouchingWall || (xInput != core.Movement.FacingDirection && !grabInput))
+        else if(!isTouchingWall && !isDead || (xInput != core.Movement.FacingDirection && !grabInput))
         {
             stateMachine.ChangeState(player.InAirState);
         }
-        else if(isTouchingWall && !isTouchingLedge)
+        else if(isTouchingWall && !isTouchingLedge && !isDead)
         {
             stateMachine.ChangeState(player.LedgeClimbState);
+        }
+        else if (isDead)
+        {
+            stateMachine.ChangeState(player.DeathState);
         }
     }
 

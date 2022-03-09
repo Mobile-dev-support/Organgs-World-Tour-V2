@@ -15,11 +15,13 @@ public class PlayerJumpState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
+        //SquashAndStretch.Instance.SquishAndStretch();
         player.InputHandler.UseJumpInput();
         core.Movement.SetVelocityY(playerData.jumpVelocity);
         isAbilityDone = true;
         amountOfJumpsLeft--;
         player.InAirState.SetIsJumping();
+        CharacterAudio.Instance.Jump();
     }
 
     public bool CanJump()

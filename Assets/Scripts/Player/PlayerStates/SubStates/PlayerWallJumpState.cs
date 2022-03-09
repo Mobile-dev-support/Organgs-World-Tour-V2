@@ -18,6 +18,7 @@ public class PlayerWallJumpState : PlayerAbilityState
         core.Movement.SetVelocity(playerData.wallJumpVelocity, playerData.wallJumpAngle, wallJumpDirection);
         core.Movement.CheckIfShouldFlip(wallJumpDirection);
         player.JumpState.DecreaseAmountOfJumpsLeft();
+        CharacterAudio.Instance.WallJump();
     }
 
     public override void LogicUpdate()

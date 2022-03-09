@@ -6,14 +6,21 @@ using UnityEngine;
 public class PlayerData : ScriptableObject
 {
     [Header("Move State")]
-    public float movementVelocity = 10f;
-
+    public float movementVelocity = 7f;
+    [HideInInspector]
+    public float CandymovementVelocity = 12f;
     [Header("Jump State")]
     public float jumpVelocity = 15f;
+    [HideInInspector]
+    public float defaultJumpVelocity = 17f;
+    public float cheeseJumpVelocity = 7f;
     public int amountOfJumps = 1;
 
     [Header("Wall Jump State")]
     public float wallJumpVelocity = 20;
+    [HideInInspector]
+    public float defaultWallJumpVelocity = 20f;
+    public float cheeseWallJumpVelocity = 10f;
     public float wallJumpTime = 0.4f;
     public Vector2 wallJumpAngle = new Vector2(1, 2);
 
@@ -40,9 +47,38 @@ public class PlayerData : ScriptableObject
     public float drag = 10f;
     public float dashEndYMultiplier = 0.2f;
     public float distBetweenAfterImages = 0.5f;
+    public float distBetweenAfterDustImage = 0.2f;
 
     [Header("Crouch States")]
     public float crouchMovementVelocity = 5f;
     public float crouchColliderHeight = 0.8f;
-    public float standColliderHeight = 1.6f;
+    public float standColliderHeight = 1.25f;
+
+    [Header("Slide States")]
+    public float slideSpeed = 2.5f;
+    public float slideTime = 0.5f;
+    public float slideAgainTimer = 0.3f;
+
+    [Header("Player Health")]
+    public float health = 10;
+    public GameObject deathChunk;
+    public float deathCheckRadiusSlide = 0.25f;
+    public float deathCheckRadiusIdle = 0.55f;
+
+    [Header("Knockback")]
+    public Vector2 knockbackAngle;
+    public float knockbackStrength;
+
+    [Header("Slippery States")]
+    public float speedOnIce = 3f;
+    [HideInInspector]
+    public float NormalMovementVelocity = 7f;
+    public float slipperyMultiplier = 50f;
+    public float platformDetectionRadius = 1f;
+
+    [Header("Enemy Status Timers")]
+    public float cheeseTimer = 2f;
+    public float candyTimer = 5f;
+    public float DrinkTimer = 2f;
+    public float afterShockTimer = 2f;
 }

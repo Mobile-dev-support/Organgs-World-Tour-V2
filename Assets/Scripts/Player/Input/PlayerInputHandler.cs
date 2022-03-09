@@ -2,11 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    private PlayerInput playerInput;
+    //private PlayerInput playerInput;
     private Camera cam;
 
     public Vector2 RawMovementInput { get; private set; }
@@ -15,6 +14,7 @@ public class PlayerInputHandler : MonoBehaviour
     public int NormInputX { get; private set; }
     public int NormInputY { get; private set; }
     public bool JumpInput { get; private set; }
+    public bool SlideInput { get; private set; }
     public bool JumpInputStop { get; private set; }
     public bool GrabInput { get; private set; }
     public bool DashInput { get; private set; }
@@ -30,98 +30,176 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void Start()
     {
-        playerInput = GetComponent<PlayerInput>();
-
         int count = Enum.GetValues(typeof(CombatInputs)).Length;
         AttackInputs = new bool[count];
-
         cam = Camera.main;
     }
 
     private void Update()
     {
+        OnMoveInput(RawMovementInput);
+        MovementControl();
+    }
+
+    private void FixedUpdate()
+    {
         CheckJumpInputHoldTime();
         CheckDashInputHoldTime();
     }
 
-    public void OnPrimaryAttackInput(InputAction.CallbackContext context)
+    private void MovementControl()
     {
-        if (context.started)
+#if UNITY_EDITOR
+        RawMovementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        if (Input.GetButtonDown("Jump"))
         {
-            AttackInputs[(int)CombatInputs.primary] = true;
+            OnJumpInput();
         }
-
-        if (context.canceled)
+        else if (Input.GetButtonUp("Jump"))
         {
-            AttackInputs[(int)CombatInputs.primary] = false;
+            OnJumpInputStop();
         }
+        if (Input.GetButtonDown("Fire3"))
+        {
+            OnSlideInput();
+        }
+        else if (Input.GetButtonUp("Fire3"))
+        {
+            OnSlideInputStop();
+        }
+#endif
+#if UNITY_ANDROID
+        RawMovementInput = new Vector2(SimpleInput.GetAxis("Horizontal"), SimpleInput.GetAxis("Vertical"));
+        if (SimpleInput.GetButtonDown("Jump"))
+        {
+            OnJumpInput();
+        }
+        else if (SimpleInput.GetButtonUp("Jump"))
+        {
+            OnJumpInputStop();
+        }
+        if(SimpleInput.GetButtonDown("Fire3"))
+        {
+            OnSlideInput();
+        }
+        else if (SimpleInput.GetButtonUp("Fire3"))
+        {
+            OnSlideInputStop();
+        }
+#endif
+#if UNITY_IOS
+        RawMovementInput = new Vector2(SimpleInput.GetAxis("Horizontal"), SimpleInput.GetAxis("Vertical"));
+        if (SimpleInput.GetButtonDown("Jump"))
+        {
+            OnJumpInput();
+        }
+        else if (SimpleInput.GetButtonUp("Jump"))
+        {
+            OnJumpInputStop();
+        }
+        if(SimpleInput.GetButtonDown("Fire3"))
+        {
+            OnSlideInput();
+        }
+        else if (SimpleInput.GetButtonUp("Fire3"))
+        {
+            OnSlideInputStop();
+        }
+#endif
     }
 
-    public void OnSecondaryAttackInput(InputAction.CallbackContext context)
+    public void OnPrimaryAttackInput()
     {
-        if (context.started)
-        {
-            AttackInputs[(int)CombatInputs.secondary] = true;
-        }
+        //if (context.started)
+        //{
+        AttackInputs[(int)CombatInputs.primary] = true;
+        //}
 
-        if (context.canceled)
-        {
-            AttackInputs[(int)CombatInputs.secondary] = false;
-        }
+        //if (context.canceled)
+        //{
+        AttackInputs[(int)CombatInputs.primary] = false;
+        //}
     }
 
-    public void OnMoveInput(InputAction.CallbackContext context)
+    public void OnSecondaryAttackInput()
     {
-        RawMovementInput = context.ReadValue<Vector2>();
+        //if (context.started)
+        //{
+        AttackInputs[(int)CombatInputs.secondary] = true;
+        //}
 
+        //if (context.canceled)
+        //{
+        AttackInputs[(int)CombatInputs.secondary] = false;
+        //}
+    }
+
+    public void OnMoveInput(Vector2 _axis)
+    {
+        _axis = RawMovementInput;
         NormInputX = Mathf.RoundToInt(RawMovementInput.x);
-        NormInputY = Mathf.RoundToInt(RawMovementInput.y);       
-        
+        NormInputY = Mathf.RoundToInt(RawMovementInput.y);
+
     }
 
-    public void OnJumpInput(InputAction.CallbackContext context)
+    public void OnJumpInput()
     {
-        if (context.started)
-        {
-            JumpInput = true;
-            JumpInputStop = false;
-            jumpInputStartTime = Time.time;
-        }
+        //if (context.started)
+        //{
+        JumpInput = true;
+        JumpInputStop = false;
+        jumpInputStartTime = Time.time;
+        //}
 
-        if (context.canceled)
-        {
-            JumpInputStop = true;
-        }
+        //if (context.canceled)
+        //{
+        //JumpInputStop = true;
+        //}
     }
-
-    public void OnGrabInput(InputAction.CallbackContext context)
+    public void OnSlideInput()
     {
-        if (context.started)
-        {
-            GrabInput = true;
-        }
-
-        if (context.canceled)
-        {
-            GrabInput = false;
-        }
+        SlideInput = true;
     }
 
-    public void OnDashInput(InputAction.CallbackContext context)
+    public void OnSlideInputStop()
     {
-        if (context.started)
-        {
-            DashInput = true;
-            DashInputStop = false;
-            dashInputStartTime = Time.time;
-        }
-        else if (context.canceled)
-        {
-            DashInputStop = true;
-        }
+        SlideInput = false;
     }
 
-    public void OnDashDirectionInput(InputAction.CallbackContext context)
+    public void OnJumpInputStop()
+    {
+        JumpInputStop = true;
+    }
+
+
+    public void OnGrabInput()
+    {
+        //if (context.started)
+        //{
+        GrabInput = true;
+        //}
+
+        //if (context.canceled)
+        //{
+        GrabInput = false;
+        //}
+    }
+
+    public void OnDashInput()
+    {
+        //if (context.started)
+        //{
+        DashInput = true;
+        DashInputStop = false;
+        dashInputStartTime = Time.time;
+        //}
+        //else if (context.canceled)
+        //{
+        DashInputStop = true;
+        //}
+    }
+
+    /*public void OnDashDirectionInput(InputAction.CallbackContext context)
     {
         RawDashDirectionInput = context.ReadValue<Vector2>();
 
@@ -131,7 +209,7 @@ public class PlayerInputHandler : MonoBehaviour
         }
 
         DashDirectionInput = Vector2Int.RoundToInt(RawDashDirectionInput.normalized);
-    }
+    }*/
 
     public void UseJumpInput() => JumpInput = false;
 
@@ -139,7 +217,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void CheckJumpInputHoldTime()
     {
-        if(Time.time >= jumpInputStartTime + inputHoldTime)
+        if (Time.time >= jumpInputStartTime + inputHoldTime)
         {
             JumpInput = false;
         }
@@ -147,7 +225,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void CheckDashInputHoldTime()
     {
-        if(Time.time >= dashInputStartTime + inputHoldTime)
+        if (Time.time >= dashInputStartTime + inputHoldTime)
         {
             DashInput = false;
         }

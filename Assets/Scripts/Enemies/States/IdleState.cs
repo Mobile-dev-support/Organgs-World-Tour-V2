@@ -9,6 +9,10 @@ public class IdleState : State
     protected bool flipAfterIdle;
     protected bool isIdleTimeOver;
     protected bool isPlayerInMinAgroRange;
+    protected bool isDetectingWall;
+    //protected bool isDetectingLedge;
+    protected bool isDetectingLedgeHorizontal;
+    protected bool isGrounded;
 
     protected float idleTime;
 
@@ -21,6 +25,9 @@ public class IdleState : State
     {
         base.DoChecks();
         isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
+        isDetectingLedgeHorizontal = core.CollisionSenses.LedgeHorizontal;
+        isDetectingWall = core.CollisionSenses.WallFront;
+        isGrounded = core.CollisionSenses.Ground;
     }
 
     public override void Enter()

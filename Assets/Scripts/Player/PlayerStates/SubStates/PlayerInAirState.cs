@@ -8,8 +8,6 @@ public class PlayerInAirState : PlayerState
     private int xInput;
     private bool jumpInput;
     private bool jumpInputStop;
-    private bool grabInput;
-    private bool dashInput;
 
     //Checks
     private bool isGrounded;
@@ -18,30 +16,36 @@ public class PlayerInAirState : PlayerState
     private bool oldIsTouchingWall;
     private bool oldIsTouchingWallBack;
     private bool isTouchingLedge;
-
+    private bool isHittingPlatform;
+    private bool isStickingToPlatform;
     private bool coyoteTime;
     private bool wallJumpCoyoteTime;
     private bool isJumping;
-
+    private bool isDead;
+    private bool isSlippery;
+    private bool isSugarPlatform;
     private float startWallJumpCoyoteTime;
 
     public PlayerInAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
 
+
     public override void DoChecks()
     {
         base.DoChecks();
-
+        isDead = core.CollisionSenses.Trap;
         oldIsTouchingWall = isTouchingWall;
         oldIsTouchingWallBack = isTouchingWallBack;
-
         isGrounded = core.CollisionSenses.Ground;
         isTouchingWall = core.CollisionSenses.WallFront;
         isTouchingWallBack = core.CollisionSenses.WallBack;
         isTouchingLedge = core.CollisionSenses.LedgeHorizontal;
-
-        if(isTouchingWall && !isTouchingLedge)
+        isHittingPlatform = core.CollisionSenses.ThroughPlatform;
+        isStickingToPlatform = core.CollisionSenses.SolidPlatform;
+        isSugarPlatform = core.CollisionSenses.SugarPlatform;
+        isSlippery = core.CollisionSenses.SlipperyPlatform;
+        if (isTouchingWall && !isTouchingLedge)
         {
             player.LedgeClimbState.SetDetectedPosition(player.transform.position);
         }
@@ -60,7 +64,6 @@ public class PlayerInAirState : PlayerState
     public override void Exit()
     {
         base.Exit();
-
         oldIsTouchingWall = false;
         oldIsTouchingWallBack = false;
         isTouchingWall = false;
@@ -73,63 +76,46 @@ public class PlayerInAirState : PlayerState
 
         CheckCoyoteTime();
         CheckWallJumpCoyoteTime();
-
         xInput = player.InputHandler.NormInputX;
         jumpInput = player.InputHandler.JumpInput;
         jumpInputStop = player.InputHandler.JumpInputStop;
-        grabInput = player.InputHandler.GrabInput;
-        dashInput = player.InputHandler.DashInput;
-
         CheckJumpMultiplier();
 
-        if (player.InputHandler.AttackInputs[(int)CombatInputs.primary])
-        {
-            stateMachine.ChangeState(player.PrimaryAttackState);
-        }
-        else if (player.InputHandler.AttackInputs[(int)CombatInputs.secondary])
-        {
-            stateMachine.ChangeState(player.SecondaryAttackState);
-        }
-        else if (isGrounded && core.Movement.CurrentVelocity.y < 0.01f)
+        if ((isGrounded || isSlippery || isStickingToPlatform || isHittingPlatform || isSugarPlatform) && core.Movement.CurrentVelocity.y < 0.01f && !isDead)
         {            
             stateMachine.ChangeState(player.LandState);
         }
-        else if(isTouchingWall && !isTouchingLedge && !isGrounded)
+        else if(isTouchingWall && !isTouchingLedge && (!isGrounded || !isSlippery || !isStickingToPlatform || !isHittingPlatform || !isSugarPlatform) && !isDead)
         {
             stateMachine.ChangeState(player.LedgeClimbState);
         }
-        else if(jumpInput && (isTouchingWall || isTouchingWallBack || wallJumpCoyoteTime))
+        else if(jumpInput && !isDead && (isTouchingWall || isTouchingWallBack || wallJumpCoyoteTime))
         {
             StopWallJumpCoyoteTime();
             isTouchingWall = core.CollisionSenses.WallFront;
             player.WallJumpState.DetermineWallJumpDirection(isTouchingWall);
             stateMachine.ChangeState(player.WallJumpState);
-        }
-        else if(jumpInput && player.JumpState.CanJump())
+        } 
+        else if(jumpInput && player.JumpState.CanJump() && !isDead)
         {
             stateMachine.ChangeState(player.JumpState);
+            CharacterAudio.Instance.Jump();
         }
-        else if(isTouchingWall && grabInput && isTouchingLedge)
+        else if(isTouchingWall && xInput == core.Movement.FacingDirection && core.Movement.CurrentVelocity.y <= 0 && !isHittingPlatform && !isDead)
         {
-            stateMachine.ChangeState(player.WallGrabState);
+             stateMachine.ChangeState(player.WallSlideState);
         }
-        else if(isTouchingWall && xInput == core.Movement.FacingDirection && core.Movement.CurrentVelocity.y <= 0)
+        else if (isDead || (isTouchingWall && isTouchingWallBack && !isHittingPlatform) || player.transform.rotation.z != 0)
         {
-            stateMachine.ChangeState(player.WallSlideState);
-        }
-        else if(dashInput && player.DashState.CheckIfCanDash())
-        {
-            stateMachine.ChangeState(player.DashState);
+            stateMachine.ChangeState(player.DeathState);
         }
         else
         {
             core.Movement.CheckIfShouldFlip(xInput);
             core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
-
             player.Anim.SetFloat("yVelocity", core.Movement.CurrentVelocity.y);
             player.Anim.SetFloat("xVelocity", Mathf.Abs(core.Movement.CurrentVelocity.x));
         }
-
     }
 
     private void CheckJumpMultiplier()
@@ -182,4 +168,7 @@ public class PlayerInAirState : PlayerState
     public void StopWallJumpCoyoteTime() => wallJumpCoyoteTime = false;
 
     public void SetIsJumping() => isJumping = true;
+
 }
+
+

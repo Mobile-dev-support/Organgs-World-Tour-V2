@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class PlayerLandState : PlayerGroundedState
 {
+
     public PlayerLandState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
+        core.Movement.SetVelocityX(0f);
+        core.Movement.SetVelocityY(0f);
+        CharacterAudio.Instance.Land();
+
     }
 
     public override void LogicUpdate()

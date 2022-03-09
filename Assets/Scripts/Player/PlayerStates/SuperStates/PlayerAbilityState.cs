@@ -7,6 +7,11 @@ public class PlayerAbilityState : PlayerState
     protected bool isAbilityDone;
 
     private bool isGrounded;
+    private bool isSlippery;
+    private bool isStickingToPlatform;
+    private bool isThroughPlatform;
+    private bool isSugarPlatform;
+    private bool isDead;
 
     public PlayerAbilityState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
@@ -15,8 +20,12 @@ public class PlayerAbilityState : PlayerState
     public override void DoChecks()
     {
         base.DoChecks();
-
         isGrounded = core.CollisionSenses.Ground;
+        isSlippery = core.CollisionSenses.SlipperyPlatform;
+        isStickingToPlatform = core.CollisionSenses.SolidPlatform;
+        isThroughPlatform = core.CollisionSenses.ThroughPlatform;
+        isSugarPlatform = core.CollisionSenses.SugarPlatform;
+        isDead = core.CollisionSenses.Trap;
     }
 
     public override void Enter()
@@ -37,7 +46,7 @@ public class PlayerAbilityState : PlayerState
 
         if (isAbilityDone)
         {
-            if (isGrounded && core.Movement.CurrentVelocity.y < 0.01f)
+            if ((isGrounded || isSlippery || isStickingToPlatform || isThroughPlatform || isSugarPlatform) && core.Movement.CurrentVelocity.y < 0.01f)
             {
                 stateMachine.ChangeState(player.IdleState);
             }
@@ -45,6 +54,10 @@ public class PlayerAbilityState : PlayerState
             {
                 stateMachine.ChangeState(player.InAirState);
             }
+        }
+        else if (isDead)
+        {
+            stateMachine.ChangeState(player.DeathState);
         }
     }
 

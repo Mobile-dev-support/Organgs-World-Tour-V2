@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMoveState : PlayerGroundedState
 {
+    public bool canSlide = true;
+    private Vector2 lastAIPos;
+
     public PlayerMoveState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -26,26 +29,38 @@ public class PlayerMoveState : PlayerGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
         core.Movement.CheckIfShouldFlip(xInput);
-
         core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
-
         if (!isExitingState)
         {
-            if (xInput == 0)
+            if (xInput == 0 || player.afterShock || player.isDrinking)
             {
                 stateMachine.ChangeState(player.IdleState);
             }
-            else if (yInput == -1)
-            {
-                stateMachine.ChangeState(player.CrouchMoveState);
-            }
-        }        
+                /*else if (yInput == -1)
+                {
+                    stateMachine.ChangeState(player.CrouchIdleState);
+                }*/
+        }
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+        CheckIfShouldPlaceAfterImage();
+    }
+        
+    private void PlaceAfterImage()
+    {
+        trailPool.Instance.GetFromPool();
+        lastAIPos = player.transform.position;
+    }
+
+    private void CheckIfShouldPlaceAfterImage()
+    {
+        if (Vector2.Distance(player.transform.position, lastAIPos) >= playerData.distBetweenAfterDustImage)
+        {
+            PlaceAfterImage();
+        }
     }
 }

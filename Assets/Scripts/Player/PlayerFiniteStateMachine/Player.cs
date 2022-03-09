@@ -14,15 +14,10 @@ public class Player : MonoBehaviour
     public PlayerInAirState InAirState { get; private set; }
     public PlayerLandState LandState { get; private set; }
     public PlayerWallSlideState WallSlideState { get; private set; }
-    public PlayerWallGrabState WallGrabState { get; private set; }
-    public PlayerWallClimbState WallClimbState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
     public PlayerLedgeClimbState LedgeClimbState { get; private set; }
-    public PlayerDashState DashState { get; private set; }
     public PlayerCrouchIdleState CrouchIdleState { get; private set; }
-    public PlayerCrouchMoveState CrouchMoveState { get; private set; }
-    public PlayerAttackState PrimaryAttackState { get; private set; }
-    public PlayerAttackState SecondaryAttackState { get; private set; }
+    public PlayerDeathState DeathState { get; private set; }
 
     [SerializeField]
     private PlayerData playerData;
@@ -36,17 +31,26 @@ public class Player : MonoBehaviour
     public Transform DashDirectionIndicator { get; private set; }
     public BoxCollider2D MovementCollider { get; private set; }
     public PlayerInventory Inventory { get; private set; }
+    public bool afterShock { get; private set; }
+    public bool isDrinking { get; private set; }
+    public bool isCandied { get; set; }
     #endregion
 
     #region Other Variables         
-
+    public GameObject drunk;
     private Vector2 workspace;
+    private bool isCheesed;
+
     #endregion
 
     #region Unity Callback Functions
     private void Awake()
     {
         Core = GetComponentInChildren<Core>();
+        if (Energy.Instance != null)
+        {
+            playerData.health = Energy.Instance.currentLife;
+        }
 
         StateMachine = new PlayerStateMachine();
 
@@ -56,15 +60,10 @@ public class Player : MonoBehaviour
         InAirState = new PlayerInAirState(this, StateMachine, playerData, "inAir");
         LandState = new PlayerLandState(this, StateMachine, playerData, "land");
         WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, "wallSlide");
-        WallGrabState = new PlayerWallGrabState(this, StateMachine, playerData, "wallGrab");
-        WallClimbState = new PlayerWallClimbState(this, StateMachine, playerData, "wallClimb");
         WallJumpState = new PlayerWallJumpState(this, StateMachine, playerData, "inAir");
         LedgeClimbState = new PlayerLedgeClimbState(this, StateMachine, playerData, "ledgeClimbState");
-        DashState = new PlayerDashState(this, StateMachine, playerData, "inAir");
         CrouchIdleState = new PlayerCrouchIdleState(this, StateMachine, playerData, "crouchIdle");
-        CrouchMoveState = new PlayerCrouchMoveState(this, StateMachine, playerData, "crouchMove");
-        PrimaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack");
-        SecondaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack");
+        DeathState = new PlayerDeathState(this, StateMachine, playerData, "death");
     }
 
     private void Start()
@@ -75,9 +74,12 @@ public class Player : MonoBehaviour
         DashDirectionIndicator = transform.Find("DashDirectionIndicator");
         MovementCollider = GetComponent<BoxCollider2D>();
         Inventory = GetComponent<PlayerInventory>();
-
-        PrimaryAttackState.SetWeapon(Inventory.weapons[(int)CombatInputs.primary]);
-        //SecondaryAttackState.SetWeapon(Inventory.weapons[(int)CombatInputs.primary]);
+        if (Energy.Instance != null)
+        {
+            ScoringMechanism.Instance.NoOfLives = Energy.Instance.currentLife;
+        }
+        isCheesed = false;
+        ScoringMechanism.Instance.NumberOfLives();
         StateMachine.Initialize(IdleState);
     }
 
@@ -87,9 +89,79 @@ public class Player : MonoBehaviour
         StateMachine.CurrentState.LogicUpdate();
     }
 
+    private void EnemyCollisions()
+    {
+
+        if (isCheesed)
+        {
+            playerData.cheeseTimer -= Time.deltaTime;
+            Anim.SetFloat("xSlide", 0.6666667f);
+            playerData.jumpVelocity = playerData.cheeseJumpVelocity;
+            playerData.wallJumpVelocity = playerData.cheeseWallJumpVelocity;
+            if (playerData.cheeseTimer < 0)
+            {
+                playerData.cheeseTimer = 2f;
+                playerData.jumpVelocity = playerData.defaultJumpVelocity;
+                playerData.wallJumpVelocity = playerData.defaultWallJumpVelocity;
+                Anim.SetFloat("xSlide", 0.0f);
+                isCheesed = false;
+            }
+        }
+        if (isCandied)
+        {
+            playerData.candyTimer -= Time.deltaTime;
+            playerData.movementVelocity = playerData.CandymovementVelocity;
+            if (playerData.candyTimer < 0)
+            {
+                playerData.candyTimer = 5f;
+                playerData.movementVelocity = playerData.NormalMovementVelocity;
+                Anim.SetFloat("xSlide", 1.0f);
+                afterShock = true;
+            }
+        }
+        if (afterShock)
+        {
+            Core.Movement.SetVelocityZero();
+            Core.Movement.CanSetVelocity = false;
+            playerData.afterShockTimer -= Time.deltaTime;
+            if (playerData.afterShockTimer < 0)
+            {
+                afterShock = false;
+                playerData.afterShockTimer = 2f;
+                Anim.SetFloat("xSlide", 0.0f);
+                Core.Movement.CanSetVelocity = true;
+                isCandied = false;
+            }
+        }
+        if (isDrinking)
+        {
+            Core.Movement.SetVelocityZero();
+            Core.Movement.CanSetVelocity = false;
+            playerData.DrinkTimer -= Time.deltaTime;
+            Anim.SetFloat("xSlide", 1.0f);
+            if (playerData.DrinkTimer < 0)
+            {
+                isDrinking = false;
+                playerData.DrinkTimer = 2f;
+                Anim.SetFloat("xSlide", 0.0f);
+                drunk.SetActive(false);
+                Core.Movement.CanSetVelocity = true;
+            }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        playerData.movementVelocity = playerData.NormalMovementVelocity;
+        playerData.jumpVelocity = playerData.defaultJumpVelocity;
+        playerData.wallJumpVelocity = playerData.defaultWallJumpVelocity;
+        Anim.SetFloat("xSlide", 0.0f);
+    }
+
     private void FixedUpdate()
     {
         StateMachine.CurrentState.PhysicsUpdate();
+        EnemyCollisions();
     }
     #endregion
 
@@ -110,6 +182,22 @@ public class Player : MonoBehaviour
 
     private void AnimtionFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
-   
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.collider.CompareTag("Cheese"))
+        {
+            playerData.cheeseTimer = 2f;
+            isCheesed = true;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Alcohol"))
+        {
+            drunk.SetActive(true);
+            isDrinking = true;
+        }
+    }
+
     #endregion
 }

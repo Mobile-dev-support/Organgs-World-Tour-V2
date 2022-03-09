@@ -1,0 +1,200 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Collider2D))]
+public class PlatformController : MonoBehaviour
+{
+
+    public PlatformWaypoint currentWaypoint;
+    public float maxSpeed;
+    public float accelerationDistance;
+    public float decelerationDistance;
+    public float waitTime;
+    public float crumbleTime;
+    public float restoreTime;
+    public float spinSpeed;
+    public bool spinning;
+    public bool clockWise;
+    public bool onlyPlayerCrumble;
+
+
+    private Vector2 speed = Vector2.zero;
+    private float currentWaitTime = 0;
+    private float currentCrumbleTime = 0;
+    private float currentRestoreTime = 0;
+    private bool crumbled = false;
+    private List<Player> objs = new List<Player>();
+    private Animator animator;
+    private Collider2D myCollider;
+    private float rotZ;
+
+    private static readonly string ANIMATION_CRUMBLING = "crumbling";
+    private static readonly string ANIMATION_CRUMBLE = "crumble";
+    private static readonly string ANIMATION_RESTORE = "restore";
+
+
+    void OnEnable()
+    {
+        animator = GetComponent<Animator>();
+        myCollider = GetComponent<Collider2D>();
+    }
+
+    void FixedUpdate()
+    {
+
+        if (spinning)
+        {
+            if (!clockWise)
+            {
+                rotZ += Time.deltaTime * spinSpeed;
+            }
+            else
+            {
+                rotZ += -Time.deltaTime * spinSpeed;
+            }
+
+            transform.rotation = Quaternion.Euler(0, 0, rotZ);
+        }
+
+        if (crumbled)
+        {
+            if (currentRestoreTime > 0)
+            {
+                currentRestoreTime -= Time.fixedDeltaTime;
+                if (currentRestoreTime <= 0)
+                {
+                    Restore();
+                }
+            }
+        }
+        else
+        {
+            if (currentCrumbleTime > 0)
+            {
+                currentCrumbleTime -= Time.fixedDeltaTime;
+                if (currentCrumbleTime <= 0)
+                {
+                    crumbled = true;
+                    animator.SetTrigger(ANIMATION_CRUMBLE);
+                    myCollider.enabled = false;
+                    if (restoreTime > 0)
+                    {
+                        currentRestoreTime = restoreTime;
+                    }
+                }
+            }
+            if (currentWaypoint)
+            {
+                if (currentWaitTime > 0)
+                {
+                    currentWaitTime -= Time.fixedDeltaTime;
+                    return;
+                }
+                Vector2 distance = currentWaypoint.transform.position - transform.position;
+                if (distance.magnitude <= decelerationDistance)
+                {
+                    if (distance.magnitude > 0)
+                    {
+                        speed -= Time.fixedDeltaTime * distance.normalized * maxSpeed * maxSpeed /
+                            (2 * decelerationDistance);
+                    }
+                    else
+                    {
+                        speed = Vector2.zero;
+                    }
+                }
+                else if (speed.magnitude < maxSpeed)
+                {
+                    if (accelerationDistance > 0)
+                    {
+                        speed += Time.fixedDeltaTime * distance.normalized * maxSpeed * maxSpeed /
+                            (2 * accelerationDistance);
+                    }
+                    if (speed.magnitude > maxSpeed || accelerationDistance <= 0)
+                    {
+                        speed = distance.normalized * maxSpeed;
+                    }
+                }
+                Vector3 newPos = Vector2.MoveTowards(transform.position, currentWaypoint.transform.position,
+                    speed.magnitude * Time.fixedDeltaTime);
+                Vector2 velocity = newPos - transform.position;
+                if (speed.y > 0)
+                {
+                    transform.position = newPos;
+                }
+                else
+                {
+                    transform.position = newPos;
+                }
+                distance = currentWaypoint.transform.position - transform.position;
+                if (distance.magnitude < 0.01f)
+                {
+                    speed = Vector2.zero;
+                    currentWaypoint = currentWaypoint.nextWaipoint;
+                    currentWaitTime = waitTime;
+                }
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player") && Mathf.Abs(other.contacts[0].normal.y) > 0.5f)
+        {
+            AttachObject(other);
+            other.collider.transform.SetParent(transform, true);
+        }
+    }
+
+    private void AttachObject(Collision2D other)
+    {
+        if (crumbled)
+        {
+            return;
+        }
+        Player obj = other.gameObject.GetComponent<Player>();
+        if (obj && !objs.Contains(obj))
+        {
+            // doesn't attach to the obj if it's a 1 way platform and the obj is below it
+            if ((obj.transform.position.y < transform.position.y))
+            {
+                return;
+            }
+            else
+            {
+                objs.Add(obj);
+                if (crumbleTime > 0 && currentCrumbleTime <= 0)
+                {
+                    if (!onlyPlayerCrumble || obj.GetComponent<Player>())
+                    {
+                        currentCrumbleTime = crumbleTime;
+                        animator.SetTrigger(ANIMATION_CRUMBLING);
+                    }
+                }
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.collider.transform.SetParent(null);
+            Player obj = other.gameObject.GetComponent<Player>();
+            if (obj && objs.Contains(obj))
+            {
+                objs.Remove(obj);
+                obj.RB.AddForce(speed);
+            }
+        }
+    }
+
+    public void Restore()
+    {
+        crumbled = false;
+        myCollider.enabled = true;
+        animator.SetTrigger(ANIMATION_RESTORE);
+    }
+}

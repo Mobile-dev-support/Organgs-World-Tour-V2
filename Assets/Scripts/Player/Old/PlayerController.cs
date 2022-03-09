@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour
     public Transform ledgeCheck;
 
     public LayerMask whatIsGround;
+    public LayerMask whatIsPlatform;
 
     // Start is called before the first frame update
     void Start()

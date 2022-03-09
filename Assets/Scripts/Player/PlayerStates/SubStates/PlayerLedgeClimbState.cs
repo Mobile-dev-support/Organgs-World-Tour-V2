@@ -14,9 +14,10 @@ public class PlayerLedgeClimbState : PlayerState
     private bool isClimbing;
     private bool jumpInput;
     private bool isTouchingCeiling;
-
     private int xInput;
     private int yInput;
+    private bool isDead;
+    private int prevxInput;
 
     public PlayerLedgeClimbState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
@@ -35,19 +36,23 @@ public class PlayerLedgeClimbState : PlayerState
         isHanging = true;
     }
 
+    public override void DoChecks()
+    {
+        base.DoChecks();
+        isDead = core.CollisionSenses.Trap;
+    }
+
     public override void Enter()
     {
         base.Enter();
-
+        prevxInput = core.Movement.FacingDirection;
         core.Movement.SetVelocityZero();
         player.transform.position = detectedPos;
         cornerPos = DetermineCornerPosition();
-
         startPos.Set(cornerPos.x - (core.Movement.FacingDirection * playerData.startOffset.x), cornerPos.y - playerData.startOffset.y);
         stopPos.Set(cornerPos.x + (core.Movement.FacingDirection * playerData.stopOffset.x), cornerPos.y + playerData.stopOffset.y);
 
         player.transform.position = startPos;
-
     }
 
     public override void Exit()
@@ -55,7 +60,6 @@ public class PlayerLedgeClimbState : PlayerState
         base.Exit();
 
         isHanging = false;
-
         if (isClimbing)
         {
             player.transform.position = stopPos;
@@ -66,7 +70,6 @@ public class PlayerLedgeClimbState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
         if (isAnimationFinished)
         {
             if (isTouchingCeiling)
@@ -86,24 +89,26 @@ public class PlayerLedgeClimbState : PlayerState
 
             core.Movement.SetVelocityZero();
             player.transform.position = startPos;
-
-            if (xInput == core.Movement.FacingDirection && isHanging && !isClimbing)
+            if (prevxInput == core.Movement.FacingDirection && isHanging && !isClimbing)
             {
                 CheckForSpace();
                 isClimbing = true;
                 player.Anim.SetBool("climbLedge", true);
             }
-            else if (yInput == -1 && isHanging && !isClimbing)
+            /*else if (yInput == -1 && isHanging && !isClimbing)
             {
                 stateMachine.ChangeState(player.InAirState);
             }
-            else if(jumpInput && !isClimbing)
+            else if (jumpInput && !isClimbing)
             {
                 player.WallJumpState.DetermineWallJumpDirection(true);
                 stateMachine.ChangeState(player.WallJumpState);
+            }*/
+            else if (isDead)
+            {
+                stateMachine.ChangeState(player.DeathState);
             }
         }
-      
     }
 
     public void SetDetectedPosition(Vector2 pos) => detectedPos = pos;

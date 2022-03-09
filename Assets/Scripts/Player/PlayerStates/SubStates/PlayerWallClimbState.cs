@@ -12,7 +12,7 @@ public class PlayerWallClimbState : PlayerTouchingWallState
     {
         base.LogicUpdate();
 
-        if (!isExitingState)
+        /*if (!isExitingState)
         {
             core.Movement.SetVelocityY(playerData.wallClimbVelocity);
 
@@ -20,8 +20,6 @@ public class PlayerWallClimbState : PlayerTouchingWallState
             {
                 stateMachine.ChangeState(player.WallGrabState);
             }
-        }
-
-        
+        }*/  
     }
 }

@@ -7,7 +7,9 @@ public class MoveState : State
     protected D_MoveState stateData;
 
     protected bool isDetectingWall;
-    protected bool isDetectingLedge;
+    protected bool isGrounded;
+    //protected bool isDetectingLedge;
+    //protected bool isDetectingLedgeHorizontal;
     protected bool isPlayerInMinAgroRange;
 
     public MoveState(Entity etity, FiniteStateMachine stateMachine, string animBoolName, D_MoveState stateData) : base(etity, stateMachine, animBoolName)
@@ -18,17 +20,19 @@ public class MoveState : State
     public override void DoChecks()
     {
         base.DoChecks();
-
-        isDetectingLedge = core.CollisionSenses.LedgeVertical;
-        isDetectingWall =core.CollisionSenses.WallFront;
+        isGrounded = core.CollisionSenses.Ground;
+        //isDetectingLedge = core.CollisionSenses.LedgeVertical;
+        //isDetectingLedgeHorizontal = core.CollisionSenses.LedgeHorizontal;
+        isDetectingWall = core.CollisionSenses.WallFront;
         isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
+
     }
 
     public override void Enter()
     {
         base.Enter();
         core.Movement.SetVelocityX(stateData.movementSpeed * core.Movement.FacingDirection);
-        
+
     }
 
     public override void Exit()

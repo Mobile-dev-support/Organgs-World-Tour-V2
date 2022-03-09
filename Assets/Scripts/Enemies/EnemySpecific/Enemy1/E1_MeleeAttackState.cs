@@ -29,6 +29,7 @@ public class E1_MeleeAttackState : MeleeAttackState
     public override void FinishAttack()
     {
         base.FinishAttack();
+        stateMachine.ChangeState(enemy.deadState);
     }
 
     public override void LogicUpdate()
@@ -56,5 +57,6 @@ public class E1_MeleeAttackState : MeleeAttackState
     public override void TriggerAttack()
     {
         base.TriggerAttack();
+        entity.gameObject.layer = LayerMask.NameToLayer("Dead");
     }
 }
