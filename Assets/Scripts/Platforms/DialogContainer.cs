@@ -76,8 +76,6 @@ namespace CleverCrow.Fluid.Dialogues.Examples
             });
 
             _ctrl.Events.End.AddListener(() => {
-                organg_key += 1;
-                Save();
                 dialogCanvas.Hide();
                 StartCoroutine(DoorController.Instance.EndGame());
 
@@ -88,6 +86,7 @@ namespace CleverCrow.Fluid.Dialogues.Examples
                 if (node.UniqueId == totemLandCode)
                 {
                     StartCoroutine(LoadLevel("TotemLand"));
+                    Save();
                 }
                 else if (node.UniqueId == backToOliverCode)
                 {
@@ -101,9 +100,9 @@ namespace CleverCrow.Fluid.Dialogues.Examples
         {
             dialogCanvas.Hide();
             cameraAnim = GetComponent<Animator>();
+            PlayerPrefs.DeleteAll();
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.sceneUnloaded += OnSceneunLoaded;
-            PlayerPrefs.DeleteAll();
             if (PlayerPrefs.HasKey("organg_key" + organg_key))
             {
                 Debug.Log("has " + organg_key + " key");
@@ -173,6 +172,7 @@ namespace CleverCrow.Fluid.Dialogues.Examples
         {
             if (collision.gameObject.CompareTag("Player"))
             {
+                organg_key += 1;
                 dialogCanvas.Show();
                 controlCanvas.Hide();
                 CountdownTimer.Instance.enabled = false;
