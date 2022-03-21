@@ -56,10 +56,15 @@ public class Enemy1 : Entity
 
     }
 
-    private void Start()
+    private void OnEnable()
     {
         stateMachine.Initialize(moveState);
+    }
+
+    private void Start()
+    {
         RB = GetComponent<Rigidbody2D>();
+        stateMachine.Initialize(moveState);
     }
 
     public override void OnDrawGizmos()

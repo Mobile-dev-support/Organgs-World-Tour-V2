@@ -26,6 +26,12 @@ public class candyBehaviour : MonoBehaviour
         JumpTimerDefault = jumpTimer;
     }
 
+    private void OnEnable()
+    {
+        RB = GetComponent<Rigidbody2D>();
+        JumpTimerDefault = jumpTimer;
+    }
+
     private void FixedUpdate()
     {
         GroundCheck();
@@ -41,7 +47,6 @@ public class candyBehaviour : MonoBehaviour
             if (jumpTimer < 0)
             {
                 RB.velocity = transform.up * jumpHeight;
-                SquishAndStretch();
                 jumpTimer = JumpTimerDefault;
             }
         }
@@ -52,45 +57,12 @@ public class candyBehaviour : MonoBehaviour
         }
     }
 
-    public void SquishAndStretch()
-    {
-        StartCoroutine(JumpSqueeze(wallSquash.x, wallSquash.y, wallSquash.z, true));
-    }
-
-    IEnumerator JumpSqueeze(float xSqueeze, float ySqueeze, float seconds, bool isInstant)
-    {
-        Vector3 originalSize = Vector3.one;
-        Vector3 newSize = new Vector3(xSqueeze, ySqueeze, originalSize.z);
-        float t = 0f;
-        if (isInstant == false)
-        {
-            while (t <= 1.0)
-            {
-                t += Time.deltaTime / seconds;
-                gameObject.transform.localScale = Vector3.Lerp(originalSize, newSize, t);
-                yield return null;
-            }
-            t = 0f;
-        }
-        while (t <= 1.0)
-        {
-            t += Time.deltaTime / seconds;
-            gameObject.transform.localScale = Vector3.Lerp(newSize, originalSize, t);
-            yield return null;
-        }
-
-    }
-
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.collider.CompareTag("Spikes"))
         {
             Instantiate(chunk, transform.position, chunk.transform.rotation);
             Destroy(gameObject, 0.01f);
-        }
-        else if (other.collider.CompareTag("Player"))
-        {
-
         }
     }
 

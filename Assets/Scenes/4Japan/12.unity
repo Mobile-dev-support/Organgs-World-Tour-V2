@@ -466,8 +466,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 170933521}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.786, y: -3.022, z: 20}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1.8, y: -2, z: 20}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1558581955}
   m_RootOrder: 1
@@ -540,7 +540,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: -29.239471, y: 2.258449}
+  m_Size: {x: -19.093546, y: 2.258449}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1928,8 +1928,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638646783}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.262, y: -1.832, z: 30}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.58, y: -1.832, z: 30}
+  m_LocalScale: {x: 2, y: 2, z: 0}
   m_Children: []
   m_Father: {fileID: 1674775040}
   m_RootOrder: 0
@@ -2002,7 +2002,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: -32.67672, y: 1.8795116}
+  m_Size: {x: -15.067437, y: 1.8795116}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -18811,6 +18811,16 @@ PrefabInstance:
       propertyPath: m_CompositePaths.m_Paths.Array.data[13].Array.data[165].y
       value: -11.623712
       objectReference: {fileID: 0}
+    - target: {fileID: 27971983619223695, guid: 6ead4c0f0171e66438feacf745c106f4,
+        type: 3}
+      propertyPath: m_AnimatedTiles.Array.data[0].second.m_AnimationSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 270630141479090230, guid: 6ead4c0f0171e66438feacf745c106f4,
+        type: 3}
+      propertyPath: m_ChunkCullingBounds.x
+      value: 1.1375
+      objectReference: {fileID: 0}
     - target: {fileID: 5029040573957985475, guid: 6ead4c0f0171e66438feacf745c106f4,
         type: 3}
       propertyPath: m_TileColorArray.Array.size
@@ -18819,7 +18829,7 @@ PrefabInstance:
     - target: {fileID: 5029040573957985475, guid: 6ead4c0f0171e66438feacf745c106f4,
         type: 3}
       propertyPath: m_Tiles.Array.data[36].second.m_TileSpriteIndex
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5029040573957985475, guid: 6ead4c0f0171e66438feacf745c106f4,
         type: 3}
@@ -18834,12 +18844,12 @@ PrefabInstance:
     - target: {fileID: 5029040573957985475, guid: 6ead4c0f0171e66438feacf745c106f4,
         type: 3}
       propertyPath: m_Tiles.Array.data[36].second.m_TileColorIndex
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5029040573957985475, guid: 6ead4c0f0171e66438feacf745c106f4,
         type: 3}
       propertyPath: m_Tiles.Array.data[36].second.m_AllTileFlags
-      value: 1073741827
+      value: 1073741825
       objectReference: {fileID: 0}
     - target: {fileID: 5029040573957985475, guid: 6ead4c0f0171e66438feacf745c106f4,
         type: 3}
@@ -18855,36 +18865,42 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TileSpriteArray.Array.data[10].m_Data
       value: 
-      objectReference: {fileID: 984393133}
+      objectReference: {fileID: -6428456047304958718, guid: 0fb32cca652a6274cb942ad6d0ebab80,
+        type: 3}
     - target: {fileID: 5029040573957985475, guid: 6ead4c0f0171e66438feacf745c106f4,
         type: 3}
       propertyPath: m_TileColorArray.Array.data[0].m_RefCount
-      value: 37
+      value: 38
       objectReference: {fileID: 0}
     - target: {fileID: 5029040573957985475, guid: 6ead4c0f0171e66438feacf745c106f4,
         type: 3}
       propertyPath: m_TileColorArray.Array.data[1].m_RefCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5029040573957985475, guid: 6ead4c0f0171e66438feacf745c106f4,
         type: 3}
       propertyPath: m_TileColorArray.Array.data[1].m_Data.r
-      value: 0.81341577
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5029040573957985475, guid: 6ead4c0f0171e66438feacf745c106f4,
         type: 3}
       propertyPath: m_TileColorArray.Array.data[1].m_Data.g
-      value: 0.35265583
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5029040573957985475, guid: 6ead4c0f0171e66438feacf745c106f4,
         type: 3}
       propertyPath: m_TileColorArray.Array.data[1].m_Data.b
-      value: 0.42291212
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5029040573957985475, guid: 6ead4c0f0171e66438feacf745c106f4,
         type: 3}
       propertyPath: m_TileColorArray.Array.data[1].m_Data.a
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5029040573957985475, guid: 6ead4c0f0171e66438feacf745c106f4,
+        type: 3}
+      propertyPath: m_TileSpriteArray.Array.data[2].m_RefCount
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ead4c0f0171e66438feacf745c106f4, type: 3}
@@ -19820,8 +19836,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1115585005}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.203, y: -3.022, z: 20}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.24, y: -3.022, z: 20}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1400935758}
   m_RootOrder: 1
@@ -19894,7 +19910,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: -32.363735, y: 2.258449}
+  m_Size: {x: -15.563888, y: 2.258449}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -20965,8 +20981,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1306988938}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.203, y: -3.022, z: 20}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.61, y: -3.022, z: 20}
+  m_LocalScale: {x: 2, y: 2, z: 0}
   m_Children: []
   m_Father: {fileID: 1674775040}
   m_RootOrder: 1
@@ -21039,7 +21055,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: -32.363735, y: 2.258449}
+  m_Size: {x: -14.923119, y: 2.258449}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -21215,7 +21231,7 @@ MonoBehaviour:
   _yMinOverflow: 1
   _yMin: 4.5
   _yMaxOverflow: 1
-  _yMax: 0.06
+  _yMax: 1.99
 --- !u!1 &1424127417
 GameObject:
   m_ObjectHideFlags: 0
@@ -21805,8 +21821,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1537164241}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.262, y: -1.832, z: 30}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.26, y: -1.832, z: 30}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1400935758}
   m_RootOrder: 0
@@ -21879,7 +21895,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: -32.67672, y: 1.8795116}
+  m_Size: {x: -15.714404, y: 1.8795116}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -21996,11 +22012,11 @@ MonoBehaviour:
   _xMinOverflow: 1
   _xMin: 17
   _xMaxOverflow: 1
-  _xMax: 17
+  _xMax: 27.76
   _yMinOverflow: 1
   _yMin: 4.5
   _yMaxOverflow: 1
-  _yMax: 0.06
+  _yMax: 1.99
 --- !u!1 &1588663950
 GameObject:
   m_ObjectHideFlags: 0
@@ -22027,8 +22043,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1588663950}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.839, y: -1.832, z: 30}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1.84, y: -0.09, z: 30}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1558581955}
   m_RootOrder: 0
@@ -22101,7 +22117,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: -29.522242, y: 1.8795116}
+  m_Size: {x: -19.278198, y: 1.8795116}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -22425,11 +22441,11 @@ MonoBehaviour:
   _xMinOverflow: 1
   _xMin: 17
   _xMaxOverflow: 1
-  _xMax: 17
+  _xMax: 25.1
   _yMinOverflow: 1
   _yMin: 4.5
   _yMaxOverflow: 1
-  _yMax: 0.06
+  _yMax: 1.99
 --- !u!1 &1677192185
 GameObject:
   m_ObjectHideFlags: 0
