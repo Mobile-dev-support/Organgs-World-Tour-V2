@@ -41,11 +41,20 @@ public class PlayerGroundedState : PlayerState
         isTouchingCeilingSolidPlatform = core.CollisionSenses.SolidPlatformCeiling;
         isSugarPlatform = core.CollisionSenses.SugarPlatform;
         player.Anim.SetBool("isTouchingWall", isTouchingWall);
-
         if (isSugarPlatform && !player.isCandied)
         {
             playerData.candyTimer = 5f;
             player.isCandied = true;
+        }
+
+        if (isSlippery && !isTouchingWall)
+        {
+            playerData.movementVelocity = playerData.speedOnIce;
+        }
+        else if(!isSlippery && !player.afterShock && !player.isDrinking)
+        {
+            playerData.movementVelocity = playerData.NormalMovementVelocity;
+            player.Anim.SetFloat("xSlide", 0.0f);
         }
     }
 

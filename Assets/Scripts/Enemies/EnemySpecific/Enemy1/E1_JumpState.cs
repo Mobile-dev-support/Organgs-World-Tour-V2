@@ -34,6 +34,10 @@ public class E1_JumpState : JumpState
             stateMachine.ChangeState(enemy.idleState);
             enemy.idleState.SetFlipAfterIdle(true);
         }
+        else if (isDead)
+        {
+            stateMachine.ChangeState(enemy.deadState);
+        }
     }
 
     public override void PhysicsUpdate()

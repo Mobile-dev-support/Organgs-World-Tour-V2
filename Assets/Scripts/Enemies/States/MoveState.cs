@@ -8,6 +8,7 @@ public class MoveState : State
 
     protected bool isDetectingWall;
     protected bool isGrounded;
+    protected bool isDead;
     //protected bool isDetectingLedge;
     //protected bool isDetectingLedgeHorizontal;
     protected bool isPlayerInMinAgroRange;
@@ -21,6 +22,7 @@ public class MoveState : State
     {
         base.DoChecks();
         isGrounded = core.CollisionSenses.Ground;
+        isDead = core.CollisionSenses.Trap;
         //isDetectingLedge = core.CollisionSenses.LedgeVertical;
         //isDetectingLedgeHorizontal = core.CollisionSenses.LedgeHorizontal;
         isDetectingWall = core.CollisionSenses.WallFront;

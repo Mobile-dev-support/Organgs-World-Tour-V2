@@ -58,7 +58,7 @@ public class Enemy1 : Entity
 
     private void OnEnable()
     {
-        stateMachine.Initialize(moveState);
+
     }
 
     private void Start()

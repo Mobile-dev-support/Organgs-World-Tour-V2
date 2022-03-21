@@ -11,6 +11,7 @@ public class PlayerDetectedState : State
     protected bool performLongRangeAction;
     protected bool performCloseRangeAction;
     protected bool isDetectingLedge;
+    protected bool isDead;
 
     public PlayerDetectedState(Entity etity, FiniteStateMachine stateMachine, string animBoolName, D_PlayerDetected stateData) : base(etity, stateMachine, animBoolName)
     {
@@ -24,6 +25,7 @@ public class PlayerDetectedState : State
         isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
         isPlayerInMaxAgroRange = entity.CheckPlayerInMaxAgroRange();
         isDetectingLedge = core.CollisionSenses.LedgeVertical;
+        isDead = core.CollisionSenses.Trap;
         performCloseRangeAction = entity.CheckPlayerInCloseRangeAction();
     }
 

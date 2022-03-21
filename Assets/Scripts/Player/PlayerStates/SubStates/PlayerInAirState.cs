@@ -99,7 +99,6 @@ public class PlayerInAirState : PlayerState
         else if(jumpInput && player.JumpState.CanJump() && !isDead)
         {
             stateMachine.ChangeState(player.JumpState);
-            CharacterAudio.Instance.Jump();
         }
         else if(isTouchingWall && xInput == core.Movement.FacingDirection && core.Movement.CurrentVelocity.y <= 0 && !isHittingPlatform && !isDead)
         {

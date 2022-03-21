@@ -53,7 +53,7 @@ public class candyBehaviour : MonoBehaviour
         if (hitcollider)
         {
             Instantiate(chunk, transform.position, chunk.transform.rotation);
-            Destroy(gameObject, 0.01f);
+            Destroy(gameObject, 0.1f);
         }
     }
 

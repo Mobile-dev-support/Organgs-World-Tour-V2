@@ -14,12 +14,6 @@ public class PlayerIdleState : PlayerGroundedState
     public override void DoChecks()
     {
         base.DoChecks();
-
-        if (!isSlippery && !player.afterShock && !player.isDrinking)
-        {
-            playerData.movementVelocity = playerData.NormalMovementVelocity;
-            player.Anim.SetFloat("xSlide", 0.0f);
-        }
     }
 
     public override void Enter()
@@ -34,10 +28,9 @@ public class PlayerIdleState : PlayerGroundedState
             playerData.slipperyMultiplier, player.RB.velocity.y));
             player.Anim.SetFloat("xSlide", 0.3333333f);
         }
-        else
-        {
-            core.Movement.SetVelocityX(0f);
-        }
+
+        core.Movement.SetVelocityX(0f);
+
     }
 
     public override void Exit()

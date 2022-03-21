@@ -34,6 +34,10 @@ public class E1_MoveState : MoveState
             enemy.idleState.SetFlipAfterIdle(true);
             stateMachine.ChangeState(enemy.idleState);
         }
+        else if (isDead)
+        {
+            stateMachine.ChangeState(enemy.deadState);
+        }
     }
 
     public override void PhysicsUpdate()

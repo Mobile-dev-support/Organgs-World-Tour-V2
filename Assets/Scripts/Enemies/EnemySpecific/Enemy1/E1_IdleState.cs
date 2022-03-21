@@ -36,6 +36,10 @@ public class E1_IdleState : IdleState
         {
             stateMachine.ChangeState(enemy.jumpState);
         }
+        else if (isDead)
+        {
+            stateMachine.ChangeState(enemy.deadState);
+        }
     }
 
     public override void PhysicsUpdate()

@@ -13,6 +13,7 @@ public class JumpState : State
     protected bool performCloseRangeAction;
     protected bool isPlayerInMaxAgroRange;
     protected bool isJumpOver;
+    protected bool isDead;
 
     public JumpState(Entity etity, FiniteStateMachine stateMachine, string animBoolName, D_JumpState stateData) : base(etity, stateMachine, animBoolName)
     {
@@ -26,6 +27,7 @@ public class JumpState : State
         performCloseRangeAction = entity.CheckPlayerInCloseRangeAction();
         isPlayerInMaxAgroRange = entity.CheckPlayerInMaxAgroRange();
         isGrounded = core.CollisionSenses.Ground;
+        isDead = core.CollisionSenses.Trap;
     }
 
     public override void Enter()

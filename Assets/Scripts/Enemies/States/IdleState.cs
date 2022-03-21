@@ -13,6 +13,7 @@ public class IdleState : State
     //protected bool isDetectingLedge;
     protected bool isDetectingLedgeHorizontal;
     protected bool isGrounded;
+    protected bool isDead;
 
     protected float idleTime;
 
@@ -28,6 +29,7 @@ public class IdleState : State
         isDetectingLedgeHorizontal = core.CollisionSenses.LedgeHorizontal;
         isDetectingWall = core.CollisionSenses.WallFront;
         isGrounded = core.CollisionSenses.Ground;
+        isDead = core.CollisionSenses.Trap;
     }
 
     public override void Enter()

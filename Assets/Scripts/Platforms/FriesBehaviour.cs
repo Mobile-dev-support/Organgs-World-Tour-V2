@@ -20,7 +20,12 @@ public class FriesBehaviour : MonoBehaviour
         }
     }
     // Start is called before the first frame update
-    void Start()
+    private void Start()
+    {
+        StartCoroutine(SpawnBlockOfFries());
+    }
+
+    private void OnEnable()
     {
         StartCoroutine(SpawnBlockOfFries());
     }

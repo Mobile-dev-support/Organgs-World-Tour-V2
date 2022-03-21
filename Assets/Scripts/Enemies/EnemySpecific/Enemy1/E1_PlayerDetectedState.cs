@@ -42,7 +42,11 @@ public class E1_PlayerDetectedState : PlayerDetectedState
             core.Movement.Flip();
             stateMachine.ChangeState(enemy.moveState);
         }
-        
+        else if (isDead)
+        {
+            stateMachine.ChangeState(enemy.deadState);
+        }
+
     }
 
     public override void PhysicsUpdate()
