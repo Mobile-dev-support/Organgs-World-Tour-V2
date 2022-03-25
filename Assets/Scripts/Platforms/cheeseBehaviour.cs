@@ -22,7 +22,7 @@ public class cheeseBehaviour : MonoBehaviour
         isExploded = false;
         isFollowing = false;
     }
-    
+
     private void FixedUpdate()
     {
         RangeOfCheese();
@@ -80,6 +80,7 @@ public class cheeseBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        if(other.collider.IsTouchingLayers(whatIsPlayer))
         isExploded = true;
     }
 }

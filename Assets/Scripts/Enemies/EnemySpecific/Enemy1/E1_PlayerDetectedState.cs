@@ -46,7 +46,6 @@ public class E1_PlayerDetectedState : PlayerDetectedState
         {
             stateMachine.ChangeState(enemy.deadState);
         }
-
     }
 
     public override void PhysicsUpdate()

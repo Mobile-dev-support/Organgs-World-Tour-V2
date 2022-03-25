@@ -31,7 +31,7 @@ public class PlayerDeathState : PlayerGroundedState
     private void Die()
     {
         GameObject deathChunk = GameObject.Instantiate(playerData.deathChunk, player.transform.position, playerData.deathChunk.transform.rotation) as GameObject;
-        Object.Destroy(GameObject.Find("MainPlayer"));
+        Object.Destroy(GameObject.FindGameObjectWithTag("Player"));
         CameraShake.Instance.ShakeCamera(5f, .1f);
         CanvasFader.Instance.Fader(true);
         CountdownTimer.Instance.enabled = false;

@@ -15,6 +15,7 @@ public class LookForPlayerState : State
 
     protected int amountOfTurnsDone;
 
+
     public LookForPlayerState(Entity etity, FiniteStateMachine stateMachine, string animBoolName, D_LookForPlayer stateData) : base(etity, stateMachine, animBoolName)
     {
         this.stateData = stateData;

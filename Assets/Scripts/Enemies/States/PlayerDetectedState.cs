@@ -25,8 +25,8 @@ public class PlayerDetectedState : State
         isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
         isPlayerInMaxAgroRange = entity.CheckPlayerInMaxAgroRange();
         isDetectingLedge = core.CollisionSenses.LedgeVertical;
-        isDead = core.CollisionSenses.Trap;
         performCloseRangeAction = entity.CheckPlayerInCloseRangeAction();
+        isDead = core.CollisionSenses.Trap;
     }
 
     public override void Enter()

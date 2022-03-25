@@ -22,12 +22,11 @@ public class MoveState : State
     {
         base.DoChecks();
         isGrounded = core.CollisionSenses.Ground;
-        isDead = core.CollisionSenses.Trap;
         //isDetectingLedge = core.CollisionSenses.LedgeVertical;
         //isDetectingLedgeHorizontal = core.CollisionSenses.LedgeHorizontal;
         isDetectingWall = core.CollisionSenses.WallFront;
         isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
-
+        isDead = core.CollisionSenses.Trap;
     }
 
     public override void Enter()

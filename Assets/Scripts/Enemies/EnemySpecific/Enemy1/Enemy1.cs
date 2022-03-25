@@ -56,11 +56,6 @@ public class Enemy1 : Entity
 
     }
 
-    private void OnEnable()
-    {
-
-    }
-
     private void Start()
     {
         RB = GetComponent<Rigidbody2D>();
@@ -72,5 +67,11 @@ public class Enemy1 : Entity
         base.OnDrawGizmos();
 
         Gizmos.DrawWireSphere(meleeAttackPosition.position, meleeAttackStateData.attackRadius);
+    }
+
+    public void Disable()
+    {
+        Instantiate(deadStateData.deathChunkParticle, transform.position, deadStateData.deathChunkParticle.transform.rotation);
+        gameObject.SetActive(false);
     }
 }
