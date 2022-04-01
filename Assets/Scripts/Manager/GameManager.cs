@@ -7,25 +7,21 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("LEVEL MANAGER")]
-    public Transform respawnPoint;
-    [SerializeField]
-    private GameObject player;
-    public GameObject Rplayer { get; set; }
+    public string sceneName;
+    public string nextScene;
     private GameObject firstDoor;
     private Camera mCamera;
-    private SpriteRenderer sprite;
     private float respawnTimeStart;
     private bool respawn;
     private float respawnTime = 2f;
     private Animator anim;
-    public string sceneName;
-    public string nextScene;
-    [Header("GAME OVER MANAGER")]
-    public View mainCanvas;
-    public View gameOverPanel;
-    public DoTweenFeatures features;
 
+    [Header("LEVEL MANAGER")]
+    [SerializeField]
+    private GameObject player;
+    public Transform respawnPoint;
+    public GameObject Rplayer { get; set; }
+    
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
 
@@ -45,9 +41,19 @@ public class GameManager : MonoBehaviour
     {
         mCamera = Camera.main;
         firstDoor = GameObject.Find("door");
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
         anim = firstDoor.GetComponent<Animator>();
-        CanvasFader.Instance.FadeImmediately();
+
+        if(Fader.Instance != null)
+        {
+            Fader.Instance.FadeImmediately();
+            CountdownTimer.Instance.ResetTimer();
+        }
+
+        Invoke("FirstSpawn", 1);
+    }
+
+    private void FirstSpawn()
+    {
         StartCoroutine(Spawnplayer());
     }
 
@@ -73,71 +79,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AddLife()
-    {
-        if(Energy.Instance.currentRewardedAd > 0)
-        {
-            StartCoroutine(AdditionalLifeRespawn());
-        }
-        else
-        {
-            mainMenu();
-        }
-    }
-
-    public void gameOver()
-    {
-        mainCanvas.Hide();
-        gameOverPanel.Show();
-        features.OnClick();
-    }
-
-    public void NextLevel()
-    {
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName("TestMenu"));
-        SceneManager.UnloadSceneAsync(sceneName);
-        MainMenu.Instance.NextLevel(nextScene);
-    }
-
-    public void Restart()
-    {
-        MainMenu.Instance.ingameCanvas.transform.SetParent(MainMenu.Instance.mainCanvas, false);
-        MainMenu.Instance.ingameCanvas.transform.SetSiblingIndex(1);
-        SceneManager.UnloadSceneAsync(sceneName);
-        MainMenu.Instance.LoadLevel(sceneName);
-        StartCoroutine(MainMenu.Instance.StarCountUpdate());
-
-    }
-
-    public void mainMenu()
-    {
-        StartCoroutine(MainMenu.Instance.LoadGameAsync(true, sceneName));
-        StartCoroutine(MainMenu.Instance.StarCountUpdate());
-    }
-
-    private IEnumerator AdditionalLifeRespawn()
-    {
-        Energy.Instance.AddALife();
-        CountdownTimer.Instance.isGameOver = false;
-        yield return new WaitForEndOfFrame();
-        Respawn();
-        mainCanvas.Show();
-        gameOverPanel.Hide();
-    }
-
     private IEnumerator Spawnplayer()
     {
         Rplayer = Instantiate(player, respawnPoint);
         yield return new WaitForSeconds(0.01f);
-        CountdownTimer.Instance.enabled = true;
-        sprite = Rplayer.GetComponent<SpriteRenderer>();
+
+        if(Fader.Instance != null)
+        {
+            CountdownTimer.Instance.enabled = true;
+            ScoringMechanism.Instance.NumberOfLives();
+            Fader.Instance.BGFader(false);
+        }
+
         var newMask = mCamera.cullingMask | (1 << 2);
         yield return new WaitForEndOfFrame();
         mCamera.cullingMask = newMask;
         Rplayer.transform.parent = null;
         Rplayer.name = player.name;
-        CanvasFader.Instance.Fader(false);
         anim.SetTrigger("opening");
-        ScoringMechanism.Instance.NumberOfLives();
     }
 }

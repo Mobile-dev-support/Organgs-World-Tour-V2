@@ -21,12 +21,16 @@ public class DoTweenFeatures : MonoBehaviour
         Button,
         Star,
         Text,
+        RevolvingObj,
     }
     public State state;
 
     private void OnEnable()
     {
-        if (state == State.Star || state == State.Panel || state == State.Text)
+        if (state == State.Star 
+            || state == State.Panel 
+                || state == State.Text 
+                    || state == State.RevolvingObj)
         {
             OnClick();
 
@@ -62,6 +66,9 @@ public class DoTweenFeatures : MonoBehaviour
                   .Append(gameObject.GetComponent<TextMeshProUGUI>().DOFade(1, duration))
                   .Append(gameObject.GetComponent<TextMeshProUGUI>().DOFade(0, duration)).OnComplete (
                     () => gameObject.SetActive(false));
+                break;
+            case State.RevolvingObj:
+                gameObject.GetComponent<Transform>().DORotate(star, duration, RotateMode.FastBeyond360);
                 break;
             default:
                 break;

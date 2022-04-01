@@ -8,24 +8,31 @@ using DG.Tweening;
 
 public class MainMenu : MonoBehaviour
 {
-    // main menu logic
-    public Transform mainCanvas;
-    public Transform MenuCanvas;
-    public Transform loadingCanvas;
-    public Transform ingameCanvas;
+    public View mainCanvas;
+    public View winCanvas;
+    public View gameOverCanvas;
+    public View statCanvas;
+    public View MenuCanvas;
+    public View loadingCanvas;
+    public View ingameCanvas;
+    public View maingameCanvas;
+    public View faderCanvas;
+    public View coverCanvas;
     public Slider slider;
     public TextMeshProUGUI textProgress;
     public AudioMixer audioMix;
     public GameObject cam;
+    public Button[] importantbuttons;
     private StarSystemUnlocker[] unlocker;
-    private string currentLoadedScene;
-
+    private GameObject level;
+    private DoTweenFeatures tween;
     private static MainMenu _instance;
+    private bool isNextLevel;
     public static MainMenu Instance { get { return _instance; } }
 
     private void Awake()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
         if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
@@ -39,6 +46,46 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         GetAllLevels();
+        level = gameOverCanvas.transform.GetChild(0).Find("level").gameObject;
+        tween = level.GetComponent<DoTweenFeatures>();
+    }
+
+    private IEnumerator AdditionalLifeRespawn()
+    {
+        Energy.Instance.AddALife();
+        CountdownTimer.Instance.isGameOver = false;
+        yield return new WaitForEndOfFrame();
+        GameManager.Instance.Respawn();
+        statCanvas.Show();
+        gameOverCanvas.Hide();
+    }
+
+    #region Pulbic Methods
+
+    public void AddLife()
+    {
+        if (Energy.Instance.currentRewardedAd > 0)
+        {
+            StartCoroutine(AdditionalLifeRespawn());
+        }
+        else
+        {
+            mainMenu();
+        }
+    }
+
+    public void mainMenu()
+    {
+        StartCoroutine(LoadGameAsync(true, GameManager.Instance.sceneName));
+        StartCoroutine(StarCountUpdate());
+        coverCanvas.Show();
+    }
+
+    public void GameOverLevel()
+    {
+        statCanvas.Hide();
+        gameOverCanvas.Show();
+        tween.OnClick();
     }
 
     public void LoadLevel(string placeName)
@@ -46,13 +93,23 @@ public class MainMenu : MonoBehaviour
         StartCoroutine(FadeGame(0, placeName));
     }
 
-    public void NextLevel(string loadStringScene)
+    public void NextLevel()
     {
-        StartCoroutine(FadeGame(0, loadStringScene));
-        currentLoadedScene = loadStringScene;
-        ingameCanvas.transform.SetParent(mainCanvas, false);
-        ingameCanvas.transform.SetSiblingIndex(1);
+        StartCoroutine(FadeGame(0, GameManager.Instance.nextScene));
+        StartCoroutine(StarCountUpdate());
+        isNextLevel = true;
+        coverCanvas.Show();
     }
+
+    public void Restart()
+    {
+        ingameCanvas.transform.SetParent(MenuCanvas.transform, false);
+        ingameCanvas.transform.SetAsLastSibling();
+        SceneManager.UnloadSceneAsync(GameManager.Instance.sceneName);
+        StartCoroutine(FadeGame(0, GameManager.Instance.sceneName));
+        StartCoroutine(StarCountUpdate());
+    }
+
 
     public void GetAllLevels()
     {
@@ -72,50 +129,44 @@ public class MainMenu : MonoBehaviour
     public IEnumerator FadeGame(float fadeVal, string loadSceneString)
     {
         slider.value = 0;
-        cam.SetActive(true);
-        mainCanvas.GetComponent<View>().Show();
-        loadingCanvas.GetComponent<View>().Show();
-        ingameCanvas.GetComponent<View>().Hide();
+        loadingCanvas.Show();
         textProgress.text = "Loading Asset Data... ";
         yield return new WaitForSeconds(.2f);
-        CanvasFader(fadeVal, MenuCanvas);
+        CanvasFader(fadeVal, MenuCanvas.transform);
         yield return new WaitForSeconds(0.5f);
-        CanvasFader(1, loadingCanvas);
+        CanvasFader(1, loadingCanvas.transform);
         yield return new WaitForSeconds(2f);
-        //load game async
         StartCoroutine(LoadGameAsync(false, loadSceneString));
-
     }
+
     void CanvasFader(float val, Transform canvas)
     {
         canvas.GetComponent<CanvasGroup>().DOFade(val, .5f);
     }
-    #region Pulbic Methods
+
     public IEnumerator LoadGameAsync(bool unload, string loadSceneString)
     {
-        slider.value = 0;
         textProgress.text = "Loading Asset Data... ";
-        GameObject Canvas = GameObject.Find("GameCanvas");
         AsyncOperation operation;
         if (!unload)
         {
-            operation = SceneManager.LoadSceneAsync(loadSceneString, LoadSceneMode.Additive);
+            if (!isNextLevel)
+            {
+                operation = SceneManager.LoadSceneAsync(loadSceneString, LoadSceneMode.Additive);
+            }
+            else
+            {
+                cam.SetActive(true);
+                SceneManager.UnloadSceneAsync(GameManager.Instance.sceneName);
+                operation = SceneManager.LoadSceneAsync(loadSceneString, LoadSceneMode.Additive);
+                isNextLevel = false;
+            }
         }
         else
         {
-            Canvas.GetComponent<View>().Hide();
-            mainCanvas.GetComponent<View>().Show();
-            ingameCanvas.GetComponent<View>().Show();
-            loadingCanvas.GetComponent<View>().Show();
-            CanvasFader(1, loadingCanvas);
             yield return new WaitForSeconds(1.2f);
             operation = SceneManager.UnloadSceneAsync(loadSceneString);
-            loadingCanvas.GetComponent<View>().Hide();
-            ingameCanvas.transform.SetParent(mainCanvas, false);
-            ingameCanvas.transform.SetSiblingIndex(1);
-            CanvasFader(0, loadingCanvas);
-            CanvasFader(1, MenuCanvas);
-            cam.SetActive(true);
+            Debug.Log("scene Unlaoded!");
         }
 
         while (!operation.isDone)
@@ -123,26 +174,47 @@ public class MainMenu : MonoBehaviour
             float progress = Mathf.Clamp01(operation.progress / .9f);
             slider.value = progress;
             textProgress.text = ProgressText(progress);
-
             yield return null;
         }
-        cam.SetActive(false);
-        CanvasFader(0, loadingCanvas);
-        mainCanvas.GetComponent<View>().Hide();
-        GameObject gameCanvas = GameObject.Find("GameCanvas");
-        ingameCanvas.transform.SetParent(gameCanvas.transform, false);
-        ingameCanvas.transform.SetSiblingIndex(1);
-        ingameCanvas.GetComponent<View>().Show();
-        if (unload)
+
+        if (operation.isDone && !unload)
         {
+            coverCanvas.Hide();
+            cam.SetActive(false);
+            mainCanvas.Hide();
+            gameOverCanvas.Hide();
+            winCanvas.Hide();
+            faderCanvas.Show();
+            maingameCanvas.Show();
+            CanvasFader(0, loadingCanvas.transform);
+            ingameCanvas.transform.SetParent(maingameCanvas.transform, false);
+            ingameCanvas.transform.SetSiblingIndex(1);
+            yield return new WaitForSeconds(0.5f);
+            ingameCanvas.Show();
+            loadingCanvas.Hide();
+        }
+        else if (operation.isDone && unload)
+        {
+            coverCanvas.Hide();
+            cam.SetActive(true);
+            mainCanvas.Show();
+            CanvasFader(1, loadingCanvas.transform);
+            ingameCanvas.transform.SetParent(MenuCanvas.transform, false);
+            ingameCanvas.transform.SetAsLastSibling();
+            maingameCanvas.Hide();
+            gameOverCanvas.Hide();
+            faderCanvas.Hide();
+            winCanvas.Hide();
+            ingameCanvas.Show();
+            CanvasFader(0, loadingCanvas.transform);
             yield return new WaitForSeconds(1f);
-            CanvasFader(1, MenuCanvas);
+            CanvasFader(1, MenuCanvas.transform);
         }
     }
 
     string ProgressText(float progress)
     {
-        string Details = "343";
+        string Details;
         progress = progress * 100;
 
         if (progress >= 0 && progress <= 20f)

@@ -5,7 +5,6 @@ using SimpleInputNamespace;
 
 public class PlayerControls : MonoBehaviour
 {
-    public static PlayerControls Instance { get; private set; }
     public bool isDrunk { get; private set; }
     private float timer = 7;
     private float defaultTime;
@@ -13,9 +12,19 @@ public class PlayerControls : MonoBehaviour
     public AxisInputUI left, right;
     public ButtonInputUI slide, jump;
 
+    private static PlayerControls _instance;
+    public static PlayerControls Instance { get { return _instance; } }
+
     private void Awake()
     {
-        Instance = this;
+        if (_instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
     }
 
     private void Start()

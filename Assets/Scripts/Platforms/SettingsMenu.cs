@@ -38,9 +38,9 @@ public class SettingsMenu : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public void mainMenu()
+    public void mainMenuFromSettings()
     {
         settings_panel.gameObject.SetActive(false);
-        GameManager.Instance.mainMenu();
+        MainMenu.Instance.mainMenu();
     }
 }

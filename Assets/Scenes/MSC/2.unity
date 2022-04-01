@@ -1133,8 +1133,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad92762f0454e145be4f4d7cbbc320c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Newpos: {x: -10.5, y: 24.616, z: 0}
-  secondDoor: {fileID: 1066761714}
+  StarsNum: 0
+  levelIndex: 0
+  country: 0
+  winCanvas: {fileID: 0}
+  counter: {fileID: 0}
+  coins: {fileID: 0}
+  img: {fileID: 0}
 --- !u!61 &263497152
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1914,7 +1919,6 @@ MonoBehaviour:
   spinning: 0
   clockWise: 0
   onlyPlayerCrumble: 0
-  speed: {x: 0, y: 0}
 --- !u!95 &406868431
 Animator:
   serializedVersion: 3
@@ -2289,7 +2293,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.947961, y: -13.213898, z: -9.999551}
+  m_LocalPosition: {x: 3.518533, y: -13.213898, z: -9.999551}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1600806940}
@@ -2369,7 +2373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7f9ad0711cd7040a8c1f35633f6503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualCam: {fileID: 685097241}
 --- !u!1 &614183798
 GameObject:
   m_ObjectHideFlags: 0
@@ -2444,7 +2447,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7f9ad0711cd7040a8c1f35633f6503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualCam: {fileID: 147885042}
 --- !u!1 &630545444
 GameObject:
   m_ObjectHideFlags: 0
@@ -2489,19 +2491,13 @@ Transform:
   m_Father: {fileID: 444203461}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &637142362 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2751054237006170988, guid: 2823f2e5b14bd1f43b030fa329cded0c,
-    type: 3}
-  m_PrefabInstance: {fileID: 2751054236960896329}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &637142368 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2751054237006170991, guid: 2823f2e5b14bd1f43b030fa329cded0c,
     type: 3}
   m_PrefabInstance: {fileID: 2751054236960896329}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 637142362}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7641726e322e6244e9f3c8975354ac13, type: 3}
@@ -3458,15 +3454,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d95c7895d3443f74f922b6a08c63032e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnPoint: {fileID: 1070363915}
+  sceneName: 
+  nextScene: 
   player: {fileID: 2751054237006170988, guid: 2823f2e5b14bd1f43b030fa329cded0c, type: 3}
-  livesText: {fileID: 329148930}
-  respawnTime: 2
-  vcams:
-  - {fileID: 147885044}
-  - {fileID: 1535888136}
-  - {fileID: 685097244}
-  NoOfLives: 0
+  respawnPoint: {fileID: 1070363915}
 --- !u!4 &979532588
 Transform:
   m_ObjectHideFlags: 0
@@ -3770,7 +3761,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7f9ad0711cd7040a8c1f35633f6503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualCam: {fileID: 1535888133}
 --- !u!1 &1101744469
 GameObject:
   m_ObjectHideFlags: 0
@@ -4223,7 +4213,6 @@ MonoBehaviour:
   spinning: 0
   clockWise: 0
   onlyPlayerCrumble: 0
-  speed: {x: 0, y: 0}
 --- !u!95 &1390050577
 Animator:
   serializedVersion: 3
@@ -5206,8 +5195,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad92762f0454e145be4f4d7cbbc320c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Newpos: {x: -10.5, y: 1.64, z: 0}
-  secondDoor: {fileID: 185891708}
+  StarsNum: 0
+  levelIndex: 0
+  country: 0
+  winCanvas: {fileID: 0}
+  counter: {fileID: 0}
+  coins: {fileID: 0}
+  img: {fileID: 0}
 --- !u!61 &1557071932
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5506,7 +5500,6 @@ MonoBehaviour:
   spinning: 0
   clockWise: 0
   onlyPlayerCrumble: 0
-  speed: {x: 0, y: 0}
 --- !u!95 &1565455902
 Animator:
   serializedVersion: 3
@@ -5629,7 +5622,6 @@ MonoBehaviour:
   spinning: 0
   clockWise: 0
   onlyPlayerCrumble: 0
-  speed: {x: 0, y: 0}
 --- !u!95 &1591608750
 Animator:
   serializedVersion: 3
@@ -5810,7 +5802,6 @@ MonoBehaviour:
   spinning: 0
   clockWise: 0
   onlyPlayerCrumble: 0
-  speed: {x: 0, y: 0}
 --- !u!95 &1594187818
 Animator:
   serializedVersion: 3
@@ -19658,7 +19649,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b903e5d2f30804eb934a167c46838e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NewRespawnPosition: {x: 20.5, y: 2, z: 0}
 --- !u!1 &1678729003
 GameObject:
   m_ObjectHideFlags: 0
@@ -19732,8 +19722,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad92762f0454e145be4f4d7cbbc320c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Newpos: {x: -10.5, y: 24.616, z: 0}
-  secondDoor: {fileID: 1066761714}
+  StarsNum: 0
+  levelIndex: 0
+  country: 0
+  winCanvas: {fileID: 0}
+  counter: {fileID: 0}
+  coins: {fileID: 0}
+  img: {fileID: 0}
 --- !u!61 &1678729007
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -19888,7 +19883,6 @@ MonoBehaviour:
   spinning: 1
   clockWise: 0
   onlyPlayerCrumble: 0
-  speed: {x: 0, y: 0}
 --- !u!95 &1690939034
 Animator:
   serializedVersion: 3
@@ -20118,9 +20112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e01a0904df29845902219a5549a3c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 637142362}
-  firstDoor: {fileID: 1863691294}
-  pos: {x: 0, y: 0, z: 0}
 --- !u!4 &1747429305
 Transform:
   m_ObjectHideFlags: 0
@@ -20147,18 +20138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2b3f65302a9a2f4aba826a4a351ca7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOverPanel: {fileID: 1558969105}
-  FinishPanel: {fileID: 1992743314}
-  minScore: 1
-  maxScore: 100
-  NxtLevelBtn: {fileID: 0}
-  imgs: []
-  level: 1
-  ccanvas: {fileID: 1558969101}
-  StartPanel: {fileID: 1558969101}
-  otherviews: []
-  anim: {fileID: 0}
-  startGame: 0
 --- !u!1 &1769166452
 GameObject:
   m_ObjectHideFlags: 0
@@ -20238,7 +20217,7 @@ SpriteRenderer:
   m_Size: {x: 20.03, y: 15.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1771459762

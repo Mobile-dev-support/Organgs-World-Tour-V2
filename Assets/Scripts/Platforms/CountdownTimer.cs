@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class CountdownTimer : MonoBehaviour
@@ -28,6 +29,11 @@ public class CountdownTimer : MonoBehaviour
     }
 
     private void Start()
+    {
+        isGameOver = false;
+    }
+
+    public void ResetTimer()
     {
         isGameOver = false;
         timeValue = defaultTime;
@@ -71,12 +77,12 @@ public class CountdownTimer : MonoBehaviour
                     Energy.Instance.UseLife();
                     if (Energy.Instance.currentLife > 0)
                     {
-                        GameManager.Instance.Restart();
+                        MainMenu.Instance.Restart();
                     }
                     else
                     {
-                        GameManager.Instance.gameOver();
-                        CanvasFader.Instance.Fader(true);
+                        MainMenu.Instance.GameOverLevel();
+                        Fader.Instance.BGFader(true);
                         timeValue += extraTime;
                         Destroy(GameManager.Instance.Rplayer, 0.01f);
                         isGameOver = true;

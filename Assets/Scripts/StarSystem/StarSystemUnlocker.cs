@@ -61,7 +61,7 @@ public class StarSystemUnlocker : MonoBehaviour
     {
         if (unlocked && Energy.Instance.currentLife > 0)
         {
-            MainMenu.Instance.NextLevel(gameObject.name);
+            MainMenu.Instance.LoadLevel(gameObject.name);
         }
         else
         {

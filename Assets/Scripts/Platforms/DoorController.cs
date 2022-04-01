@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
@@ -19,12 +17,19 @@ public class DoorController : MonoBehaviour
     public int levelIndex;
     public int country;
     private GameObject player;
-    [Header("WIN PANEL")]
+    private GameObject button;
+    private GameObject coinsObj;
+    [HideInInspector]
     public GameObject winCanvas;
+    private View win;
+    private GameObject mainCanvas;
+    private View main;
+    private Button nextLvlBtn;
+    [Header("WIN PANEL")]
     public TextMeshProUGUI counter;
     public TextMeshProUGUI coins;
     public Image img;
-    public View mainCanvas;
+
 
     private static DoorController _instance;
     public static DoorController Instance { get { return _instance; } }
@@ -43,12 +48,23 @@ public class DoorController : MonoBehaviour
 
     private void Start()
     {
-        //PlayerPrefs.DeleteKey("totem_key" + country);
-        Load();
+        mainCanvas = GameObject.Find("main_game_canvas");
+        if (mainCanvas != null)
+        {
+            coinsObj = GameObject.Find("coinText");
+            winCanvas = GameObject.Find("win_canvas");
+            button = GameObject.Find("next_level_btn");
+            coins = coinsObj.GetComponent<TextMeshProUGUI>();
+            win = winCanvas.GetComponent<View>();
+            main = mainCanvas.GetComponent<View>();
+            nextLvlBtn = button.GetComponent<Button>();
+        }
+        /*Load();
         if (totem_key > 0)
             img.color = Color.white;
         else
             img.color = Color.black;
+        */
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -78,12 +94,22 @@ public class DoorController : MonoBehaviour
         yield return new WaitForSeconds(1);
         StartCoroutine(ScoringMechanism.Instance.WinPanel());
         yield return new WaitForEndOfFrame();
-        winCanvas.GetComponent<View>().Show();
+        NextLevelNotif();
+        main.Hide();
+        win.Show();
         CountdownTimer.Instance.enabled = false;
-        counter.SetText("{0:00}:{1:00}", CountdownTimer.Instance.minutes, CountdownTimer.Instance.seconds);
-        coins.SetText(ScoringMechanism.Instance.coinNo.ToString());
+        GameObject coinNo = GameObject.Find("coins_number");
+        coins = coinNo.GetComponent<TextMeshProUGUI>();
+        coins.SetText(ScoringMechanism.Instance.score.ToString());
         GameManager.Instance.Rplayer.SetActive(false);
-        mainCanvas.Hide();
+    }
+
+    public void NextLevelNotif()
+    {
+        if (PlayerPrefs.GetInt("Lv" + levelIndex) > 1)
+            nextLvlBtn.interactable = true;
+        else
+            nextLvlBtn.interactable = false;
     }
 
     public void Save()

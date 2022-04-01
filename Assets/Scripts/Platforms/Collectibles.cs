@@ -12,7 +12,6 @@ public class Collectibles : MonoBehaviour
         {
             ScoringMechanism.Instance.coinScore();
             CharacterAudio.Instance.Coin();
-            ScoringMechanism.Instance.coinNo += 1;
             Destroy(gameObject);
         }
     }

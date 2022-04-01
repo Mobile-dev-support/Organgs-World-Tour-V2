@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Canvas))]
-//[RequireComponent(typeof(GraphicRaycaster))]
+[RequireComponent(typeof(GraphicRaycaster))]
 public class View : MonoBehaviour
 {
     private static View current;
@@ -40,17 +40,15 @@ public class View : MonoBehaviour
         rectTransform = (RectTransform)transform;
         canvas = GetComponent<Canvas>();
         raycaster = GetComponent<GraphicRaycaster>();
-
         canvas.enabled = false;
-        if (raycaster != null)
-        {
-            raycaster.enabled = false;
-        }
+        raycaster.enabled = false;
         rectTransform.offsetMin = new Vector2(0, 0);
         rectTransform.offsetMax = new Vector2(0, 0);
 
         if (showOnAwake)
+        {
             Show();
+        }
     }
 
     public bool isVisible()
@@ -101,10 +99,7 @@ public class View : MonoBehaviour
     {
         onHide?.Invoke();
         canvas.enabled = false;
-        if (raycaster != null)
-        {
-            raycaster.enabled = false;
-        }
+        raycaster.enabled = false;
         if (childAffected == null)
         {
             foreach (View view in children)
@@ -126,11 +121,8 @@ public class View : MonoBehaviour
     {
         onShow?.Invoke();
         canvas.enabled = true;
-        if(raycaster != null)
-        {
-            raycaster.enabled = true;
-        }
-        /*if (childAffected == null)
+        raycaster.enabled = true;
+        if (childAffected == null)
         {
             foreach (View view in children)
             {
@@ -144,7 +136,7 @@ public class View : MonoBehaviour
             {
                 children[childIndex].Show();
             }
-        }*/
+        }
     }
 
     public void setChildAffected(int[] childAffected)

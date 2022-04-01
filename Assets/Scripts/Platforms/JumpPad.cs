@@ -79,7 +79,6 @@ public class JumpPad : MonoBehaviour
                 {
                     if (collider.gameObject.CompareTag("JumpPad"))
                     {
-                        Debug.Log("Hit");
                         Knockback(angle, strength, direction);
                     }
                 }

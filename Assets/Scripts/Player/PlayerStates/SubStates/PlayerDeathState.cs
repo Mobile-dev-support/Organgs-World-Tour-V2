@@ -31,10 +31,15 @@ public class PlayerDeathState : PlayerGroundedState
     private void Die()
     {
         GameObject deathChunk = GameObject.Instantiate(playerData.deathChunk, player.transform.position, playerData.deathChunk.transform.rotation) as GameObject;
-        Object.Destroy(GameObject.FindGameObjectWithTag("Player"));
+        Object.Destroy(player.gameObject);
         CameraShake.Instance.ShakeCamera(5f, .1f);
-        CanvasFader.Instance.Fader(true);
-        CountdownTimer.Instance.enabled = false;
+
+        if (Fader.Instance != null)
+        {
+            Fader.Instance.BGFader(true);
+            CountdownTimer.Instance.enabled = false;
+        }
+
         if (Energy.Instance != null)
         {
             Energy.Instance.UseLife();
@@ -45,7 +50,7 @@ public class PlayerDeathState : PlayerGroundedState
             }
             else
             {
-                GameManager.Instance.gameOver();
+                MainMenu.Instance.GameOverLevel();
             }
         }
         else

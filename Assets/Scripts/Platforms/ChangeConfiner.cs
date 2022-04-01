@@ -38,8 +38,10 @@ public class ChangeConfiner : MonoBehaviour
             Collider2D hitCharacer = Physics2D.OverlapBox(transform.position, new Vector2(RangeX, RangeY), 0, layer);
             confiner.m_BoundingShape2D = polygon;
             if(hitCharacer != null)
-            vcam.m_Follow = hitCharacer.transform;
-            isChanged = false;
+            {
+                vcam.m_Follow = hitCharacer.transform;
+                isChanged = false;
+            }
         }
     }
 

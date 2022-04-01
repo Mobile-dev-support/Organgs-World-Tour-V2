@@ -11,22 +11,12 @@ namespace CleverCrow.Fluid.Dialogues.Examples
 {
     public class DialogContainer : MonoBehaviour
     {
-        private DialogueController _ctrl;
-        private GameObject Oliver;
-
         [Header("DIALOGUE")]
         public DialogueGraph dialogue;
         public GameObjectOverride[] gameObjectOverrides;
-        public GameObject speakerContainer;
-        public Image portrait;
-        public TextMeshProUGUI lines;
-        public TextMeshProUGUI ActorName;
-        public RectTransform choiceList;
         public ChoiceButton choicePrefab;
         public string totemLandCode;
         public string backToOliverCode;
-        public View dialogCanvas;
-        public View controlCanvas;
         private int organg_key;
         public int organg;
         [Header("DIALOGUE EFFECTS")]
@@ -34,8 +24,17 @@ namespace CleverCrow.Fluid.Dialogues.Examples
         public float strength;
         public int vibrato;
         public float randomness;
-        private Animator cameraAnim;
 
+
+        private Animator cameraAnim;
+        private DialogueController _ctrl;
+        private GameObject Oliver;
+        private Image portrait;
+        private TextMeshProUGUI lines;
+        private TextMeshProUGUI ActorName;
+        private RectTransform choiceList;
+        private View dialogCanvas;
+        private View controlCanvas;
 
         IEnumerator LoadLevel(string level)
         {
@@ -51,7 +50,17 @@ namespace CleverCrow.Fluid.Dialogues.Examples
 
         private void Awake()
         {
-            Load();
+
+            if (controlCanvas == null)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                Initialize();
+            }
+
+            //Load();
             var database = new DatabaseInstanceExtended();
             _ctrl = new DialogueController(database);
             _ctrl.Events.Speak.AddListener((actor, text) => {
@@ -100,7 +109,6 @@ namespace CleverCrow.Fluid.Dialogues.Examples
         {
             dialogCanvas.Hide();
             cameraAnim = GetComponent<Animator>();
-            PlayerPrefs.DeleteAll();
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.sceneUnloaded += OnSceneunLoaded;
             if (PlayerPrefs.HasKey("organg_key" + organg_key))
@@ -108,6 +116,22 @@ namespace CleverCrow.Fluid.Dialogues.Examples
                 Debug.Log("has " + organg_key + " key");
                 Destroy(gameObject, 0.01f);
             }
+        }
+
+        public void Initialize()
+        {
+            GameObject goPortrait = GameObject.Find("CharImage");
+            GameObject goDia = GameObject.Find("Dialog");
+            GameObject goName = GameObject.Find("ActorName");
+            GameObject goList = GameObject.Find("ChoiceList");
+            GameObject goDialogCanvas = GameObject.Find("dialog_canvas");
+            GameObject gomainCanvas = GameObject.Find("main_game_canvas");
+            portrait = goPortrait.GetComponent<Image>();
+            lines = goDia.GetComponent<TextMeshProUGUI>();
+            ActorName = goName.GetComponent<TextMeshProUGUI>();
+            choiceList = goList.GetComponent<RectTransform>();
+            dialogCanvas = goDialogCanvas.GetComponent<View>();
+            controlCanvas = gomainCanvas.GetComponent<View>();
         }
 
         private void OnDestroy()
@@ -147,25 +171,25 @@ namespace CleverCrow.Fluid.Dialogues.Examples
         private IEnumerator LoadLevel()
         {
             cameraAnim.SetBool("cutscene", false);
-            CanvasFader.Instance.Fader(true);
+            Fader.Instance.BGFader(true);
             Oliver = GameObject.Find("MainPlayer");
             yield return new WaitForSeconds(2f);
             Oliver.SetActive(false);
             yield return new WaitForSeconds(1f);
             gameObject.GetComponent<Collider2D>().enabled = false;
             gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
-            CanvasFader.Instance.Fader(false);
+            Fader.Instance.BGFader(false);
         }
 
         private IEnumerator unLoadLevel()
         {
-            CanvasFader.Instance.FadeImmediately();
-            CanvasFader.Instance.Fader(true);
+            Fader.Instance.FadeImmediately();
+            Fader.Instance.BGFader(true);
             yield return new WaitForSeconds(1.0f);
             cameraAnim.SetBool("cutscene", false);
             Oliver.SetActive(true);
             yield return new WaitForSeconds(0.5f);
-            CanvasFader.Instance.Fader(false);
+            Fader.Instance.BGFader(false);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)

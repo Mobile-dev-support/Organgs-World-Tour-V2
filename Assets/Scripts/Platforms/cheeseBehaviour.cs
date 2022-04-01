@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 public class cheeseBehaviour : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class cheeseBehaviour : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private float timer;
     [SerializeField] private LayerMask whatIsPlayer;
+    private string runAnimation = "run";
 
     private void Start()
     {
@@ -25,13 +27,16 @@ public class cheeseBehaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Profiler.BeginSample("MyPieceOfCode");
         RangeOfCheese();
         Explosion();
+        Profiler.EndSample();
     }
 
     public void AttachToPlayer()
     {
         transform.position = Vector2.MoveTowards(transform.position, GameManager.Instance.Rplayer.transform.position, speed);
+        gameObject.GetComponent<Animator>().SetTrigger(runAnimation);
 
     }
 
@@ -80,7 +85,6 @@ public class cheeseBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.collider.IsTouchingLayers(whatIsPlayer))
         isExploded = true;
     }
 }
