@@ -10,14 +10,11 @@ public class StarSystemUnlocker : MonoBehaviour
     public GameObject[] stars;
     public Sprite starSprite;
     public View getlifeCanvas;
-    private RectTransform rect;
-    public ScrollRect scroller;
  
 
     private void Start()
     {
         Button btn = gameObject.GetComponent<Button>();
-        rect = gameObject.GetComponent<RectTransform>();
         btn.onClick.AddListener(PressSelection);
         UpdateLevelStatus();
         UpdateLevelImage();
@@ -30,9 +27,20 @@ public class StarSystemUnlocker : MonoBehaviour
         if (PlayerPrefs.GetInt("Lv" + previousLevelNum.ToString()) > 1)//If the firts level star is bigger than 0, second level can play
         {
             unlocked = true;
-            //ScrollViewFocusFunctions.FocusOnItemCoroutine(scroller, rect, 0.2f);
+            GetHighestLevel();
         }
     }
+
+    public void GetHighestLevel()
+    {
+        int currentlevel = int.Parse(gameObject.name);
+        if (!UIFocus.Instance.CurrentLevel.Contains(currentlevel))
+        {
+            UIFocus.Instance.CurrentLevel.Add(int.Parse(gameObject.name));
+            UIFocus.Instance.CurrentLevel.Sort();
+        }
+    }
+
     public void UpdateLevelImage()
     {
         if (!unlocked)//MARKER if unclock is false means This level is clocked!

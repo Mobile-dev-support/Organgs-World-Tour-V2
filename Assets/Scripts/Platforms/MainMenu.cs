@@ -19,16 +19,17 @@ public class MainMenu : MonoBehaviour
     public View maingameCanvas;
     public View faderCanvas;
     public View coverCanvas;
+    public View scroller_canvas;
+    public View menu_item_canvas;
     public Slider slider;
     public TextMeshProUGUI textProgress;
     public AudioMixer audioMix;
     public GameObject cam;
-    public Button[] importantbuttons;
     private StarSystemUnlocker[] unlocker;
     private GameObject level;
     private DoTweenFeatures tween;
-    private static MainMenu _instance;
     private bool isNextLevel;
+    private static MainMenu _instance;
     public static MainMenu Instance { get { return _instance; } }
 
     private void Awake()
@@ -133,7 +134,7 @@ public class MainMenu : MonoBehaviour
         loadingCanvas.Show();
         textProgress.text = "Loading Asset Data... ";
         yield return new WaitForSeconds(.2f);
-        CanvasFader(fadeVal, MenuCanvas.transform);
+        CanvasFader(fadeVal, mainCanvas.transform);
         yield return new WaitForSeconds(0.5f);
         CanvasFader(1, loadingCanvas.transform);
         yield return new WaitForSeconds(2f);
@@ -185,6 +186,8 @@ public class MainMenu : MonoBehaviour
             mainCanvas.Hide();
             gameOverCanvas.Hide();
             winCanvas.Hide();
+            scroller_canvas.Hide();
+            menu_item_canvas.Hide();
             faderCanvas.Show();
             maingameCanvas.Show();
             CanvasFader(0, loadingCanvas.transform);
@@ -196,20 +199,24 @@ public class MainMenu : MonoBehaviour
         }
         else if (operation.isDone && unload)
         {
-            coverCanvas.Hide();
             cam.SetActive(true);
             mainCanvas.Show();
-            CanvasFader(1, loadingCanvas.transform);
-            ingameCanvas.transform.SetParent(mainCanvas.transform, false);
-            ingameCanvas.transform.SetSiblingIndex(2);
             maingameCanvas.Hide();
             gameOverCanvas.Hide();
             faderCanvas.Hide();
             winCanvas.Hide();
+            coverCanvas.Hide();
+            CanvasFader(1, loadingCanvas.transform);
+            ingameCanvas.transform.SetParent(mainCanvas.transform, false);
+            ingameCanvas.transform.SetSiblingIndex(2);
+            yield return new WaitForSeconds(1f);
+            scroller_canvas.Show();
+            menu_item_canvas.Show();
             ingameCanvas.Show();
             CanvasFader(0, loadingCanvas.transform);
+            UIFocus.Instance.FocusOnObjectImmediately();
             yield return new WaitForSeconds(1f);
-            CanvasFader(1, MenuCanvas.transform);
+            CanvasFader(1, mainCanvas.transform);
         }
     }
 

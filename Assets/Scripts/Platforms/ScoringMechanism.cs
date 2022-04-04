@@ -41,7 +41,6 @@ public class ScoringMechanism : MonoBehaviour
             livesText = golivesObj.GetComponent<TextMeshProUGUI>();
             coinsText = gocoinsObj.GetComponent<TextMeshProUGUI>();
             coinsText.SetText("0");
-            DoorController.Instance.winCanvas.transform.Find("bg").gameObject.SetActive(false);
         }
     }
 
@@ -86,6 +85,8 @@ public class ScoringMechanism : MonoBehaviour
     #region IEnumerator
     public IEnumerator WinPanel()
     {
+        DoorController.Instance.winCanvas.transform.Find("bg").gameObject.SetActive(false);
+        yield return new WaitForEndOfFrame();
         DoorController.Instance.winCanvas.transform.Find("bg").gameObject.SetActive(true);
         GameObject[] stars = GameObject.FindGameObjectsWithTag("stars");
         yield return new WaitForEndOfFrame();

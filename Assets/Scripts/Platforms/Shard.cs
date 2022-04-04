@@ -33,7 +33,7 @@ public class Shard : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            DoorController.Instance.img.DOColor(Color.white, 0.5f);
+            //DoorController.Instance.img.DOColor(Color.white, 0.5f);
             DoorController.Instance.totem_key += 1;
             DoorController.Instance.Save();
             Destroy(gameObject, 0.01f);

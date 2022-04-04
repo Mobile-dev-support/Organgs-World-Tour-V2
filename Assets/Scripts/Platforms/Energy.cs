@@ -11,7 +11,7 @@ public class Energy : MonoBehaviour
     [SerializeField] private Slider[] lifeBar;
     [SerializeField] private TextMeshProUGUI timerTxt;
     [SerializeField] private Button AdButton;
-    private int maxLife = 1;
+    private int maxLife = 5;
     public int currentLife { get; set; }
     private int restorDuration = 1;
     private DateTime nextLifeTime;

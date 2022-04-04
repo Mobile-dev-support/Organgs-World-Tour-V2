@@ -25,10 +25,7 @@ public class DoorController : MonoBehaviour
     private GameObject mainCanvas;
     private View main;
     private Button nextLvlBtn;
-    [Header("WIN PANEL")]
-    public TextMeshProUGUI counter;
-    public TextMeshProUGUI coins;
-    public Image img;
+    private TextMeshProUGUI coins;
 
 
     private static DoorController _instance;
