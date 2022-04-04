@@ -5,6 +5,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using DG.Tweening;
+using System.Linq;
 
 public class MainMenu : MonoBehaviour
 {
@@ -199,8 +200,8 @@ public class MainMenu : MonoBehaviour
             cam.SetActive(true);
             mainCanvas.Show();
             CanvasFader(1, loadingCanvas.transform);
-            ingameCanvas.transform.SetParent(MenuCanvas.transform, false);
-            ingameCanvas.transform.SetAsLastSibling();
+            ingameCanvas.transform.SetParent(mainCanvas.transform, false);
+            ingameCanvas.transform.SetSiblingIndex(2);
             maingameCanvas.Hide();
             gameOverCanvas.Hide();
             faderCanvas.Hide();

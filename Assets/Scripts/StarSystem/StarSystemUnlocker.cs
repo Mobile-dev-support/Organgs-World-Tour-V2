@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using UnityEngine.SceneManagement;
 
 public class StarSystemUnlocker : MonoBehaviour
 {
@@ -11,12 +9,16 @@ public class StarSystemUnlocker : MonoBehaviour
     public Image unlockImage;
     public GameObject[] stars;
     public Sprite starSprite;
-    public View[] otherViews;
     public View getlifeCanvas;
+    private RectTransform rect;
+    public ScrollRect scroller;
  
 
     private void Start()
     {
+        Button btn = gameObject.GetComponent<Button>();
+        rect = gameObject.GetComponent<RectTransform>();
+        btn.onClick.AddListener(PressSelection);
         UpdateLevelStatus();
         UpdateLevelImage();
     }
@@ -28,6 +30,7 @@ public class StarSystemUnlocker : MonoBehaviour
         if (PlayerPrefs.GetInt("Lv" + previousLevelNum.ToString()) > 1)//If the firts level star is bigger than 0, second level can play
         {
             unlocked = true;
+            //ScrollViewFocusFunctions.FocusOnItemCoroutine(scroller, rect, 0.2f);
         }
     }
     public void UpdateLevelImage()
@@ -65,10 +68,6 @@ public class StarSystemUnlocker : MonoBehaviour
         }
         else
         {
-            for(int i = 0; i < otherViews.Length; i++)
-            {
-                otherViews[i].Hide();
-            }
             getlifeCanvas.Show();
         }
     }
