@@ -28,21 +28,15 @@ public class UIFocus : MonoBehaviour
 
     public void FocusOnObject()
     {
-        if(objectOfFocus != null)
-        {
-            objectOfFocus = GameObject.Find(CurrentLevel.Last().ToString());
-            rect = objectOfFocus.GetComponent<RectTransform>();
-            StartCoroutine(ScrollViewFocusFunctions.FocusOnItemCoroutine(scroller, rect, 2f));
-        }
+        objectOfFocus = GameObject.Find(CurrentLevel.Last().ToString());
+        rect = objectOfFocus.GetComponent<RectTransform>();
+        StartCoroutine(ScrollViewFocusFunctions.FocusOnItemCoroutine(scroller, rect, 2f));
     }
 
     public void FocusOnObjectImmediately()
     {
-        if (objectOfFocus != null)
-        {
-            objectOfFocus = GameObject.Find(CurrentLevel.Last().ToString());
-            rect = objectOfFocus.GetComponent<RectTransform>();
-            ScrollViewFocusFunctions.FocusOnItem(scroller, rect);
-        }
+        objectOfFocus = GameObject.Find(CurrentLevel.Last().ToString());
+        rect = objectOfFocus.GetComponent<RectTransform>();
+        ScrollViewFocusFunctions.FocusOnItem(scroller, rect);
     }
 }

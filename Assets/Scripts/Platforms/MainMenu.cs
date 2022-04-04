@@ -9,6 +9,7 @@ using System.Linq;
 
 public class MainMenu : MonoBehaviour
 {
+    [Header("MAIN MENU")]
     public View mainCanvas;
     public View winCanvas;
     public View gameOverCanvas;
@@ -21,6 +22,7 @@ public class MainMenu : MonoBehaviour
     public View coverCanvas;
     public View scroller_canvas;
     public View menu_item_canvas;
+    public View dialogCanvas;
     public Slider slider;
     public TextMeshProUGUI textProgress;
     public AudioMixer audioMix;
@@ -29,6 +31,18 @@ public class MainMenu : MonoBehaviour
     private GameObject level;
     private DoTweenFeatures tween;
     private bool isNextLevel;
+    [Header("DIALOG CONTAINER")]
+    public Image portrait;
+    public Image portrait2;
+    public TextMeshProUGUI lines;
+    public TextMeshProUGUI ActorName;
+    public RectTransform choiceList;
+    public RectTransform dialog;
+    [Header("DIALOGUE EFFECTS")]
+    public float duration;
+    public float strength;
+    public int vibrato;
+    public float randomness;
     private static MainMenu _instance;
     public static MainMenu Instance { get { return _instance; } }
 

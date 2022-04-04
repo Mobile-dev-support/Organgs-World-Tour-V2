@@ -61,7 +61,6 @@ public class PlayerGroundedState : PlayerState
     public override void Enter()
     {
         base.Enter();
-
         player.JumpState.ResetAmountOfJumpsLeft();
     }
 

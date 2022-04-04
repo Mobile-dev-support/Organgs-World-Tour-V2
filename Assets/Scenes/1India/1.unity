@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Follow: {fileID: 337336937}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 4.5
+    OrthographicSize: 5.05
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -242,7 +242,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 125531062}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.880126, y: 27.482195, z: -4.0038247}
+  m_LocalPosition: {x: -8.880126, y: 27.483213, z: -4.0038247}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 580440761}
@@ -275,7 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ConfineMode: 0
   m_BoundingVolume: {fileID: 0}
-  m_BoundingShape2D: {fileID: 134415429}
+  m_BoundingShape2D: {fileID: 945171988}
   m_ConfineScreenEdges: 1
   m_Damping: 0
 --- !u!114 &125531067
@@ -297,9 +297,9 @@ MonoBehaviour:
   m_ZoomScale: 1
   m_FollowAttachment: 0.8
   m_LookAtAttachment: 1
---- !u!60 &134415429 stripped
-PolygonCollider2D:
-  m_CorrespondingSourceObject: {fileID: 890151763, guid: 1e8fb5d356a856c4e8644f3375b1ecbd,
+--- !u!19719996 &293463088 stripped
+TilemapCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5179999310574078303, guid: 1e8fb5d356a856c4e8644f3375b1ecbd,
     type: 3}
   m_PrefabInstance: {fileID: 5179999311429272788}
   m_PrefabAsset: {fileID: 0}
@@ -397,7 +397,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 4.5
+  orthographic size: 5.05
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -421,7 +421,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.613294, y: 28.629103, z: -4.0038247}
+  m_LocalPosition: {x: 23.616293, y: -10.924898, z: -4.0038247}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1600806940}
@@ -844,6 +844,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!19719996 &914664714 stripped
+TilemapCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5179999310878436622, guid: 1e8fb5d356a856c4e8644f3375b1ecbd,
+    type: 3}
+  m_PrefabInstance: {fileID: 5179999311429272788}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &945171988 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 6775627959918775112, guid: 1e8fb5d356a856c4e8644f3375b1ecbd,
+    type: 3}
+  m_PrefabInstance: {fileID: 5179999311429272788}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &979532586
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,6 +890,14 @@ MonoBehaviour:
   nextScene: 2
   player: {fileID: 2751054237006170988, guid: 2823f2e5b14bd1f43b030fa329cded0c, type: 3}
   respawnPoint: {fileID: 1510275816}
+  ground:
+  - {fileID: 914664714}
+  trap:
+  - {fileID: 293463088}
+  slipperyground: []
+  sugarplatform: []
+  throughplatforms: []
+  solidplatforms: []
 --- !u!4 &979532588
 Transform:
   m_ObjectHideFlags: 0

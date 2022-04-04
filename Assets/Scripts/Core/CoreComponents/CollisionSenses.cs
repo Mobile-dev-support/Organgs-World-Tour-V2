@@ -66,62 +66,62 @@ public class CollisionSenses : CoreComponent
 
     public bool Ceiling
     {
-        get => Physics2D.OverlapCircle(CeilingCheck.position, ceilingCheckRadius, whatIsGround);
+        get => Physics2D.OverlapCircleNonAlloc(CeilingCheck.position, ceilingCheckRadius, GameManager.Instance.ground, whatIsGround) > 0;
     }
 
     public bool SolidPlatformCeiling
     {
-        get => Physics2D.OverlapCircle(CeilingCheck.position, ceilingCheckRadius, whatIsSolidPlatform);
+        get => Physics2D.OverlapCircleNonAlloc(CeilingCheck.position, ceilingCheckRadius, GameManager.Instance.solidplatforms, whatIsSolidPlatform) > 0;
     }
 
     public bool Ground
     {
-        get => Physics2D.OverlapCircle(GroundCheck.position, groundCheckRadius, whatIsGround);
+        get => Physics2D.OverlapCircleNonAlloc(GroundCheck.position, groundCheckRadius, GameManager.Instance.ground, whatIsGround) > 0;
     }
 
     public bool ThroughPlatform
     {
-        get => Physics2D.OverlapCircle(GroundCheck.position, groundCheckRadius, whatIsThroughPlatform);
+        get => Physics2D.OverlapCircleNonAlloc(GroundCheck.position, groundCheckRadius, GameManager.Instance.throughplatforms, whatIsThroughPlatform) > 0;
     }
 
     public bool SolidPlatform
     {
-        get => Physics2D.OverlapCircle(GroundCheck.position, groundCheckRadius, whatIsSolidPlatform);
+        get => Physics2D.OverlapCircleNonAlloc(GroundCheck.position, groundCheckRadius, GameManager.Instance.solidplatforms, whatIsSolidPlatform) > 0;
     }
 
     public bool SlipperyPlatform
     {
-        get => Physics2D.OverlapCircle(GroundCheck.position, groundCheckRadius, whatIsSlipperyPlatform);
+        get => Physics2D.OverlapCircleNonAlloc(GroundCheck.position, groundCheckRadius, GameManager.Instance.slipperyground, whatIsSlipperyPlatform) > 0;
     }
 
     public bool SugarPlatform
     {
-        get => Physics2D.OverlapCircle(GroundCheck.position, groundCheckRadius, whatIsSugarPlatform);
+        get => Physics2D.OverlapCircleNonAlloc(GroundCheck.position, groundCheckRadius, GameManager.Instance.sugarplatform, whatIsSugarPlatform) > 0;
     }
 
     public bool Trap
     {
-        get => Physics2D.OverlapCircle(DeathCheck.position, deathCheckRadius, whatIsTrap);
+        get => Physics2D.OverlapCircleNonAlloc(DeathCheck.position, deathCheckRadius, GameManager.Instance.trap, whatIsTrap) > 0;
     }
 
     public bool WallFront
     {
-        get => Physics2D.Raycast(WallCheck.position, Vector2.right * core.Movement.FacingDirection, wallCheckDistance, whatIsGround);
+        get => Physics2D.RaycastNonAlloc(WallCheck.position, Vector2.right * core.Movement.FacingDirection, GameManager.Instance.groundRay, wallCheckDistance, whatIsGround) > 0;
     }
 
     public bool LedgeHorizontal
     {
-        get => Physics2D.Raycast(LedgeCheckHorizontal.position, Vector2.right * core.Movement.FacingDirection, wallCheckDistance, whatIsGround);
+        get => Physics2D.RaycastNonAlloc(LedgeCheckHorizontal.position, Vector2.right * core.Movement.FacingDirection, GameManager.Instance.groundRay, wallCheckDistance, whatIsGround) > 0;
     }
 
     public bool LedgeVertical
     {
-        get => Physics2D.Raycast(LedgeCheckVertical.position, Vector2.down, wallCheckDistance, whatIsGround);
+        get => Physics2D.RaycastNonAlloc(LedgeCheckVertical.position, Vector2.down, GameManager.Instance.groundRay, wallCheckDistance, whatIsGround) > 0;
     }
 
     public bool WallBack
     {
-        get => Physics2D.Raycast(WallCheck.position, Vector2.right * -core.Movement.FacingDirection, wallCheckDistance, whatIsGround);
+        get => Physics2D.RaycastNonAlloc(WallCheck.position, Vector2.right * -core.Movement.FacingDirection, GameManager.Instance.groundRay, wallCheckDistance, whatIsGround) > 0;
     }
 
     private void OnDrawGizmos()

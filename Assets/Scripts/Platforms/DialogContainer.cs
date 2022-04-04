@@ -19,22 +19,11 @@ namespace CleverCrow.Fluid.Dialogues.Examples
         public string backToOliverCode;
         private int organg_key;
         public int organg;
-        [Header("DIALOGUE EFFECTS")]
-        public float duration;
-        public float strength;
-        public int vibrato;
-        public float randomness;
-
 
         private Animator cameraAnim;
         private DialogueController _ctrl;
         private GameObject Oliver;
-        private Image portrait;
-        private TextMeshProUGUI lines;
-        private TextMeshProUGUI ActorName;
-        private RectTransform choiceList;
-        private View dialogCanvas;
-        private View controlCanvas;
+        private static string mainChar = "Oliver";
 
         IEnumerator LoadLevel(string level)
         {
@@ -50,42 +39,53 @@ namespace CleverCrow.Fluid.Dialogues.Examples
 
         private void Awake()
         {
-
-            if (controlCanvas == null)
-            {
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                Initialize();
-            }
-
-            //Load();
             var database = new DatabaseInstanceExtended();
             _ctrl = new DialogueController(database);
             _ctrl.Events.Speak.AddListener((actor, text) => {
                 ClearChoices();
-                ActorName.text = actor.DisplayName;
-                portrait.sprite = actor.Portrait;
-                lines.text = text;
+                MainMenu.Instance.ActorName.text = actor.DisplayName;
+                if (MainMenu.Instance.ActorName.text == mainChar)
+                {
+                    MainMenu.Instance.portrait.sprite = actor.Portrait;
+                    MainMenu.Instance.portrait.gameObject.SetActive(true);
+                    MainMenu.Instance.portrait2.gameObject.SetActive(false);
+                }
+                else
+                {
+                    MainMenu.Instance.portrait2.sprite = actor.Portrait;
+                    MainMenu.Instance.portrait.gameObject.SetActive(false);
+                    MainMenu.Instance.portrait2.gameObject.SetActive(true);
+                }
+                MainMenu.Instance.lines.text = text;
                 _ctrl.Next();
             });
 
             _ctrl.Events.Choice.AddListener((actor, text, choices) => {
                 ClearChoices();
-                ActorName.text = actor.DisplayName;
-                portrait.sprite = actor.Portrait;
-                lines.text = text;
+                MainMenu.Instance.ActorName.text = actor.DisplayName;
+                if (MainMenu.Instance.ActorName.text == mainChar)
+                {
+                    MainMenu.Instance.portrait.sprite = actor.Portrait;
+                    MainMenu.Instance.portrait.gameObject.SetActive(true);
+                    MainMenu.Instance.portrait2.gameObject.SetActive(false);
+                }
+                else
+                {
+                    MainMenu.Instance.portrait2.sprite = actor.Portrait;
+                    MainMenu.Instance.portrait.gameObject.SetActive(false);
+                    MainMenu.Instance.portrait2.gameObject.SetActive(true);
+                }
+                MainMenu.Instance.lines.text = text;
                 Tween();
                 choices.ForEach(c => {
-                    var choice = Instantiate(choicePrefab, choiceList);
+                    var choice = Instantiate(choicePrefab, MainMenu.Instance.choiceList);
                     choice.title.text = c.Text;
                     choice.clickEvent.AddListener(_ctrl.SelectChoice);
                 });
             });
 
             _ctrl.Events.End.AddListener(() => {
-                dialogCanvas.Hide();
+                MainMenu.Instance.dialogCanvas.Hide();
                 StartCoroutine(DoorController.Instance.EndGame());
 
             });
@@ -107,7 +107,7 @@ namespace CleverCrow.Fluid.Dialogues.Examples
 
         public void Start()
         {
-            dialogCanvas.Hide();
+            MainMenu.Instance.dialogCanvas.Hide();
             cameraAnim = GetComponent<Animator>();
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.sceneUnloaded += OnSceneunLoaded;
@@ -118,22 +118,6 @@ namespace CleverCrow.Fluid.Dialogues.Examples
             }
         }
 
-        public void Initialize()
-        {
-            GameObject goPortrait = GameObject.Find("CharImage");
-            GameObject goDia = GameObject.Find("Dialog");
-            GameObject goName = GameObject.Find("ActorName");
-            GameObject goList = GameObject.Find("ChoiceList");
-            GameObject goDialogCanvas = GameObject.Find("dialog_canvas");
-            GameObject gomainCanvas = GameObject.Find("main_game_canvas");
-            portrait = goPortrait.GetComponent<Image>();
-            lines = goDia.GetComponent<TextMeshProUGUI>();
-            ActorName = goName.GetComponent<TextMeshProUGUI>();
-            choiceList = goList.GetComponent<RectTransform>();
-            dialogCanvas = goDialogCanvas.GetComponent<View>();
-            controlCanvas = gomainCanvas.GetComponent<View>();
-        }
-
         private void OnDestroy()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -142,12 +126,15 @@ namespace CleverCrow.Fluid.Dialogues.Examples
 
         private void Tween()
         {
-            portrait.GetComponent<Transform>().DOShakeScale(duration, strength, vibrato, randomness, false);
+            MainMenu.Instance.dialog.DOShakeScale(MainMenu.Instance.duration,
+                MainMenu.Instance.strength,
+                MainMenu.Instance.vibrato,
+                MainMenu.Instance.randomness, false);
         }
 
         private void ClearChoices()
         {
-            foreach (Transform child in choiceList)
+            foreach (Transform child in MainMenu.Instance.choiceList)
             {
                 Destroy(child.gameObject);
             }
@@ -197,8 +184,8 @@ namespace CleverCrow.Fluid.Dialogues.Examples
             if (collision.gameObject.CompareTag("Player"))
             {
                 organg_key += 1;
-                dialogCanvas.Show();
-                controlCanvas.Hide();
+                MainMenu.Instance.dialogCanvas.Show();
+                MainMenu.Instance.statCanvas.Hide();
                 CountdownTimer.Instance.enabled = false;
                 cameraAnim.SetBool("cutscene", true);
             }

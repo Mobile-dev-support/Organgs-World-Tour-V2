@@ -83,6 +83,11 @@ public class Player : MonoBehaviour
         StateMachine.Initialize(IdleState);
     }
 
+    private void OnEnable()
+    {
+        //Core.CollisionSenses.ground = 
+    }
+
     private void Update()
     {
         Core.LogicUpdate();

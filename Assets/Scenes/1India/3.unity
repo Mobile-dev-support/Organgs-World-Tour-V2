@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Follow: {fileID: 2014698455}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 3.7
+    OrthographicSize: 5.05
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -187,7 +187,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 125531062}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -24.21149, y: -13.525763, z: -3.1571417}
+  m_LocalPosition: {x: -24.21149, y: -13.523262, z: -3.1571417}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 580440761}
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ConfineMode: 0
   m_BoundingVolume: {fileID: 0}
-  m_BoundingShape2D: {fileID: 2069478521}
+  m_BoundingShape2D: {fileID: 1624138539}
   m_ConfineScreenEdges: 1
   m_Damping: 0
 --- !u!114 &125531067
@@ -784,7 +784,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 3.7
+  orthographic size: 5.05
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -808,7 +808,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -22.857044, y: 5.406099, z: -4.0038247}
+  m_LocalPosition: {x: -21.52371, y: 14.156103, z: -4.0038247}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1600806940}
@@ -1368,10 +1368,6 @@ MonoBehaviour:
   totemLandCode: 9796981a-c5cd-4f21-9b39-62bc41150d18
   backToOliverCode: dd86701c-7974-4b2e-825f-6cee30283135
   organg: 1
-  duration: 0.1
-  strength: 0.1
-  vibrato: 2
-  randomness: 1
 --- !u!4 &994412017
 Transform:
   m_ObjectHideFlags: 0
@@ -1380,7 +1376,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 994412013}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.5, y: 17.83, z: 0}
+  m_LocalPosition: {x: -18.73, y: 16.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 185592490}
@@ -2004,6 +2000,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &1624138539 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8528311099549474530, guid: a48ddde8392f12d4c983e7cecbb9ccd6,
+    type: 3}
+  m_PrefabInstance: {fileID: 2014698454}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1625606626
 GameObject:
   m_ObjectHideFlags: 0
@@ -2467,12 +2469,6 @@ Transform:
 --- !u!4 &2014698456 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 826951880203155502, guid: a48ddde8392f12d4c983e7cecbb9ccd6,
-    type: 3}
-  m_PrefabInstance: {fileID: 2014698454}
-  m_PrefabAsset: {fileID: 0}
---- !u!60 &2069478521 stripped
-PolygonCollider2D:
-  m_CorrespondingSourceObject: {fileID: 6883694642190356364, guid: a48ddde8392f12d4c983e7cecbb9ccd6,
     type: 3}
   m_PrefabInstance: {fileID: 2014698454}
   m_PrefabAsset: {fileID: 0}
