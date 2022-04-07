@@ -35,7 +35,7 @@ public class E2_RangedAttackState : RangedAttackState
     {
         base.LogicUpdate();
 
-        if (isAnimationFinished)
+       /* if (isAnimationFinished)
         {
             if (isPlayerInMinAgroRange)
             {
@@ -46,6 +46,7 @@ public class E2_RangedAttackState : RangedAttackState
                 stateMachine.ChangeState(enemy.lookForPlayerState);
             }
         }
+        */
     }
 
     public override void PhysicsUpdate()

@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 3531919922983391597}
   - component: {fileID: 3531919922983391595}
   - component: {fileID: 3985675437011752324}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: CandyBoulder
-  m_TagString: Untagged
+  m_TagString: Candy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,8 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2444061750750367405}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -76,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 1667960627
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3366272070310193754, guid: d4822050472efe44abf06951c5ae6373,
+  m_Sprite: {fileID: 6964570259394370745, guid: 35357571207a5824695ddba159ba5180,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -104,11 +103,11 @@ Rigidbody2D:
   m_LinearDrag: 0.1
   m_AngularDrag: 0.05
   m_GravityScale: 5
-  m_Material: {fileID: 6200000, guid: a70ddbdca19c50141b17ff95ea59cb13, type: 2}
+  m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!58 &3531919922983391597
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -118,13 +117,13 @@ CircleCollider2D:
   m_GameObject: {fileID: 3531919922983391505}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: a70ddbdca19c50141b17ff95ea59cb13, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.13}
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 0.45
 --- !u!114 &3531919922983391595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,12 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab8d70cf1c2ccb042a8ac38b1f71139b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chunk: {fileID: 1962614393226834858, guid: 8e16bd53ff532284dbca00aa8a8b52b8, type: 3}
-  radius: 0.61
-  layer:
-    serializedVersion: 2
-    m_Bits: 5120
-  isHorizontal: 0
+  chunk: {fileID: 1962614393226834858, guid: a524e5a34791e3841a0084888546a39d, type: 3}
 --- !u!95 &3985675437011752324
 Animator:
   serializedVersion: 3
@@ -153,8 +147,8 @@ Animator:
   m_GameObject: {fileID: 3531919922983391505}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c07162bae54d62e48a1c54f1303a342c, type: 2}
-  m_CullingMode: 0
+  m_Controller: {fileID: 9100000, guid: 053d249ec6702a1409eac4e0333cfe54, type: 2}
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -162,50 +156,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!1 &8065053930701697264
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2444061750750367405}
-  - component: {fileID: 727840770732587520}
-  m_Layer: 0
-  m_Name: CandyCollider
-  m_TagString: Candy
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2444061750750367405
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8065053930701697264}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3531919922983391599}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &727840770732587520
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8065053930701697264}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.45

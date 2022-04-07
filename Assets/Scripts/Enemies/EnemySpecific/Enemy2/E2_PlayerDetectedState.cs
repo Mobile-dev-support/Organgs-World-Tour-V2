@@ -30,7 +30,7 @@ public class E2_PlayerDetectedState : PlayerDetectedState
     {
         base.LogicUpdate();
 
-        if (performCloseRangeAction)
+        /*if (performCloseRangeAction)
         {
             if(Time.time >= enemy.dodgeState.startTime + enemy.dodgeStateData.dodgeCooldown)
             {
@@ -48,7 +48,7 @@ public class E2_PlayerDetectedState : PlayerDetectedState
         else if (!isPlayerInMaxAgroRange)
         {
             stateMachine.ChangeState(enemy.lookForPlayerState);
-        }
+        }*/
     }
 
     public override void PhysicsUpdate()

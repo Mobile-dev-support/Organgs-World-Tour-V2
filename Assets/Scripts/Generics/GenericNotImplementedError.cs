@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class GenericNotImplementedError<T>
 {
-    public static T TryGet(T value, string name)
+    public static T TryGet(T value, Transform name)
     {
         if(value != null)
         {

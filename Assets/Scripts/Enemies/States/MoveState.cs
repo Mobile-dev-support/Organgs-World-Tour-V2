@@ -10,7 +10,7 @@ public class MoveState : State
     protected bool isGrounded;
     protected bool isDead;
     //protected bool isDetectingLedge;
-    //protected bool isDetectingLedgeHorizontal;
+    protected bool isDetectingLedgeHorizontal;
     protected bool isPlayerInMinAgroRange;
 
     public MoveState(Entity etity, FiniteStateMachine stateMachine, string animBoolName, D_MoveState stateData) : base(etity, stateMachine, animBoolName)
@@ -23,7 +23,7 @@ public class MoveState : State
         base.DoChecks();
         isGrounded = core.CollisionSenses.Ground;
         //isDetectingLedge = core.CollisionSenses.LedgeVertical;
-        //isDetectingLedgeHorizontal = core.CollisionSenses.LedgeHorizontal;
+        isDetectingLedgeHorizontal = core.CollisionSenses.LedgeHorizontal;
         isDetectingWall = core.CollisionSenses.WallFront;
         isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
         isDead = core.CollisionSenses.Trap;

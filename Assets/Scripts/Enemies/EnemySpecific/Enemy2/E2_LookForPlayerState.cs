@@ -29,11 +29,11 @@ public class E2_LookForPlayerState : LookForPlayerState
     {
         base.LogicUpdate();
 
-        if (isPlayerInMinAgroRange)
+        /*if (isPlayerInMinAgroRange)
         {
             stateMachine.ChangeState(enemy.playerDetectedState);
-        }
-        else if (isAllTurnsTimeDone)
+        }*/
+        if (isAllTurnsTimeDone)
         {
             stateMachine.ChangeState(enemy.moveState);
         }

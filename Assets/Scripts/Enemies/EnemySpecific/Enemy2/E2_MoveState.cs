@@ -14,6 +14,7 @@ public class E2_MoveState : MoveState
     public override void DoChecks()
     {
         base.DoChecks();
+        enemy.particle.Play();
     }
 
     public override void Enter()
@@ -30,15 +31,20 @@ public class E2_MoveState : MoveState
     {
         base.LogicUpdate();
 
-        if (isPlayerInMinAgroRange)
-        {
-            stateMachine.ChangeState(enemy.playerDetectedState);
-        }
-        else if(isDetectingWall /*|| !isDetectingLedge*/)
+        if (isDetectingWall)
         {
             enemy.idleState.SetFlipAfterIdle(true);
             stateMachine.ChangeState(enemy.idleState);
         }
+        else if (isDead)
+        {
+            stateMachine.ChangeState(enemy.deadState);
+        }
+
+        /*if (isPlayerInMinAgroRange)
+        {
+            stateMachine.ChangeState(enemy.playerDetectedState);
+        }*/
     }
 
     public override void PhysicsUpdate()

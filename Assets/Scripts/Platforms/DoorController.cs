@@ -1,16 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
-using DG.Tweening;
 using UnityEngine.UI;
 using TMPro;
 
 public class DoorController : MonoBehaviour
 {
-
-    #region Key Variables
-    public int totem_key { get; set; }
-    #endregion
-
     [Header("STARS")]
     private int currentStarsNum = 0;
     public int StarsNum;
@@ -56,12 +50,6 @@ public class DoorController : MonoBehaviour
             main = mainCanvas.GetComponent<View>();
             nextLvlBtn = button.GetComponent<Button>();
         }
-        /*Load();
-        if (totem_key > 0)
-            img.color = Color.white;
-        else
-            img.color = Color.black;
-        */
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -70,7 +58,7 @@ public class DoorController : MonoBehaviour
         {
             player = GameObject.Find("MainPlayer");
             gameObject.GetComponent<Animator>().SetTrigger("opening");
-            player.GetComponent<SpriteRenderer>().DOFade(0f, 0.5f).OnComplete(OnDoorClose);
+            OnDoorClose();
         }   
     }
 
@@ -88,7 +76,7 @@ public class DoorController : MonoBehaviour
             PlayerPrefs.SetInt("Lv" + levelIndex, StarsNum);
         }
         Debug.Log(PlayerPrefs.GetInt("Lv" + levelIndex, StarsNum));
-        yield return new WaitForSeconds(1);
+        yield return new WaitForEndOfFrame();
         StartCoroutine(ScoringMechanism.Instance.WinPanel());
         yield return new WaitForEndOfFrame();
         NextLevelNotif();
@@ -107,14 +95,5 @@ public class DoorController : MonoBehaviour
             nextLvlBtn.interactable = true;
         else
             nextLvlBtn.interactable = false;
-    }
-
-    public void Save()
-    {
-        PlayerPrefs.SetInt("totem_key" + country, totem_key);
-    }
-    private void Load() 
-    {
-        totem_key = PlayerPrefs.GetInt("totem_key" + country);
     }
 }

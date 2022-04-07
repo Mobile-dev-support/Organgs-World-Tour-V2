@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &166692686
 Transform:
@@ -47,7 +47,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &682115625
 Transform:
@@ -91,7 +91,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &933356244
 Transform:
@@ -132,14 +132,15 @@ GameObject:
   - component: {fileID: 6655037253821049441}
   - component: {fileID: 6655037253821049440}
   - component: {fileID: 6655037253821049447}
-  - component: {fileID: 6655037253821049446}
   - component: {fileID: 8352012481367266986}
-  m_Layer: 0
+  - component: {fileID: 7316295181564220245}
+  - component: {fileID: 3204298873801592963}
+  m_Layer: 14
   m_Name: CandyFlipped
   m_TagString: Candy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6655037253821049444
 Transform:
@@ -196,7 +197,7 @@ SpriteRenderer:
   m_SortingLayerID: 1667960627
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3366272070310193754, guid: d4822050472efe44abf06951c5ae6373,
+  m_Sprite: {fileID: 6964570259394370745, guid: 35357571207a5824695ddba159ba5180,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -218,8 +219,8 @@ Animator:
   m_GameObject: {fileID: 6655037253821049451}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c07162bae54d62e48a1c54f1303a342c, type: 2}
-  m_CullingMode: 0
+  m_Controller: {fileID: 9100000, guid: 053d249ec6702a1409eac4e0333cfe54, type: 2}
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -250,24 +251,6 @@ MonoBehaviour:
   spinning: 0
   clockWise: 0
   onlyPlayerCrumble: 0
-  speed: {x: 0, y: 0}
-  currentWaitTime: -0.019998658
---- !u!70 &6655037253821049446
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6655037253821049451}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.4857143, y: 1.2628572}
-  m_Direction: 0
 --- !u!114 &8352012481367266986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,9 +263,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab8d70cf1c2ccb042a8ac38b1f71139b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chunk: {fileID: 1962614393226834858, guid: 8e16bd53ff532284dbca00aa8a8b52b8, type: 3}
-  radius: 0.3
-  layer:
-    serializedVersion: 2
-    m_Bits: 17408
-  isHorizontal: 0
+  chunk: {fileID: 1962614393226834858, guid: a524e5a34791e3841a0084888546a39d, type: 3}
+--- !u!58 &7316295181564220245
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6655037253821049451}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.24}
+  serializedVersion: 2
+  m_Radius: 0.49
+--- !u!50 &3204298873801592963
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6655037253821049451}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 6

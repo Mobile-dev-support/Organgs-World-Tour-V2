@@ -6,12 +6,12 @@ public class Core : MonoBehaviour
 {
     public Movement Movement
     {
-        get => GenericNotImplementedError<Movement>.TryGet(movement, transform.parent.name);
+        get => GenericNotImplementedError<Movement>.TryGet(movement, transform.parent);
         private set => movement = value;
     }
     public CollisionSenses CollisionSenses
     {
-        get => GenericNotImplementedError<CollisionSenses>.TryGet(collisionSenses, transform.parent.name);
+        get => GenericNotImplementedError<CollisionSenses>.TryGet(collisionSenses, transform.parent);
         private set => collisionSenses = value;
     }
     /*public Combat Combat

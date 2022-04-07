@@ -34,7 +34,7 @@ public class E2_MeleeAttackState : MeleeAttackState
     {
         base.LogicUpdate();
 
-        if (isAnimationFinished)
+        /*if (isAnimationFinished)
         {
             if (isPlayerInMinAgroRange)
             {
@@ -43,7 +43,7 @@ public class E2_MeleeAttackState : MeleeAttackState
             {
                 stateMachine.ChangeState(enemy.lookForPlayerState);
             }
-        }
+        }*/
     }
 
     public override void PhysicsUpdate()

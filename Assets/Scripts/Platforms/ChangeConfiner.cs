@@ -16,7 +16,9 @@ public class ChangeConfiner : MonoBehaviour
     private bool isChanged;
     private float previousOrthoSize;
     public GameObject[] objs;
-
+    [Header("LAST CONFINER DIALOG")]
+    public bool lastConfiner;
+    private GameObject CinematicsTrigger;
     private void Start()
     {
         cam = GameObject.Find("CM vcam1");
@@ -24,6 +26,7 @@ public class ChangeConfiner : MonoBehaviour
         polygon = GetComponent<PolygonCollider2D>();
         confiner = vcam.GetComponent<CinemachineConfiner>();
         gameObject.GetComponent<SpriteRenderer>().DOFade(1f, 0.01f);
+        CinematicsTrigger = GameObject.Find("CinematicsTrigger");
         previousOrthoSize = vcam.m_Lens.OrthographicSize;
         for (int i = 0; i < objs.Length; i++)
         {
@@ -63,7 +66,16 @@ public class ChangeConfiner : MonoBehaviour
             {
                 objs[i].SetActive(true);
             }
+
+            if (lastConfiner)
+            {
+                if (!PlayerPrefs.HasKey("totem_key" + DoorController.Instance.country))
+                {
+                    Destroy(CinematicsTrigger);
+                }
+            }
         }
+
     }
 
     private void OnTriggerExit2D(Collider2D other)

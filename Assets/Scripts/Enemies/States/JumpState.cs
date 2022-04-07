@@ -36,7 +36,7 @@ public class JumpState : State
 
         isJumpOver = false;
 
-        core.Movement.SetVelocity(stateData.jumpSpeed, stateData.jumpAngle, -core.Movement.FacingDirection);
+        core.Movement.SetVelocity(stateData.jumpSpeed, stateData.jumpAngle, core.Movement.FacingDirection);
     }
 
     public override void Exit()

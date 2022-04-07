@@ -100,7 +100,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4414473769376131986}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.238, y: 0.789, z: 0}
+  m_LocalPosition: {x: 0.302, y: 0.645, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4414473770438594426}
@@ -264,7 +264,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.5}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &4414473769794057793
 GameObject:
@@ -281,9 +281,9 @@ GameObject:
   - component: {fileID: 4414473769794057795}
   - component: {fileID: 4414473769794057794}
   - component: {fileID: 4414473769794057805}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: CandyEnemy
-  m_TagString: Untagged
+  m_TagString: Candy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -346,10 +346,10 @@ SpriteRenderer:
   m_SortingLayerID: 756119877
   m_SortingLayer: 4
   m_SortingOrder: 1
-  m_Sprite: {fileID: -3366272070310193754, guid: d4822050472efe44abf06951c5ae6373,
+  m_Sprite: {fileID: -7642239419928554605, guid: 35357571207a5824695ddba159ba5180,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.4857143, y: 1.2628572}
@@ -369,7 +369,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: c07162bae54d62e48a1c54f1303a342c, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -396,7 +396,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: 03301e8e8906d2941bd4c0e90755c817, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &4414473769794057795
 MonoBehaviour:
@@ -436,8 +436,8 @@ MonoBehaviour:
   meleeAttackStateData: {fileID: 11400000, guid: 52982a8e08df37947b2966c4cf66e3ed,
     type: 2}
   stunStateData: {fileID: 11400000, guid: feb476734f45df242b04c3b50b211dc5, type: 2}
-  deadStateData: {fileID: 11400000, guid: 803c5f6895b75114087f77743674c1bc, type: 2}
   jumpStateData: {fileID: 11400000, guid: 5a6f582accd5672418e0a9bc694a3e1b, type: 2}
+  deadStateData: {fileID: 11400000, guid: 803c5f6895b75114087f77743674c1bc, type: 2}
   meleeAttackPosition: {fileID: 4414473769502118907}
 --- !u!70 &4414473769794057805
 CapsuleCollider2D:
@@ -453,7 +453,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.4857143, y: 1.2628572}
+  m_Size: {x: 0.8, y: 0.8}
   m_Direction: 0
 --- !u!1 &4414473769960761329
 GameObject:
@@ -479,7 +479,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4414473769960761329}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.047, y: 0.08, z: 0}
+  m_LocalPosition: {x: 0.279, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4414473770438594426}
@@ -600,10 +600,10 @@ MonoBehaviour:
   ledgeCheckHorizontal: {fileID: 4414473769376131987}
   ledgeCheckVertical: {fileID: 4414473770181431711}
   ceilingCheck: {fileID: 4414473769558052442}
-  groundCheckRadius: 0.03
+  groundCheckRadius: 0.1
   ceilingCheckRadius: 0
   wallCheckDistance: 0.5
-  deathCheckRadius: 0.66
+  deathCheckRadius: 0.7
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
@@ -646,7 +646,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4414473770545802487}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.63, z: 0}
+  m_LocalPosition: {x: 0, y: -0.433, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4414473770438594426}

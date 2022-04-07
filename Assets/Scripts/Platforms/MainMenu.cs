@@ -23,6 +23,7 @@ public class MainMenu : MonoBehaviour
     public View scroller_canvas;
     public View menu_item_canvas;
     public View dialogCanvas;
+    public View totem_land;
     public Slider slider;
     public TextMeshProUGUI textProgress;
     public AudioMixer audioMix;
@@ -48,7 +49,7 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        //PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();
         if (_instance != null && _instance != this)
         {
             Destroy(gameObject);

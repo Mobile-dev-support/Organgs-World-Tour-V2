@@ -19,7 +19,7 @@ public class PlayerGroundedState : PlayerState
     private bool isDead;
     private bool isStickingToPlatform;
     private bool isTouchingCeilingSolidPlatform;
-
+    private int istouchingWall = Animator.StringToHash("isTouchingWall");
     private bool isThroughPlatform;
 
 
@@ -40,7 +40,7 @@ public class PlayerGroundedState : PlayerState
         isStickingToPlatform = core.CollisionSenses.SolidPlatform;
         isTouchingCeilingSolidPlatform = core.CollisionSenses.SolidPlatformCeiling;
         isSugarPlatform = core.CollisionSenses.SugarPlatform;
-        player.Anim.SetBool("isTouchingWall", isTouchingWall);
+        player.Anim.SetBool(istouchingWall, isTouchingWall);
         if (isSugarPlatform && !player.isCandied)
         {
             playerData.candyTimer = 5f;
@@ -54,7 +54,8 @@ public class PlayerGroundedState : PlayerState
         else if(!isSlippery && !player.afterShock && !player.isDrinking)
         {
             playerData.movementVelocity = playerData.NormalMovementVelocity;
-            player.Anim.SetFloat("xSlide", 0.0f);
+            player.Anim.SetFloat("xState", 0.0f);
+            player.Anim.SetFloat("Candied", 0.0f);
         }
     }
 
@@ -85,10 +86,10 @@ public class PlayerGroundedState : PlayerState
             player.InAirState.StartCoyoteTime();
             stateMachine.ChangeState(player.InAirState);
         }
-        else if ((isGrounded || isSlippery || isStickingToPlatform || isThroughPlatform || isSugarPlatform) && isTouchingWall && !isTouchingCeiling && !isDead)
+        /*else if ((isGrounded || isSlippery || isStickingToPlatform || isThroughPlatform || isSugarPlatform) && isTouchingWall && !isTouchingCeiling && !isDead)
         {
             stateMachine.ChangeState(player.IdleState);
-        }
+        }*/
         else if (isDead || ( !isCurrentlySliding && (isTouchingCeiling || isTouchingCeilingSolidPlatform) && (isGrounded || isSlippery || isStickingToPlatform || isSugarPlatform))
             || (isTouchingWall && isTouchingWallBack && (isGrounded || isSlippery || !isThroughPlatform || isSugarPlatform)) || player.transform.rotation.z != 0)
         {

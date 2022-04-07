@@ -141,7 +141,7 @@ public class PlatformController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player") && Mathf.Abs(other.contacts[0].normal.y) > 0.5f)
+        if ((other.gameObject.CompareTag("Player") && Mathf.Abs(other.contacts[0].normal.y) > 0.5f) && gameObject.layer != LayerMask.NameToLayer("Enemy"))
         {
             AttachObject(other);
             other.collider.transform.SetParent(transform, true);
@@ -179,7 +179,7 @@ public class PlatformController : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && gameObject.layer != LayerMask.NameToLayer("Enemy"))
         {
             other.collider.transform.SetParent(null);
             Player obj = other.gameObject.GetComponent<Player>();

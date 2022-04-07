@@ -19,6 +19,7 @@ public class E2_IdleState : IdleState
     public override void Enter()
     {
         base.Enter();
+        enemy.particle.Stop();
     }
 
     public override void Exit()
@@ -30,13 +31,17 @@ public class E2_IdleState : IdleState
     {
         base.LogicUpdate();
 
-        if (isPlayerInMinAgroRange)
+        /*if (isPlayerInMinAgroRange)
         {
             stateMachine.ChangeState(enemy.playerDetectedState);
-        }
-        else if (isIdleTimeOver)
+        }*/
+        if (isIdleTimeOver)
         {
             stateMachine.ChangeState(enemy.moveState);
+        }
+        else if (isDead)
+        {
+            stateMachine.ChangeState(enemy.deadState);
         }
     }
 

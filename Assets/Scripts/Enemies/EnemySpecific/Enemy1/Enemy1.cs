@@ -30,9 +30,9 @@ public class Enemy1 : Entity
     [SerializeField]
     private D_StunState stunStateData;
     [SerializeField]
-    private D_DeadState deadStateData;
-    [SerializeField]
     private D_JumpState jumpStateData;
+    [SerializeField]
+    private D_DeadState deadStateData;
 
     public Rigidbody2D RB { get; private set; }
 
@@ -59,7 +59,12 @@ public class Enemy1 : Entity
     private void Start()
     {
         RB = GetComponent<Rigidbody2D>();
-        stateMachine.Initialize(moveState);
+        stateMachine.Initialize(idleState);
+    }
+
+    public void DisableEnemy()
+    {
+        gameObject.SetActive(false);
     }
 
     public override void OnDrawGizmos()
@@ -67,11 +72,5 @@ public class Enemy1 : Entity
         base.OnDrawGizmos();
 
         Gizmos.DrawWireSphere(meleeAttackPosition.position, meleeAttackStateData.attackRadius);
-    }
-
-    public void Disable()
-    {
-        Instantiate(deadStateData.deathChunkParticle, transform.position, deadStateData.deathChunkParticle.transform.rotation);
-        gameObject.SetActive(false);
     }
 }

@@ -30,7 +30,7 @@ public class E2_StunState : StunState
     {
         base.LogicUpdate();
 
-        if (isStunTimeOver)
+        /*if (isStunTimeOver)
         {
             if (isPlayerInMinAgroRange)
             {
@@ -40,7 +40,7 @@ public class E2_StunState : StunState
             {
                 stateMachine.ChangeState(enemy.lookForPlayerState);
             }
-        }
+        }*/
     }
 
     public override void PhysicsUpdate()

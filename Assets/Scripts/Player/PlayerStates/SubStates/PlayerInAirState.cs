@@ -25,6 +25,8 @@ public class PlayerInAirState : PlayerState
     private bool isSlippery;
     private bool isSugarPlatform;
     private float startWallJumpCoyoteTime;
+    private int yVelocity = Animator.StringToHash("yVelocity");
+    private int xVelocity = Animator.StringToHash("xVelocity");
 
     public PlayerInAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
@@ -112,8 +114,8 @@ public class PlayerInAirState : PlayerState
         {
             core.Movement.CheckIfShouldFlip(xInput);
             core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
-            player.Anim.SetFloat("yVelocity", core.Movement.CurrentVelocity.y);
-            player.Anim.SetFloat("xVelocity", Mathf.Abs(core.Movement.CurrentVelocity.x));
+            player.Anim.SetFloat(yVelocity, core.Movement.CurrentVelocity.y);
+            player.Anim.SetFloat(xVelocity, Mathf.Abs(core.Movement.CurrentVelocity.x));
         }
     }
 

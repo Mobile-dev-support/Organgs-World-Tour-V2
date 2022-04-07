@@ -32,10 +32,6 @@ public class E1_IdleState : IdleState
         {
             stateMachine.ChangeState(enemy.moveState);
         }
-        else if (isDetectingWall && !isDetectingLedgeHorizontal && isGrounded)
-        {
-            stateMachine.ChangeState(enemy.jumpState);
-        }
         else if (isDead)
         {
             stateMachine.ChangeState(enemy.deadState);

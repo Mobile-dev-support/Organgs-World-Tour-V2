@@ -1,9 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
 using DG.Tweening;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,14 +17,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject player;
     public Transform respawnPoint;
-    [Header("COLLIDERS")]
-    public Collider2D[] ground;
-    public Collider2D[] trap;
-    public Collider2D[] slipperyground;
-    public Collider2D[] sugarplatform;
-    public Collider2D[] throughplatforms;
-    public Collider2D[] solidplatforms;
-    public RaycastHit2D[] groundRay = new RaycastHit2D[1];
     public GameObject Rplayer { get; set; }
     
     private static GameManager _instance;

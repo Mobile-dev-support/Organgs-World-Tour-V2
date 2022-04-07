@@ -19,7 +19,8 @@ public class E1_DeadState : DeadState
     public override void Enter()
     {
         base.Enter();
-        entity.Invoke("Disable", 0.1f);
+        GameObject deathChunk = GameObject.Instantiate(stateData.deathChunkParticle, enemy.transform.position, stateData.deathChunkParticle.transform.rotation) as GameObject;
+        enemy.Invoke("DisableEnemy", 0.1f);
     }
 
     public override void Exit()

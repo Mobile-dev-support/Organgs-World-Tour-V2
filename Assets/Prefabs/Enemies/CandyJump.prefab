@@ -41,15 +41,15 @@ GameObject:
   - component: {fileID: 6130579283295287719}
   - component: {fileID: 6130579283295287715}
   - component: {fileID: 6130579283295287712}
-  - component: {fileID: 6130579283295287718}
   - component: {fileID: 2134382127289886139}
   - component: {fileID: 4167809125783176325}
+  - component: {fileID: 838279730990799974}
   m_Layer: 10
   m_Name: CandyJump
-  m_TagString: Untagged
+  m_TagString: Candy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6130579283295287719
 Transform:
@@ -58,15 +58,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6130579283295287716}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: -1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 37.516365, y: 5.648426, z: -7.322593}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.033333335, y: 0.033333335, z: 1}
   m_Children:
   - {fileID: 5644775731937075432}
   - {fileID: 6888457849387939087}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6130579283295287715
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -107,7 +107,7 @@ SpriteRenderer:
   m_SortingLayerID: 756119877
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3366272070310193754, guid: d4822050472efe44abf06951c5ae6373,
+  m_Sprite: {fileID: 6964570259394370745, guid: 35357571207a5824695ddba159ba5180,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -129,8 +129,8 @@ Animator:
   m_GameObject: {fileID: 6130579283295287716}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c07162bae54d62e48a1c54f1303a342c, type: 2}
-  m_CullingMode: 0
+  m_Controller: {fileID: 9100000, guid: 053d249ec6702a1409eac4e0333cfe54, type: 2}
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -138,22 +138,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!70 &6130579283295287718
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6130579283295287716}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.4857143, y: 1.2628572}
-  m_Direction: 0
 --- !u!50 &2134382127289886139
 Rigidbody2D:
   serializedVersion: 4
@@ -189,8 +173,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpHeight: 20
   jumpTimer: 2
-  radius: 0.05
-  deathradius: 0.65
+  radius: 0.14
+  deathradius: 0.67
   groundCheck: {fileID: 5644775731937075432}
   playerCheck: {fileID: 6888457849387939087}
   layer:
@@ -199,8 +183,24 @@ MonoBehaviour:
   playerlayer:
     serializedVersion: 2
     m_Bits: 2048
-  chunk: {fileID: 1962614393226834858, guid: 3d13ef1f52d189642930444f906fc622, type: 3}
-  wallSquash: {x: 0.6, y: 1.66, z: 0.1}
+  chunk: {fileID: 1962614393226834858, guid: a524e5a34791e3841a0084888546a39d, type: 3}
+  wallSquash: {x: 0.00005, y: 0.00005, z: 0.00005}
+--- !u!58 &838279730990799974
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6130579283295287716}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.24}
+  serializedVersion: 2
+  m_Radius: 0.4
 --- !u!1 &6888457849387939086
 GameObject:
   m_ObjectHideFlags: 0

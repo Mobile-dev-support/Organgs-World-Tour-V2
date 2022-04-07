@@ -38,9 +38,11 @@ public class Player : MonoBehaviour
 
     #region Other Variables         
     public GameObject drunk;
+    private int Candied = Animator.StringToHash("Candied");
+    private int xState = Animator.StringToHash("xState");
+    public ParticleSystem dust;
     private Vector2 workspace;
     private bool isCheesed;
-
     #endregion
 
     #region Unity Callback Functions
@@ -53,7 +55,6 @@ public class Player : MonoBehaviour
         }
 
         StateMachine = new PlayerStateMachine();
-
         IdleState = new PlayerIdleState(this, StateMachine, playerData, "idle");
         MoveState = new PlayerMoveState(this, StateMachine, playerData, "move");
         JumpState = new PlayerJumpState(this, StateMachine, playerData, "inAir");
@@ -83,11 +84,6 @@ public class Player : MonoBehaviour
         StateMachine.Initialize(IdleState);
     }
 
-    private void OnEnable()
-    {
-        //Core.CollisionSenses.ground = 
-    }
-
     private void Update()
     {
         Core.LogicUpdate();
@@ -96,19 +92,20 @@ public class Player : MonoBehaviour
 
     private void EnemyCollisions()
     {
-
         if (isCheesed)
         {
+
             playerData.cheeseTimer -= Time.deltaTime;
-            Anim.SetFloat("xSlide", 0.6666667f);
+            Anim.SetFloat(xState, 0.6f);
             playerData.jumpVelocity = playerData.cheeseJumpVelocity;
             playerData.wallJumpVelocity = playerData.cheeseWallJumpVelocity;
+
             if (playerData.cheeseTimer < 0)
             {
                 playerData.cheeseTimer = 2f;
                 playerData.jumpVelocity = playerData.defaultJumpVelocity;
                 playerData.wallJumpVelocity = playerData.defaultWallJumpVelocity;
-                Anim.SetFloat("xSlide", 0.0f);
+                Anim.SetFloat(xState, 0f);
                 isCheesed = false;
             }
         }
@@ -116,16 +113,17 @@ public class Player : MonoBehaviour
         {
             playerData.candyTimer -= Time.deltaTime;
             playerData.movementVelocity = playerData.CandymovementVelocity;
+            Anim.SetFloat(Candied, 0.5f);
             if (playerData.candyTimer < 0)
             {
                 playerData.candyTimer = 5f;
                 playerData.movementVelocity = playerData.NormalMovementVelocity;
-                Anim.SetFloat("xSlide", 1.0f);
                 afterShock = true;
             }
         }
         if (afterShock)
         {
+            Anim.SetFloat(Candied, 1f);
             Core.Movement.SetVelocityZero();
             Core.Movement.CanSetVelocity = false;
             playerData.afterShockTimer -= Time.deltaTime;
@@ -133,7 +131,7 @@ public class Player : MonoBehaviour
             {
                 afterShock = false;
                 playerData.afterShockTimer = 2f;
-                Anim.SetFloat("xSlide", 0.0f);
+                Anim.SetFloat(Candied, 0f);
                 Core.Movement.CanSetVelocity = true;
                 isCandied = false;
             }
@@ -143,12 +141,12 @@ public class Player : MonoBehaviour
             Core.Movement.SetVelocityZero();
             Core.Movement.CanSetVelocity = false;
             playerData.DrinkTimer -= Time.deltaTime;
-            Anim.SetFloat("xSlide", 1.0f);
+            Anim.SetFloat(xState, 1.0f);
             if (playerData.DrinkTimer < 0)
             {
                 isDrinking = false;
                 playerData.DrinkTimer = 2f;
-                Anim.SetFloat("xSlide", 0.0f);
+                Anim.SetFloat(xState, 0.0f);
                 drunk.SetActive(false);
                 Core.Movement.CanSetVelocity = true;
             }
@@ -157,10 +155,8 @@ public class Player : MonoBehaviour
 
     private void OnDestroy()
     {
-        playerData.movementVelocity = playerData.NormalMovementVelocity;
-        playerData.jumpVelocity = playerData.defaultJumpVelocity;
-        playerData.wallJumpVelocity = playerData.defaultWallJumpVelocity;
-        Anim.SetFloat("xSlide", 0.0f);
+        if(gameObject == null)
+         StateMachine.Initialize(DeathState);
     }
 
     private void FixedUpdate()
@@ -193,6 +189,11 @@ public class Player : MonoBehaviour
         {
             playerData.cheeseTimer = 2f;
             isCheesed = true;
+        }
+        if (other.collider.CompareTag("Candy"))
+        {
+            StateMachine.Initialize(DeathState);
+            other.gameObject.SetActive(false);
         }
     }
     private void OnTriggerEnter2D(Collider2D other)

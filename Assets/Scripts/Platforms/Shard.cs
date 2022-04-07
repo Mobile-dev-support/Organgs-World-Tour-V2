@@ -9,6 +9,15 @@ public class Shard : MonoBehaviour
     public float str;
     public int vibrato;
     public float randomness;
+    private GameObject CinematicsTrigger;
+    #region Key Variables
+    public int totem_key { get; set; }
+    #endregion
+
+    public void Save()
+    {
+        PlayerPrefs.SetInt("totem_key" + DoorController.Instance.country, totem_key);
+    }
 
     private void OnEnable()
     {
@@ -18,9 +27,12 @@ public class Shard : MonoBehaviour
 
     private void Start()
     {
+        CinematicsTrigger = GameObject.Find("CinematicsTrigger");
         if (PlayerPrefs.HasKey("totem_key" + DoorController.Instance.country)) 
         {
             Destroy(gameObject, 0.01f);
+            Destroy(CinematicsTrigger, 0.01f);
+            Debug.Log("already have a shard!");
         }
     }
 
@@ -33,9 +45,9 @@ public class Shard : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            //DoorController.Instance.img.DOColor(Color.white, 0.5f);
-            DoorController.Instance.totem_key += 1;
-            DoorController.Instance.Save();
+            totem_key += 1;
+            Save();
+            totemlandActivation.Instance.Initialize();
             Destroy(gameObject, 0.01f);
         }
     }

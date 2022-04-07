@@ -29,10 +29,14 @@ public class E1_MoveState : MoveState
         {
             stateMachine.ChangeState(enemy.playerDetectedState);
         }
-        else if(isDetectingWall && isGrounded)
+        else if(isDetectingWall && isGrounded && isDetectingLedgeHorizontal)
         {
             enemy.idleState.SetFlipAfterIdle(true);
             stateMachine.ChangeState(enemy.idleState);
+        }
+        else if (isDetectingWall && !isDetectingLedgeHorizontal && isGrounded)
+        {
+            stateMachine.ChangeState(enemy.jumpState);
         }
         else if (isDead)
         {

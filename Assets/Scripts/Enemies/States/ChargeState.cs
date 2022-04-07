@@ -11,6 +11,7 @@ public class ChargeState : State
     protected bool isDetectingWall;
     protected bool isChargeTimeOver;
     protected bool performCloseRangeAction;
+    protected bool isDead;
 
     public ChargeState(Entity etity, FiniteStateMachine stateMachine, string animBoolName, D_ChargeState stateData) : base(etity, stateMachine, animBoolName)
     {
@@ -24,7 +25,6 @@ public class ChargeState : State
         isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
         isDetectingLedge = core.CollisionSenses.LedgeVertical;
         isDetectingWall =core.CollisionSenses.WallFront;
-
         performCloseRangeAction = entity.CheckPlayerInCloseRangeAction();
     }
 
@@ -46,7 +46,7 @@ public class ChargeState : State
         base.LogicUpdate();
 
         core.Movement.SetVelocityX(stateData.chargeSpeed * core.Movement.FacingDirection);
-
+        isDead = core.CollisionSenses.Trap;
         if (Time.time >= startTime + stateData.chargeTime)
         {
             isChargeTimeOver = true;

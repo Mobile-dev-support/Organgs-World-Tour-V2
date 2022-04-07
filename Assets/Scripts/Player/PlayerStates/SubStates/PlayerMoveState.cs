@@ -37,10 +37,11 @@ public class PlayerMoveState : PlayerGroundedState
             {
                 stateMachine.ChangeState(player.IdleState);
             }
-                /*else if (yInput == -1)
-                {
-                    stateMachine.ChangeState(player.CrouchIdleState);
-                }*/
+            /*else if (yInput == -1)
+            {
+                stateMachine.ChangeState(player.CrouchIdleState);
+            }*/
+
         }
     }
 
@@ -52,7 +53,7 @@ public class PlayerMoveState : PlayerGroundedState
         
     private void PlaceAfterImage()
     {
-        trailPool.Instance.GetFromPool();
+        player.dust.Play();
         lastAIPos = player.transform.position;
     }
 

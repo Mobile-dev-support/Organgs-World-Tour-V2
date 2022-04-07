@@ -19,14 +19,15 @@ public class PlayerIdleState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-
+        player.dust.Stop();
         if (isSlippery && !isTouchingWall)
         {
             playerData.movementVelocity = playerData.speedOnIce;
             xInput = core.Movement.FacingDirection;
             player.RB.AddForce(new Vector2(playerData.movementVelocity * xInput *
             playerData.slipperyMultiplier, player.RB.velocity.y));
-            player.Anim.SetFloat("xSlide", 0.3333333f);
+            player.Anim.SetFloat("xState", 0.3f);
+            player.Anim.SetFloat("Candied", 0.05f);
         }
 
         core.Movement.SetVelocityX(0f);

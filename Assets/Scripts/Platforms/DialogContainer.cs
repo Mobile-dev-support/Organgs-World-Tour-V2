@@ -17,25 +17,10 @@ namespace CleverCrow.Fluid.Dialogues.Examples
         public ChoiceButton choicePrefab;
         public string totemLandCode;
         public string backToOliverCode;
-        private int organg_key;
-        public int organg;
 
         private Animator cameraAnim;
         private DialogueController _ctrl;
-        private GameObject Oliver;
-        private static string mainChar = "Oliver";
-
-        IEnumerator LoadLevel(string level)
-        {
-            yield return new WaitForEndOfFrame();
-            SceneManager.LoadScene(level, LoadSceneMode.Additive);
-        }
-
-        IEnumerator UnLoadLevel(string level)
-        {
-            yield return new WaitForEndOfFrame();
-            SceneManager.UnloadSceneAsync(level, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
-        }
+        private readonly string mainChar = "Oliver";
 
         private void Awake()
         {
@@ -94,12 +79,11 @@ namespace CleverCrow.Fluid.Dialogues.Examples
                 Debug.Log($"Node Enter: {node.GetType()} - {node.UniqueId}");
                 if (node.UniqueId == totemLandCode)
                 {
-                    StartCoroutine(LoadLevel("TotemLand"));
-                    Save();
+                    StartCoroutine(LoadCanvas());
                 }
                 else if (node.UniqueId == backToOliverCode)
                 {
-                    StartCoroutine(UnLoadLevel("TotemLand"));
+                    StartCoroutine(unLoadCanvas());
                 }
             });
             _ctrl.Play(dialogue);
@@ -109,19 +93,6 @@ namespace CleverCrow.Fluid.Dialogues.Examples
         {
             MainMenu.Instance.dialogCanvas.Hide();
             cameraAnim = GetComponent<Animator>();
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            SceneManager.sceneUnloaded += OnSceneunLoaded;
-            if (PlayerPrefs.HasKey("organg_key" + organg_key))
-            {
-                Debug.Log("has " + organg_key + " key");
-                Destroy(gameObject, 0.01f);
-            }
-        }
-
-        private void OnDestroy()
-        {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-            SceneManager.sceneUnloaded -= OnSceneunLoaded;
         }
 
         private void Tween()
@@ -145,60 +116,40 @@ namespace CleverCrow.Fluid.Dialogues.Examples
             _ctrl.Tick();
         }
 
-        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            StartCoroutine(LoadLevel());
-        }
-
-        private void OnSceneunLoaded(Scene scene)
-        {
-            StartCoroutine(unLoadLevel());
-        }
-
-        private IEnumerator LoadLevel()
+        private IEnumerator LoadCanvas()
         {
             cameraAnim.SetBool("cutscene", false);
             Fader.Instance.BGFader(true);
-            Oliver = GameObject.Find("MainPlayer");
-            yield return new WaitForSeconds(2f);
-            Oliver.SetActive(false);
             yield return new WaitForSeconds(1f);
-            gameObject.GetComponent<Collider2D>().enabled = false;
-            gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
             Fader.Instance.BGFader(false);
+            totemlandActivation.Instance.EnableTotemLand();
+            totemlandActivation.Instance.Initialize();
+            MainMenu.Instance.totem_land.transform.Find("organgs_canvas")
+                .GetComponent<DoTweenFeatures>().OnClick();
+            MainMenu.Instance.totem_land.Show();
         }
 
-        private IEnumerator unLoadLevel()
+        private IEnumerator unLoadCanvas()
         {
-            Fader.Instance.FadeImmediately();
             Fader.Instance.BGFader(true);
-            yield return new WaitForSeconds(1.0f);
-            cameraAnim.SetBool("cutscene", false);
-            Oliver.SetActive(true);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f);
+            totemlandActivation.Instance.DisableTotemLand();
+            MainMenu.Instance.totem_land.Hide();
+            yield return new WaitForSeconds(1f);
             Fader.Instance.BGFader(false);
+            cameraAnim.SetBool("cutscene", false);
+
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.CompareTag("Player"))
             {
-                organg_key += 1;
                 MainMenu.Instance.dialogCanvas.Show();
                 MainMenu.Instance.statCanvas.Hide();
                 CountdownTimer.Instance.enabled = false;
                 cameraAnim.SetBool("cutscene", true);
             }
-        }
-
-        public void Save()
-        {
-            PlayerPrefs.SetInt("organg_key" + organg, organg_key);
-            Debug.Log(organg_key);
-        }
-        public void Load()
-        {
-            organg_key = PlayerPrefs.GetInt("organg_key" + organg);
         }
     }
 }

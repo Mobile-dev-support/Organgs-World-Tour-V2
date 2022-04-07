@@ -31,9 +31,13 @@ public class PlayerDeathState : PlayerGroundedState
     private void Die()
     {
         GameObject deathChunk = GameObject.Instantiate(playerData.deathChunk, player.transform.position, playerData.deathChunk.transform.rotation) as GameObject;
-        Object.Destroy(player.gameObject);
         CameraShake.Instance.ShakeCamera(5f, .1f);
-
+        Object.Destroy(player.gameObject);
+        playerData.movementVelocity = playerData.NormalMovementVelocity;
+        playerData.jumpVelocity = playerData.defaultJumpVelocity;
+        playerData.wallJumpVelocity = playerData.defaultWallJumpVelocity;
+        player.Anim.SetFloat("xState", 0f);
+        player.Anim.SetFloat("Candied", 0f);
         if (Fader.Instance != null)
         {
             Fader.Instance.BGFader(true);

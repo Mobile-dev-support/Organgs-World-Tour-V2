@@ -5,42 +5,26 @@ using UnityEngine;
 public class Spawn : MonoBehaviour
 {
     public GameObject chunk;
-    private bool isExploded;
-    [SerializeField] private float radius;
     private pooledObject Pooler;
-    public LayerMask layer;
-    public bool isHorizontal;
 
     private void OnEnable()
     {
         pooledObject pooler = GetComponentInParent<pooledObject>();
         Pooler = pooler;
-        isExploded = false;
     }
 
-    private void OnDisable()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        //Pooler.GetFromPool();
-    }
-
-    private void FixedUpdate()
-    {
-        Collider2D collider = Physics2D.OverlapCircle(transform.position, radius, layer);
-        if (collider)
+        if (other.gameObject.CompareTag("Player"))
         {
-            isExploded = true;
-            if (isExploded)
-            {
-                Instantiate(chunk, transform.position, chunk.transform.rotation);
-                Pooler.AddToPool(gameObject);
-                isExploded = false;
-            }
-        }
-    }
+            Instantiate(chunk, transform.position, chunk.transform.rotation);
+            Pooler.AddToPool(gameObject);
 
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.blue * new Color(1, 1, 1, 0.5f);
-        Gizmos.DrawWireSphere(transform.position, radius);
+        }
+        else if (other.gameObject.CompareTag("Spikes"))
+        {
+            Instantiate(chunk, transform.position, chunk.transform.rotation);
+            Pooler.AddToPool(gameObject);
+        }
     }
 }

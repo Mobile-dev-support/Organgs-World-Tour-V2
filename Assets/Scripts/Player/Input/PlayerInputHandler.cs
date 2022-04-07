@@ -37,13 +37,13 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void Update()
     {
-        OnMoveInput(RawMovementInput);
         MovementControl();
     }
 
     private void FixedUpdate()
     {
         CheckJumpInputHoldTime();
+        OnMoveInput();
     }
 
     private void MovementControl()
@@ -133,12 +133,10 @@ public class PlayerInputHandler : MonoBehaviour
         //}
     }
 
-    public void OnMoveInput(Vector2 _axis)
+    public void OnMoveInput()
     {
-        _axis = RawMovementInput;
         NormInputX = Mathf.RoundToInt(RawMovementInput.x);
         NormInputY = Mathf.RoundToInt(RawMovementInput.y);
-
     }
 
     public void OnJumpInput()
