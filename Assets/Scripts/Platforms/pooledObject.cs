@@ -8,11 +8,13 @@ public class pooledObject : MonoBehaviour
     private GameObject prefab;
     public float spawnTime;
     private float Timer;
+    private Animator anim;
     private Queue<GameObject> availableObjects = new Queue<GameObject>();
 
     private void Start()
     {
         Timer = spawnTime;
+        anim = GetComponentInParent<Animator>();
     }
 
     private void Update()
@@ -41,8 +43,6 @@ public class pooledObject : MonoBehaviour
     {
         instance.SetActive(false);
         availableObjects.Enqueue(instance);
-        instance.transform.position = transform.position;
-        instance.transform.rotation = transform.rotation;
     }
 
     public GameObject GetFromPool()
@@ -51,8 +51,8 @@ public class pooledObject : MonoBehaviour
         {
             GrowPool();
         }
-
         var instance = availableObjects.Dequeue();
+        anim.SetTrigger("spawn");
         instance.SetActive(true);
         return instance;
     }

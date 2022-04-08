@@ -33,7 +33,6 @@ public class DoTweenFeatures : MonoBehaviour
                     || state == State.RevolvingObj)
         {
             OnClick();
-
         }
     }
 

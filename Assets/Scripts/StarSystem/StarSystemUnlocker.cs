@@ -10,6 +10,7 @@ public class StarSystemUnlocker : MonoBehaviour
     public GameObject[] stars;
     public Sprite starSprite;
     public View getlifeCanvas;
+    private GameObject country;
  
 
     private void Start()
@@ -33,11 +34,11 @@ public class StarSystemUnlocker : MonoBehaviour
 
     public void GetHighestLevel()
     {
-        int currentlevel = int.Parse(gameObject.name);
-        if (!UIFocus.Instance.CurrentLevel.Contains(currentlevel))
+       country = GameObject.Find(gameObject.transform.parent.name);
+        if (!UIFocus.Instance.CurrentLevel.Contains(country))
         {
-            UIFocus.Instance.CurrentLevel.Add(int.Parse(gameObject.name));
-            UIFocus.Instance.CurrentLevel.Sort();
+            UIFocus.Instance.CurrentLevel.Add(country);
+            country.GetComponent<Button>().interactable = true;
         }
     }
 
@@ -50,7 +51,6 @@ public class StarSystemUnlocker : MonoBehaviour
             {
                 stars[i].gameObject.SetActive(false);
             }
-            gameObject.GetComponent<Button>().interactable = false;
         }
         else//if unlock is true means This level can play !
         {
