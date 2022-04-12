@@ -9,19 +9,19 @@ public class AlcoholBehaviour : MonoBehaviour
     public float jumpTimer;
     private Rigidbody2D RB;
     private float JumpTimerDefault;
+    private Animator anim;
     [Header("CHECK")]
     [SerializeField] private float radius;
     public Transform groundCheck;
     public LayerMask layer;
     public GameObject chunk;
-    [Header("SQUISH AND STRETCH")]
-    public Vector3 wallSquash = new Vector3(0.6f, 1.66f, 0.1f);
 
     private void Start()
     {
+        anim = GetComponent<Animator>();
         RB = GetComponent<Rigidbody2D>();
         JumpTimerDefault = jumpTimer;
-      }
+    }
 
     private void FixedUpdate()
     {
@@ -36,40 +36,11 @@ public class AlcoholBehaviour : MonoBehaviour
             jumpTimer -= Time.deltaTime;
             if (jumpTimer < 0)
             {
+                anim.SetTrigger("jump");
                 RB.velocity = transform.up * jumpHeight;
-                SquishAndStretch();
                 jumpTimer = JumpTimerDefault;
             }
         }
-    }
-
-    public void SquishAndStretch()
-    {
-        StartCoroutine(JumpSqueeze(wallSquash.x, wallSquash.y, wallSquash.z, true));
-    }
-
-    IEnumerator JumpSqueeze(float xSqueeze, float ySqueeze, float seconds, bool isInstant)
-    {
-        Vector3 originalSize = Vector3.one;
-        Vector3 newSize = new Vector3(xSqueeze, ySqueeze, originalSize.z);
-        float t = 0f;
-        if (isInstant == false)
-        {
-            while (t <= 1.0)
-            {
-                t += Time.deltaTime / seconds;
-                gameObject.transform.localScale = Vector3.Lerp(originalSize, newSize, t);
-                yield return null;
-            }
-            t = 0f;
-        }
-        while (t <= 1.0)
-        {
-            t += Time.deltaTime / seconds;
-            gameObject.transform.localScale = Vector3.Lerp(newSize, originalSize, t);
-            yield return null;
-        }
-
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -77,6 +48,11 @@ public class AlcoholBehaviour : MonoBehaviour
         if (other.collider.CompareTag("Spikes"))
         {
             Instantiate(chunk, transform.position, chunk.transform.rotation);
+            Destroy(gameObject, 0.01f);
+        }
+        if (other.gameObject.CompareTag("Player"))
+        {
+            anim.ResetTrigger("jump");
             Destroy(gameObject, 0.01f);
         }
     }

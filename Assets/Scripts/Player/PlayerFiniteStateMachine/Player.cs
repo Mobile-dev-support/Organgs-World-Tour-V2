@@ -195,15 +195,11 @@ public class Player : MonoBehaviour
             StateMachine.Initialize(DeathState);
             other.gameObject.SetActive(false);
         }
-    }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
         if (other.gameObject.CompareTag("Alcohol"))
         {
             drunk.SetActive(true);
             isDrinking = true;
         }
     }
-
     #endregion
 }

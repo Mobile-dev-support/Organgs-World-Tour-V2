@@ -1,0 +1,637 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9081655873073896467
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: Next
+  children:
+  - {fileID: -8247460555387717129}
+  _uniqueId: a14b4008-7309-4239-9c39-fd1749d20b27
+--- !u!114 &-8305918844442599799
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: End Dialogue
+  children: []
+  _uniqueId: 085c564b-d709-4e9b-9282-bda82616eb64
+--- !u!114 &-8247460555387717129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 625fccfc-c29d-46b2-95a7-7490cb6a0dbd
+  rect:
+    serializedVersion: 2
+    x: 50404
+    y: 50188
+    width: 200
+    height: 182
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices:
+  - {fileID: -905032201258534323}
+  - {fileID: 4834919053068834588}
+  actor: {fileID: 11400000, guid: 1466c86c0d6d57349a93774a25daa5ab, type: 2}
+  dialogue: Hup! Hup! Hup!
+--- !u!114 &-7718598604457474526
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: End Dialogue
+  children: []
+  _uniqueId: 2855324a-191d-4c00-947a-d64cea081f68
+--- !u!114 &-6286463874588847194
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: End Dialogue
+  children: []
+  _uniqueId: b1c85750-cbb9-425d-a1cd-3bd909641436
+--- !u!114 &-4500777227153173478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 2b128ba2-fdc6-492f-aaef-d83112ace58f
+  rect:
+    serializedVersion: 2
+    x: 50906
+    y: 50422
+    width: 200
+    height: 182
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices:
+  - {fileID: 5290804045253877983}
+  - {fileID: -3160333276248715457}
+  actor: {fileID: 11400000, guid: 1466c86c0d6d57349a93774a25daa5ab, type: 2}
+  dialogue: "I\u2019ve brought the 15th shard. "
+--- !u!114 &-3160333276248715457
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: End Dialogue
+  children: []
+  _uniqueId: 175fc299-bcb7-481a-a09b-a4c2797be099
+--- !u!114 &-2910950105588531845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d8d0566afe4d5fa9596c80df966df6, type: 3}
+  m_Name: Root
+  m_EditorClassIdentifier: 
+  _uniqueId: 91594074-0cae-48a7-893d-7c1fa8286670
+  rect:
+    serializedVersion: 2
+    x: 50050
+    y: 50200
+    width: 100
+    height: 58
+  nodeTitle: 
+  children:
+  - {fileID: 6169352935785202108}
+  conditions: []
+  enterActions: []
+  exitActions: []
+--- !u!114 &-2708453689859705819
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: End Dialogue
+  children: []
+  _uniqueId: 83adad8d-1cd3-4922-a0a1-2a20919f040c
+--- !u!114 &-2287587965495490049
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: End Dialogue
+  children: []
+  _uniqueId: 044746fa-144a-47cc-9ebe-a7e68d73af17
+--- !u!114 &-1839455508654902525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 31c69e79-f2c6-4a1b-aaed-37f31e8f0059
+  rect:
+    serializedVersion: 2
+    x: 50168
+    y: 50419
+    width: 200
+    height: 182
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices:
+  - {fileID: 6885380521833420377}
+  - {fileID: -6286463874588847194}
+  actor: {fileID: 11400000, guid: a5a0c565a954f2b4faad87d09cbda22c, type: 2}
+  dialogue: "Yip, found it! All safe and sound.\_"
+--- !u!114 &-905032201258534323
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: Next
+  children:
+  - {fileID: 4540798953993279402}
+  _uniqueId: bbe310e8-149e-4d81-902c-74f7e2415228
+--- !u!114 &-800083385003690448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: e95f23e7-ee91-41cd-9400-4991d111f542
+  rect:
+    serializedVersion: 2
+    x: 51155
+    y: 50424
+    width: 200
+    height: 162
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices:
+  - {fileID: 5558731662945082977}
+  actor: {fileID: 11400000, guid: 283bc47a7e7a3c44aa22970dec902488, type: 2}
+  dialogue: "It\u2019s all up to Oliver now."
+--- !u!114 &-172794190223095598
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: Next
+  children:
+  - {fileID: 4114572206304289928}
+  _uniqueId: ef065999-e37f-40e0-80b9-696243e8ea7c
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b35851dfd8754a74b333944d50d05bbd, type: 3}
+  m_Name: Dialogue_ostin
+  m_EditorClassIdentifier: 
+  _nodes:
+  - {fileID: -2910950105588531845}
+  - {fileID: 6169352935785202108}
+  - {fileID: -8247460555387717129}
+  - {fileID: 4540798953993279402}
+  - {fileID: 1455502462254730138}
+  - {fileID: 4114572206304289928}
+  - {fileID: -1839455508654902525}
+  - {fileID: 836569921667445956}
+  - {fileID: 8318129355662066540}
+  - {fileID: -4500777227153173478}
+  - {fileID: -800083385003690448}
+  root: {fileID: -2910950105588531845}
+  scrollPosition: {x: 50677.863, y: 50227.7}
+--- !u!114 &836569921667445956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: e72b33f4-e090-43a0-ab2a-5d80229fff27
+  rect:
+    serializedVersion: 2
+    x: 50400
+    y: 50419
+    width: 200
+    height: 182
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices:
+  - {fileID: 4417049121467073302}
+  - {fileID: -2708453689859705819}
+  actor: {fileID: 11400000, guid: 0dc033516a5503b4aa70e9ec8422c2a9, type: 2}
+  dialogue: You ready to take this to the Totem Land?
+--- !u!114 &1217226044374041174
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: End Dialogue
+  children: []
+  _uniqueId: a76e5f98-50d0-4b35-9a9e-a1fbbfa144a4
+--- !u!114 &1455502462254730138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: f2ba6468-7444-45a6-8961-86cafd18a21d
+  rect:
+    serializedVersion: 2
+    x: 50907
+    y: 50188
+    width: 200
+    height: 182
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices:
+  - {fileID: -172794190223095598}
+  - {fileID: -2287587965495490049}
+  actor: {fileID: 11400000, guid: 283bc47a7e7a3c44aa22970dec902488, type: 2}
+  dialogue: "Oliver, finally! I\u2019ve been lifting this dumbbell for ages! Can\u2019t
+    slack off for a second, you know? "
+--- !u!114 &4114572206304289928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: f13729cc-2e10-4022-bae1-d8269ce8a429
+  rect:
+    serializedVersion: 2
+    x: 51148
+    y: 50189
+    width: 200
+    height: 182
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices:
+  - {fileID: 4623069387130145305}
+  - {fileID: -8305918844442599799}
+  actor: {fileID: 11400000, guid: 3ea3eaf7850bebc44b5e4d411e7ec6c6, type: 2}
+  dialogue: Were you able to find the shard?
+--- !u!114 &4417049121467073302
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: Next
+  children:
+  - {fileID: 8318129355662066540}
+  _uniqueId: 2e9fe357-51d1-4545-af6c-fadce9c47560
+--- !u!114 &4540798953993279402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 745684a7-3df1-49e8-a19b-aa3c56409ca7
+  rect:
+    serializedVersion: 2
+    x: 50655
+    y: 50186
+    width: 200
+    height: 182
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices:
+  - {fileID: 7817051978464027049}
+  - {fileID: 1217226044374041174}
+  actor: {fileID: 11400000, guid: a5a0c565a954f2b4faad87d09cbda22c, type: 2}
+  dialogue: "Ostin! Lookin\u2019 good, yo!"
+--- !u!114 &4623069387130145305
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: Next
+  children:
+  - {fileID: -1839455508654902525}
+  _uniqueId: b963d7fb-902e-4cd8-ac24-97acf90bc7a7
+--- !u!114 &4834919053068834588
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: End Dialogue
+  children: []
+  _uniqueId: 0d81b045-eb33-4e3b-8250-2f4b616458e8
+--- !u!114 &5290804045253877983
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: Next
+  children:
+  - {fileID: -800083385003690448}
+  _uniqueId: cdc53867-3f23-452c-9737-6fc8b1fe2dfa
+--- !u!114 &5558731662945082977
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: End Dialogue
+  children: []
+  _uniqueId: c4d1be6b-97ae-4e0d-bf93-28795ee88abd
+--- !u!114 &5684779543240591268
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: Next
+  children:
+  - {fileID: -4500777227153173478}
+  _uniqueId: 36ebbe07-4cde-41fb-9b97-e6e4c3db2558
+--- !u!114 &6169352935785202108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 0041db4e-4421-4bc5-ac68-c212585c4758
+  rect:
+    serializedVersion: 2
+    x: 50172
+    y: 50190
+    width: 200
+    height: 182
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices:
+  - {fileID: -9081655873073896467}
+  - {fileID: 7479368195886928816}
+  actor: {fileID: 11400000, guid: 1466c86c0d6d57349a93774a25daa5ab, type: 2}
+  dialogue: Gotta get in shape, gotta get in shape!
+--- !u!114 &6885380521833420377
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: Next
+  children:
+  - {fileID: 836569921667445956}
+  _uniqueId: cb33ea5c-be03-4703-af4c-b00bfc57bdb7
+--- !u!114 &7479368195886928816
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: End Dialogue
+  children: []
+  _uniqueId: 381250fb-5429-4827-9cf0-3374a7fb408f
+--- !u!114 &7817051978464027049
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb407621a43446dac370b409a9ddc29, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  text: Next
+  children:
+  - {fileID: 1455502462254730138}
+  _uniqueId: 9d4dfd3e-6b7a-429c-8af5-6675edc1a324
+--- !u!114 &8318129355662066540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 319db8fc-b484-4a28-b626-8eebf6fe39fa
+  rect:
+    serializedVersion: 2
+    x: 50654
+    y: 50418
+    width: 200
+    height: 182
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices:
+  - {fileID: 5684779543240591268}
+  - {fileID: -7718598604457474526}
+  actor: {fileID: 11400000, guid: 283bc47a7e7a3c44aa22970dec902488, type: 2}
+  dialogue: "C\u2019mon!"

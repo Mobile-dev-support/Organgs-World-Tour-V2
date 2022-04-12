@@ -8,8 +8,11 @@ public class AlcoholState : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        PlayerControls.Instance.CheckDrunk();
-        PlayerControls.Instance.ReverseControl();
+        if (PlayerControls.Instance)
+        {
+            PlayerControls.Instance.CheckDrunk();
+            PlayerControls.Instance.ReverseControl();
+        }
     }
 
     // Update is called once per frame
