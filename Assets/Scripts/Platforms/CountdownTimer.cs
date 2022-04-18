@@ -72,7 +72,7 @@ public class CountdownTimer : MonoBehaviour
             {
                 timeValue = 0;
 
-                if(Energy.Instance != null && Energy.Instance.currentLife < 10)
+                if(Energy.Instance != null && Energy.Instance.currentLife < Energy.Instance.maxLife)
                 {
                     Energy.Instance.UseLife();
                     if (Energy.Instance.currentLife > 0)
