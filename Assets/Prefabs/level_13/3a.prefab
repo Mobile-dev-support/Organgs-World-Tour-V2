@@ -1,5 +1,108 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2098954576
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2098954577}
+  - component: {fileID: 2098954579}
+  - component: {fileID: 2098954578}
+  m_Layer: 0
+  m_Name: finishlinePortal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2098954577
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098954576}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.89, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8648630924924200711}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &2098954579
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098954576}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 1667960627
+  m_SortingLayer: 3
+  m_SortingOrder: 3
+  m_Sprite: {fileID: 2394082229892792856, guid: 614c004746607f74c9d5969936105ef7,
+    type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.42, y: 2.19}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!95 &2098954578
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098954576}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dc30a5dce8d760e4a9e7ed4998e9da12, type: 2}
+  m_CullingMode: 2
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &644069960401147051
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +331,8 @@ Transform:
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: -9.989, y: -12.212, z: 5.995726}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2098954577}
   m_Father: {fileID: 4912099518775821775}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
@@ -272,8 +376,7 @@ SpriteRenderer:
   m_SortingLayerID: 1667960627
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6652531810633381615, guid: 7dfd8766f3048e441967d54cf80f3f63,
-    type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -281,7 +384,7 @@ SpriteRenderer:
   m_Size: {x: 0.73, y: 0.85}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &7388484570185535707
@@ -295,7 +398,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 785e41a3ea1fc6942be5c56ca792bd69, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -7192,7 +7295,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3823811491822396712}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 41.64, y: 2.793, z: -2.796008}
+  m_LocalPosition: {x: 25, y: 29.2, z: -2.796008}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4912099518775821775}
@@ -25793,7 +25896,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 1
+  m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -26801,6 +26904,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4912099518267211714}
   - component: {fileID: 4912099518267211713}
+  - component: {fileID: 4912099519144849226}
   m_Layer: 0
   m_Name: Tunnel (8)
   m_TagString: Untagged
@@ -26816,7 +26920,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4912099518267211715}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 32.01, y: 13.86, z: -2.5317173}
+  m_LocalPosition: {x: 32.01, y: 14.01, z: -2.5317173}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4912099519180701915}
@@ -26863,17 +26967,37 @@ SpriteRenderer:
   m_SortingLayerID: 1667960627
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6aaab5e9f28aba847a64442bb7d33b0f, type: 3}
+  m_Sprite: {fileID: -4597006607926371355, guid: 8d372fa4a90063c49bdc48534c5157e9,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 1
-  m_DrawMode: 1
-  m_Size: {x: 2.84, y: 0.78}
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.1733512, y: 1.02}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4912099519144849226
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4912099518267211715}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f5a9038130ca5ea45b9c11fa377c1f86, type: 2}
+  m_CullingMode: 2
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4912099518278743773
 GameObject:
   m_ObjectHideFlags: 0
@@ -27000,7 +27124,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4912099518322156580}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.06, y: 32.7, z: 0}
+  m_LocalPosition: {x: -10.06, y: 35.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4912099518775821775}
@@ -27184,6 +27308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4912099518361369530}
   - component: {fileID: 4912099518361369529}
+  - component: {fileID: 4912099519144849233}
   m_Layer: 0
   m_Name: Tunnel (4)
   m_TagString: Untagged
@@ -27199,7 +27324,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4912099518361369531}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.09766666, y: -0.039666656, z: -2.5317173}
+  m_LocalPosition: {x: -0.09766666, y: -0.033899978, z: -2.5317173}
   m_LocalScale: {x: 0.033333335, y: 0.033333335, z: 1}
   m_Children:
   - {fileID: 4912099519675856003}
@@ -27246,17 +27371,37 @@ SpriteRenderer:
   m_SortingLayerID: 1667960627
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6aaab5e9f28aba847a64442bb7d33b0f, type: 3}
+  m_Sprite: {fileID: -4597006607926371355, guid: 8d372fa4a90063c49bdc48534c5157e9,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 1
-  m_DrawMode: 1
-  m_Size: {x: 1.33, y: 0.78}
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.1733512, y: 1.02}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4912099519144849233
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4912099518361369531}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f5a9038130ca5ea45b9c11fa377c1f86, type: 2}
+  m_CullingMode: 2
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4912099518390808930
 GameObject:
   m_ObjectHideFlags: 0
@@ -27400,6 +27545,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4912099518397772814}
   - component: {fileID: 4912099518397772813}
+  - component: {fileID: 4912099519144849234}
   m_Layer: 0
   m_Name: Tunnel (5)
   m_TagString: Untagged
@@ -27415,7 +27561,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4912099518397772815}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.15700002, y: -0.039666656, z: -2.5317173}
+  m_LocalPosition: {x: 0.15700002, y: -0.033899978, z: -2.5317173}
   m_LocalScale: {x: 0.033333335, y: 0.033333335, z: 1}
   m_Children:
   - {fileID: 4912099518222865236}
@@ -27462,17 +27608,37 @@ SpriteRenderer:
   m_SortingLayerID: 1667960627
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6aaab5e9f28aba847a64442bb7d33b0f, type: 3}
+  m_Sprite: {fileID: -4597006607926371355, guid: 8d372fa4a90063c49bdc48534c5157e9,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 1
-  m_DrawMode: 1
-  m_Size: {x: 1.33, y: 0.78}
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.1733512, y: 1.02}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4912099519144849234
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4912099518397772815}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f5a9038130ca5ea45b9c11fa377c1f86, type: 2}
+  m_CullingMode: 2
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4912099518423871911
 GameObject:
   m_ObjectHideFlags: 0
@@ -28363,6 +28529,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4912099518540104283}
   - component: {fileID: 4912099518540104282}
+  - component: {fileID: 4912099519144849229}
   m_Layer: 0
   m_Name: Tunnel
   m_TagString: Untagged
@@ -28378,7 +28545,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4912099518540104292}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.11699999, y: 0.46133336, z: -2.5317173}
+  m_LocalPosition: {x: -0.11699999, y: 0.4671, z: -2.5317173}
   m_LocalScale: {x: 0.033333335, y: 0.033333335, z: 1}
   m_Children:
   - {fileID: 4912099519753506008}
@@ -28425,17 +28592,37 @@ SpriteRenderer:
   m_SortingLayerID: 1667960627
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6aaab5e9f28aba847a64442bb7d33b0f, type: 3}
+  m_Sprite: {fileID: -4597006607926371355, guid: 8d372fa4a90063c49bdc48534c5157e9,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 1
-  m_DrawMode: 1
-  m_Size: {x: 1.33, y: 0.78}
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.1733512, y: 1.02}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4912099519144849229
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4912099518540104292}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f5a9038130ca5ea45b9c11fa377c1f86, type: 2}
+  m_CullingMode: 2
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4912099518547869677
 GameObject:
   m_ObjectHideFlags: 0
@@ -36223,6 +36410,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4912099518613432164}
   - component: {fileID: 4912099518613432155}
+  - component: {fileID: 4912099519144849225}
   m_Layer: 0
   m_Name: Tunnel (9)
   m_TagString: Untagged
@@ -36238,7 +36426,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4912099518613432165}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 36.01, y: 13.86, z: -2.5317173}
+  m_LocalPosition: {x: 36.01, y: 14.01, z: -2.5317173}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4912099518905072968}
@@ -36285,17 +36473,37 @@ SpriteRenderer:
   m_SortingLayerID: 1667960627
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6aaab5e9f28aba847a64442bb7d33b0f, type: 3}
+  m_Sprite: {fileID: -4597006607926371355, guid: 8d372fa4a90063c49bdc48534c5157e9,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 1
-  m_DrawMode: 1
-  m_Size: {x: 2.84, y: 0.78}
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.1733512, y: 1.02}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4912099519144849225
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4912099518613432165}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f5a9038130ca5ea45b9c11fa377c1f86, type: 2}
+  m_CullingMode: 2
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4912099518618120786
 GameObject:
   m_ObjectHideFlags: 0
@@ -36420,6 +36628,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4912099518632853657}
   - component: {fileID: 4912099518632853656}
+  - component: {fileID: 4912099519144849232}
   m_Layer: 0
   m_Name: Tunnel (3)
   m_TagString: Untagged
@@ -36435,7 +36644,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4912099518632853658}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.28399998, y: 0.46133336, z: -2.5317173}
+  m_LocalPosition: {x: 0.28399998, y: 0.46710005, z: -2.5317173}
   m_LocalScale: {x: 0.033333335, y: 0.033333335, z: 1}
   m_Children:
   - {fileID: 4912099520128479406}
@@ -36482,17 +36691,37 @@ SpriteRenderer:
   m_SortingLayerID: 1667960627
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6aaab5e9f28aba847a64442bb7d33b0f, type: 3}
+  m_Sprite: {fileID: -4597006607926371355, guid: 8d372fa4a90063c49bdc48534c5157e9,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 1
-  m_DrawMode: 1
-  m_Size: {x: 1.33, y: 0.78}
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.1733512, y: 1.02}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4912099519144849232
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4912099518632853658}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f5a9038130ca5ea45b9c11fa377c1f86, type: 2}
+  m_CullingMode: 2
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4912099518644043827
 GameObject:
   m_ObjectHideFlags: 0
@@ -64687,6 +64916,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4912099519007591574}
   - component: {fileID: 4912099519007591573}
+  - component: {fileID: 4912099519144849230}
   m_Layer: 0
   m_Name: Tunnel (1)
   m_TagString: Untagged
@@ -64702,7 +64932,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4912099519007591575}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.016666684, y: 0.46133336, z: -2.5317173}
+  m_LocalPosition: {x: 0.016666684, y: 0.46710005, z: -2.5317173}
   m_LocalScale: {x: 0.033333335, y: 0.033333335, z: 1}
   m_Children:
   - {fileID: 4912099519527846066}
@@ -64749,17 +64979,37 @@ SpriteRenderer:
   m_SortingLayerID: 1667960627
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6aaab5e9f28aba847a64442bb7d33b0f, type: 3}
+  m_Sprite: {fileID: -4597006607926371355, guid: 8d372fa4a90063c49bdc48534c5157e9,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 1
-  m_DrawMode: 1
-  m_Size: {x: 1.33, y: 0.78}
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.1733512, y: 1.02}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4912099519144849230
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4912099519007591575}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f5a9038130ca5ea45b9c11fa377c1f86, type: 2}
+  m_CullingMode: 2
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4912099519010840263
 GameObject:
   m_ObjectHideFlags: 0
@@ -68538,6 +68788,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4912099519018567101}
   - component: {fileID: 4912099519018567100}
+  - component: {fileID: 4912099519144849227}
   m_Layer: 0
   m_Name: Tunnel (7)
   m_TagString: Untagged
@@ -68553,7 +68804,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4912099519018567102}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 28.03, y: 13.86, z: -2.5317173}
+  m_LocalPosition: {x: 28.03, y: 14.01, z: -2.5317173}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4912099518333772992}
@@ -68600,17 +68851,37 @@ SpriteRenderer:
   m_SortingLayerID: 1667960627
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6aaab5e9f28aba847a64442bb7d33b0f, type: 3}
+  m_Sprite: {fileID: -4597006607926371355, guid: 8d372fa4a90063c49bdc48534c5157e9,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 1
-  m_DrawMode: 1
-  m_Size: {x: 2.84, y: 0.78}
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.1733512, y: 1.02}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4912099519144849227
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4912099519018567102}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f5a9038130ca5ea45b9c11fa377c1f86, type: 2}
+  m_CullingMode: 2
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4912099519024753788
 GameObject:
   m_ObjectHideFlags: 0
@@ -69784,6 +70055,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4912099519237668015}
   - component: {fileID: 4912099519237668014}
+  - component: {fileID: 4912099519144849224}
   m_Layer: 0
   m_Name: Tunnel (10)
   m_TagString: Untagged
@@ -69799,7 +70071,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4912099519237668008}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 39.96, y: 13.86, z: -2.5317173}
+  m_LocalPosition: {x: 39.96, y: 14.01, z: -2.5317173}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4912099518644043826}
@@ -69846,17 +70118,37 @@ SpriteRenderer:
   m_SortingLayerID: 1667960627
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6aaab5e9f28aba847a64442bb7d33b0f, type: 3}
+  m_Sprite: {fileID: -4597006607926371355, guid: 8d372fa4a90063c49bdc48534c5157e9,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 1
-  m_DrawMode: 1
-  m_Size: {x: 2.84, y: 0.78}
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.1733512, y: 1.02}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4912099519144849224
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4912099519237668008}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f5a9038130ca5ea45b9c11fa377c1f86, type: 2}
+  m_CullingMode: 2
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4912099519255471710
 GameObject:
   m_ObjectHideFlags: 0
@@ -70547,7 +70839,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4912099519394444247}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.16946667, y: -0.2646667, z: 0}
+  m_LocalPosition: {x: 0.1523, y: -0.212, z: 0}
   m_LocalScale: {x: 0.033333335, y: 0.06666667, z: 1}
   m_Children: []
   m_Father: {fileID: 8464869534832502176}
@@ -70945,6 +71237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4912099519491360998}
   - component: {fileID: 4912099519491360997}
+  - component: {fileID: 4912099519144849228}
   m_Layer: 0
   m_Name: Tunnel (6)
   m_TagString: Untagged
@@ -70960,7 +71253,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4912099519491360999}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 24.03, y: 13.86, z: -2.5317173}
+  m_LocalPosition: {x: 24.03, y: 14.01, z: -2.5317173}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4912099519786344143}
@@ -71007,17 +71300,37 @@ SpriteRenderer:
   m_SortingLayerID: 1667960627
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6aaab5e9f28aba847a64442bb7d33b0f, type: 3}
+  m_Sprite: {fileID: -4597006607926371355, guid: 8d372fa4a90063c49bdc48534c5157e9,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 1
-  m_DrawMode: 1
-  m_Size: {x: 2.84, y: 0.78}
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.1733512, y: 1.02}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4912099519144849228
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4912099519491360999}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f5a9038130ca5ea45b9c11fa377c1f86, type: 2}
+  m_CullingMode: 2
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4912099519495368124
 GameObject:
   m_ObjectHideFlags: 0
@@ -71338,6 +71651,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4912099519594389561}
   - component: {fileID: 4912099519594389560}
+  - component: {fileID: 4912099519144849231}
   m_Layer: 0
   m_Name: Tunnel (2)
   m_TagString: Untagged
@@ -71353,7 +71667,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4912099519594389562}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.15033336, y: 0.46133336, z: -2.5317173}
+  m_LocalPosition: {x: 0.15033336, y: 0.46710005, z: -2.5317173}
   m_LocalScale: {x: 0.033333335, y: 0.033333335, z: 1}
   m_Children:
   - {fileID: 4912099518853486604}
@@ -71400,17 +71714,37 @@ SpriteRenderer:
   m_SortingLayerID: 1667960627
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6aaab5e9f28aba847a64442bb7d33b0f, type: 3}
+  m_Sprite: {fileID: -4597006607926371355, guid: 8d372fa4a90063c49bdc48534c5157e9,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 1
-  m_DrawMode: 1
-  m_Size: {x: 1.33, y: 0.78}
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.1733512, y: 1.02}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4912099519144849231
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4912099519594389562}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f5a9038130ca5ea45b9c11fa377c1f86, type: 2}
+  m_CullingMode: 2
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4912099519605162436
 GameObject:
   m_ObjectHideFlags: 0
@@ -71570,7 +71904,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4912099519608440775}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.03, y: 32.77, z: 5.995726}
+  m_LocalPosition: {x: -10.03, y: 35.97, z: 5.995726}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4912099518775821775}
@@ -71616,8 +71950,7 @@ SpriteRenderer:
   m_SortingLayerID: 1667960627
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6652531810633381615, guid: 7dfd8766f3048e441967d54cf80f3f63,
-    type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -71625,7 +71958,7 @@ SpriteRenderer:
   m_Size: {x: 0.73, y: 0.85}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &4912099519608440773
@@ -71639,7 +71972,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 785e41a3ea1fc6942be5c56ca792bd69, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0

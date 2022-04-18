@@ -51,6 +51,7 @@ public class StarSystemUnlocker : MonoBehaviour
             {
                 stars[i].gameObject.SetActive(false);
             }
+            gameObject.GetComponent<Button>().interactable = false;
         }
         else//if unlock is true means This level can play !
         {

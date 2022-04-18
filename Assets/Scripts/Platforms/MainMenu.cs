@@ -10,19 +10,33 @@ using System.Linq;
 public class MainMenu : MonoBehaviour
 {
     [Header("MAIN MENU")]
+    [HideInInspector]
     public View mainCanvas;
+    [HideInInspector]
     public View winCanvas;
+    [HideInInspector]
     public View gameOverCanvas;
+    [HideInInspector]
     public View statCanvas;
+    [HideInInspector]
     public View MenuCanvas;
+    [HideInInspector]
     public View loadingCanvas;
+    [HideInInspector]
     public View ingameCanvas;
+    [HideInInspector]
     public View maingameCanvas;
+    [HideInInspector]
     public View faderCanvas;
+    [HideInInspector]
     public View coverCanvas;
+    [HideInInspector]
     public View scroller_canvas;
+    [HideInInspector]
     public View menu_item_canvas;
+    [HideInInspector]
     public View dialogCanvas;
+    [HideInInspector]
     public View totem_land;
     public Slider slider;
     public TextMeshProUGUI textProgress;
@@ -44,12 +58,19 @@ public class MainMenu : MonoBehaviour
     public float strength;
     public int vibrato;
     public float randomness;
+    [Header("MAIN MENU AUDIO")]
+    public AudioClip Main;
+    public AudioClip Map;
+    [Header("BUTTON SOUND")]
+    public AudioClip ButtonSound;
+    [Header("GAMEOVER/WIN PANEL SOUND")]
+    public AudioClip win;
     private static MainMenu _instance;
     public static MainMenu Instance { get { return _instance; } }
 
     private void Awake()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
         if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
@@ -63,8 +84,21 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         GetAllLevels();
+        SoundManager.Instance.MusicAudio(Main);
         level = gameOverCanvas.transform.GetChild(0).Find("level").gameObject;
         tween = level.GetComponent<DoTweenFeatures>();
+    }
+
+    public void MainToMap()
+    {
+        SoundManager.Instance.StopMusicAudio(Main);
+        SoundManager.Instance.SFXAudio(Map);
+    }
+
+    public void MapToMain()
+    {
+        SoundManager.Instance.StopSFXAudio(Map);
+        SoundManager.Instance.MusicAudio(Main);
     }
 
     private IEnumerator AdditionalLifeRespawn()
@@ -183,7 +217,6 @@ public class MainMenu : MonoBehaviour
         {
             yield return new WaitForSeconds(1.2f);
             operation = SceneManager.UnloadSceneAsync(loadSceneString);
-            Debug.Log("scene Unlaoded!");
         }
 
         while (!operation.isDone)
@@ -208,9 +241,12 @@ public class MainMenu : MonoBehaviour
             CanvasFader(0, loadingCanvas.transform);
             ingameCanvas.transform.SetParent(maingameCanvas.transform, false);
             ingameCanvas.transform.SetSiblingIndex(1);
+            SoundManager.Instance.StopMusicAudio(Main);
             yield return new WaitForSeconds(0.5f);
+            SoundManager.Instance.BGMusic(BGMusic.Instance.music);
             ingameCanvas.Show();
             loadingCanvas.Hide();
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(GameManager.Instance.sceneName));
         }
         else if (operation.isDone && unload)
         {
@@ -230,8 +266,11 @@ public class MainMenu : MonoBehaviour
             ingameCanvas.Show();
             CanvasFader(0, loadingCanvas.transform);
             UIFocus.Instance.FocusOnObjectImmediately();
+            SoundManager.Instance.OutBGMusic(BGMusic.Instance.music);
             yield return new WaitForSeconds(1f);
+            SoundManager.Instance.SFXAudio(Map);
             CanvasFader(1, mainCanvas.transform);
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainMenu"));
         }
     }
 

@@ -11,7 +11,7 @@ public class Energy : MonoBehaviour
     [SerializeField] private Slider[] lifeBar;
     [SerializeField] private TextMeshProUGUI timerTxt;
     [SerializeField] private Button AdButton;
-    private int maxLife = 5;
+    private int maxLife = 99;
     public int currentLife { get; set; }
     private int restorDuration = 1;
     private DateTime nextLifeTime;
@@ -20,7 +20,7 @@ public class Energy : MonoBehaviour
     [Header("REWARDED ADS")]
     private DateTime nextAdTime;
     private DateTime lastAdTime;
-    private int restoreAdDuration = 1;
+    private int restoreAdDuration = 3;
     private int maxRewardedAd = 2;
     [HideInInspector] public int currentRewardedAd;
     private bool isRestoringAd = false;

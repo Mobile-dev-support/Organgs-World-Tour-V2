@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
         {
 
             playerData.cheeseTimer -= Time.deltaTime;
-            Anim.SetFloat(xState, 0.6f);
+            Anim.SetFloat(xState, 0.5f);
             playerData.jumpVelocity = playerData.cheeseJumpVelocity;
             playerData.wallJumpVelocity = playerData.cheeseWallJumpVelocity;
 
@@ -138,17 +138,14 @@ public class Player : MonoBehaviour
         }
         if (isDrinking)
         {
-            Core.Movement.SetVelocityZero();
-            Core.Movement.CanSetVelocity = false;
             playerData.DrinkTimer -= Time.deltaTime;
             Anim.SetFloat(xState, 1.0f);
             if (playerData.DrinkTimer < 0)
             {
                 isDrinking = false;
                 playerData.DrinkTimer = 2f;
-                Anim.SetFloat(xState, 0.0f);
+                //Anim.SetFloat(xState, 0.0f);
                 drunk.SetActive(false);
-                Core.Movement.CanSetVelocity = true;
             }
         }
     }

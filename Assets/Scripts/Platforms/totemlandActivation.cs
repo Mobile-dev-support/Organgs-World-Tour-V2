@@ -8,7 +8,7 @@ public class totemlandActivation : MonoBehaviour
     public Animator anim;
     public TextMeshProUGUI[] shardtext;
     public GameObject[] organgs;
-    private int totem_key;
+    private int Trophy;
     private static totemlandActivation _instance;
     public static totemlandActivation Instance { get { return _instance; } }
 
@@ -32,22 +32,17 @@ public class totemlandActivation : MonoBehaviour
 
     public void Initialize()
     {
-        for (int j = 1; j < organgs.Length; j++)
+        Trophy = 0;
+        for (int i = 1; i < organgs.Length; i++)
         {
-            organgs[j].SetActive(false);
-        }
-
-        for (int i = 0; i < 17; i++)
-        {
-            totem_key = PlayerPrefs.GetInt("totem_key" + i);
+            organgs[i].SetActive(false);
             if (PlayerPrefs.HasKey("totem_key" + i))
             {
-                for (int j = 1; j < organgs.Length; j++)
+                Trophy++;
+                organgs[i].SetActive(true);
+                for (int j = 0; j < shardtext.Length; j++)
                 {
-                    organgs[i].SetActive(i == totem_key);
-                    shardtext[0].text = totem_key.ToString();
-                    shardtext[1].text = totem_key.ToString();
-                    shardtext[2].text = totem_key.ToString();
+                    shardtext[j].text = Trophy.ToString();
                 }
             }
         }

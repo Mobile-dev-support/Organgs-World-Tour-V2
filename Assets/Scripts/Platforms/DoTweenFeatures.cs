@@ -55,6 +55,7 @@ public class DoTweenFeatures : MonoBehaviour
                 break;
             case State.Button:
                 gameObject.GetComponent<Transform>().DOPunchScale(button, duration, vibration, elasticity);
+                SoundManager.Instance.ButtonSound(MainMenu.Instance.ButtonSound);
                 break;
             case State.Star:
                 gameObject.GetComponent<Transform>().DOPunchScale(star, duration, vibration, elasticity);

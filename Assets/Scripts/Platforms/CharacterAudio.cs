@@ -12,6 +12,8 @@ public class CharacterAudio : MonoBehaviour
     public AudioClip slide;
     public AudioClip land;
     public AudioClip coin;
+    public AudioClip shard;
+    public AudioClip breakable;
     private AudioSource src;
 
     private static CharacterAudio _instance;
@@ -42,27 +44,28 @@ public class CharacterAudio : MonoBehaviour
     {
         src.PlayOneShot(coin);
     }
-
+    public void Shard()
+    {
+        src.PlayOneShot(shard);
+    }
+    public void Breakable()
+    {
+        src.PlayOneShot(breakable);
+    }
     public void Jump()
     {
         src.PlayOneShot(jump);
-        //Debug.Log("jumping");
     }
-
     public void WallJump()
     {
         src.PlayOneShot(walljump);
-        //Debug.Log("wall jumping");
     }
-
     public void Slide()
     {
         src.PlayOneShot(slide);
-       //Debug.Log("sliding");
     }
     public void Land()
     {
         src.PlayOneShot(land);
-        //Debug.Log("landed");
     }
 }

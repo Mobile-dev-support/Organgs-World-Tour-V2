@@ -96,6 +96,7 @@ public class ScoringMechanism : MonoBehaviour
             if(stars[i].gameObject.GetComponent<DoTweenFeatures>() != null)
                 stars[i].gameObject.GetComponent<DoTweenFeatures>().OnClick();
         }
+        SoundManager.Instance.winSound(MainMenu.Instance.win);
     }
     #endregion
 }

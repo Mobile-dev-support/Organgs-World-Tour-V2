@@ -60,6 +60,7 @@ public class PlatformController : MonoBehaviour
 
         if (crumbled)
         {
+
             if (currentRestoreTime > 0)
             {
                 currentRestoreTime -= Time.fixedDeltaTime;
@@ -137,6 +138,12 @@ public class PlatformController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void isPlatformBroke()
+    {
+        if(CharacterAudio.Instance != null)
+        CharacterAudio.Instance.Breakable();
     }
 
     private void OnCollisionEnter2D(Collision2D other)

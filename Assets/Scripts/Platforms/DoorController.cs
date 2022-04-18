@@ -10,7 +10,6 @@ public class DoorController : MonoBehaviour
     public int StarsNum;
     public int levelIndex;
     public int country;
-    private GameObject player;
     private GameObject button;
     private GameObject coinsObj;
     [HideInInspector]
@@ -56,7 +55,6 @@ public class DoorController : MonoBehaviour
     { 
         if (other.gameObject.CompareTag("Player"))
         {
-            player = GameObject.Find("MainPlayer");
             gameObject.GetComponent<Animator>().SetTrigger("opening");
             OnDoorClose();
         }   
@@ -92,8 +90,12 @@ public class DoorController : MonoBehaviour
     public void NextLevelNotif()
     {
         if (PlayerPrefs.GetInt("Lv" + levelIndex) > 1)
+        {
             nextLvlBtn.interactable = true;
-        else
+        }
+        else if((PlayerPrefs.GetInt("Lv" + levelIndex) <= 1) || (levelIndex == 48))
+        {
             nextLvlBtn.interactable = false;
+        }
     }
 }

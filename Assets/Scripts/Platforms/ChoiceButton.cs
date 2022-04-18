@@ -19,6 +19,7 @@ namespace CleverCrow.Fluid.Dialogues.Examples
         {
             button.onClick.AddListener(() => {
                 clickEvent.Invoke(transform.GetSiblingIndex());
+                SoundManager.Instance.ButtonSound(MainMenu.Instance.ButtonSound);
             });
         }
     }

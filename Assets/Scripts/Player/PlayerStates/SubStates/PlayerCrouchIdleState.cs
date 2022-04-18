@@ -33,7 +33,6 @@ public class PlayerCrouchIdleState : PlayerGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        SlideInput = player.InputHandler.SlideInput;
         if (!isExitingState)
         {
            /*if (xInput != 0)
@@ -41,7 +40,7 @@ public class PlayerCrouchIdleState : PlayerGroundedState
                  stateMachine.ChangeState(player.CrouchMoveState);
             }*/
             //else
-            if (!SlideInput && !isTouchingCeiling)
+            if (!isCurrentlySliding && !isTouchingCeiling)
             {
                  stateMachine.ChangeState(player.IdleState);
             }

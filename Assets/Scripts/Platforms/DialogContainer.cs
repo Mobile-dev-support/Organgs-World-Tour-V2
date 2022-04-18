@@ -70,6 +70,8 @@ namespace CleverCrow.Fluid.Dialogues.Examples
             });
 
             _ctrl.Events.End.AddListener(() => {
+                totemlandActivation.Instance.DisableTotemLand();
+                MainMenu.Instance.totem_land.Hide();
                 MainMenu.Instance.dialogCanvas.Hide();
                 StartCoroutine(DoorController.Instance.EndGame());
 

@@ -11,8 +11,13 @@ public class Shard : MonoBehaviour
     public float randomness;
     private GameObject CinematicsTrigger;
     #region Key Variables
-    public int totem_key { get; set; }
+    private int totem_key { get; set; }
     #endregion
+
+    public void Load()
+    {
+        PlayerPrefs.GetInt("totem_key" + DoorController.Instance.country, totem_key);
+    }
 
     public void Save()
     {
@@ -27,6 +32,7 @@ public class Shard : MonoBehaviour
 
     private void Start()
     {
+        Load();
         CinematicsTrigger = GameObject.Find("CinematicsTrigger");
         if (PlayerPrefs.HasKey("totem_key" + DoorController.Instance.country)) 
         {
@@ -45,8 +51,9 @@ public class Shard : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            totem_key += 1;
+            totem_key = 1;
             Save();
+            CharacterAudio.Instance.Shard();
             totemlandActivation.Instance.Initialize();
             Destroy(gameObject, 0.01f);
         }
