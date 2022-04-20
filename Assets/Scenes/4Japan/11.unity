@@ -382,7 +382,6 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
-  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -459,7 +458,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 5.05
+  orthographic size: 4.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -483,24 +482,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.053017, y: 1.3714223, z: -9.999551}
+  m_LocalPosition: {x: 10.112331, y: 13.632071, z: -9.999551}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1600806940}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84e73c4c713f7ad47adae55e919bea33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &604718847
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,6 +709,12 @@ MonoBehaviour:
   _debug: 1
   _autoInit: 1
   _trackingTarget: {fileID: 1774609207}
+--- !u!60 &1254593489 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7818850090312202387, guid: 2c7d45a8390743146a2b3215f55c66bc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1724974347}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1266127203
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,12 +876,6 @@ MonoBehaviour:
   _yMin: 4.5
   _yMaxOverflow: 1
   _yMax: 1.99
---- !u!60 &1385896163 stripped
-PolygonCollider2D:
-  m_CorrespondingSourceObject: {fileID: 7818850091689544427, guid: 2c7d45a8390743146a2b3215f55c66bc,
-    type: 3}
-  m_PrefabInstance: {fileID: 1724974347}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1419259954
 GameObject:
   m_ObjectHideFlags: 0
@@ -1509,7 +1496,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1724974348}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 5.05
+    OrthographicSize: 4.5
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -1530,7 +1517,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1774609205}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.403667, y: 1.3714218, z: -9.999551}
+  m_LocalPosition: {x: -8.403667, y: 1.3704033, z: -9.999551}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1667791235}
@@ -1563,7 +1550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ConfineMode: 0
   m_BoundingVolume: {fileID: 0}
-  m_BoundingShape2D: {fileID: 1385896163}
+  m_BoundingShape2D: {fileID: 1254593489}
   m_ConfineScreenEdges: 1
   m_Damping: 0
 --- !u!114 &1774609210

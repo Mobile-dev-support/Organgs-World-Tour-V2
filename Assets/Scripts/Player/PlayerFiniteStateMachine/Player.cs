@@ -33,13 +33,16 @@ public class Player : MonoBehaviour
     public PlayerInventory Inventory { get; private set; }
     public bool afterShock { get; private set; }
     public bool isDrinking { get; private set; }
+    public bool IsStunned { get; private set; }
     public bool isCandied { get; set; }
     #endregion
 
     #region Other Variables         
     public GameObject drunk;
+    public Animator statusEffect;
     private int Candied = Animator.StringToHash("Candied");
     private int xState = Animator.StringToHash("xState");
+    private int status = Animator.StringToHash("status");
     public ParticleSystem dust;
     private Vector2 workspace;
     private bool isCheesed;
@@ -136,18 +139,6 @@ public class Player : MonoBehaviour
                 isCandied = false;
             }
         }
-        if (isDrinking)
-        {
-            playerData.DrinkTimer -= Time.deltaTime;
-            Anim.SetFloat(xState, 1.0f);
-            if (playerData.DrinkTimer < 0)
-            {
-                isDrinking = false;
-                playerData.DrinkTimer = 2f;
-                //Anim.SetFloat(xState, 0.0f);
-                drunk.SetActive(false);
-            }
-        }
     }
 
     private void OnDestroy()
@@ -180,22 +171,31 @@ public class Player : MonoBehaviour
 
     private void AnimtionFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
+    public void isNotDrunk() => isDrinking = false;
+    public void isDrunk() => isDrinking = true;
+    public void isNotStunned() => IsStunned = false;
+    public void isStunned() => IsStunned = true;
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.collider.CompareTag("Cheese"))
         {
             playerData.cheeseTimer = 2f;
+            statusEffect.SetTrigger(status);
             isCheesed = true;
         }
         if (other.collider.CompareTag("Candy"))
         {
             StateMachine.Initialize(DeathState);
             other.gameObject.SetActive(false);
+            statusEffect.SetTrigger(status);
         }
         if (other.gameObject.CompareTag("Alcohol"))
         {
             drunk.SetActive(true);
-            isDrinking = true;
+            statusEffect.SetTrigger(status);
+            isStunned();
+            isDrunk();
         }
     }
     #endregion

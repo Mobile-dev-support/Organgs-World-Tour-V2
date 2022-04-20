@@ -16,9 +16,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool JumpInput { get; private set; }
     public bool SlideInput { get; private set; }
     public bool JumpInputStop { get; private set; }
-    public bool GrabInput { get; private set; }
-    public bool DashInput { get; private set; }
-    public bool DashInputStop { get; private set; }
+
 
     public bool[] AttackInputs { get; private set; }
 
@@ -26,49 +24,26 @@ public class PlayerInputHandler : MonoBehaviour
     private float inputHoldTime = 0.2f;
 
     private float jumpInputStartTime;
-    private float dashInputStartTime;
 
     private void Start()
     {
-        int count = Enum.GetValues(typeof(CombatInputs)).Length;
-        AttackInputs = new bool[count];
         cam = Camera.main;
     }
 
     private void Update()
     {
         MovementControl();
+        OnMoveInput();
     }
 
     private void FixedUpdate()
     {
         CheckJumpInputHoldTime();
-        OnMoveInput();
     }
 
     private void MovementControl()
     {
-#if UNITY_EDITOR
-        RawMovementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        if (Input.GetButtonDown("Jump"))
-        {
-            OnJumpInput();
-        }
-        else if (Input.GetButtonUp("Jump"))
-        {
-            OnJumpInputStop();
-        }
-        if (Input.GetButtonDown("Fire3"))
-        {
-            OnSlideInput();
-        }
-        else if (Input.GetButtonUp("Fire3"))
-        {
-            OnSlideInputStop();
-        }
-#endif
-#if UNITY_ANDROID
-        RawMovementInput = new Vector2(SimpleInput.GetAxis("Horizontal"), SimpleInput.GetAxis("Vertical"));
+        RawMovementInput = new Vector2(SimpleInput.GetAxisRaw("Horizontal"), SimpleInput.GetAxisRaw("Vertical"));
         if (SimpleInput.GetButtonDown("Jump"))
         {
             OnJumpInput();
@@ -85,52 +60,6 @@ public class PlayerInputHandler : MonoBehaviour
         {
             OnSlideInputStop();
         }
-#endif
-#if UNITY_IOS
-        RawMovementInput = new Vector2(SimpleInput.GetAxis("Horizontal"), SimpleInput.GetAxis("Vertical"));
-        if (SimpleInput.GetButtonDown("Jump"))
-        {
-            OnJumpInput();
-        }
-        else if (SimpleInput.GetButtonUp("Jump"))
-        {
-            OnJumpInputStop();
-        }
-        if(SimpleInput.GetButtonDown("Fire3"))
-        {
-            OnSlideInput();
-        }
-        else if (SimpleInput.GetButtonUp("Fire3"))
-        {
-            OnSlideInputStop();
-        }
-#endif
-    }
-
-    public void OnPrimaryAttackInput()
-    {
-        //if (context.started)
-        //{
-        AttackInputs[(int)CombatInputs.primary] = true;
-        //}
-
-        //if (context.canceled)
-        //{
-        AttackInputs[(int)CombatInputs.primary] = false;
-        //}
-    }
-
-    public void OnSecondaryAttackInput()
-    {
-        //if (context.started)
-        //{
-        AttackInputs[(int)CombatInputs.secondary] = true;
-        //}
-
-        //if (context.canceled)
-        //{
-        AttackInputs[(int)CombatInputs.secondary] = false;
-        //}
     }
 
     public void OnMoveInput()
@@ -141,18 +70,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnJumpInput()
     {
-        //if (context.started)
-        //{
         JumpInput = true;
         JumpInputStop = false;
         jumpInputStartTime = Time.time;
-        //}
-
-        //if (context.canceled)
-        //{
-        //JumpInputStop = true;
-        //}
     }
+
     public void OnSlideInput()
     {
         SlideInput = true;
@@ -168,23 +90,7 @@ public class PlayerInputHandler : MonoBehaviour
         JumpInputStop = true;
     }
 
-
-    public void OnGrabInput()
-    {
-        //if (context.started)
-        //{
-        GrabInput = true;
-        //}
-
-        //if (context.canceled)
-        //{
-        GrabInput = false;
-        //}
-    }
-
     public void UseJumpInput() => JumpInput = false;
-
-    public void UseDashInput() => DashInput = false;
 
     private void CheckJumpInputHoldTime()
     {
@@ -193,10 +99,4 @@ public class PlayerInputHandler : MonoBehaviour
             JumpInput = false;
         }
     }
-}
-
-public enum CombatInputs
-{
-    primary,
-    secondary
 }

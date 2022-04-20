@@ -8,7 +8,6 @@ public class UIFocus : MonoBehaviour
 {
     public List<GameObject> CurrentLevel = new List<GameObject>();
     private RectTransform rect;
-    private GameObject objectOfFocus;
     public ScrollRect scroller;
 
     private static UIFocus _instance;
@@ -30,11 +29,21 @@ public class UIFocus : MonoBehaviour
     {
         rect = CurrentLevel.Last().GetComponent<RectTransform>();
         StartCoroutine(ScrollViewFocusFunctions.FocusOnItemCoroutine(scroller, rect, 2f));
+        for(int i = 0; i < CurrentLevel.Count; i++)
+        {
+            CurrentLevel[i].GetComponentInChildren<ParticleSystem>().Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
+        CurrentLevel.Last().GetComponentInChildren<ParticleSystem>().Play();
     }
 
     public void FocusOnObjectImmediately()
     {
         rect = CurrentLevel.Last().GetComponent<RectTransform>();
         ScrollViewFocusFunctions.FocusOnItem(scroller, rect);
+        for (int i = 0; i < CurrentLevel.Count; i++)
+        {
+            CurrentLevel[i].GetComponentInChildren<ParticleSystem>().Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
+        CurrentLevel.Last().GetComponentInChildren<ParticleSystem>().Play();
     }
 }

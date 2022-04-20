@@ -26,8 +26,7 @@ public class PlayerIdleState : PlayerGroundedState
             xInput = core.Movement.FacingDirection;
             player.RB.AddForce(new Vector2(playerData.movementVelocity * xInput *
             playerData.slipperyMultiplier, player.RB.velocity.y));
-            player.Anim.SetFloat("xState", 0.3f);
-            player.Anim.SetFloat("Candied", 0.05f);
+            player.Anim.SetFloat(Candied, 0.01f);
         }
 
         core.Movement.SetVelocityX(0f);
@@ -46,7 +45,7 @@ public class PlayerIdleState : PlayerGroundedState
         SlideInput = player.InputHandler.SlideInput;
         if (!isExitingState)
         {
-            if (!player.afterShock && !player.isDrinking)
+            if (!player.afterShock && !player.IsStunned)
             {
                 if (xInput != 0)
                 {

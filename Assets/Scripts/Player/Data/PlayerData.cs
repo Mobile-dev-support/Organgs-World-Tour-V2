@@ -62,8 +62,8 @@ public class PlayerData : ScriptableObject
     [Header("Player Health")]
     public float health = 10;
     public GameObject deathChunk;
-    public float deathCheckRadiusSlide = 0.25f;
-    public float deathCheckRadiusIdle = 0.55f;
+    public float deathCheckYSlide = 0.25f;
+    public float deathCheckYIdle = 1.1f;
 
     [Header("Knockback")]
     public Vector2 knockbackAngle;
@@ -79,6 +79,7 @@ public class PlayerData : ScriptableObject
     [Header("Enemy Status Timers")]
     public float cheeseTimer = 2f;
     public float candyTimer = 5f;
-    public float DrinkTimer = 2f;
+    public float DrinkTimer = 7f;
+    public float Stunned = 2f;
     public float afterShockTimer = 2f;
 }

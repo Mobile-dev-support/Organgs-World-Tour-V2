@@ -38,7 +38,7 @@ public class CollisionSenses : CoreComponent
         private set => ceilingCheck = value;
     }
     public float GroundCheckRadius { get => groundCheckRadius; set => groundCheckRadius = value; }
-    public float DeathCheckRadius { get => deathCheckRadius; set => deathCheckRadius = value; }
+    public float DeathCheckY { get => deathCheckY; set => deathCheckY = value; }
     public float WallCheckDistance { get => wallCheckDistance; set => wallCheckDistance = value; }
     public LayerMask WhatIsGround { get => whatIsGround; set => whatIsGround = value; }
 
@@ -53,7 +53,8 @@ public class CollisionSenses : CoreComponent
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private float ceilingCheckRadius;
     [SerializeField] private float wallCheckDistance;
-    [SerializeField] private float deathCheckRadius;
+    [SerializeField] private float deathCheckX;
+    [SerializeField] private float deathCheckY;
 
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private LayerMask whatIsThroughPlatform;
@@ -101,7 +102,8 @@ public class CollisionSenses : CoreComponent
 
     public bool Trap
     {
-        get => Physics2D.OverlapCircle(DeathCheck.position, deathCheckRadius, whatIsTrap);
+        //get => Physics2D.OverlapCircle(DeathCheck.position, deathCheckRadius, whatIsTrap);
+        get => Physics2D.OverlapBox(DeathCheck.position, new Vector2(deathCheckX, deathCheckY), 0, whatIsTrap);
     }
 
     public bool WallFront
@@ -129,7 +131,7 @@ public class CollisionSenses : CoreComponent
         Gizmos.color = Color.red;
         Vector2 direction = Vector2.right * WallCheckDistance;
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
-        Gizmos.DrawWireSphere(deathCheck.position, deathCheckRadius);
+        Gizmos.DrawWireCube(deathCheck.position, new Vector2(deathCheckX, deathCheckY));
         Gizmos.DrawWireSphere(ceilingCheck.position, ceilingCheckRadius);
         Gizmos.DrawRay(wallCheck.position, direction);
         Gizmos.DrawRay(ledgeCheckHorizontal.position, direction);

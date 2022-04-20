@@ -23,6 +23,8 @@ public class StarSystemUnlocker : MonoBehaviour
 
     public void UpdateLevelStatus()
     {
+        country = GameObject.Find(gameObject.transform.parent.name);
+        country.GetComponentInChildren<ParticleSystem>().Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
         //if the current lv is 5, the pre should be 4
         int previousLevelNum = int.Parse(gameObject.name) - 1;
         if (PlayerPrefs.GetInt("Lv" + previousLevelNum.ToString()) > 1)//If the firts level star is bigger than 0, second level can play
@@ -34,7 +36,6 @@ public class StarSystemUnlocker : MonoBehaviour
 
     public void GetHighestLevel()
     {
-       country = GameObject.Find(gameObject.transform.parent.name);
         if (!UIFocus.Instance.CurrentLevel.Contains(country))
         {
             UIFocus.Instance.CurrentLevel.Add(country);

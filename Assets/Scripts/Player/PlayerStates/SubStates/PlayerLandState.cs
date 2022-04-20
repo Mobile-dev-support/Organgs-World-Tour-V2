@@ -15,6 +15,7 @@ public class PlayerLandState : PlayerGroundedState
         core.Movement.SetVelocityX(0f);
         core.Movement.SetVelocityY(0f);
         CharacterAudio.Instance.Land();
+        player.Anim.SetFloat(Candied, 0.0f);
 
     }
 

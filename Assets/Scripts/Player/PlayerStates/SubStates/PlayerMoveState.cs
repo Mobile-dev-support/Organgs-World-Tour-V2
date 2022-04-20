@@ -33,7 +33,7 @@ public class PlayerMoveState : PlayerGroundedState
         core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
         if (!isExitingState)
         {
-            if (xInput == 0 || player.afterShock || player.isDrinking)
+            if (xInput == 0 || player.afterShock || player.IsStunned)
             {
                 stateMachine.ChangeState(player.IdleState);
             }

@@ -17,7 +17,7 @@ public class PlayerDashState : PlayerAbilityState
     public PlayerDashState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
-    public override void Enter()
+    /*public override void Enter()
     {
         base.Enter();
 
@@ -116,5 +116,6 @@ public class PlayerDashState : PlayerAbilityState
     }
 
     public void ResetCanDash() => CanDash = true;
+    */
 
 }

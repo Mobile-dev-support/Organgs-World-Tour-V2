@@ -46,7 +46,7 @@ public class JumpPad : MonoBehaviour
             else
             {
                 coreP = core;
-                Collider2D[] playerOnPlatform = Physics2D.OverlapCircleAll(rb.transform.position, rb.GetComponentInChildren<CollisionSenses>().DeathCheckRadius);
+                Collider2D[] playerOnPlatform = Physics2D.OverlapCircleAll(rb.transform.position, rb.GetComponentInChildren<CollisionSenses>().DeathCheckY);
                 foreach (Collider2D collider in playerOnPlatform)
                 {
                     if (collider.gameObject.CompareTag("JumpPad"))
@@ -74,7 +74,7 @@ public class JumpPad : MonoBehaviour
             else
             {
                 coreP = core;
-                Collider2D[] playerOnPlatform = Physics2D.OverlapCircleAll(rb.transform.position, rb.GetComponentInChildren<CollisionSenses>().DeathCheckRadius);
+                Collider2D[] playerOnPlatform = Physics2D.OverlapCircleAll(rb.transform.position, rb.GetComponentInChildren<CollisionSenses>().DeathCheckY);
                 foreach (Collider2D collider in playerOnPlatform)
                 {
                     if (collider.gameObject.CompareTag("JumpPad"))

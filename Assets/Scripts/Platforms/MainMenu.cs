@@ -259,7 +259,7 @@ public class MainMenu : MonoBehaviour
             coverCanvas.Hide();
             CanvasFader(1, loadingCanvas.transform);
             ingameCanvas.transform.SetParent(mainCanvas.transform, false);
-            ingameCanvas.transform.SetSiblingIndex(2);
+            ingameCanvas.transform.SetSiblingIndex(3);
             yield return new WaitForSeconds(1f);
             scroller_canvas.Show();
             menu_item_canvas.Show();

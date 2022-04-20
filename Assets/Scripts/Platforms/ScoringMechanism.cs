@@ -92,9 +92,7 @@ public class ScoringMechanism : MonoBehaviour
         yield return new WaitForEndOfFrame();
         for (int i = 0; i < DoorController.Instance.StarsNum; i++)
         {
-            stars[i].gameObject.GetComponent<Image>().sprite = starSprite;
-            if(stars[i].gameObject.GetComponent<DoTweenFeatures>() != null)
-                stars[i].gameObject.GetComponent<DoTweenFeatures>().OnClick();
+            stars[i].GetComponent<Image>().sprite = starSprite;
         }
         SoundManager.Instance.winSound(MainMenu.Instance.win);
     }

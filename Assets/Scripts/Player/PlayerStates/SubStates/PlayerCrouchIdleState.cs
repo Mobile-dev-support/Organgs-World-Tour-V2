@@ -16,7 +16,7 @@ public class PlayerCrouchIdleState : PlayerGroundedState
         base.Enter();
         isCurrentlySliding = true;
         core.Movement.SetVelocityZero();
-        core.CollisionSenses.DeathCheckRadius = playerData.deathCheckRadiusSlide;
+        core.CollisionSenses.DeathCheckY = playerData.deathCheckYSlide;
         player.SetColliderHeight(playerData.crouchColliderHeight);
         CharacterAudio.Instance.Slide();
     }
@@ -26,7 +26,7 @@ public class PlayerCrouchIdleState : PlayerGroundedState
         base.Exit();
         isCurrentlySliding = false;
         core.Movement.SetVelocityZero();
-        core.CollisionSenses.DeathCheckRadius = playerData.deathCheckRadiusIdle;
+        core.CollisionSenses.DeathCheckY = playerData.deathCheckYIdle;
         player.SetColliderHeight(playerData.standColliderHeight);
     }
 
