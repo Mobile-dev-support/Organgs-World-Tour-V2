@@ -10,15 +10,7 @@ public class DoorController : MonoBehaviour
     public int StarsNum;
     public int levelIndex;
     public int country;
-    private GameObject button;
-    private GameObject coinsObj;
-    [HideInInspector]
-    public GameObject winCanvas;
-    private View win;
-    private GameObject mainCanvas;
-    private View main;
     private Button nextLvlBtn;
-    private TextMeshProUGUI coins;
 
 
     private static DoorController _instance;
@@ -38,17 +30,8 @@ public class DoorController : MonoBehaviour
 
     private void Start()
     {
-        mainCanvas = GameObject.Find("main_game_canvas");
-        if (mainCanvas != null)
-        {
-            coinsObj = GameObject.Find("coinText");
-            winCanvas = GameObject.Find("win_canvas");
-            button = GameObject.Find("next_level_btn");
-            coins = coinsObj.GetComponent<TextMeshProUGUI>();
-            win = winCanvas.GetComponent<View>();
-            main = mainCanvas.GetComponent<View>();
-            nextLvlBtn = button.GetComponent<Button>();
-        }
+        ScoringMechanism.Instance.coinsText.SetText("0");
+        ScoringMechanism.Instance.coinNo = 0;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -77,25 +60,24 @@ public class DoorController : MonoBehaviour
         yield return new WaitForEndOfFrame();
         StartCoroutine(ScoringMechanism.Instance.WinPanel());
         yield return new WaitForEndOfFrame();
-        NextLevelNotif();
-        main.Hide();
-        win.Show();
+        MainMenu.Instance.mainCanvas.Hide();
+        MainMenu.Instance.winCanvas.Show();
         CountdownTimer.Instance.enabled = false;
-        GameObject coinNo = GameObject.Find("coins_number");
-        coins = coinNo.GetComponent<TextMeshProUGUI>();
-        coins.SetText(ScoringMechanism.Instance.score.ToString());
+        ScoringMechanism.Instance.coinsNumber.SetText(ScoringMechanism.Instance.score.ToString());
         GameManager.Instance.Rplayer.SetActive(false);
+        yield return new WaitForEndOfFrame();
+        NextLevelNotif();
     }
 
     public void NextLevelNotif()
     {
         if (PlayerPrefs.GetInt("Lv" + levelIndex) > 1)
         {
-            nextLvlBtn.interactable = true;
+            ScoringMechanism.Instance.NextLevelBtn.interactable = true;
         }
         else if((PlayerPrefs.GetInt("Lv" + levelIndex) <= 1) || (levelIndex == 48))
         {
-            nextLvlBtn.interactable = false;
+            ScoringMechanism.Instance.NextLevelBtn.interactable = false;
         }
     }
 }

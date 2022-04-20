@@ -8,8 +8,10 @@ using TMPro;
 public class ScoringMechanism : MonoBehaviour
 {
     public Sprite starSprite;
-    private TextMeshProUGUI livesText;
-    private TextMeshProUGUI coinsText;
+    public TextMeshProUGUI livesText;
+    public TextMeshProUGUI coinsText;
+    public TextMeshProUGUI coinsNumber;
+    public Button NextLevelBtn;
     private float coinscore = 100f;
     private float timeMinusScore = 2f;
 
@@ -32,23 +34,10 @@ public class ScoringMechanism : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        if (DoorController.Instance.winCanvas != null)
-        {
-            GameObject golivesObj = GameObject.Find("lifetext");
-            GameObject gocoinsObj = GameObject.Find("coinText");
-            livesText = golivesObj.GetComponent<TextMeshProUGUI>();
-            coinsText = gocoinsObj.GetComponent<TextMeshProUGUI>();
-            coinsText.SetText("0");
-        }
-    }
-
     #region scoring
     public void NumberOfLives()
     {
-        if(livesText != null)
-            livesText.SetText(NoOfLives.ToString());
+        livesText.SetText(NoOfLives.ToString());
     }
 
     private void Scoring()
@@ -71,8 +60,7 @@ public class ScoringMechanism : MonoBehaviour
     {
         coinNo++;
         score += coinscore;
-        if (coinsText != null)
-            coinsText.SetText(coinNo.ToString());
+        coinsText.SetText(coinNo.ToString());
     }
 
     public void timeScore()
@@ -85,9 +73,9 @@ public class ScoringMechanism : MonoBehaviour
     #region IEnumerator
     public IEnumerator WinPanel()
     {
-        DoorController.Instance.winCanvas.transform.Find("bg").gameObject.SetActive(false);
+        MainMenu.Instance.winCanvas.transform.Find("bg").gameObject.SetActive(false);
         yield return new WaitForEndOfFrame();
-        DoorController.Instance.winCanvas.transform.Find("bg").gameObject.SetActive(true);
+        MainMenu.Instance.winCanvas.transform.Find("bg").gameObject.SetActive(true);
         GameObject[] stars = GameObject.FindGameObjectsWithTag("stars");
         yield return new WaitForEndOfFrame();
         for (int i = 0; i < DoorController.Instance.StarsNum; i++)

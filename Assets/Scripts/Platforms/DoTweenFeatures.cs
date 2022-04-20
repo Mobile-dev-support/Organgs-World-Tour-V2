@@ -58,7 +58,7 @@ public class DoTweenFeatures : MonoBehaviour
                 SoundManager.Instance.ButtonSound(MainMenu.Instance.ButtonSound);
                 break;
             case State.Star:
-                gameObject.GetComponent<Transform>().DOPunchScale(star, duration, vibration, elasticity);
+                gameObject.GetComponent<Transform>().DOPunchScale(star, duration, vibration, elasticity).SetUpdate(true);
                 break;
             case State.Text:
                 Sequence textSeq = DOTween.Sequence();
