@@ -11,7 +11,6 @@ public class Energy : MonoBehaviour
     [SerializeField] private Slider[] lifeBar;
     [SerializeField] private TextMeshProUGUI timerTxt;
     [SerializeField] private Button AdButton;
-    [HideInInspector] public int maxLife = 99;
     public int currentLife { get; set; }
     private int restorDuration = 1;
     private DateTime nextLifeTime;
@@ -25,6 +24,7 @@ public class Energy : MonoBehaviour
     [HideInInspector] public int currentRewardedAd;
     private bool isRestoringAd = false;
     [SerializeField] private TextMeshProUGUI AdTimer;
+    public EnergymaxLife maxLifeData;
 
     private static Energy _instance;
     public static Energy Instance { get { return _instance; } }
@@ -45,11 +45,11 @@ public class Energy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // PlayerPrefs.DeleteAll();
         AdTimer.gameObject.SetActive(false);
         if (!PlayerPrefs.HasKey("currentLife"))
         {
-            PlayerPrefs.SetInt("currentLife", maxLife);
+            maxLifeData.maxLife = 99;
+            PlayerPrefs.SetInt("currentLife", maxLifeData.maxLife);
             Load();
             StartCoroutine(RestoreLife());
             StartCoroutine(RestoreRewardedAd());
@@ -62,6 +62,24 @@ public class Energy : MonoBehaviour
         }
     }
 
+    public void lowLifePlus()
+    {
+        MainMenu.Instance.confirrmation_canvas.Show();
+        StartCoroutine(BuyLifePlus(10));
+    }
+
+    public void midLifePlus()
+    {
+        MainMenu.Instance.confirrmation_canvas.Show();
+        StartCoroutine(BuyLifePlus(20));
+    }
+
+    public void highLifePlus()
+    {
+        MainMenu.Instance.confirrmation_canvas.Show();
+        StartCoroutine(BuyLifePlus(30));
+    }
+
     public void UseLife()
     {
         if (currentLife > 0)
@@ -70,7 +88,7 @@ public class Energy : MonoBehaviour
             UpdateLife();
             if (!isRestoring)
             {
-                if (currentLife + 1 == maxLife)
+                if (currentLife + 1 == maxLifeData.maxLife)
                 {
                     nextLifeTime = AddDuration(DateTime.Now, restorDuration);
                 }
@@ -177,7 +195,7 @@ public class Energy : MonoBehaviour
         UpdateLife();
         isRestoring = true;
 
-        while (currentLife < maxLife)
+        while (currentLife < maxLifeData.maxLife)
         {
             DateTime currentDateTime = DateTime.Now;
             DateTime nextDateTime = nextLifeTime;
@@ -186,7 +204,7 @@ public class Energy : MonoBehaviour
 
             while (currentDateTime > nextDateTime)
             {
-                if(currentLife < maxLife)
+                if(currentLife < maxLifeData.maxLife)
                 {
                     isLifeAdding = true;
                     currentLife++;
@@ -216,9 +234,19 @@ public class Energy : MonoBehaviour
         isRestoring = false;
     }
 
+    private IEnumerator BuyLifePlus(int life)
+    {
+        maxLifeData.maxLife += life;
+        yield return new WaitForEndOfFrame();
+        currentLife = maxLifeData.maxLife;
+        UpdateLifeTimer();
+        UpdateLife();
+        Save();
+    }
+
     private void UpdateLifeTimer()
     {
-        if(currentLife >= maxLife)
+        if(currentLife >= maxLifeData.maxLife)
         {
             timerTxt.text = "Full";
             return;
@@ -232,11 +260,11 @@ public class Energy : MonoBehaviour
     {
         for(int i = 0; i < lifeTxt.Length; i++)
         {
-            lifeTxt[i].SetText(currentLife.ToString() + "/" + maxLife.ToString());
+            lifeTxt[i].SetText(currentLife.ToString() + "/" + maxLifeData.maxLife.ToString());
         }
         for (int i = 0; i < lifeBar.Length; i++)
         {
-            lifeBar[i].maxValue = maxLife;
+            lifeBar[i].maxValue = maxLifeData.maxLife;
             lifeBar[i].value = currentLife;
         }
     }

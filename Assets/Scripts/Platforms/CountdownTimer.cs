@@ -71,21 +71,25 @@ public class CountdownTimer : MonoBehaviour
             else
             {
                 timeValue = 0;
-
-                if(Energy.Instance != null && Energy.Instance.currentLife < Energy.Instance.maxLife)
+                if(Energy.Instance != null)
                 {
                     Energy.Instance.UseLife();
-                    if (Energy.Instance.currentLife > 0)
+                    if(Energy.Instance.currentLife < Energy.Instance.maxLifeData.maxLife)
                     {
-                        MainMenu.Instance.Restart();
-                    }
-                    else
-                    {
-                        MainMenu.Instance.GameOverLevel();
-                        Fader.Instance.BGFader(true);
-                        timeValue += extraTime;
-                        Destroy(GameManager.Instance.Rplayer, 0.01f);
-                        isGameOver = true;
+                        if (Energy.Instance.currentLife > 0)
+                        { 
+                            Debug.Log("call");
+                            MainMenu.Instance.Restart();
+                            isGameOver = true;
+                        }
+                        else
+                        {
+                            MainMenu.Instance.GameOverLevel();
+                            Fader.Instance.BGFader(true);
+                            timeValue += extraTime;
+                            Destroy(GameManager.Instance.Rplayer, 0.01f);
+                            isGameOver = true;
+                        }
                     }
                 }
             }

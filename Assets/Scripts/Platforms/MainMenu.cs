@@ -38,6 +38,8 @@ public class MainMenu : MonoBehaviour
     public View dialogCanvas;
     [HideInInspector]
     public View totem_land;
+    [HideInInspector]
+    public View confirrmation_canvas;
     public Slider slider;
     public TextMeshProUGUI textProgress;
     public AudioMixer audioMix;
@@ -154,11 +156,11 @@ public class MainMenu : MonoBehaviour
 
     public void Restart()
     {
-        ingameCanvas.transform.SetParent(MenuCanvas.transform, false);
-        ingameCanvas.transform.SetAsLastSibling();
-        SceneManager.UnloadSceneAsync(GameManager.Instance.sceneName);
         StartCoroutine(FadeGame(0, GameManager.Instance.sceneName));
         StartCoroutine(StarCountUpdate());
+        isNextLevel = true;
+        ingameCanvas.transform.SetParent(MenuCanvas.transform, false);
+        ingameCanvas.transform.SetAsLastSibling();
     }
 
 

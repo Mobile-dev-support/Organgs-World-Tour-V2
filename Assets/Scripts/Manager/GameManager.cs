@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     {
         var newMask = mCamera.cullingMask & ~(1 << 2);
         respawnTimeStart = Time.time;
-        mCamera.cullingMask = newMask;
+        //mCamera.cullingMask = newMask;
         respawn = true;
     }
 
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
 
         var newMask = mCamera.cullingMask | (1 << 2);
         yield return new WaitForEndOfFrame();
-        mCamera.cullingMask = newMask;
+        //mCamera.cullingMask = newMask;
         Rplayer.transform.parent = null;
         Rplayer.name = player.name;
         anim.SetTrigger("opening");

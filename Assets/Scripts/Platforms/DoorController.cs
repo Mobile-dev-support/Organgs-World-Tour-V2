@@ -32,6 +32,7 @@ public class DoorController : MonoBehaviour
     {
         ScoringMechanism.Instance.coinsText.SetText("0");
         ScoringMechanism.Instance.coinNo = 0;
+        ScoringMechanism.Instance.score = 0;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
