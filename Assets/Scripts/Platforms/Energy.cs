@@ -333,9 +333,9 @@ public class Energy : MonoBehaviour, IStoreListener
     public void RequestLoadOpenAd()
     {
 #if UNITY_ANDROID
-        string AD_UNIT_ID = "ca-app-pub-2161356203087661/7823256688";
+        string AD_UNIT_ID = "ca-app-pub-2161356203087661/1878654308";
 #elif UNITY_IPHONE
-        string AD_UNIT_ID = "ca-app-pub-2161356203087661/6319079301";
+        string AD_UNIT_ID = "ca-app-pub-2161356203087661/1878654308";
 #else
         string AD_UNIT_ID = "unexpected_platform";
 #endif
@@ -366,7 +366,7 @@ public class Energy : MonoBehaviour, IStoreListener
     public void RequestInterstitial()
     {
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-2161356203087661/4502396068";
+        string adUnitId = "ca-app-pub-2161356203087661/5559686231";
 #elif UNITY_IPHONE
         string adUnitId = "ca-app-pub-2161356203087661/6681196218";
 #else
