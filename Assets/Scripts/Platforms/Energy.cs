@@ -74,7 +74,7 @@ public class Energy : MonoBehaviour, IStoreListener
         AdTimer.gameObject.SetActive(false);
         if (!PlayerPrefs.HasKey("currentLife"))
         {
-            maxLifeData.maxLife = 2;
+            maxLifeData.maxLife = 99;
             PlayerPrefs.SetInt("currentLife", maxLifeData.maxLife);
             Load();
             StartCoroutine(RestoreLife());
