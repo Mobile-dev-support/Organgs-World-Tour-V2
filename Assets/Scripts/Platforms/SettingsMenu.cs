@@ -41,6 +41,7 @@ public class SettingsMenu : MonoBehaviour
     public void mainMenuFromSettings()
     {
         settings_panel.gameObject.SetActive(false);
+        CountdownTimer.Instance.enabled = false;
         MainMenu.Instance.mainMenu();
     }
 }

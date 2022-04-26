@@ -82,7 +82,6 @@ public class PlayerGroundedState : PlayerState
         xInput = player.InputHandler.NormInputX;
         yInput = player.InputHandler.NormInputY;
         JumpInput = player.InputHandler.JumpInput;
-
         if (JumpInput && player.JumpState.CanJump() && !isDead && !player.afterShock && !player.IsStunned)
         {
             stateMachine.ChangeState(player.JumpState);
@@ -92,11 +91,15 @@ public class PlayerGroundedState : PlayerState
             player.InAirState.StartCoyoteTime();
             stateMachine.ChangeState(player.InAirState);
         }
-        else if (isDead || ( !isCurrentlySliding && (isTouchingCeiling || isTouchingCeilingSolidPlatform) && (isGrounded || isSlippery || isStickingToPlatform || isSugarPlatform))
-            || (isTouchingWall && isTouchingWallBack && (isGrounded || isSlippery || !isThroughPlatform || isSugarPlatform)) || player.transform.rotation.z != 0)
+        else if (isDead || (!isCurrentlySliding && (isTouchingCeiling || isTouchingCeilingSolidPlatform) && (isGrounded || isSlippery || isStickingToPlatform || isSugarPlatform))
+            || player.transform.rotation.z != 0)
         {
             stateMachine.ChangeState(player.DeathState);
         }
+        /*else if (isTouchingWall && isTouchingWallBack && !isThroughPlatform && (isGrounded || isSlippery || isSugarPlatform))
+        {
+            Debug.Log("this");
+        }*/
         else if(player.isDrinking)
         {
             DrunkState();

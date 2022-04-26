@@ -33,8 +33,7 @@ public class pooledObject : MonoBehaviour
         {
             var instanceToAdd = Instantiate(prefab);
             instanceToAdd.transform.SetParent(transform);
-            instanceToAdd.transform.position = transform.position;
-            instanceToAdd.transform.rotation = transform.rotation;
+            instanceToAdd.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
             AddToPool(instanceToAdd);
         }
     }
@@ -42,6 +41,7 @@ public class pooledObject : MonoBehaviour
     public void AddToPool(GameObject instance)
     {
         instance.SetActive(false);
+        instance.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
         availableObjects.Enqueue(instance);
     }
 

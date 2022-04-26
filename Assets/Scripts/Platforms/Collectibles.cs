@@ -10,9 +10,10 @@ public class Collectibles : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            ScoringMechanism.Instance.coinScore();
             CharacterAudio.Instance.Coin();
             Destroy(gameObject);
+            if (ScoringMechanism.Instance != null)
+                ScoringMechanism.Instance.coinScore();
         }
     }
 }

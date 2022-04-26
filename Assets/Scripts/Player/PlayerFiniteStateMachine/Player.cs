@@ -81,9 +81,9 @@ public class Player : MonoBehaviour
         if (Energy.Instance != null)
         {
             ScoringMechanism.Instance.NoOfLives = Energy.Instance.currentLife;
+            ScoringMechanism.Instance.NumberOfLives();
         }
         isCheesed = false;
-        ScoringMechanism.Instance.NumberOfLives();
         StateMachine.Initialize(IdleState);
     }
 
@@ -144,7 +144,12 @@ public class Player : MonoBehaviour
     private void OnDestroy()
     {
         if(gameObject == null)
-         StateMachine.Initialize(DeathState);
+        {
+            StateMachine.Initialize(DeathState);
+            playerData.jumpVelocity = playerData.defaultJumpVelocity;
+            playerData.wallJumpVelocity = playerData.defaultWallJumpVelocity;
+            playerData.movementVelocity = playerData.NormalMovementVelocity;
+        }
     }
 
     private void FixedUpdate()

@@ -61,9 +61,7 @@ public class GameManager : MonoBehaviour
 
     public void Respawn()
     {
-        var newMask = mCamera.cullingMask & ~(1 << 2);
         respawnTimeStart = Time.time;
-        //mCamera.cullingMask = newMask;
         respawn = true;
     }
 
@@ -80,17 +78,13 @@ public class GameManager : MonoBehaviour
     {
         Rplayer = Instantiate(player, respawnPoint);
         yield return new WaitForSeconds(0.01f);
-
         if(Fader.Instance != null)
         {
             CountdownTimer.Instance.enabled = true;
             ScoringMechanism.Instance.NumberOfLives();
             Fader.Instance.BGFader(false);
         }
-
-        var newMask = mCamera.cullingMask | (1 << 2);
         yield return new WaitForEndOfFrame();
-        //mCamera.cullingMask = newMask;
         Rplayer.transform.parent = null;
         Rplayer.name = player.name;
         anim.SetTrigger("opening");

@@ -383,7 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -946,7 +946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 1747756814}
   stars:
   - {fileID: 2127246945}
@@ -12056,7 +12056,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 60.19995, y: 85.79999}
+  m_AnchoredPosition: {x: 60.200195, y: 85.80005}
   m_SizeDelta: {x: 174.1, y: 144}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &98180763
@@ -12934,7 +12934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 1067806066}
   stars:
   - {fileID: 1998409894}
@@ -13175,7 +13175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 1600965676}
   stars:
   - {fileID: 2063005742}
@@ -13340,7 +13340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 1321869099}
   stars:
   - {fileID: 1603133314}
@@ -15380,7 +15380,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7, y: -604}
+  m_AnchoredPosition: {x: -7, y: -603.99994}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &272989109
@@ -16743,6 +16743,18 @@ MonoBehaviour:
       - m_Target: {fileID: 471770794}
         m_TargetAssemblyTypeName: DoTweenFeatures, Assembly-CSharp
         m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1939364690}
+        m_TargetAssemblyTypeName: Energy, Assembly-CSharp
+        m_MethodName: ShowAdIfAvailable
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18367,7 +18379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 284680078}
   stars:
   - {fileID: 1513692217}
@@ -18686,7 +18698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 1902496386}
   stars:
   - {fileID: 986434887}
@@ -24691,7 +24703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 783440453}
   stars:
   - {fileID: 1742796813}
@@ -25631,7 +25643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 141943490}
   stars:
   - {fileID: 1137328959}
@@ -26343,8 +26355,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 587297743}
-  - component: {fileID: 587297745}
-  - component: {fileID: 587297744}
   - component: {fileID: 587297746}
   m_Layer: 5
   m_Name: selections
@@ -26375,44 +26385,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &587297744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 587297742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &587297745
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 587297742}
-  m_CullTransparentMesh: 0
 --- !u!114 &587297746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32621,7 +32593,6 @@ GameObject:
   - component: {fileID: 654192825}
   - component: {fileID: 654192828}
   - component: {fileID: 654192827}
-  - component: {fileID: 654192826}
   m_Layer: 5
   m_Name: Viewport
   m_TagString: Untagged
@@ -32649,20 +32620,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -45.50003}
   m_SizeDelta: {x: -17, y: -45.50003}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &654192826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 654192824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding: {x: 0, y: 0, z: 0, w: 0}
-  m_Softness: {x: 0, y: 0}
 --- !u!114 &654192827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37902,7 +37859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 884887507}
   stars:
   - {fileID: 1986842181}
@@ -38239,7 +38196,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 60.19995, y: 66}
+  m_AnchoredPosition: {x: 60.200195, y: 66}
   m_SizeDelta: {x: 174.1, y: 144}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &697389184
@@ -38968,7 +38925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 1612776357}
   stars:
   - {fileID: 436651663}
@@ -39786,7 +39743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 1236486109}
   stars:
   - {fileID: 2047186596}
@@ -40234,7 +40191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 733539436}
   stars:
   - {fileID: 1694974356}
@@ -40843,7 +40800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 975113261}
   stars:
   - {fileID: 1551246131}
@@ -42021,7 +41978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 837327544}
   stars:
   - {fileID: 1482307821}
@@ -42473,7 +42430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 714114004}
   stars:
   - {fileID: 421395858}
@@ -42638,7 +42595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 2139906535}
   stars:
   - {fileID: 1397655970}
@@ -42940,7 +42897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 1188756332}
   stars:
   - {fileID: 542888810}
@@ -48946,7 +48903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 281288685}
   stars:
   - {fileID: 1036110333}
@@ -60525,7 +60482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 1859977536}
   stars:
   - {fileID: 1654756107}
@@ -60690,7 +60647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 1284373176}
   stars:
   - {fileID: 1802617903}
@@ -61679,7 +61636,7 @@ RectTransform:
   m_GameObject: {fileID: 1056365911}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 263580351}
   - {fileID: 19362999}
@@ -61703,13 +61660,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8a42f8bc2b5bb4e9e7b1cb4c55d1ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panel: {x: 1, y: 1, z: 1}
+  panel: {x: 0.8, y: 0.8, z: 0.8}
   button: {x: 0, y: 0, z: 0}
-  star: {x: 1, y: 1, z: 1}
+  star: {x: 0.8, y: 0.8, z: 0.8}
   duration: 0.1
   vibration: 5
   elasticity: 10
-  state: 2
+  state: 0
 --- !u!114 &1056365914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67059,7 +67016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 2011335336}
   stars:
   - {fileID: 574340907}
@@ -67652,7 +67609,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1939364690}
         m_TargetAssemblyTypeName: Energy, Assembly-CSharp
-        m_MethodName: highLifePlus
+        m_MethodName: BuyHighLives
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -67971,7 +67928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 1813502783}
   stars:
   - {fileID: 1050251232}
@@ -68663,7 +68620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 1770511946}
   stars:
   - {fileID: 1637991543}
@@ -69016,7 +68973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 1243113099}
   stars:
   - {fileID: 777517643}
@@ -69778,7 +69735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 1914823980}
   stars:
   - {fileID: 995250842}
@@ -70586,7 +70543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 1054250791}
   stars:
   - {fileID: 2039701950}
@@ -70751,7 +70708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 1733141276}
   stars:
   - {fileID: 65880183}
@@ -77137,13 +77094,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1220740359842b34e95878cb1573e6da, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7709cae4a7e0311438d9171303a4d81e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -78911,7 +78868,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!224 &1372658049
 RectTransform:
@@ -84768,6 +84725,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1939364690}
+        m_TargetAssemblyTypeName: Energy, Assembly-CSharp
+        m_MethodName: showInterstitialAd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1420012754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84913,7 +84882,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1428268958}
-  - component: {fileID: 1428268959}
   m_Layer: 5
   m_Name: Viewport
   m_TagString: Untagged
@@ -84941,20 +84909,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1428268959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1428268957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding: {x: 0, y: 0, z: 0, w: 0}
-  m_Softness: {x: 0, y: 0}
 --- !u!1 &1433081412
 GameObject:
   m_ObjectHideFlags: 0
@@ -90015,7 +89969,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &1442299103
 GameObject:
@@ -106918,7 +106872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 449802957}
   stars:
   - {fileID: 896002251}
@@ -107587,7 +107541,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1939364690}
         m_TargetAssemblyTypeName: Energy, Assembly-CSharp
-        m_MethodName: lowLifePlus
+        m_MethodName: BuyLowLives
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -107814,7 +107768,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1939364690}
         m_TargetAssemblyTypeName: Energy, Assembly-CSharp
-        m_MethodName: midLifePlus
+        m_MethodName: BuyMidLives
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -107999,7 +107953,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 756119877
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &1612776355
 GameObject:
@@ -108596,7 +108550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 556734125}
   stars:
   - {fileID: 1792592199}
@@ -108989,7 +108943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 2007921597}
   stars:
   - {fileID: 2092750592}
@@ -109212,7 +109166,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 60.19995, y: 85.79999}
+  m_AnchoredPosition: {x: 60.200195, y: 85.80005}
   m_SizeDelta: {x: 174.1, y: 144}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1645265735
@@ -116847,12 +116801,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60.1
+  m_fontSize: 60
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 25
-  m_fontSizeMax: 60.1
+  m_fontSizeMin: 50
+  m_fontSizeMax: 60
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -117197,7 +117151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 1533825795}
   stars:
   - {fileID: 1082055566}
@@ -130585,7 +130539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 1845669872}
   stars:
   - {fileID: 654681763}
@@ -132856,7 +132810,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 60.19995, y: 156}
+  m_AnchoredPosition: {x: 60.200195, y: 156}
   m_SizeDelta: {x: 174.1, y: 144}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2081326716
@@ -133696,7 +133650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 953516721}
   stars:
   - {fileID: 2089287323}
@@ -134061,8 +134015,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 300, y: -50}
-  m_SizeDelta: {x: 310.22327, y: 60.542725}
+  m_AnchoredPosition: {x: 298.7, y: -47.3}
+  m_SizeDelta: {x: 314.19, y: 60.543}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2121713549
 MonoBehaviour:
@@ -134084,7 +134038,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Thyra
+  m_text: THYRA
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 322019344563f4740a981962d5743a02, type: 2}
   m_sharedMaterial: {fileID: 3366476187341071685, guid: 322019344563f4740a981962d5743a02,
@@ -134116,7 +134070,7 @@ MonoBehaviour:
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 50
+  m_fontSizeMin: 15
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -134444,7 +134398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e1980579982c42b10224a5b602ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   unlockImage: {fileID: 655527067}
   stars:
   - {fileID: 412519518}

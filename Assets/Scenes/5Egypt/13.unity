@@ -667,7 +667,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 5.05
+  orthographic size: 4.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -691,7 +691,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.529002, y: 4.082067, z: -9.999551}
+  m_LocalPosition: {x: 10.362332, y: 30.380404, z: -9.999551}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1600806940}
@@ -1493,7 +1493,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1637214725}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.467668, y: 30.381422, z: -9.999551}
+  m_LocalPosition: {x: -8.467668, y: 30.380404, z: -9.999551}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 213892416}
@@ -1526,7 +1526,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ConfineMode: 0
   m_BoundingVolume: {fileID: 0}
-  m_BoundingShape2D: {fileID: 2121676563}
+  m_BoundingShape2D: {fileID: 1811671987}
   m_ConfineScreenEdges: 1
   m_Damping: 0
 --- !u!114 &1637214729
@@ -1570,7 +1570,7 @@ MonoBehaviour:
   m_Follow: {fileID: 7236388135611132258}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 5.05
+    OrthographicSize: 4.5
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -1693,6 +1693,12 @@ MonoBehaviour:
   _yMin: 4.5
   _yMaxOverflow: 1
   _yMax: 0.06
+--- !u!60 &1811671987 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7236388135530524648, guid: 2a0492c1d882fd4409d4d866f2a4f398,
+    type: 3}
+  m_PrefabInstance: {fileID: 7236388135611132257}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1867800330
 GameObject:
   m_ObjectHideFlags: 0
@@ -1799,12 +1805,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &2121676563 stripped
-PolygonCollider2D:
-  m_CorrespondingSourceObject: {fileID: 7236388134532866065, guid: 2a0492c1d882fd4409d4d866f2a4f398,
-    type: 3}
-  m_PrefabInstance: {fileID: 7236388135611132257}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7236388135611132257
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31951,6 +31951,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[9].Array.data[434].Y
       value: -140154640
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236388134185346281, guid: 2a0492c1d882fd4409d4d866f2a4f398,
+        type: 3}
+      propertyPath: m_AnimatedTiles.Array.data[0].second.m_AnimationSpeed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7236388135390198697, guid: 2a0492c1d882fd4409d4d866f2a4f398,
         type: 3}
