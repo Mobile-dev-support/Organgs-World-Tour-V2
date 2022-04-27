@@ -74,22 +74,31 @@ public class CountdownTimer : MonoBehaviour
                 if(Energy.Instance != null)
                 {
                     Energy.Instance.UseLife();
-                    if(Energy.Instance.currentLife < Energy.Instance.maxLifeData.maxLife)
+                    if(Energy.Instance.extraLife < 0)
                     {
-                        if (Energy.Instance.currentLife > 0)
-                        { 
-                            Debug.Log("call");
-                            MainMenu.Instance.Restart();
-                            isGameOver = true;
-                        }
-                        else
+                        if (Energy.Instance.currentLife < Energy.Instance.maxLifeData.maxLife)
                         {
-                            MainMenu.Instance.GameOverLevel();
-                            Fader.Instance.BGFader(true);
-                            timeValue += extraTime;
-                            Destroy(GameManager.Instance.Rplayer, 0.01f);
-                            isGameOver = true;
+                            if (Energy.Instance.currentLife > 0)
+                            {
+                                Debug.Log("stil have current lives");
+                                MainMenu.Instance.Restart();
+                                isGameOver = true;
+                            }
+                            else
+                            {
+                                MainMenu.Instance.GameOverLevel();
+                                Fader.Instance.BGFader(true);
+                                timeValue += extraTime;
+                                Destroy(GameManager.Instance.Rplayer, 0.01f);
+                                isGameOver = true;
+                            }
                         }
+                    }
+                    else
+                    {
+                        Debug.Log("no more extra lives");
+                        MainMenu.Instance.Restart();
+                        isGameOver = true;
                     }
                 }
             }

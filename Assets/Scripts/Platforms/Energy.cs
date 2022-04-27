@@ -11,8 +11,11 @@ public class Energy : MonoBehaviour, IStoreListener
 {
     [SerializeField] private TextMeshProUGUI[] lifeTxt;
     [SerializeField] private Slider[] lifeBar;
+    [SerializeField] private TextMeshProUGUI[] extraLivesTxt;
     [SerializeField] private TextMeshProUGUI timerTxt;
+    [SerializeField] private Button nonConsumableBtn;
     [SerializeField] private Button AdButton;
+    public int extraLife { get; set; }
     public int currentLife { get; set; }
     private int restorDuration = 1;
     private DateTime nextLifeTime;
@@ -74,7 +77,8 @@ public class Energy : MonoBehaviour, IStoreListener
         AdTimer.gameObject.SetActive(false);
         if (!PlayerPrefs.HasKey("currentLife"))
         {
-            maxLifeData.maxLife = 99;
+            maxLifeData.maxLife = 10;
+            extraLife = 0;
             PlayerPrefs.SetInt("currentLife", maxLifeData.maxLife);
             Load();
             StartCoroutine(RestoreLife());
@@ -90,24 +94,32 @@ public class Energy : MonoBehaviour, IStoreListener
 
     public void UseLife()
     {
-        if (currentLife > 0)
+        if(extraLife > 0)
         {
-            currentLife--;
-            UpdateLife();
-            if (!isRestoring)
-            {
-                if (currentLife + 1 == maxLifeData.maxLife)
-                {
-                    nextLifeTime = AddDuration(DateTime.Now, restorDuration);
-                }
-
-                StartCoroutine(RestoreLife());
-            }
+            extraLife--;
         }
         else
         {
-            Debug.Log("Insufficient Energy");
+            if (currentLife > 0)
+            {
+                currentLife--;
+                if (!isRestoring)
+                {
+                    if (currentLife + 1 == maxLifeData.maxLife)
+                    {
+                        nextLifeTime = AddDuration(DateTime.Now, restorDuration);
+                    }
+
+                    StartCoroutine(RestoreLife());
+                }
+            }
+            else
+            {
+                Debug.Log("Insufficient Energy");
+            }
         }
+        UpdateLife();
+        Save();
     }
 
     public void AddALife()
@@ -240,16 +252,6 @@ public class Energy : MonoBehaviour, IStoreListener
         isRestoring = false;
     }
 
-    private IEnumerator BuyLifePlus(int life)
-    {
-        maxLifeData.maxLife += life;
-        yield return new WaitForEndOfFrame();
-        currentLife = maxLifeData.maxLife;
-        UpdateLifeTimer();
-        UpdateLife();
-        Save();
-    }
-
     private void UpdateLifeTimer()
     {
         if(currentLife >= maxLifeData.maxLife)
@@ -273,6 +275,11 @@ public class Energy : MonoBehaviour, IStoreListener
             lifeBar[i].maxValue = maxLifeData.maxLife;
             lifeBar[i].value = currentLife;
         }
+        for (int i = 0; i < extraLivesTxt.Length; i++)
+        {
+            extraLivesTxt[i].SetText("+" + extraLife.ToString());
+        }
+
     }
     #endregion
 
@@ -298,6 +305,7 @@ public class Energy : MonoBehaviour, IStoreListener
     private void Load()
     {
         currentLife = PlayerPrefs.GetInt("currentLife");
+        extraLife = PlayerPrefs.GetInt("extraLife");
         nextLifeTime = StringToDate(PlayerPrefs.GetString("nextLifeTime"));
         lastLifeTime = StringToDate(PlayerPrefs.GetString("lastLifeTime"));
         nextAdTime = StringToDate(PlayerPrefs.GetString("nextAdTime"));
@@ -307,6 +315,7 @@ public class Energy : MonoBehaviour, IStoreListener
     private void Save()
     {
         PlayerPrefs.SetInt("currentLife", currentLife);
+        PlayerPrefs.SetInt("extraLife", extraLife);
         PlayerPrefs.SetString("nextLifeTime", nextLifeTime.ToString());
         PlayerPrefs.SetString("lastLifeTime", lastLifeTime.ToString());
         PlayerPrefs.SetString("nextAdTime", nextLifeTime.ToString());
@@ -510,6 +519,36 @@ public class Energy : MonoBehaviour, IStoreListener
     #endregion
 
     #region inAppPurchasing
+
+    private IEnumerator ExpandLifeToMax()
+    {
+        maxLifeData.maxLife += 10;
+        yield return new WaitForEndOfFrame();
+        nonConsumableBtn.interactable = false;
+        currentLife = maxLifeData.maxLife;
+        UpdateLifeTimer();
+        UpdateLife();
+        Save();
+    }
+
+    private IEnumerator RestoreToFull()
+    {
+        currentLife = maxLifeData.maxLife;
+        yield return new WaitForEndOfFrame();
+        UpdateLifeTimer();
+        UpdateLife();
+        Save();
+    }
+
+    private IEnumerator BuyLifePlus(int life)
+    {
+        extraLife += life;
+        yield return new WaitForEndOfFrame();
+        UpdateLifeTimer();
+        UpdateLife();
+        Save();
+    }
+
     public void InitializePurchasing()
     {
         if (IsInitialized())
@@ -548,12 +587,12 @@ public class Energy : MonoBehaviour, IStoreListener
 
     public void RestoreLives()
     {
-        //Restore lives
+        BuyProductID(restore);
     }
 
     public void ExpandLives()
     {
-        //Expand lives
+        BuyProductID(expand);
     }
 
     public string GetProductPriceFromStore(string id)
@@ -652,13 +691,13 @@ public class Energy : MonoBehaviour, IStoreListener
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             MainMenu.Instance.confirrmation_canvas.Show();
-            //restore lives
+            StartCoroutine(RestoreToFull());
         }
         else if (String.Equals(args.purchasedProduct.definition.id, expand, StringComparison.Ordinal))
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             MainMenu.Instance.confirrmation_canvas.Show();
-            //expand lives
+            StartCoroutine(ExpandLifeToMax());
         }
         else
         {

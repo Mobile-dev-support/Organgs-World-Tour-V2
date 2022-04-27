@@ -7,23 +7,25 @@ public class pooledObject : MonoBehaviour
     [SerializeField]
     private GameObject prefab;
     public float spawnTime;
-    private float Timer;
     private Animator anim;
     private Queue<GameObject> availableObjects = new Queue<GameObject>();
 
     private void Start()
     {
-        Timer = spawnTime;
         anim = GetComponentInParent<Animator>();
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        Timer -= Time.deltaTime;
-        if(Timer < 0)
+        StartCoroutine(SpawnTime());
+    }
+
+    private IEnumerator SpawnTime()
+    {
+        while (true)
         {
+            yield return new WaitForSeconds(spawnTime);
             GetFromPool();
-            Timer = spawnTime;
         }
     }
 

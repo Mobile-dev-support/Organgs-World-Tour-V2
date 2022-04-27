@@ -10,6 +10,7 @@ public class LookForPlayerState : State
     protected bool isPlayerInMinAgroRange;
     protected bool isAllTurnsDone;
     protected bool isAllTurnsTimeDone;
+    protected bool isDead;
 
     protected float lastTurnTime;
 
@@ -26,6 +27,7 @@ public class LookForPlayerState : State
         base.DoChecks();
 
         isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
+        isDead = core.CollisionSenses.Trap;
     }
 
     public override void Enter()

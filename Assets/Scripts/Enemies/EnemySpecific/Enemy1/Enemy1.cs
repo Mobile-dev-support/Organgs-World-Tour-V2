@@ -34,6 +34,8 @@ public class Enemy1 : Entity
     [SerializeField]
     private D_DeadState deadStateData;
 
+    public pooledObject pooler { get; private set; }
+
     public Rigidbody2D RB { get; private set; }
 
     [SerializeField]
@@ -42,7 +44,6 @@ public class Enemy1 : Entity
     public override void Awake()
     {
         base.Awake();
-
         moveState = new E1_MoveState(this, stateMachine, "move", moveStateData, this);
         idleState = new E1_IdleState(this, stateMachine, "idle", idleStateData, this);
         playerDetectedState = new E1_PlayerDetectedState(this, stateMachine, "playerDetected", playerDetectedData, this);
@@ -52,19 +53,20 @@ public class Enemy1 : Entity
         stunState = new E1_StunState(this, stateMachine, "stun", stunStateData, this);
         deadState = new E1_DeadState(this, stateMachine, "dead", deadStateData, this);
         jumpState = new E1_JumpState(this, stateMachine, "jumping", jumpStateData, this);
-
-
     }
 
     private void Start()
     {
         RB = GetComponent<Rigidbody2D>();
         stateMachine.Initialize(idleState);
+        pooledObject Pooler = GetComponentInParent<pooledObject>();
+        if (Pooler != null)
+            pooler = Pooler;
     }
-
-    public void DisableEnemy()
+    private void OnEnable()
     {
-        gameObject.SetActive(false);
+        if (pooler != null)
+            stateMachine.Initialize(idleState);
     }
 
     public override void OnDrawGizmos()

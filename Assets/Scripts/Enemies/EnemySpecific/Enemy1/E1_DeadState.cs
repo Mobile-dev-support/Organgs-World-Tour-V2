@@ -19,8 +19,22 @@ public class E1_DeadState : DeadState
     public override void Enter()
     {
         base.Enter();
+        enemy.StartCoroutine(Disable());
+    }
+
+    IEnumerator Disable()
+    {
         GameObject deathChunk = GameObject.Instantiate(stateData.deathChunkParticle, enemy.transform.position, stateData.deathChunkParticle.transform.rotation) as GameObject;
-        enemy.Invoke("DisableEnemy", 0.1f);
+        yield return new WaitForSeconds(0.09f);
+        if (enemy.pooler != null)
+        {
+            stateMachine.ChangeState(enemy.idleState);
+            enemy.pooler.AddToPool(enemy.gameObject);
+        }
+        else
+        {
+            enemy.gameObject.SetActive(false);
+        }
     }
 
     public override void Exit()

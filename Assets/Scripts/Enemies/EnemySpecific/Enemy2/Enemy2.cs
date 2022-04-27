@@ -14,6 +14,7 @@ public class Enemy2 : Entity
     private D_IdleState idleStateData;
     [SerializeField]
     private D_DeadState deadStateData;
+    public pooledObject pooler { get; private set; }
 
 
 
@@ -29,7 +30,16 @@ public class Enemy2 : Entity
 
     private void Start()
     {
-        stateMachine.Initialize(idleState);        
+        stateMachine.Initialize(idleState);
+        pooledObject Pooler = GetComponentInParent<pooledObject>();
+        if (Pooler != null)
+            pooler = Pooler;
+    }
+
+    private void OnEnable()
+    {
+        if(pooler != null)
+            stateMachine.Initialize(idleState);
     }
 
     public override void OnDrawGizmos()

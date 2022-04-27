@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 4414473769794057804}
   - component: {fileID: 4414473769794057795}
   - component: {fileID: 4414473769794057794}
-  - component: {fileID: 4414473769794057805}
+  - component: {fileID: 6871147872800921385}
   m_Layer: 14
   m_Name: CandyEnemy
   m_TagString: Candy
@@ -439,8 +439,8 @@ MonoBehaviour:
   jumpStateData: {fileID: 11400000, guid: 5a6f582accd5672418e0a9bc694a3e1b, type: 2}
   deadStateData: {fileID: 11400000, guid: 803c5f6895b75114087f77743674c1bc, type: 2}
   meleeAttackPosition: {fileID: 4414473769502118907}
---- !u!70 &4414473769794057805
-CapsuleCollider2D:
+--- !u!61 &6871147872800921385
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -453,8 +453,18 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.41, y: 0.89}
+    newSize: {x: 0.4857143, y: 1.2628572}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 0.8, y: 0.8}
-  m_Direction: 0
+  m_EdgeRadius: 0.001
 --- !u!1 &4414473769960761329
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,8 +613,8 @@ MonoBehaviour:
   groundCheckRadius: 0.1
   ceilingCheckRadius: 0
   wallCheckDistance: 0.5
-  deathCheckX: 1.16
-  deathCheckY: 1.12
+  deathCheckX: 0.8
+  deathCheckY: 0.8
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256

@@ -144,12 +144,7 @@ public class Player : MonoBehaviour
     private void OnDestroy()
     {
         if(gameObject == null)
-        {
             StateMachine.Initialize(DeathState);
-            playerData.jumpVelocity = playerData.defaultJumpVelocity;
-            playerData.wallJumpVelocity = playerData.defaultWallJumpVelocity;
-            playerData.movementVelocity = playerData.NormalMovementVelocity;
-        }
     }
 
     private void FixedUpdate()
@@ -188,12 +183,6 @@ public class Player : MonoBehaviour
             playerData.cheeseTimer = 2f;
             statusEffect.SetTrigger(status);
             isCheesed = true;
-        }
-        if (other.collider.CompareTag("Candy"))
-        {
-            StateMachine.Initialize(DeathState);
-            other.gameObject.SetActive(false);
-            statusEffect.SetTrigger(status);
         }
         if (other.gameObject.CompareTag("Alcohol"))
         {

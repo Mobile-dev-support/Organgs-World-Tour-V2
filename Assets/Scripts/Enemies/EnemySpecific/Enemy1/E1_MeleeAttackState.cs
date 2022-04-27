@@ -29,22 +29,25 @@ public class E1_MeleeAttackState : MeleeAttackState
     public override void FinishAttack()
     {
         base.FinishAttack();
-        stateMachine.ChangeState(enemy.deadState);
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        if (isAnimationFinished)
+        if (!isAnimationFinished)
         {
-            if (isPlayerInMinAgroRange)
+            if (isPlayerInMinAgroRange && !isDead)
             {
                 stateMachine.ChangeState(enemy.playerDetectedState);
             }
-            else
+            else if(!isPlayerInMinAgroRange && !isDead)
             {
                 stateMachine.ChangeState(enemy.lookForPlayerState);
+            }
+            else if (isDead)
+            {
+                stateMachine.ChangeState(enemy.deadState);
             }
         }
     }

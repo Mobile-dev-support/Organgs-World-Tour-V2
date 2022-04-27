@@ -35,9 +35,8 @@ public class IdleState : State
     public override void Enter()
     {
         base.Enter();
-
         core.Movement.SetVelocityX(0f);
-        isIdleTimeOver = false;        
+        isIdleTimeOver = false;
         SetRandomIdleTime();
     }
 

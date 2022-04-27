@@ -20,7 +20,15 @@ public class E2_DeadState : DeadState
     {
         base.Enter();
         GameObject deathChunk = GameObject.Instantiate(stateData.deathChunkParticle, enemy.transform.position, stateData.deathChunkParticle.transform.rotation) as GameObject;
-        enemy.gameObject.SetActive(false);
+        if (enemy.pooler != null)
+        {
+            stateMachine.ChangeState(enemy.idleState);
+            enemy.pooler.AddToPool(enemy.gameObject);
+        }
+        else
+        {
+            enemy.gameObject.SetActive(false);
+        }
     }
 
     public override void Exit()

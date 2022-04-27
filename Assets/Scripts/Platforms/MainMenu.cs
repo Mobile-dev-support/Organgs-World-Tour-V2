@@ -9,6 +9,7 @@ using System.Linq;
 
 public class MainMenu : MonoBehaviour
 {
+    #region variables
     [Header("MAIN MENU")]
     [HideInInspector]
     public View mainCanvas;
@@ -69,10 +70,11 @@ public class MainMenu : MonoBehaviour
     public AudioClip win;
     private static MainMenu _instance;
     public static MainMenu Instance { get { return _instance; } }
+    #endregion
 
     private void Awake()
     {
-        //PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();
         if (_instance != null && _instance != this)
         {
             Destroy(gameObject);

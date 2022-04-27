@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MeleeAttackState : AttackState
 {
-    protected D_MeleeAttack stateData;    
+    protected D_MeleeAttack stateData;
+    protected bool isDead;
 
     public MeleeAttackState(Entity etity, FiniteStateMachine stateMachine, string animBoolName, Transform attackPosition, D_MeleeAttack stateData) : base(etity, stateMachine, animBoolName, attackPosition)
     {
@@ -14,6 +15,7 @@ public class MeleeAttackState : AttackState
     public override void DoChecks()
     {
         base.DoChecks();
+        isDead = core.CollisionSenses.Trap;
     }
 
     public override void Enter()

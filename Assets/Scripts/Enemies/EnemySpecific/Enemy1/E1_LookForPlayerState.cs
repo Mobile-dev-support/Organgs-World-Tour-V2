@@ -38,6 +38,10 @@ public class E1_LookForPlayerState : LookForPlayerState
         {
             stateMachine.ChangeState(enemy.moveState);
         }
+        else if (isDead)
+        {
+            stateMachine.ChangeState(enemy.deadState);
+        }
     }
 
     public override void PhysicsUpdate()
