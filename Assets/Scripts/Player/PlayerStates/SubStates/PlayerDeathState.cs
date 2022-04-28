@@ -68,7 +68,7 @@ public class PlayerDeathState : PlayerGroundedState
         {
             GameManager.Instance.Respawn();
         }
-        Object.Destroy(player.gameObject, 0.09f);
+        Object.Destroy(player.gameObject);
     }
 
     public override void PhysicsUpdate()
