@@ -26,7 +26,7 @@ public class Energy : MonoBehaviour, IStoreListener
     private DateTime lastAdTime;
     private int restoreAdDuration = 3;
     private int maxRewardedAd = 2;
-    [HideInInspector] public int currentRewardedAd;
+    public int currentRewardedAd;
     private bool isRestoringAd = false;
     [SerializeField] private TextMeshProUGUI AdTimer;
     public EnergymaxLife maxLifeData;
@@ -679,13 +679,13 @@ public class Energy : MonoBehaviour, IStoreListener
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             MainMenu.Instance.confirrmation_canvas.Show();
-            StartCoroutine(BuyLifePlus(20));
+            StartCoroutine(BuyLifePlus(30));
         }
         else if (String.Equals(args.purchasedProduct.definition.id, life70, StringComparison.Ordinal))
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             MainMenu.Instance.confirrmation_canvas.Show();
-            StartCoroutine(BuyLifePlus(30));
+            StartCoroutine(BuyLifePlus(70));
         }
         else if (String.Equals(args.purchasedProduct.definition.id, restore, StringComparison.Ordinal))
         {
