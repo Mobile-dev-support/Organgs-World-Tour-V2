@@ -28,9 +28,7 @@ public class Player : MonoBehaviour
     public Animator Anim { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
     public Rigidbody2D RB { get; private set; }
-    public Transform DashDirectionIndicator { get; private set; }
     public BoxCollider2D MovementCollider { get; private set; }
-    public PlayerInventory Inventory { get; private set; }
     public bool afterShock { get; private set; }
     public bool isDrinking { get; private set; }
     public bool IsStunned { get; private set; }
@@ -75,15 +73,18 @@ public class Player : MonoBehaviour
         Anim = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
         RB = GetComponent<Rigidbody2D>();
-        DashDirectionIndicator = transform.Find("DashDirectionIndicator");
         MovementCollider = GetComponent<BoxCollider2D>();
-        Inventory = GetComponent<PlayerInventory>();
         if (Energy.Instance != null)
         {
             ScoringMechanism.Instance.NoOfLives = Energy.Instance.currentLife;
             ScoringMechanism.Instance.NumberOfLives();
         }
         isCheesed = false;
+        playerData.movementVelocity = playerData.NormalMovementVelocity;
+        playerData.jumpVelocity = playerData.defaultJumpVelocity;
+        playerData.wallJumpVelocity = playerData.defaultWallJumpVelocity;
+        Anim.SetFloat(xState, 0f);
+        Anim.SetFloat(Candied, 0f);
         StateMachine.Initialize(IdleState);
     }
 

@@ -64,7 +64,7 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
         if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
@@ -109,14 +109,7 @@ public class MainMenu : MonoBehaviour
 
     public void AddLife()
     {
-        if (Energy.Instance.currentRewardedAd > 0)
-        {
-            StartCoroutine(AdditionalLifeRespawn());
-        }
-        else
-        {
-            mainMenu();
-        }
+        StartCoroutine(AdditionalLifeRespawn());
     }
 
     public void mainMenu()

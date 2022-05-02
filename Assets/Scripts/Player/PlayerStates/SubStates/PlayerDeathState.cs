@@ -32,17 +32,12 @@ public class PlayerDeathState : PlayerGroundedState
     {
         GameObject deathChunk = GameObject.Instantiate(playerData.deathChunk, player.transform.position, playerData.deathChunk.transform.rotation) as GameObject;
         CameraShake.Instance.ShakeCamera(5f, .1f);
-        playerData.movementVelocity = playerData.NormalMovementVelocity;
-        playerData.jumpVelocity = playerData.defaultJumpVelocity;
-        playerData.wallJumpVelocity = playerData.defaultWallJumpVelocity;
-        player.Anim.SetFloat("xState", 0f);
-        player.Anim.SetFloat("Candied", 0f);
+        Object.Destroy(player.gameObject);
         if (Fader.Instance != null)
         {
             Fader.Instance.BGFader(true);
             CountdownTimer.Instance.enabled = false;
         }
-
         if (Energy.Instance != null)
         {
             Energy.Instance.UseLife();
@@ -68,7 +63,6 @@ public class PlayerDeathState : PlayerGroundedState
         {
             GameManager.Instance.Respawn();
         }
-        Object.Destroy(player.gameObject);
     }
 
     public override void PhysicsUpdate()

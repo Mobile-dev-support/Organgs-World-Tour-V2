@@ -21,15 +21,8 @@ public class Energy : MonoBehaviour, IStoreListener
     private DateTime nextLifeTime;
     private DateTime lastLifeTime;
     private bool isRestoring = false;
-    [Header("REWARDED ADS")]
-    private DateTime nextAdTime;
-    private DateTime lastAdTime;
-    private int restoreAdDuration = 1;
-    private int maxRewardedAd = 5;
     public int extraLife { get; set; }
     public int currentLife { get; set; }
-    public int currentRewardedAd { get; set; }
-    private bool isRestoringAd = false;
     [SerializeField] private TextMeshProUGUI AdTimer;
     public EnergymaxLife maxLifeData;
 
@@ -85,13 +78,11 @@ public class Energy : MonoBehaviour, IStoreListener
             PlayerPrefs.SetInt("currentLife", maxLifeData.maxLife);
             Load();
             StartCoroutine(RestoreLife());
-            StartCoroutine(RestoreRewardedAd());
         }
         else
         {
             Load();
             StartCoroutine(RestoreLife());
-            StartCoroutine(RestoreRewardedAd());
         }
     }
 
@@ -127,85 +118,7 @@ public class Energy : MonoBehaviour, IStoreListener
 
     public void AddALife()
     {
-        if(currentRewardedAd > 0)
-        {
-            currentLife++;
-            RewardedAdCount();
-            StartCoroutine(RestoreLife());
-        }
-        else
-        {
-            RewardedAdCount();
-        }
-    }
-
-    private void RewardedAdCount()
-    {
-        if (currentRewardedAd > 0)
-        {
-            showRewardedAd();
-            currentRewardedAd--;
-            if (!isRestoringAd)
-            {
-                if (currentRewardedAd + 1 == maxRewardedAd)
-                {
-                    nextAdTime = AddDuration(DateTime.Now, restoreAdDuration);
-                }
-            }
-        }
-        else
-        {
-            AdTimer.gameObject.SetActive(true);
-        }
-    }
-    #endregion
-
-    #region AdTimer
-    private IEnumerator RestoreRewardedAd()
-    {
-        UpdateAdTimer();
-        isRestoringAd = true;
-
-        while (currentRewardedAd < maxRewardedAd)
-        {
-            DateTime currenAdtDateTime = DateTime.Now;
-            DateTime nextAdDateTime = nextAdTime;
-            bool isAdAdding = false;
-
-            while (currenAdtDateTime > nextAdDateTime)
-            {
-                if (currentRewardedAd < maxRewardedAd)
-                {
-                    isAdAdding = true;
-                    currentRewardedAd++;
-                    DateTime timeToAddAd = lastAdTime > nextAdDateTime ? lastAdTime : nextAdDateTime;
-                    nextAdDateTime = AddDuration(timeToAddAd, restoreAdDuration);
-                }
-                else
-                {
-
-                    break;
-                }
-            }
-
-            if (isAdAdding)
-            {
-                lastAdTime = DateTime.Now;
-                nextAdTime = nextAdDateTime;
-            }
-
-            UpdateAdTimer();
-            Save();
-            yield return null;
-        }
-        isRestoringAd = false;
-    }
-
-    private void UpdateAdTimer()
-    {
-        TimeSpan Adtime = nextAdTime - DateTime.Now;
-        AdTimer.SetText("You have exceeded the maximum amount of playable ads, try again later!");
-        //AdTimer.SetText("{0:00}:{1:00}", Adtime.Minutes, Adtime.Seconds);
+        showRewardedAd();
     }
     #endregion
 
@@ -311,8 +224,6 @@ public class Energy : MonoBehaviour, IStoreListener
         extraLife = PlayerPrefs.GetInt("extraLife");
         nextLifeTime = StringToDate(PlayerPrefs.GetString("nextLifeTime"));
         lastLifeTime = StringToDate(PlayerPrefs.GetString("lastLifeTime"));
-        nextAdTime = StringToDate(PlayerPrefs.GetString("nextAdTime"));
-        lastAdTime = StringToDate(PlayerPrefs.GetString("lastAdTime"));
     }
 
     private void Save()
@@ -321,8 +232,6 @@ public class Energy : MonoBehaviour, IStoreListener
         PlayerPrefs.SetInt("extraLife", extraLife);
         PlayerPrefs.SetString("nextLifeTime", nextLifeTime.ToString());
         PlayerPrefs.SetString("lastLifeTime", lastLifeTime.ToString());
-        PlayerPrefs.SetString("nextAdTime", nextLifeTime.ToString());
-        PlayerPrefs.SetString("lastAdTime", lastLifeTime.ToString());
     }
     #endregion
 
@@ -414,6 +323,7 @@ public class Energy : MonoBehaviour, IStoreListener
         this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
         // Called when an ad request failed to load.
         this.rewardedAd.OnAdFailedToLoad += HandleRewardedAdFailedToLoad;
+        this.rewardedAd.OnAdClosed += HandleRewardedAdClosed;
     }
 
     public void showRewardedAd()
@@ -454,7 +364,13 @@ public class Energy : MonoBehaviour, IStoreListener
 
     public void HandleUserEarnedReward(object sender, Reward args)
     {
+        currentLife++;
         StartCoroutine(RestoreLife());
+    }
+    public void HandleRewardedAdClosed(object sender, EventArgs args)
+    {
+        RequestRewarded();
+        MonoBehaviour.print("HandleRewardedAdClosed event received");
     }
 
     public void HandleRewardedAdLoaded(object sender, EventArgs args)
