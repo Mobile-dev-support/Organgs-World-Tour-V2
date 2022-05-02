@@ -10,7 +10,6 @@ using System.Linq;
 public class MainMenu : MonoBehaviour
 {
     #region variables
-    [Header("MAIN MENU")]
     [HideInInspector] public View mainCanvas;
     [HideInInspector] public View winCanvas;
     [HideInInspector] public View gameOverCanvas;
@@ -26,12 +25,12 @@ public class MainMenu : MonoBehaviour
     [HideInInspector] public View dialogCanvas;
     [HideInInspector] public View totem_land;
     [HideInInspector] public View confirrmation_canvas;
-    [Header("INFO CONTAINER")]
-    public View restore_canvas;
-    public View life10_canvas;
-    public View life30_canvas;
-    public View life70_canvas;
-    public View expand_canvas;
+    [HideInInspector] public View restore_canvas;
+    [HideInInspector] public View life10_canvas;
+    [HideInInspector] public View life30_canvas;
+    [HideInInspector] public View life70_canvas;
+    [HideInInspector] public View expand_canvas;
+    [Header("MAIN MENU")]
     public Slider slider;
     public TextMeshProUGUI textProgress;
     public AudioMixer audioMix;
@@ -65,7 +64,7 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        //PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();
         if (_instance != null && _instance != this)
         {
             Destroy(gameObject);

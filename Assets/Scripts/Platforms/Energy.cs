@@ -9,14 +9,14 @@ using System;
 
 public class Energy : MonoBehaviour, IStoreListener
 {
+    #region variables
     [SerializeField] private TextMeshProUGUI[] lifeTxt;
     [SerializeField] private Slider[] lifeBar;
     [SerializeField] private TextMeshProUGUI[] extraLivesTxt;
     [SerializeField] private TextMeshProUGUI timerTxt;
     [SerializeField] private Button nonConsumableBtn;
     [SerializeField] private Button AdButton;
-    public int extraLife { get; set; }
-    public int currentLife { get; set; }
+
     private int restorDuration = 3;
     private DateTime nextLifeTime;
     private DateTime lastLifeTime;
@@ -24,9 +24,11 @@ public class Energy : MonoBehaviour, IStoreListener
     [Header("REWARDED ADS")]
     private DateTime nextAdTime;
     private DateTime lastAdTime;
-    private int restoreAdDuration = 3;
+    private int restoreAdDuration = 1;
     private int maxRewardedAd = 5;
-    public int currentRewardedAd;
+    public int extraLife { get; set; }
+    public int currentLife { get; set; }
+    public int currentRewardedAd { get; set; }
     private bool isRestoringAd = false;
     [SerializeField] private TextMeshProUGUI AdTimer;
     public EnergymaxLife maxLifeData;
@@ -46,6 +48,7 @@ public class Energy : MonoBehaviour, IStoreListener
 
     private static Energy _instance;
     public static Energy Instance { get { return _instance; } }
+    #endregion
 
     private void Awake()
     {

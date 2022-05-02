@@ -68,7 +68,7 @@ public class DoTweenFeatures : MonoBehaviour
                     () => gameObject.SetActive(false));
                 break;
             case State.RevolvingObj:
-                gameObject.GetComponent<Transform>().DORotate(star, duration, RotateMode.FastBeyond360);
+                gameObject.GetComponent<RectTransform>().DORotate(star, duration, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1, LoopType.Incremental);
                 break;
             default:
                 break;
