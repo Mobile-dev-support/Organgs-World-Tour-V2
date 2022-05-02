@@ -17,7 +17,7 @@ public class Energy : MonoBehaviour, IStoreListener
     [SerializeField] private Button AdButton;
     public int extraLife { get; set; }
     public int currentLife { get; set; }
-    private int restorDuration = 1;
+    private int restorDuration = 3;
     private DateTime nextLifeTime;
     private DateTime lastLifeTime;
     private bool isRestoring = false;
@@ -25,7 +25,7 @@ public class Energy : MonoBehaviour, IStoreListener
     private DateTime nextAdTime;
     private DateTime lastAdTime;
     private int restoreAdDuration = 3;
-    private int maxRewardedAd = 2;
+    private int maxRewardedAd = 5;
     public int currentRewardedAd;
     private bool isRestoringAd = false;
     [SerializeField] private TextMeshProUGUI AdTimer;
@@ -674,30 +674,35 @@ public class Energy : MonoBehaviour, IStoreListener
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             MainMenu.Instance.confirrmation_canvas.Show();
             StartCoroutine(BuyLifePlus(10));
+            MainMenu.Instance.life10_canvas.Hide();
         }
         else if (String.Equals(args.purchasedProduct.definition.id, life30, StringComparison.Ordinal))
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             MainMenu.Instance.confirrmation_canvas.Show();
             StartCoroutine(BuyLifePlus(30));
+            MainMenu.Instance.life30_canvas.Hide();
         }
         else if (String.Equals(args.purchasedProduct.definition.id, life70, StringComparison.Ordinal))
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             MainMenu.Instance.confirrmation_canvas.Show();
             StartCoroutine(BuyLifePlus(70));
+            MainMenu.Instance.life70_canvas.Hide();
         }
         else if (String.Equals(args.purchasedProduct.definition.id, restore, StringComparison.Ordinal))
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             MainMenu.Instance.confirrmation_canvas.Show();
             StartCoroutine(RestoreToFull());
+            MainMenu.Instance.restore_canvas.Hide();
         }
         else if (String.Equals(args.purchasedProduct.definition.id, expand, StringComparison.Ordinal))
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             MainMenu.Instance.confirrmation_canvas.Show();
             StartCoroutine(ExpandLifeToMax());
+            MainMenu.Instance.expand_canvas.Hide();
         }
         else
         {

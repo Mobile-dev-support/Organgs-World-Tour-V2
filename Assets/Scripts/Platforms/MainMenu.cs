@@ -11,36 +11,27 @@ public class MainMenu : MonoBehaviour
 {
     #region variables
     [Header("MAIN MENU")]
-    [HideInInspector]
-    public View mainCanvas;
-    [HideInInspector]
-    public View winCanvas;
-    [HideInInspector]
-    public View gameOverCanvas;
-    [HideInInspector]
-    public View statCanvas;
-    [HideInInspector]
-    public View MenuCanvas;
-    [HideInInspector]
-    public View loadingCanvas;
-    [HideInInspector]
-    public View ingameCanvas;
-    [HideInInspector]
-    public View maingameCanvas;
-    [HideInInspector]
-    public View faderCanvas;
-    [HideInInspector]
-    public View coverCanvas;
-    [HideInInspector]
-    public View scroller_canvas;
-    [HideInInspector]
-    public View menu_item_canvas;
-    [HideInInspector]
-    public View dialogCanvas;
-    [HideInInspector]
-    public View totem_land;
-    [HideInInspector]
-    public View confirrmation_canvas;
+    [HideInInspector] public View mainCanvas;
+    [HideInInspector] public View winCanvas;
+    [HideInInspector] public View gameOverCanvas;
+    [HideInInspector] public View statCanvas;
+    [HideInInspector] public View MenuCanvas;
+    [HideInInspector] public View loadingCanvas;
+    [HideInInspector] public View ingameCanvas;
+    [HideInInspector] public View maingameCanvas;
+    [HideInInspector] public View faderCanvas;
+    [HideInInspector] public View coverCanvas;
+    [HideInInspector] public View scroller_canvas;
+    [HideInInspector] public View menu_item_canvas;
+    [HideInInspector] public View dialogCanvas;
+    [HideInInspector] public View totem_land;
+    [HideInInspector] public View confirrmation_canvas;
+    [Header("INFO CONTAINER")]
+    public View restore_canvas;
+    public View life10_canvas;
+    public View life30_canvas;
+    public View life70_canvas;
+    public View expand_canvas;
     public Slider slider;
     public TextMeshProUGUI textProgress;
     public AudioMixer audioMix;
