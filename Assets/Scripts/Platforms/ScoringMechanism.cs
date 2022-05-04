@@ -14,7 +14,7 @@ public class ScoringMechanism : MonoBehaviour
     public Button NextLevelBtn;
     private float coinscore = 100f;
     private float timeMinusScore = 2f;
-
+    public GameObject[] stars;
     public float NoOfLives { get; set; }
     public float coinNo { get; set; }
     public float score { get; set; }
@@ -40,20 +40,27 @@ public class ScoringMechanism : MonoBehaviour
         livesText.SetText(NoOfLives.ToString());
     }
 
-    private void Scoring()
+    public void Scoring()
     {
         if (score >= 1000 && score < 2000)
         {
             DoorController.Instance.StarsNum = 1;
+            stars[0].GetComponent<Image>().sprite = starSprite;
         }
         else if (score >= 2000 && score < 2500)
         {
             DoorController.Instance.StarsNum = 2;
+            stars[0].GetComponent<Image>().sprite = starSprite;
+            stars[1].GetComponent<Image>().sprite = starSprite;
         }
         else if (score >= 2500 && score < 3000)
         {
             DoorController.Instance.StarsNum = 3;
+            stars[0].GetComponent<Image>().sprite = starSprite;
+            stars[1].GetComponent<Image>().sprite = starSprite;
+            stars[2].GetComponent<Image>().sprite = starSprite;
         }
+        SoundManager.Instance.winSound(MainMenu.Instance.win);
     }
 
     public void coinScore()
@@ -66,23 +73,6 @@ public class ScoringMechanism : MonoBehaviour
     public void timeScore()
     {
         score -= timeMinusScore;
-        Scoring();
-    }
-    #endregion
-
-    #region IEnumerator
-    public IEnumerator WinPanel()
-    {
-        MainMenu.Instance.winCanvas.transform.Find("bg").gameObject.SetActive(false);
-        yield return new WaitForEndOfFrame();
-        MainMenu.Instance.winCanvas.transform.Find("bg").gameObject.SetActive(true);
-        GameObject[] stars = GameObject.FindGameObjectsWithTag("stars");
-        yield return new WaitForEndOfFrame();
-        for (int i = 0; i < DoorController.Instance.StarsNum; i++)
-        {
-            stars[i].GetComponent<Image>().sprite = starSprite;
-        }
-        SoundManager.Instance.winSound(MainMenu.Instance.win);
     }
     #endregion
 }

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UIFocus : MonoBehaviour
 {
     public List<GameObject> CurrentLevel = new List<GameObject>();
-    public RectTransform rect;
+    private RectTransform rect;
     public ScrollRect scroller;
     public Transform UI_particle;
     private static UIFocus _instance;

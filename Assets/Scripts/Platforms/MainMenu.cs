@@ -64,7 +64,7 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
         if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
@@ -97,7 +97,6 @@ public class MainMenu : MonoBehaviour
 
     private IEnumerator AdditionalLifeRespawn()
     {
-        Energy.Instance.AddALife();
         CountdownTimer.Instance.isGameOver = false;
         yield return new WaitForEndOfFrame();
         GameManager.Instance.Respawn();

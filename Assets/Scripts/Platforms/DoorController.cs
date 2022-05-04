@@ -55,22 +55,22 @@ public class DoorController : MonoBehaviour
 
     public IEnumerator EndGame()
     {
+        ScoringMechanism.Instance.Scoring();
+        yield return new WaitForEndOfFrame();
         currentStarsNum = StarsNum;
         if (currentStarsNum > PlayerPrefs.GetInt("Lv" + levelIndex))
         {
             PlayerPrefs.SetInt("Lv" + levelIndex, StarsNum);
         }
         Debug.Log(PlayerPrefs.GetInt("Lv" + levelIndex, StarsNum));
-        yield return new WaitForEndOfFrame();
-        StartCoroutine(ScoringMechanism.Instance.WinPanel());
-        yield return new WaitForEndOfFrame();
         MainMenu.Instance.mainCanvas.Hide();
         MainMenu.Instance.winCanvas.Show();
+        MainMenu.Instance.winCanvas.gameObject.GetComponent<DoTweenFeatures>().OnClick();
         CountdownTimer.Instance.enabled = false;
         ScoringMechanism.Instance.coinsNumber.SetText(ScoringMechanism.Instance.score.ToString());
         GameManager.Instance.Rplayer.SetActive(false);
-        yield return new WaitForEndOfFrame();
         NextLevelNotif();
+        Debug.Log(ScoringMechanism.Instance.score);
     }
 
     public void NextLevelNotif()

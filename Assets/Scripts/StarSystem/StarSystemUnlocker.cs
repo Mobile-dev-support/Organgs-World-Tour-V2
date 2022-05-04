@@ -49,7 +49,7 @@ public class StarSystemUnlocker : MonoBehaviour
             unlockImage.gameObject.SetActive(true);
             for (int i = 0; i < stars.Length; i++)
             {
-                stars[i].gameObject.SetActive(false);
+                stars[i].SetActive(false);
             }
             gameObject.GetComponent<Button>().interactable = false;
         }
@@ -58,12 +58,12 @@ public class StarSystemUnlocker : MonoBehaviour
             unlockImage.gameObject.SetActive(false);
             for (int i = 0; i < stars.Length; i++)
             {
-                stars[i].gameObject.SetActive(true);
+                stars[i].SetActive(true);
             }
 
             for (int i = 0; i < PlayerPrefs.GetInt("Lv" + gameObject.name); i++)
             {
-                stars[i].gameObject.GetComponent<Image>().sprite = starSprite;
+                stars[i].GetComponent<Image>().sprite = starSprite;
             }
             gameObject.GetComponent<Button>().interactable = true;
         }

@@ -366,7 +366,9 @@ public class Energy : MonoBehaviour, IStoreListener
     {
         currentLife++;
         StartCoroutine(RestoreLife());
+        MainMenu.Instance.AddLife();
     }
+
     public void HandleRewardedAdClosed(object sender, EventArgs args)
     {
         RequestRewarded();
@@ -377,6 +379,7 @@ public class Energy : MonoBehaviour, IStoreListener
     {
         print("HandleRewardedAdLoaded event received");
     }
+
     public void HandleRewardedAdFailedToLoad(object sender, EventArgs args)
     {
         Debug.LogError(
