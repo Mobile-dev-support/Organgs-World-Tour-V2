@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class UIFocus : MonoBehaviour
 {
     public List<GameObject> CurrentLevel = new List<GameObject>();
-    private RectTransform rect;
+    public RectTransform rect;
     public ScrollRect scroller;
-
+    public Transform UI_particle;
     private static UIFocus _instance;
     public static UIFocus Instance { get { return _instance; } }
 
@@ -29,21 +29,17 @@ public class UIFocus : MonoBehaviour
     {
         rect = CurrentLevel.Last().GetComponent<RectTransform>();
         StartCoroutine(ScrollViewFocusFunctions.FocusOnItemCoroutine(scroller, rect, 2f));
-        for(int i = 0; i < CurrentLevel.Count; i++)
-        {
-            CurrentLevel[i].GetComponentInChildren<ParticleSystem>().Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
-        }
-        CurrentLevel.Last().GetComponentInChildren<ParticleSystem>().Play();
+        UI_particle.GetComponent<ParticleSystem>().Play();
+        UI_particle.SetPositionAndRotation(rect.position, Quaternion.identity);
+        UI_particle.SetParent(rect.transform);
     }
 
     public void FocusOnObjectImmediately()
     {
         rect = CurrentLevel.Last().GetComponent<RectTransform>();
         ScrollViewFocusFunctions.FocusOnItem(scroller, rect);
-        for (int i = 0; i < CurrentLevel.Count; i++)
-        {
-            CurrentLevel[i].GetComponentInChildren<ParticleSystem>().Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
-        }
-        CurrentLevel.Last().GetComponentInChildren<ParticleSystem>().Play();
+        UI_particle.GetComponent<ParticleSystem>().Play();
+        UI_particle.SetPositionAndRotation(rect.position, Quaternion.identity);
+        UI_particle.SetParent(rect.transform);
     }
 }
