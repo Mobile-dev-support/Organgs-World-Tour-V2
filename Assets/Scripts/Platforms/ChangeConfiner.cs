@@ -100,14 +100,14 @@ public class ChangeConfiner : MonoBehaviour
         previousOrthoSize = vcam.m_Lens.OrthographicSize;
         if (RangeX == 15 && RangeY == 15) // cube
         {
-            DOVirtual.Float(previousOrthoSize, 5.05f, 0.15f, angle =>
+            DOVirtual.Float(previousOrthoSize, 3.8f, 0.15f, angle =>
             {
                 vcam.m_Lens.OrthographicSize = angle;
             });
         }
         else if (RangeX == 15 && RangeY == 30) // vertical
         {
-            DOVirtual.Float(previousOrthoSize, 3.7f, 0.15f, angle =>
+            DOVirtual.Float(previousOrthoSize, 3.6f, 0.15f, angle =>
             {
                 vcam.m_Lens.OrthographicSize = angle;
             });

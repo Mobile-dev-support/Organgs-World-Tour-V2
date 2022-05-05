@@ -87,7 +87,7 @@ public class PlayerInAirState : PlayerState
         {            
             stateMachine.ChangeState(player.LandState);
         }
-        else if(isTouchingWall && !player.isDrinking && !isTouchingLedge && (!isGrounded || !isSlippery || !isStickingToPlatform || !isHittingPlatform || !isSugarPlatform) && !isDead)
+        else if(isTouchingWall && !isTouchingLedge && (!isGrounded || !isSlippery || !isStickingToPlatform || !isHittingPlatform || !isSugarPlatform || !player.isDrinking) && !isDead)
         {
             stateMachine.ChangeState(player.LedgeClimbState);
         }
