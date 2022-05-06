@@ -255,7 +255,7 @@ public class Energy : MonoBehaviour, IStoreListener
     {
 #if UNITY_ANDROID
         string AD_UNIT_ID = "ca-app-pub-2161356203087661/1878654308";
-#elif UNITY_IPHONE
+#elif UNITY_IOS
         string AD_UNIT_ID = "ca-app-pub-2161356203087661/1878654308";
 #else
         string AD_UNIT_ID = "unexpected_platform";
@@ -288,7 +288,7 @@ public class Energy : MonoBehaviour, IStoreListener
     {
 #if UNITY_ANDROID
         string adUnitId = "ca-app-pub-2161356203087661/5559686231";
-#elif UNITY_IPHONE
+#elif UNITY_IOS
         string adUnitId = "ca-app-pub-2161356203087661/6681196218";
 #else
         string adUnitId = "unexpected_platform";
@@ -309,7 +309,7 @@ public class Energy : MonoBehaviour, IStoreListener
     {
 #if UNITY_ANDROID
         string adUnitId = "ca-app-pub-2161356203087661/8530700286";
-#elif UNITY_IPHONE
+#elif UNITY_IOS
         string adUnitId = "ca-app-pub-2161356203087661/1946477617";
 #else
         string adUnitId = "unexpected_platform";
