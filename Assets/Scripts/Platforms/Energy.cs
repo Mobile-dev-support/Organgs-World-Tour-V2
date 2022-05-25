@@ -31,9 +31,9 @@ public class Energy : MonoBehaviour, IStoreListener
 
     public static string expand = "com.purplebug.wt.expandlives";
     public static string restore = "com.purplebug.wt.restore";
-    public static string life10 = "com.purplebug.wt.10lives";
-    public static string life30 = "com.purplebug.wt.30lives";
-    public static string life70 = "com.purplebug.wt.70lives";
+    public static string life20 = "com.purplebug.wt.20lives";
+    public static string life50 = "com.purplebug.wt.50lives";
+    public static string life100 = "com.purplebug.wt.100lives";
     private InterstitialAd interstitial;
     private RewardedAd rewardedAd;
     private AppOpenAd ad;
@@ -73,7 +73,7 @@ public class Energy : MonoBehaviour, IStoreListener
         AdTimer.gameObject.SetActive(false);
         if (!PlayerPrefs.HasKey("currentLife"))
         {
-            maxLifeData.maxLife = 10;
+            maxLifeData.maxLife = 20;
             extraLife = 0;
             PlayerPrefs.SetInt("currentLife", maxLifeData.maxLife);
             Load();
@@ -256,7 +256,7 @@ public class Energy : MonoBehaviour, IStoreListener
 #if UNITY_ANDROID
         string AD_UNIT_ID = "ca-app-pub-2161356203087661/1878654308";
 #elif UNITY_IOS
-        string AD_UNIT_ID = "ca-app-pub-2161356203087661/1878654308";
+        string AD_UNIT_ID = "ca-app-pub-2161356203087661/4702079995";
 #else
         string AD_UNIT_ID = "unexpected_platform";
 #endif
@@ -444,7 +444,7 @@ public class Energy : MonoBehaviour, IStoreListener
 
     private IEnumerator ExpandLifeToMax()
     {
-        maxLifeData.maxLife += 10;
+        maxLifeData.maxLife += 20;
         yield return new WaitForEndOfFrame();
         nonConsumableBtn.interactable = false;
         currentLife = maxLifeData.maxLife;
@@ -480,9 +480,9 @@ public class Energy : MonoBehaviour, IStoreListener
 
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
         builder.AddProduct(restore, ProductType.Consumable);
-        builder.AddProduct(life10, ProductType.Consumable);
-        builder.AddProduct(life30, ProductType.Consumable);
-        builder.AddProduct(life70, ProductType.Consumable);
+        builder.AddProduct(life20, ProductType.Consumable);
+        builder.AddProduct(life50, ProductType.Consumable);
+        builder.AddProduct(life100, ProductType.Consumable);
         builder.AddProduct(expand, ProductType.NonConsumable);
         UnityPurchasing.Initialize(this, builder);
     }
@@ -494,17 +494,17 @@ public class Energy : MonoBehaviour, IStoreListener
 
     public void BuyLowLives()
     {
-        BuyProductID(life10);
+        BuyProductID(life20);
     }
 
     public void BuyMidLives()
     {
-        BuyProductID(life30);
+        BuyProductID(life50);
     }
 
     public void BuyHighLives()
     {
-        BuyProductID(life70);
+        BuyProductID(life100);
     }
 
     public void RestoreLives()
@@ -591,26 +591,26 @@ public class Energy : MonoBehaviour, IStoreListener
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
     {
-        if (String.Equals(args.purchasedProduct.definition.id, life10, StringComparison.Ordinal))
+        if (String.Equals(args.purchasedProduct.definition.id, life20, StringComparison.Ordinal))
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             MainMenu.Instance.confirrmation_canvas.Show();
-            StartCoroutine(BuyLifePlus(10));
-            MainMenu.Instance.life10_canvas.Hide();
+            StartCoroutine(BuyLifePlus(22));
+            MainMenu.Instance.life20_canvas.Hide();
         }
-        else if (String.Equals(args.purchasedProduct.definition.id, life30, StringComparison.Ordinal))
+        else if (String.Equals(args.purchasedProduct.definition.id, life50, StringComparison.Ordinal))
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             MainMenu.Instance.confirrmation_canvas.Show();
-            StartCoroutine(BuyLifePlus(30));
-            MainMenu.Instance.life30_canvas.Hide();
+            StartCoroutine(BuyLifePlus(65));
+            MainMenu.Instance.life50_canvas.Hide();
         }
-        else if (String.Equals(args.purchasedProduct.definition.id, life70, StringComparison.Ordinal))
+        else if (String.Equals(args.purchasedProduct.definition.id, life100, StringComparison.Ordinal))
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             MainMenu.Instance.confirrmation_canvas.Show();
-            StartCoroutine(BuyLifePlus(70));
-            MainMenu.Instance.life70_canvas.Hide();
+            StartCoroutine(BuyLifePlus(130));
+            MainMenu.Instance.life100_canvas.Hide();
         }
         else if (String.Equals(args.purchasedProduct.definition.id, restore, StringComparison.Ordinal))
         {

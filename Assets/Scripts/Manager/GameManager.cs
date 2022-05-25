@@ -80,7 +80,15 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.01f);
         if(Fader.Instance != null)
         {
-            CountdownTimer.Instance.enabled = true;
+            if (Tutorial.Instance.view.isVisible())
+            {
+                CountdownTimer.Instance.enabled = false;
+            }
+            else
+            {
+                CountdownTimer.Instance.enabled = true;
+            }
+
             ScoringMechanism.Instance.NumberOfLives();
             Fader.Instance.BGFader(false);
         }

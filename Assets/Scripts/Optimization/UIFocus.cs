@@ -29,17 +29,13 @@ public class UIFocus : MonoBehaviour
     {
         rect = CurrentLevel.Last().GetComponent<RectTransform>();
         StartCoroutine(ScrollViewFocusFunctions.FocusOnItemCoroutine(scroller, rect, 2f));
-        UI_particle.GetComponent<ParticleSystem>().Play();
         UI_particle.SetPositionAndRotation(rect.position, Quaternion.identity);
-        UI_particle.SetParent(rect.transform);
     }
 
     public void FocusOnObjectImmediately()
     {
         rect = CurrentLevel.Last().GetComponent<RectTransform>();
         ScrollViewFocusFunctions.FocusOnItem(scroller, rect);
-        UI_particle.GetComponent<ParticleSystem>().Play();
         UI_particle.SetPositionAndRotation(rect.position, Quaternion.identity);
-        UI_particle.SetParent(rect.transform);
     }
 }

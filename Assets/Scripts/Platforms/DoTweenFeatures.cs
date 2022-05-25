@@ -36,14 +36,6 @@ public class DoTweenFeatures : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        if(gameObject.GetComponent<Button>() != null)
-        {
-            gameObject.GetComponent<Button>().onClick.AddListener(OnClick);
-        }
-    }
-
     public void OnClick()
     {
         switch (state)

@@ -13,7 +13,6 @@ public class ChangeConfiner : MonoBehaviour
     public LayerMask layer;
     public float RangeX;
     public float RangeY;
-    private bool isChanged;
     private float previousOrthoSize;
     public GameObject[] objs;
     [Header("LAST CONFINER DIALOG")]
@@ -34,19 +33,6 @@ public class ChangeConfiner : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (isChanged)
-        {
-            Collider2D hitCharacer = Physics2D.OverlapBox(transform.position, new Vector2(RangeX, RangeY), 0, layer);
-            confiner.m_BoundingShape2D = polygon;
-            if(hitCharacer != null)
-            {
-                vcam.m_Follow = hitCharacer.transform;
-                isChanged = false;
-            }
-        }
-    }
 
     private void OnDrawGizmos()
     {
@@ -58,11 +44,11 @@ public class ChangeConfiner : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            CamSizer();
             gameObject.GetComponent<SpriteRenderer>().DOFade(0f, 1f);
-            isChanged = true;
-
-            for(int i = 0; i < objs.Length; i++)
+            CamSizer();
+            confiner.m_BoundingShape2D = polygon;
+            vcam.m_Follow = GameManager.Instance.Rplayer.transform;
+            for (int i = 0; i < objs.Length; i++)
             {
                 objs[i].SetActive(true);
             }
@@ -75,7 +61,6 @@ public class ChangeConfiner : MonoBehaviour
                 }
             }
         }
-
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -83,7 +68,6 @@ public class ChangeConfiner : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             gameObject.GetComponent<SpriteRenderer>().DOFade(1f, 1f);
-            isChanged = false;
 
             for (int i = 0; i < objs.Length; i++)
             {

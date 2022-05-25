@@ -26,9 +26,9 @@ public class MainMenu : MonoBehaviour
     [HideInInspector] public View totem_land;
     [HideInInspector] public View confirrmation_canvas;
     [HideInInspector] public View restore_canvas;
-    [HideInInspector] public View life10_canvas;
-    [HideInInspector] public View life30_canvas;
-    [HideInInspector] public View life70_canvas;
+    [HideInInspector] public View life20_canvas;
+    [HideInInspector] public View life50_canvas;
+    [HideInInspector] public View life100_canvas;
     [HideInInspector] public View expand_canvas;
     [Header("MAIN MENU")]
     public Slider slider;
@@ -62,6 +62,7 @@ public class MainMenu : MonoBehaviour
     public static MainMenu Instance { get { return _instance; } }
     #endregion
 
+    #region other methods
     private void Awake()
     {
         //PlayerPrefs.DeleteAll();
@@ -103,6 +104,7 @@ public class MainMenu : MonoBehaviour
         statCanvas.Show();
         gameOverCanvas.Hide();
     }
+    #endregion
 
     #region Pulbic Methods
 
@@ -132,10 +134,19 @@ public class MainMenu : MonoBehaviour
 
     public void NextLevel()
     {
-        StartCoroutine(FadeGame(0, GameManager.Instance.nextScene));
-        StartCoroutine(StarCountUpdate());
-        isNextLevel = true;
-        coverCanvas.Show();
+        if(GameManager.Instance.sceneName != "48")
+        {
+            StartCoroutine(FadeGame(0, GameManager.Instance.nextScene));
+            StartCoroutine(StarCountUpdate());
+            isNextLevel = true;
+            coverCanvas.Show();
+        }
+        else
+        {
+            StartCoroutine(LoadGameAsync(true, GameManager.Instance.sceneName));
+            StartCoroutine(StarCountUpdate());
+            coverCanvas.Show();
+        }
     }
 
     public void Restart()
@@ -158,7 +169,7 @@ public class MainMenu : MonoBehaviour
         foreach (StarSystemUnlocker obj in unlocker)
         {
             obj.UpdateLevelStatus();
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(0.1f);
             obj.UpdateLevelImage();
         }
     }
@@ -222,6 +233,7 @@ public class MainMenu : MonoBehaviour
             winCanvas.Hide();
             scroller_canvas.Hide();
             menu_item_canvas.Hide();
+            totem_land.Hide();
             faderCanvas.Show();
             maingameCanvas.Show();
             CanvasFader(0, loadingCanvas.transform);
@@ -233,6 +245,7 @@ public class MainMenu : MonoBehaviour
             ingameCanvas.Show();
             loadingCanvas.Hide();
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(GameManager.Instance.sceneName));
+            Tutorial.Instance.TutorialOn();
         }
         else if (operation.isDone && unload)
         {
@@ -243,13 +256,12 @@ public class MainMenu : MonoBehaviour
             faderCanvas.Hide();
             winCanvas.Hide();
             coverCanvas.Hide();
+            totem_land.Hide();
             CanvasFader(1, loadingCanvas.transform);
             ingameCanvas.transform.SetParent(mainCanvas.transform, false);
             ingameCanvas.transform.SetSiblingIndex(3);
             yield return new WaitForSeconds(1f);
-            scroller_canvas.Show();
-            menu_item_canvas.Show();
-            ingameCanvas.Show();
+            Ending();
             CanvasFader(0, loadingCanvas.transform);
             UIFocus.Instance.FocusOnObjectImmediately();
             SoundManager.Instance.OutBGMusic(BGMusic.Instance.music);
@@ -257,6 +269,21 @@ public class MainMenu : MonoBehaviour
             SoundManager.Instance.SFXAudio(Map);
             CanvasFader(1, mainCanvas.transform);
             SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainMenu"));
+            Tutorial.Instance.TutorialOff();
+        }
+    }
+
+    public void Ending()
+    {
+        if (GameManager.Instance.sceneName != "48")
+        {
+            scroller_canvas.Show();
+            menu_item_canvas.Show();
+            ingameCanvas.Show();
+        }
+        else
+        {
+            videoManager.Instance.ShowVideo();
         }
     }
 

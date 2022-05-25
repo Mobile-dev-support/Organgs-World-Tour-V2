@@ -10,13 +10,12 @@ public class StarSystemUnlocker : MonoBehaviour
     public GameObject[] stars;
     public Sprite starSprite;
     public View getlifeCanvas;
-    private GameObject country;
+    public GameObject country;
  
 
     private void Start()
     {
         Button btn = gameObject.GetComponent<Button>();
-        country = GameObject.Find(gameObject.transform.parent.name);
         btn.onClick.AddListener(PressSelection);
         UpdateLevelStatus();
         UpdateLevelImage();

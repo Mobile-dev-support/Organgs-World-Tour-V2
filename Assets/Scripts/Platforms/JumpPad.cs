@@ -63,7 +63,6 @@ public class JumpPad : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player"))
         {
-            CharacterAudio.Instance.WallJump();
             gameObject.GetComponent<Animator>().SetTrigger(jumpAnimation);
             Core core = other.GetComponent<Collider2D>().GetComponentInChildren<Core>();
             Rigidbody2D rb = other.GetComponent<Collider2D>().GetComponent<Rigidbody2D>();
