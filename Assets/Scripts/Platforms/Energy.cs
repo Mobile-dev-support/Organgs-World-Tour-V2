@@ -303,6 +303,7 @@ public class Energy : MonoBehaviour, IStoreListener
         this.interstitial.OnAdLoaded += HandleOnAdLoaded;
         // Called when an ad request failed to load.
         this.interstitial.OnAdFailedToLoad += HandleOnAdFailedToLoad;
+        this.interstitial.OnAdClosed += HandleOnAdClosed;
     }
 
     public void RequestRewarded()
@@ -392,7 +393,12 @@ public class Energy : MonoBehaviour, IStoreListener
         Debug.Log("Ad loaded  " + args.ToString());
 
     }
-
+    
+    public void HandleOnAdClosed(object sender, EventArgs args)
+    {
+        MonoBehaviour.print("HandleAdClosed event received");
+        this.RequestInterstitial();
+    }
 
     public void HandleOnAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
     {

@@ -65,7 +65,7 @@ public class MainMenu : MonoBehaviour
     #region other methods
     private void Awake()
     {
-        //PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();
         if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
@@ -88,6 +88,12 @@ public class MainMenu : MonoBehaviour
     {
         SoundManager.Instance.StopMusicAudio(Main);
         SoundManager.Instance.SFXAudio(Map);
+    }
+
+    public void ButtonSfx()
+    {
+        SoundManager.Instance.ButtonSound(ButtonSound);
+        Debug.Log("Sound");
     }
 
     public void MapToMain()
