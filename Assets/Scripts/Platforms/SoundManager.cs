@@ -46,6 +46,10 @@ public class SoundManager : MonoBehaviour
         music.loop = false;
         music.Stop();
     }
+    public void BeepTimer(AudioClip clip)
+    {
+        music.PlayOneShot(clip);
+    }
     #endregion
 
     #region Button

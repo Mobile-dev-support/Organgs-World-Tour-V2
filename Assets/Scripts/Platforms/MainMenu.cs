@@ -30,6 +30,7 @@ public class MainMenu : MonoBehaviour
     [HideInInspector] public View life50_canvas;
     [HideInInspector] public View life100_canvas;
     [HideInInspector] public View expand_canvas;
+    [HideInInspector] public View shop_canvas;
     [Header("MAIN MENU")]
     public Slider slider;
     public TextMeshProUGUI textProgress;
@@ -65,7 +66,7 @@ public class MainMenu : MonoBehaviour
     #region other methods
     private void Awake()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
         if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
@@ -93,7 +94,6 @@ public class MainMenu : MonoBehaviour
     public void ButtonSfx()
     {
         SoundManager.Instance.ButtonSound(ButtonSound);
-        Debug.Log("Sound");
     }
 
     public void MapToMain()

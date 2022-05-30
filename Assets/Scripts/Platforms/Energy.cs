@@ -15,6 +15,7 @@ public class Energy : MonoBehaviour, IStoreListener
     [SerializeField] private TextMeshProUGUI[] extraLivesTxt;
     [SerializeField] private TextMeshProUGUI timerTxt;
     [SerializeField] private Button nonConsumableBtn;
+    [SerializeField] private Button nonConsumableBtn2;
     [SerializeField] private Button AdButton;
 
     private int restorDuration = 3;
@@ -73,8 +74,8 @@ public class Energy : MonoBehaviour, IStoreListener
         AdTimer.gameObject.SetActive(false);
         if (!PlayerPrefs.HasKey("currentLife"))
         {
-            maxLifeData.maxLife = 20;
             extraLife = 0;
+            PlayerPrefs.SetInt("maxLife", maxLifeData.maxLife);
             PlayerPrefs.SetInt("currentLife", maxLifeData.maxLife);
             Load();
             StartCoroutine(RestoreLife());
@@ -82,7 +83,14 @@ public class Energy : MonoBehaviour, IStoreListener
         else
         {
             Load();
+            PlayerPrefs.SetInt("maxLife", maxLifeData.maxLife);
             StartCoroutine(RestoreLife());
+        }
+
+        if(maxLifeData.maxLife > 20)
+        {
+            nonConsumableBtn.interactable = false;
+            nonConsumableBtn2.interactable = false;
         }
     }
 
@@ -221,6 +229,7 @@ public class Energy : MonoBehaviour, IStoreListener
     private void Load()
     {
         currentLife = PlayerPrefs.GetInt("currentLife");
+        maxLifeData.maxLife = PlayerPrefs.GetInt("maxLife");
         extraLife = PlayerPrefs.GetInt("extraLife");
         nextLifeTime = StringToDate(PlayerPrefs.GetString("nextLifeTime"));
         lastLifeTime = StringToDate(PlayerPrefs.GetString("lastLifeTime"));
@@ -230,6 +239,7 @@ public class Energy : MonoBehaviour, IStoreListener
     {
         PlayerPrefs.SetInt("currentLife", currentLife);
         PlayerPrefs.SetInt("extraLife", extraLife);
+        PlayerPrefs.SetInt("maxLife", maxLifeData.maxLife);
         PlayerPrefs.SetString("nextLifeTime", nextLifeTime.ToString());
         PlayerPrefs.SetString("lastLifeTime", lastLifeTime.ToString());
     }
@@ -453,6 +463,7 @@ public class Energy : MonoBehaviour, IStoreListener
         maxLifeData.maxLife += 20;
         yield return new WaitForEndOfFrame();
         nonConsumableBtn.interactable = false;
+        nonConsumableBtn2.interactable = false;
         currentLife = maxLifeData.maxLife;
         UpdateLifeTimer();
         UpdateLife();
@@ -603,6 +614,7 @@ public class Energy : MonoBehaviour, IStoreListener
             MainMenu.Instance.confirrmation_canvas.Show();
             StartCoroutine(BuyLifePlus(22));
             MainMenu.Instance.life20_canvas.Hide();
+            Purchased();
         }
         else if (String.Equals(args.purchasedProduct.definition.id, life50, StringComparison.Ordinal))
         {
@@ -610,6 +622,7 @@ public class Energy : MonoBehaviour, IStoreListener
             MainMenu.Instance.confirrmation_canvas.Show();
             StartCoroutine(BuyLifePlus(65));
             MainMenu.Instance.life50_canvas.Hide();
+            Purchased();
         }
         else if (String.Equals(args.purchasedProduct.definition.id, life100, StringComparison.Ordinal))
         {
@@ -617,6 +630,7 @@ public class Energy : MonoBehaviour, IStoreListener
             MainMenu.Instance.confirrmation_canvas.Show();
             StartCoroutine(BuyLifePlus(130));
             MainMenu.Instance.life100_canvas.Hide();
+            Purchased();
         }
         else if (String.Equals(args.purchasedProduct.definition.id, restore, StringComparison.Ordinal))
         {
@@ -624,6 +638,7 @@ public class Energy : MonoBehaviour, IStoreListener
             MainMenu.Instance.confirrmation_canvas.Show();
             StartCoroutine(RestoreToFull());
             MainMenu.Instance.restore_canvas.Hide();
+            Purchased();
         }
         else if (String.Equals(args.purchasedProduct.definition.id, expand, StringComparison.Ordinal))
         {
@@ -631,6 +646,7 @@ public class Energy : MonoBehaviour, IStoreListener
             MainMenu.Instance.confirrmation_canvas.Show();
             StartCoroutine(ExpandLifeToMax());
             MainMenu.Instance.expand_canvas.Hide();
+            Purchased();
         }
         else
         {
@@ -638,6 +654,18 @@ public class Energy : MonoBehaviour, IStoreListener
         }
 
         return PurchaseProcessingResult.Complete;
+    }
+
+    private void Purchased()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.Respawn();
+            MainMenu.Instance.statCanvas.Show();
+            MainMenu.Instance.gameOverCanvas.Hide();
+            MainMenu.Instance.shop_canvas.Hide();
+            MainMenu.Instance.confirrmation_canvas.Hide();
+        }
     }
 
 

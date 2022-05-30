@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using DG.Tweening;
 using TMPro;
 
 public class CountdownTimer : MonoBehaviour
@@ -13,6 +13,7 @@ public class CountdownTimer : MonoBehaviour
     private TextMeshProUGUI timerText;
     [SerializeField] private float defaultTime = 300;
     [SerializeField] private float extraTime = 60;
+    [SerializeField] private AudioClip beep;
     private static CountdownTimer _instance;
     public static CountdownTimer Instance { get { return _instance; } }
 
@@ -31,12 +32,15 @@ public class CountdownTimer : MonoBehaviour
     private void Start()
     {
         isGameOver = false;
+        timerText.DOColor(Color.white, 0f);
+        StartCoroutine(NearTime());
     }
 
     public void ResetTimer()
     {
         isGameOver = false;
         timeValue = defaultTime;
+        timerText.DOColor(Color.white, 0f);
     }
 
     private void OnEnable()
@@ -110,7 +114,6 @@ public class CountdownTimer : MonoBehaviour
     {
         if(timeToDisplay < 0)
         {
-
             timeToDisplay = 0;
         }
         else if(timeToDisplay > 0)
@@ -121,6 +124,20 @@ public class CountdownTimer : MonoBehaviour
         minutes = Mathf.FloorToInt(timeToDisplay / 60);
         seconds = Mathf.FloorToInt(timeToDisplay % 60);
         timerText.SetText("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    private IEnumerator NearTime()
+    {
+        while (true)
+        {
+            if(timeValue <= 20 && timeValue > 0 && GameManager.Instance != null)
+            {
+                timerText.DOColor(Color.red, 0.3f);
+                timerText.transform.DOShakeScale(0.3f, 1, 10, 0);
+                SoundManager.Instance.BeepTimer(beep);
+            }
+            yield return new WaitForSeconds(1f);
+        }
     }
 
 }
