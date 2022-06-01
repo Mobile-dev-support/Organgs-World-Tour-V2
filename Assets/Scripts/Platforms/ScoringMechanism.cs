@@ -14,7 +14,7 @@ public class ScoringMechanism : MonoBehaviour
     public Button NextLevelBtn;
     private float coinscore = 100f;
     private float timeMinusScore = 2f;
-    public GameObject[] stars;
+    public Image[] stars;
     public float NoOfLives { get; set; }
     public float coinNo { get; set; }
     public float score { get; set; }
@@ -42,23 +42,23 @@ public class ScoringMechanism : MonoBehaviour
 
     public void Scoring()
     {
-        if (score >= 1000 && score < 2000)
+        if (score >= 1000 && score <= 2000)
         {
             DoorController.Instance.StarsNum = 1;
-            stars[0].GetComponent<Image>().sprite = starSprite;
+            stars[0].sprite = starSprite;
         }
-        else if (score >= 2000 && score < 2500)
+        else if (score >= 2000 && score <= 2500)
         {
             DoorController.Instance.StarsNum = 2;
-            stars[0].GetComponent<Image>().sprite = starSprite;
-            stars[1].GetComponent<Image>().sprite = starSprite;
+            stars[0].sprite = starSprite;
+            stars[1].sprite = starSprite;
         }
-        else if (score >= 2500 && score < 3000)
+        else if (score >= 2500 && score <= 3000)
         {
             DoorController.Instance.StarsNum = 3;
-            stars[0].GetComponent<Image>().sprite = starSprite;
-            stars[1].GetComponent<Image>().sprite = starSprite;
-            stars[2].GetComponent<Image>().sprite = starSprite;
+            stars[0].sprite = starSprite;
+            stars[1].sprite = starSprite;
+            stars[2].sprite = starSprite;
         }
         SoundManager.Instance.winSound(MainMenu.Instance.win);
     }
@@ -73,6 +73,7 @@ public class ScoringMechanism : MonoBehaviour
     public void timeScore()
     {
         score -= timeMinusScore;
+        Debug.Log(score);
     }
     #endregion
 }

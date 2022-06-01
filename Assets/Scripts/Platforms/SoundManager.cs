@@ -48,7 +48,7 @@ public class SoundManager : MonoBehaviour
     }
     public void BeepTimer(AudioClip clip)
     {
-        music.PlayOneShot(clip);
+        sfx.PlayOneShot(clip);
     }
     #endregion
 

@@ -6,6 +6,7 @@ public class PlayerMoveState : PlayerGroundedState
 {
     public bool canSlide = true;
     private Vector2 lastAIPos;
+    private bool SlideInput;
 
     public PlayerMoveState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
@@ -31,6 +32,7 @@ public class PlayerMoveState : PlayerGroundedState
         base.LogicUpdate();
         core.Movement.CheckIfShouldFlip(xInput);
         core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
+        SlideInput = player.InputHandler.SlideInput;
         if (!isExitingState)
         {
             if (xInput == 0 || player.afterShock || player.IsStunned)
@@ -41,6 +43,10 @@ public class PlayerMoveState : PlayerGroundedState
             {
                 stateMachine.ChangeState(player.CrouchIdleState);
             }*/
+            else if (SlideInput && !isTouchingWall && Time.time >= startTime + playerData.slideAgainTimer)
+            {
+                stateMachine.ChangeState(player.CrouchIdleState);
+            }
 
         }
     }
