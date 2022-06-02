@@ -10,7 +10,7 @@ public class CountdownTimer : MonoBehaviour
     public int seconds { get; set; }
     public bool isGameOver { get; set ; }
     private float timeValue;
-    private TextMeshProUGUI timerText;
+    public TextMeshProUGUI timerText;
     [SerializeField] private float defaultTime = 300;
     [SerializeField] private float extraTime = 60;
     [SerializeField] private AudioClip beep;
@@ -40,13 +40,11 @@ public class CountdownTimer : MonoBehaviour
     {
         isGameOver = false;
         timeValue = defaultTime;
-        timerText.DOColor(Color.white, 0f);
     }
 
     private void OnEnable()
     {
         InvokeRepeating("ScoreDecreaser", 1, 1);
-        timerText = GetComponent<TextMeshProUGUI>();
     }
 
     private void OnDisable()

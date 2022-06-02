@@ -18,6 +18,7 @@ public class E1_IdleState : IdleState
     public override void Exit()
     {
         base.Exit();
+        enemy.idleState.SetFlipAfterIdle(true);
     }
 
     public override void LogicUpdate()

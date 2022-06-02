@@ -31,7 +31,7 @@ public class E1_MoveState : MoveState
         }
         else if(isDetectingWall && isGrounded && isDetectingLedgeHorizontal)
         {
-            enemy.idleState.SetFlipAfterIdle(true);
+            //enemy.idleState.SetFlipAfterIdle(true);
             stateMachine.ChangeState(enemy.idleState);
         }
         else if (isDetectingWall && !isDetectingLedgeHorizontal && isGrounded)

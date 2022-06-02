@@ -39,9 +39,9 @@ public class GameManager : MonoBehaviour
         mCamera = Camera.main;
         firstDoor = GameObject.Find("door");
         anim = firstDoor.GetComponent<Animator>();
-
-        if(Fader.Instance != null)
+        if (Fader.Instance != null)
         {
+            CountdownTimer.Instance.timerText.DOColor(Color.white, 0f);
             Fader.Instance.FadeImmediately();
             CountdownTimer.Instance.ResetTimer();
         }

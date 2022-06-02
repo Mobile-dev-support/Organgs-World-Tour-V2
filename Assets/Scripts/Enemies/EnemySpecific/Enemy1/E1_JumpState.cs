@@ -31,7 +31,7 @@ public class E1_JumpState : JumpState
         }*/
         if (isJumpOver && isGrounded)
         {
-            stateMachine.ChangeState(enemy.idleState);
+            stateMachine.ChangeState(enemy.moveState);
             //enemy.idleState.SetFlipAfterIdle(true);
         }
         else if (isDead)
