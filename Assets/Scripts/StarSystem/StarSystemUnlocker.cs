@@ -10,7 +10,7 @@ public class StarSystemUnlocker : MonoBehaviour
     public GameObject[] stars;
     public Sprite starSprite;
     public View getlifeCanvas;
-    public GameObject country;
+    public RectTransform country;
  
 
     private void Start()

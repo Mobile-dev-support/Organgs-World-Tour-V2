@@ -65,8 +65,7 @@ public class Enemy1 : Entity
     }
     private void OnEnable()
     {
-        if (pooler != null)
-            stateMachine.Initialize(idleState);
+        stateMachine.ChangeState(idleState);
     }
 
     public override void OnDrawGizmos()

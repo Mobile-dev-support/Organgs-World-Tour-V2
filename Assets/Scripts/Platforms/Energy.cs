@@ -383,7 +383,7 @@ public class Energy : MonoBehaviour, IStoreListener
 
     public void HandleRewardedAdClosed(object sender, EventArgs args)
     {
-        RequestRewarded();
+        this.RequestRewarded();
         MonoBehaviour.print("HandleRewardedAdClosed event received");
     }
 
@@ -394,6 +394,7 @@ public class Energy : MonoBehaviour, IStoreListener
 
     public void HandleRewardedAdFailedToLoad(object sender, EventArgs args)
     {
+        this.RequestRewarded();
         Debug.LogError(
             "HandleRewardedAdFailedToLoad event received with message: "
                              + args.ToString());

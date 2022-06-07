@@ -58,8 +58,8 @@ public class DoorController : MonoBehaviour
         totemlandActivation.Instance.DisableTotemLand();
         MainMenu.Instance.totem_land.Hide();
         MainMenu.Instance.dialogCanvas.Hide();
-        ScoringMechanism.Instance.Scoring();
         yield return new WaitForSeconds(0.1f);
+        ScoringMechanism.Instance.Scoring();
         currentStarsNum = StarsNum;
         if (currentStarsNum > PlayerPrefs.GetInt("Lv" + levelIndex))
         {

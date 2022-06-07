@@ -18,13 +18,18 @@ public class Spawn : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Instantiate(chunk, transform.position, chunk.transform.rotation);
-            Pooler.AddToPool(gameObject);
+            Invoke("Delay", 0.1f);
 
         }
         else if (other.gameObject.CompareTag("Spikes"))
         {
             Instantiate(chunk, transform.position, chunk.transform.rotation);
-            Pooler.AddToPool(gameObject);
+            Invoke("Delay", 0.1f);
         }
+    }
+    
+    private void Delay()
+    {
+            Pooler.AddToPool(gameObject);
     }
 }
