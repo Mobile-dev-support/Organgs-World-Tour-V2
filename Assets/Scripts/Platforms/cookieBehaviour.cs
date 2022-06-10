@@ -5,26 +5,30 @@ using UnityEngine;
 public class cookieBehaviour : MonoBehaviour
 {
     public GameObject chunk;
-    private bool isExploded;
-    private Rigidbody2D rb;
     [Header("Jump towards Player")]
     private Animator anim;
     [SerializeField] private float jumpHeight;
     [SerializeField] private float radius;
     [SerializeField] private LayerMask whatIsPlayer;
+    [Header("Knockback")]
+    [SerializeField]
+    private Vector2 angle;
+    [SerializeField]
+    private float strength;
+
     private static readonly string ANIMATION_DETECT = "playerDetected";
+    private Rigidbody2D rb;
+    private Core coreP;
 
     private void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        isExploded = false;
     }
 
     private void FixedUpdate()
     {
         RangeOfCookie();
-        Explosion();
     }
 
     public void LungeAttack()
@@ -35,10 +39,6 @@ public class cookieBehaviour : MonoBehaviour
             rb.bodyType = RigidbodyType2D.Dynamic;
             rb.AddForce(new Vector2(distanceFromPlayer, jumpHeight), ForceMode2D.Impulse);
         }
-        else
-        {
-            isExploded = true;
-        }
     }
 
     private void RangeOfCookie()
@@ -47,8 +47,8 @@ public class cookieBehaviour : MonoBehaviour
         {
             if (Vector2.Distance(transform.position, GameManager.Instance.Rplayer.transform.position) < radius)
             {
-                Vector2 direction = GameManager.Instance.Rplayer.transform.position - transform.position;
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, radius, whatIsPlayer);
+                Vector2 playerPos = GameManager.Instance.Rplayer.transform.position - transform.position;
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, playerPos, radius, whatIsPlayer);
                 if (hit.collider == null)
                 {
                     return;
@@ -61,18 +61,40 @@ public class cookieBehaviour : MonoBehaviour
         }
     }
 
-    private void Explosion()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (isExploded)
+        if (other.gameObject.CompareTag("Player"))
         {
-            Instantiate(chunk, transform.position, chunk.transform.rotation);
-            isExploded = false;
-            Destroy(gameObject, 0.1f);
+            Core core = other.gameObject.GetComponentInChildren<Core>();
+            coreP = core;
+            Knockback(angle, strength, -coreP.Movement.FacingDirection);
+            Invoke("Explosion", 0.15f);
+        }
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            Explosion();
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    public void Knockback(Vector2 angle, float strength, int direction)
     {
-        isExploded = true;
+        coreP.Movement.SetVelocity(strength, angle, direction);
+        coreP.Movement.Flip();
+        coreP.Movement.CanSetVelocity = false;
+    }
+
+    private void Explosion()
+    {
+        Instantiate(chunk, transform.position, chunk.transform.rotation);
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        if(coreP != null)
+        {
+            coreP.Movement.CanSetVelocity = true;
+            coreP.Movement.SetVelocityX(0);
+        }
     }
 }

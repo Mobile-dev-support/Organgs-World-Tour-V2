@@ -15,6 +15,7 @@ public class CountdownTimer : MonoBehaviour
     [SerializeField] private float extraTime = 60;
     [SerializeField] private AudioClip beep;
     private static CountdownTimer _instance;
+    private bool time;
     public static CountdownTimer Instance { get { return _instance; } }
 
     private void Awake()
@@ -33,7 +34,6 @@ public class CountdownTimer : MonoBehaviour
     {
         isGameOver = false;
         timerText.DOColor(Color.white, 0f);
-        StartCoroutine(NearTime());
     }
 
     public void ResetTimer()
@@ -44,12 +44,15 @@ public class CountdownTimer : MonoBehaviour
 
     private void OnEnable()
     {
+        time = true;
+        StartCoroutine(NearTime());
         InvokeRepeating("ScoreDecreaser", 1, 1);
     }
 
     private void OnDisable()
     {
         CancelInvoke();
+        time = false;
     }
 
     public void ScoreDecreaser()
@@ -126,7 +129,7 @@ public class CountdownTimer : MonoBehaviour
 
     private IEnumerator NearTime()
     {
-        while (true)
+        while (time)
         {
             if(timeValue <= 20 && timeValue > 0 && GameManager.Instance != null)
             {

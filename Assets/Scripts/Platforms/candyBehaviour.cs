@@ -13,9 +13,7 @@ public class candyBehaviour : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private float deathradius;
     public Transform groundCheck;
-    public Transform playerCheck;
     public LayerMask layer;
-    public LayerMask playerlayer;
     public GameObject chunk;
     [Header("SQUISH AND STRETCH")]
     public Vector3 wallSquash = new Vector3(0.6f, 1.66f, 0.1f);
@@ -40,7 +38,6 @@ public class candyBehaviour : MonoBehaviour
     private void GroundCheck()
     {
         Collider2D collider = Physics2D.OverlapCircle(groundCheck.position, radius, layer);
-        Collider2D hitcollider = Physics2D.OverlapCircle(playerCheck.position, deathradius, playerlayer);
         if (collider)
         {
             jumpTimer -= Time.deltaTime;
@@ -50,11 +47,6 @@ public class candyBehaviour : MonoBehaviour
                 jumpTimer = JumpTimerDefault;
             }
         }
-        if (hitcollider)
-        {
-            Instantiate(chunk, transform.position, chunk.transform.rotation);
-            Destroy(gameObject, 0.1f);
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -62,7 +54,13 @@ public class candyBehaviour : MonoBehaviour
         if (other.collider.CompareTag("Spikes"))
         {
             Instantiate(chunk, transform.position, chunk.transform.rotation);
-            Destroy(gameObject, 0.01f);
+            Destroy(gameObject, 0.15f);
+        }
+        if (other.collider.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<Player>().StateMachine.ChangeState(other.gameObject.GetComponent<Player>().DeathState);
+            Instantiate(chunk, transform.position, chunk.transform.rotation);
+            Destroy(gameObject, 0.15f);
         }
     }
 
@@ -70,6 +68,5 @@ public class candyBehaviour : MonoBehaviour
     {
         Gizmos.color = Color.blue * new Color(1, 1, 1, 0.5f);
         Gizmos.DrawWireSphere(groundCheck.position, radius);
-        Gizmos.DrawWireSphere(playerCheck.position, deathradius);
     }
 }

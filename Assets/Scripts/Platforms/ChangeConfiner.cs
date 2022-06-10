@@ -68,13 +68,17 @@ public class ChangeConfiner : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             gameObject.GetComponent<SpriteRenderer>().DOFade(1f, 1f);
+            Invoke("Delay", 0.15f);
+        }
+    }
 
-            for (int i = 0; i < objs.Length; i++)
+    private void Delay()
+    {
+        for (int i = 0; i < objs.Length; i++)
+        {
+            if (confiner.m_BoundingShape2D != polygon)
             {
-                if (confiner.m_BoundingShape2D != polygon)
-                {
-                    objs[i].SetActive(false);
-                }
+                objs[i].SetActive(false);
             }
         }
     }

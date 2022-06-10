@@ -27,14 +27,14 @@ public class UIFocus : MonoBehaviour
 
     public void FocusOnObject()
     {
-        rect = CurrentLevel.Last();
+        rect = CurrentLevel.First();
         StartCoroutine(ScrollViewFocusFunctions.FocusOnItemCoroutine(scroller, rect, 2f));
         UI_particle.SetPositionAndRotation(rect.position, Quaternion.identity);
     }
 
     public void FocusOnObjectImmediately()
     {
-        rect = CurrentLevel.Last();
+        rect = CurrentLevel.First();
         ScrollViewFocusFunctions.FocusOnItem(scroller, rect);
         UI_particle.SetPositionAndRotation(rect.position, Quaternion.identity);
     }

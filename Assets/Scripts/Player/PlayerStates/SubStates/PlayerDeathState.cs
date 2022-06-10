@@ -37,6 +37,7 @@ public class PlayerDeathState : PlayerGroundedState
         {
             Fader.Instance.BGFader(true);
             CountdownTimer.Instance.enabled = false;
+            player.isNotDrunk();
         }
         if (Energy.Instance != null)
         {

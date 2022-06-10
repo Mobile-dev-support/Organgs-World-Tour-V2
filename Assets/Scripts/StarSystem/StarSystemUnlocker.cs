@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class StarSystemUnlocker : MonoBehaviour
 {
@@ -37,7 +38,11 @@ public class StarSystemUnlocker : MonoBehaviour
         if (!UIFocus.Instance.CurrentLevel.Contains(country))
         {
             UIFocus.Instance.CurrentLevel.Add(country);
+            var moveToFirst = UIFocus.Instance.CurrentLevel.Last();
+            UIFocus.Instance.CurrentLevel.RemoveAt(UIFocus.Instance.CurrentLevel.Count - 1);
+            UIFocus.Instance.CurrentLevel.Insert(0, moveToFirst);
             country.GetComponent<Button>().interactable = true;
+
         }
     }
 

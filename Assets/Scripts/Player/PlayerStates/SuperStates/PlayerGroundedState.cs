@@ -100,23 +100,25 @@ public class PlayerGroundedState : PlayerState
         {
             Debug.Log("this");
         }*/
-        else if(player.isDrinking)
+        else if(player.isDrinking && !isDead)
         {
             DrunkState();
         }
     }
 
-    private void DrunkState()
+    public void DrunkState()
     {
         player.Anim.SetFloat(xState, 1.0f);
         if (Time.time >= startTime + playerData.Stunned)
         {
+            player.DrunkControls();
             player.isNotStunned();
             player.drunk.SetActive(false);
             if (!Stunned && Time.time >= startTime + playerData.DrinkTimer)
             {
                 player.isNotDrunk();
                 player.Anim.SetFloat(xState, 0.0f);
+                player.DefaultControls();
             }
         }
     }

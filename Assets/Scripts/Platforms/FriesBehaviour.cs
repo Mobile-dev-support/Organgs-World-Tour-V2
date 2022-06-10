@@ -6,9 +6,11 @@ public class FriesBehaviour : MonoBehaviour
 {
     public GameObject[] Fries;
     public float waitTime;
+    public float idleTime;
     public float cascadeTime;
     private List<Animator> ani;
     public bool isCascade;
+    public bool isAlternate;
     private static readonly string ANIMATION_BUMP = "onJump";
 
     public void Awake()
@@ -34,7 +36,7 @@ public class FriesBehaviour : MonoBehaviour
     {
         while (true)
         {
-            if (isCascade)
+            if (isCascade && !isAlternate)
             {
                 foreach (Animator anim in ani)
                 {
@@ -43,6 +45,19 @@ public class FriesBehaviour : MonoBehaviour
                     anim.SetBool(ANIMATION_BUMP, false);
                     yield return new WaitForSeconds(cascadeTime);
                 }
+            }
+            else if(isAlternate && !isCascade)
+            {
+                foreach (Animator anim in ani)
+                {
+                    anim.SetBool(ANIMATION_BUMP, false);
+                }
+                yield return new WaitForSeconds(waitTime);
+                foreach (Animator anim in ani)
+                {
+                    anim.SetBool(ANIMATION_BUMP, true);
+                }
+                yield return new WaitForSeconds(idleTime);
             }
             else
             {

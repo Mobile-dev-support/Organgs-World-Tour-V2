@@ -392,6 +392,12 @@ MonoBehaviour:
   _debug: 1
   _autoInit: 1
   _trackingTarget: {fileID: 2008496941}
+--- !u!60 &297509832 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4039071178006354844, guid: 4207c4bbbd118a84a8142300078e50da,
+    type: 3}
+  m_PrefabInstance: {fileID: 4039071179488103603}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &341888125
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +697,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 4.5
+  orthographic size: 5.05
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -715,7 +721,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.172232, y: 30.240404, z: -4.003824}
+  m_LocalPosition: {x: 26.405592, y: 19.082071, z: -4.003824}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1600806940}
@@ -1362,12 +1368,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &1738474031 stripped
-PolygonCollider2D:
-  m_CorrespondingSourceObject: {fileID: 4039071178699327854, guid: 4207c4bbbd118a84a8142300078e50da,
-    type: 3}
-  m_PrefabInstance: {fileID: 4039071179488103603}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2008496939
 GameObject:
   m_ObjectHideFlags: 0
@@ -1410,7 +1410,7 @@ MonoBehaviour:
   m_Follow: {fileID: 4039071179488103604}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 4.5
+    OrthographicSize: 5.05
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -1431,7 +1431,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2008496939}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.843668, y: 30.2404, z: -4.003824}
+  m_LocalPosition: {x: -8.843668, y: 30.241419, z: -4.003824}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 417731747}
@@ -1464,7 +1464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ConfineMode: 0
   m_BoundingVolume: {fileID: 0}
-  m_BoundingShape2D: {fileID: 1738474031}
+  m_BoundingShape2D: {fileID: 297509832}
   m_ConfineScreenEdges: 1
   m_Damping: 0
 --- !u!114 &2008496944

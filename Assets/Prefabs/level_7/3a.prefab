@@ -103,6 +103,59 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &848889041
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 848889042}
+  - component: {fileID: 848889043}
+  m_Layer: 9
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &848889042
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848889041}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.44, y: 0.02, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7183274634621188868}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!68 &848889043
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848889041}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 5.28, y: 0}
+  - {x: 0.5, y: 0}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &909577804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1427,7 +1480,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2431229706786876056}
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.445, y: -0.15166666, z: 0}
+  m_LocalPosition: {x: -0.4469, y: -0.15166666, z: 0}
   m_LocalScale: {x: 0.03333333, y: 0.03333333, z: 1}
   m_Children:
   - {fileID: 2431229707535964109}
@@ -1453,8 +1506,10 @@ MonoBehaviour:
   - {fileID: 2431229708058787740}
   - {fileID: 2431229707174257892}
   waitTime: 2
+  idleTime: 0
   cascadeTime: 0
   isCascade: 0
+  isAlternate: 0
 --- !u!1 &2431229706790241053
 GameObject:
   m_ObjectHideFlags: 0
@@ -2934,7 +2989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWaypoint: {fileID: 2431229708588407522}
-  maxSpeed: 2.5
+  maxSpeed: 2
   accelerationDistance: 0
   decelerationDistance: 0
   waitTime: 1
@@ -7646,7 +7701,7 @@ GameObject:
   - component: {fileID: 2431229707589702228}
   - component: {fileID: 2431229707589702231}
   m_Layer: 0
-  m_Name: Block
+  m_Name: Cascade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7716,8 +7771,10 @@ MonoBehaviour:
   - {fileID: 2431229707255926709}
   - {fileID: 2431229708196307790}
   waitTime: 1
+  idleTime: 0
   cascadeTime: 0.5
   isCascade: 1
+  isAlternate: 0
 --- !u!1 &2431229707597849412
 GameObject:
   m_ObjectHideFlags: 0
@@ -8309,7 +8366,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2431229707689132884}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.3551, y: 0.028666688, z: 0}
+  m_LocalPosition: {x: -0.3533, y: 0.028666688, z: 0}
   m_LocalScale: {x: 0.03333333, y: 0.03333333, z: 1}
   m_Children:
   - {fileID: 2431229707139594855}
@@ -8335,8 +8392,10 @@ MonoBehaviour:
   - {fileID: 2431229707362910265}
   - {fileID: 2431229708868636523}
   waitTime: 2
+  idleTime: 0
   cascadeTime: 0
   isCascade: 0
+  isAlternate: 0
 --- !u!1 &2431229707705093469
 GameObject:
   m_ObjectHideFlags: 0
@@ -9852,7 +9911,7 @@ Tilemap:
       - {fileID: 2459267521760796185, guid: ce71e813b0851064eadcc52316c6c413, type: 3}
       - {fileID: -8585919926412423772, guid: ce71e813b0851064eadcc52316c6c413, type: 3}
       - {fileID: 3487863345566075101, guid: ce71e813b0851064eadcc52316c6c413, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 0, y: -6, z: 0}
@@ -9882,7 +9941,7 @@ Tilemap:
       - {fileID: 2459267521760796185, guid: ce71e813b0851064eadcc52316c6c413, type: 3}
       - {fileID: -8585919926412423772, guid: ce71e813b0851064eadcc52316c6c413, type: 3}
       - {fileID: 3487863345566075101, guid: ce71e813b0851064eadcc52316c6c413, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 3, y: -6, z: 0}
@@ -9912,7 +9971,7 @@ Tilemap:
       - {fileID: 2459267521760796185, guid: ce71e813b0851064eadcc52316c6c413, type: 3}
       - {fileID: -8585919926412423772, guid: ce71e813b0851064eadcc52316c6c413, type: 3}
       - {fileID: 3487863345566075101, guid: ce71e813b0851064eadcc52316c6c413, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -1, y: -5, z: 0}
@@ -16374,7 +16433,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2431229708190759993}
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.445, y: 0.20733339, z: 0}
+  m_LocalPosition: {x: -0.4467, y: 0.20733339, z: 0}
   m_LocalScale: {x: 0.03333333, y: 0.03333333, z: 1}
   m_Children:
   - {fileID: 2431229708481718489}
@@ -16400,8 +16459,10 @@ MonoBehaviour:
   - {fileID: 2431229708903856168}
   - {fileID: 2431229707544544293}
   waitTime: 2
+  idleTime: 0
   cascadeTime: 0
   isCascade: 0
+  isAlternate: 0
 --- !u!1 &2431229708196307790
 GameObject:
   m_ObjectHideFlags: 0
@@ -89432,12 +89493,27 @@ PrefabInstance:
     - target: {fileID: 4759575492175039794, guid: d3949174093eff64d9316e42894eab73,
         type: 3}
       propertyPath: m_Size.x
-      value: 0.75
+      value: 0.7589226
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759575492175039794, guid: d3949174093eff64d9316e42894eab73,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.2534957
       objectReference: {fileID: 0}
     - target: {fileID: 4759575492175039794, guid: d3949174093eff64d9316e42894eab73,
         type: 3}
       propertyPath: m_Material
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759575492175039794, guid: d3949174093eff64d9316e42894eab73,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0.019895554
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759575492175039794, guid: d3949174093eff64d9316e42894eab73,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.7518337
       objectReference: {fileID: 0}
     - target: {fileID: 4759575492175039794, guid: d3949174093eff64d9316e42894eab73,
         type: 3}

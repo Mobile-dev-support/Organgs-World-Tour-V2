@@ -8,6 +8,7 @@ using TMPro;
 public class ScoringMechanism : MonoBehaviour
 {
     public Sprite starSprite;
+    public Sprite emptyStarSprite;
     public TextMeshProUGUI livesText;
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI coinsNumber;
@@ -42,25 +43,24 @@ public class ScoringMechanism : MonoBehaviour
 
     public void Scoring()
     {
-        if (score >= 1000 && score <= 2000)
+        StarNumber();
+        SoundManager.Instance.winSound(MainMenu.Instance.win);
+    }
+
+    private void StarNumber()
+    {
+        if (score >= 1000 && score <= 1999)
         {
             DoorController.Instance.StarsNum = 1;
-            stars[0].sprite = starSprite;
         }
-        else if (score >= 2000 && score <= 2500)
+        else if (score >= 2000 && score <= 2499)
         {
             DoorController.Instance.StarsNum = 2;
-            stars[0].sprite = starSprite;
-            stars[1].sprite = starSprite;
         }
         else if (score >= 2500 && score <= 3000)
         {
             DoorController.Instance.StarsNum = 3;
-            stars[0].sprite = starSprite;
-            stars[1].sprite = starSprite;
-            stars[2].sprite = starSprite;
         }
-        SoundManager.Instance.winSound(MainMenu.Instance.win);
     }
 
     public void coinScore()
@@ -73,7 +73,6 @@ public class ScoringMechanism : MonoBehaviour
     public void timeScore()
     {
         score -= timeMinusScore;
-        Debug.Log(score);
     }
     #endregion
 }

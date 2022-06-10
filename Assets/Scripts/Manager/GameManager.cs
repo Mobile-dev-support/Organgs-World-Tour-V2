@@ -45,7 +45,17 @@ public class GameManager : MonoBehaviour
             Fader.Instance.FadeImmediately();
             CountdownTimer.Instance.ResetTimer();
         }
+        if (ScoringMechanism.Instance != null)
+        {
+            ScoringMechanism.Instance.coinsText.SetText("0");
+            ScoringMechanism.Instance.coinNo = 0;
+            ScoringMechanism.Instance.score = 0;
 
+            for (int i = 0; i < ScoringMechanism.Instance.stars.Length; i++)
+            {
+                ScoringMechanism.Instance.stars[i].sprite = ScoringMechanism.Instance.emptyStarSprite;
+            }
+        }
         Invoke("FirstSpawn", 1);
     }
 

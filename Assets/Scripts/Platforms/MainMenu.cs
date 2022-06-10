@@ -59,6 +59,7 @@ public class MainMenu : MonoBehaviour
     public AudioClip ButtonSound;
     [Header("GAMEOVER/WIN PANEL SOUND")]
     public AudioClip win;
+    private bool gameIsFinished;
     private static MainMenu _instance;
     public static MainMenu Instance { get { return _instance; } }
     #endregion
@@ -66,7 +67,7 @@ public class MainMenu : MonoBehaviour
     #region other methods
     private void Awake()
     {
-        //PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();
         if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
@@ -122,7 +123,7 @@ public class MainMenu : MonoBehaviour
     public void mainMenu()
     {
         StartCoroutine(LoadGameAsync(true, GameManager.Instance.sceneName));
-        StartCoroutine(StarCountUpdate());
+        UpdateMainMenu();
         coverCanvas.Show();
     }
 
@@ -143,14 +144,14 @@ public class MainMenu : MonoBehaviour
         if(GameManager.Instance.sceneName != "48")
         {
             StartCoroutine(FadeGame(0, GameManager.Instance.nextScene));
-            StartCoroutine(StarCountUpdate());
+            UpdateMainMenu();
             isNextLevel = true;
             coverCanvas.Show();
         }
         else
         {
             StartCoroutine(LoadGameAsync(true, GameManager.Instance.sceneName));
-            StartCoroutine(StarCountUpdate());
+            UpdateMainMenu();
             coverCanvas.Show();
         }
     }
@@ -158,7 +159,7 @@ public class MainMenu : MonoBehaviour
     public void Restart()
     {
         StartCoroutine(FadeGame(0, GameManager.Instance.sceneName));
-        StartCoroutine(StarCountUpdate());
+        UpdateMainMenu();
         isNextLevel = true;
         ingameCanvas.transform.SetParent(MenuCanvas.transform, false);
         ingameCanvas.transform.SetAsLastSibling();
@@ -168,6 +169,11 @@ public class MainMenu : MonoBehaviour
     public void GetAllLevels()
     {
         unlocker = FindObjectsOfType(typeof(StarSystemUnlocker)) as StarSystemUnlocker[];
+    }
+
+    public void UpdateMainMenu()
+    {
+        StartCoroutine(StarCountUpdate());
     }
 
     public IEnumerator StarCountUpdate()
@@ -281,7 +287,8 @@ public class MainMenu : MonoBehaviour
 
     public void Ending()
     {
-        if (GameManager.Instance.sceneName != "48")
+
+        if (!PlayerPrefs.HasKey("totem_key" + 16))
         {
             scroller_canvas.Show();
             menu_item_canvas.Show();
@@ -289,7 +296,11 @@ public class MainMenu : MonoBehaviour
         }
         else
         {
-            videoManager.Instance.ShowVideo();
+            if(PlayerPrefs.HasKey("totem_key" + 16) && !gameIsFinished)
+            {
+                videoManager.Instance.ShowVideo();
+                gameIsFinished = true;
+            }
         }
     }
 

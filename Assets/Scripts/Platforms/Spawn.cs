@@ -17,19 +17,14 @@ public class Spawn : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            other.gameObject.GetComponent<Player>().StateMachine.ChangeState(other.gameObject.GetComponent<Player>().DeathState);
             Instantiate(chunk, transform.position, chunk.transform.rotation);
-            Invoke("Delay", 0.1f);
-
+            Pooler.AddToPool(gameObject);
         }
         else if (other.gameObject.CompareTag("Spikes"))
         {
             Instantiate(chunk, transform.position, chunk.transform.rotation);
-            Invoke("Delay", 0.1f);
-        }
-    }
-    
-    private void Delay()
-    {
             Pooler.AddToPool(gameObject);
+        }
     }
 }

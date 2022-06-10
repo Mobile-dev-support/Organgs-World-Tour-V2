@@ -1163,7 +1163,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 3.6
+  orthographic size: 4.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1187,7 +1187,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.360255, y: 2.6097388, z: -5.4395366}
+  m_LocalPosition: {x: 25.09736, y: 13.632072, z: -5.4395366}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1600806940}
@@ -2087,6 +2087,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   music: {fileID: 8300000, guid: c7e85f41a36fb10488dbba8457c1111b, type: 3}
+--- !u!60 &991909241 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4790189989319059686, guid: 688a97585d8408a40a85c867954d7f03,
+    type: 3}
+  m_PrefabInstance: {fileID: 5000596962972875176}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1031105587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3690,7 +3696,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1637214725}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.158708, y: -23.40974, z: -4.5928535}
+  m_LocalPosition: {x: -9.158708, y: -23.408073, z: -4.5928535}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 213892416}
@@ -3723,7 +3729,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ConfineMode: 0
   m_BoundingVolume: {fileID: 0}
-  m_BoundingShape2D: {fileID: 1821385196}
+  m_BoundingShape2D: {fileID: 991909241}
   m_ConfineScreenEdges: 1
   m_Damping: 0
 --- !u!114 &1637214729
@@ -3767,7 +3773,7 @@ MonoBehaviour:
   m_Follow: {fileID: 5000596962972875177}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 3.6
+    OrthographicSize: 4.5
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -3816,12 +3822,6 @@ Transform:
   m_Father: {fileID: 1830244523}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &1821385196 stripped
-PolygonCollider2D:
-  m_CorrespondingSourceObject: {fileID: 4790189988416556058, guid: 688a97585d8408a40a85c867954d7f03,
-    type: 3}
-  m_PrefabInstance: {fileID: 5000596962972875176}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1830244522
 GameObject:
   m_ObjectHideFlags: 0

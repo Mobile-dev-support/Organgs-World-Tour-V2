@@ -33,9 +33,10 @@ public class Player : MonoBehaviour
     public bool isDrinking { get; private set; }
     public bool IsStunned { get; private set; }
     public bool isCandied { get; set; }
-    #endregion
+    public bool Stunned { get; set; }
+#endregion
 
-    #region Other Variables         
+#region Other Variables         
     public GameObject drunk;
     public Animator statusEffect;
     private int Candied = Animator.StringToHash("Candied");
@@ -78,6 +79,7 @@ public class Player : MonoBehaviour
         {
             ScoringMechanism.Instance.NoOfLives = Energy.Instance.currentLife;
             ScoringMechanism.Instance.NumberOfLives();
+            DefaultControls();
         }
         isCheesed = false;
         playerData.movementVelocity = playerData.NormalMovementVelocity;
@@ -189,9 +191,26 @@ public class Player : MonoBehaviour
         {
             drunk.SetActive(true);
             statusEffect.SetTrigger(status);
+            DrunkControls();
             isStunned();
             isDrunk();
         }
+    }
+
+    public void DrunkControls() 
+    {
+        PlayerControls.Instance.left.value = 1;
+        PlayerControls.Instance.right.value = -1;
+        PlayerControls.Instance.slide.button.Key = "Jump";
+        PlayerControls.Instance.jump.button.Key = "Fire3";
+    }
+
+    public void DefaultControls()
+    {
+        PlayerControls.Instance.left.value = -1;
+        PlayerControls.Instance.right.value = 1;
+        PlayerControls.Instance.jump.button.Key = "Jump";
+        PlayerControls.Instance.slide.button.Key = "Fire3";
     }
     #endregion
 }
