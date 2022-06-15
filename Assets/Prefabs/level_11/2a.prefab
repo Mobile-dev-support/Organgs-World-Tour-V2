@@ -17538,8 +17538,7 @@ SpriteRenderer:
   m_SortingLayerID: 756119877
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7134964571666765789, guid: 088abc7375fd22642803be2107637fca,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7c739602a0727de4f8ac4ca906e83002, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -17599,10 +17598,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunk: {fileID: 1962614393226834858, guid: 8e16bd53ff532284dbca00aa8a8b52b8, type: 3}
   jumpHeight: 10
-  radius: 2
+  radius: 3
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 2304
+    m_Bits: 6912
+  angle: {x: 35, y: 60}
+  strength: 10
 --- !u!50 &2766521262091521671
 Rigidbody2D:
   serializedVersion: 4
@@ -19557,8 +19558,7 @@ SpriteRenderer:
   m_SortingLayerID: 756119877
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7134964571666765789, guid: 088abc7375fd22642803be2107637fca,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7c739602a0727de4f8ac4ca906e83002, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -19618,10 +19618,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunk: {fileID: 1962614393226834858, guid: 8e16bd53ff532284dbca00aa8a8b52b8, type: 3}
   jumpHeight: 10
-  radius: 2
+  radius: 3
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 2304
+    m_Bits: 6912
+  angle: {x: 35, y: 60}
+  strength: 10
 --- !u!50 &7867819509383212244
 Rigidbody2D:
   serializedVersion: 4
@@ -20538,8 +20540,10 @@ MonoBehaviour:
   - {fileID: 7867819510477120117}
   - {fileID: 7867819510757419506}
   waitTime: 1
+  idleTime: 0
   cascadeTime: 0.01
   isCascade: 1
+  isAlternate: 0
 --- !u!1 &7867819509577491935
 GameObject:
   m_ObjectHideFlags: 0
@@ -22192,8 +22196,7 @@ SpriteRenderer:
   m_SortingLayerID: 756119877
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7134964571666765789, guid: 088abc7375fd22642803be2107637fca,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7c739602a0727de4f8ac4ca906e83002, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -22252,11 +22255,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunk: {fileID: 1962614393226834858, guid: 8e16bd53ff532284dbca00aa8a8b52b8, type: 3}
-  jumpHeight: 20
-  radius: 2
+  jumpHeight: 10
+  radius: 3
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 2304
+    m_Bits: 6912
+  angle: {x: 35, y: 60}
+  strength: 10
 --- !u!50 &7867819509814617872
 Rigidbody2D:
   serializedVersion: 4
@@ -22508,8 +22513,10 @@ MonoBehaviour:
   - {fileID: 7867819510926610119}
   - {fileID: 7867819510735405071}
   waitTime: 1
+  idleTime: 0
   cascadeTime: 0.01
   isCascade: 1
+  isAlternate: 0
 --- !u!1 &7867819509848532833
 GameObject:
   m_ObjectHideFlags: 0
@@ -23308,7 +23315,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.0389009, y: 2.07478}
+  m_Offset: {x: 1.0389009, y: 4.01}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -23319,7 +23326,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3555317, y: 6.982893}
+  m_Size: {x: 0.3555317, y: 16.04}
   m_EdgeRadius: 0
 --- !u!1 &7867819509945516347
 GameObject:
@@ -23653,8 +23660,7 @@ SpriteRenderer:
   m_SortingLayerID: 756119877
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7134964571666765789, guid: 088abc7375fd22642803be2107637fca,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7c739602a0727de4f8ac4ca906e83002, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -23714,10 +23720,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunk: {fileID: 1962614393226834858, guid: 8e16bd53ff532284dbca00aa8a8b52b8, type: 3}
   jumpHeight: 10
-  radius: 2
+  radius: 3
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 2304
+    m_Bits: 6912
+  angle: {x: 35, y: 60}
+  strength: 10
 --- !u!50 &7867819510007837642
 Rigidbody2D:
   serializedVersion: 4
@@ -65270,8 +65278,10 @@ MonoBehaviour:
   - {fileID: 7867819511094619595}
   - {fileID: 7867819509635858718}
   waitTime: 1
+  idleTime: 0
   cascadeTime: 0.01
   isCascade: 1
+  isAlternate: 0
 --- !u!1 &7867819511087727124
 GameObject:
   m_ObjectHideFlags: 0
@@ -86326,8 +86336,7 @@ SpriteRenderer:
   m_SortingLayerID: 756119877
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7134964571666765789, guid: 088abc7375fd22642803be2107637fca,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7c739602a0727de4f8ac4ca906e83002, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86386,11 +86395,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunk: {fileID: 1962614393226834858, guid: 8e16bd53ff532284dbca00aa8a8b52b8, type: 3}
-  jumpHeight: 20
-  radius: 2
+  jumpHeight: 10
+  radius: 3
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 2304
+    m_Bits: 6912
+  angle: {x: 35, y: 60}
+  strength: 10
 --- !u!50 &7867819511239201517
 Rigidbody2D:
   serializedVersion: 4

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UIFocus : MonoBehaviour
 {
-    public List<RectTransform> CurrentLevel = new List<RectTransform>();
+    public List<GameObject> CurrentLevel = new List<GameObject>();
     private RectTransform rect;
     public ScrollRect scroller;
     public Transform UI_particle;
@@ -27,14 +27,18 @@ public class UIFocus : MonoBehaviour
 
     public void FocusOnObject()
     {
-        rect = CurrentLevel.First();
+        List<GameObject> objSortedList = CurrentLevel.OrderBy(o => o.name).ToList();
+        CurrentLevel = objSortedList;
+        rect = CurrentLevel.Last().GetComponent<RectTransform>();
         StartCoroutine(ScrollViewFocusFunctions.FocusOnItemCoroutine(scroller, rect, 2f));
         UI_particle.SetPositionAndRotation(rect.position, Quaternion.identity);
     }
 
     public void FocusOnObjectImmediately()
     {
-        rect = CurrentLevel.First();
+        List<GameObject> objSortedList = CurrentLevel.OrderBy(o => o.name).ToList();
+        CurrentLevel = objSortedList;
+        rect = CurrentLevel.Last().GetComponent<RectTransform>();
         ScrollViewFocusFunctions.FocusOnItem(scroller, rect);
         UI_particle.SetPositionAndRotation(rect.position, Quaternion.identity);
     }

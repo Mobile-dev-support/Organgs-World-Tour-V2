@@ -1,5 +1,75 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1281941118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1281941119}
+  - component: {fileID: 1281941121}
+  - component: {fileID: 1281941120}
+  m_Layer: 0
+  m_Name: Respawn Point (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1281941119
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281941118}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 42.63, y: 29.16, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8591204204518029310}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1281941121
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281941118}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &1281941120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281941118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4b903e5d2f30804eb934a167c46838e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1923867215
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42f85fffaa7059141b4f96c19bec9c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnPoint: {fileID: 8591204204204083158}
+  respawnPoint: {fileID: 1281941119}
 --- !u!61 &8591204205665216387
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -38396,8 +38466,10 @@ MonoBehaviour:
   - {fileID: 8591204204665367004}
   - {fileID: 8591204205066836885}
   waitTime: 2
+  idleTime: 0
   cascadeTime: 0
   isCascade: 0
+  isAlternate: 0
 --- !u!1 &8591204203919538770
 GameObject:
   m_ObjectHideFlags: 0
@@ -39960,8 +40032,10 @@ MonoBehaviour:
   - {fileID: 8591204204088200884}
   - {fileID: 8591204204939388157}
   waitTime: 2
+  idleTime: 0
   cascadeTime: 0
   isCascade: 0
+  isAlternate: 0
 --- !u!1 &8591204204149493782
 GameObject:
   m_ObjectHideFlags: 0
@@ -41555,8 +41629,10 @@ MonoBehaviour:
   - {fileID: 8591204204256646440}
   - {fileID: 8591204204054747744}
   waitTime: 5
+  idleTime: 0
   cascadeTime: 0
   isCascade: 0
+  isAlternate: 0
 --- !u!1 &8591204204307642257
 GameObject:
   m_ObjectHideFlags: 0
@@ -42878,7 +42954,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8591204204431980654}
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.21733354, y: -0.1009998, z: 0}
+  m_LocalPosition: {x: -0.2086668, y: -0.10099993, z: 0}
   m_LocalScale: {x: 0.033333324, y: 0.033333324, z: 1}
   m_Children: []
   m_Father: {fileID: 2632513643474433622}
@@ -42924,13 +43000,12 @@ SpriteRenderer:
   m_SortingLayerID: 756119877
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7134964571666765789, guid: 088abc7375fd22642803be2107637fca,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7c739602a0727de4f8ac4ca906e83002, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9444444, y: 0.9444444}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -42988,7 +43063,9 @@ MonoBehaviour:
   radius: 3
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 2304
+    m_Bits: 6912
+  angle: {x: 35, y: 60}
+  strength: 10
 --- !u!50 &8591204204431980652
 Rigidbody2D:
   serializedVersion: 4
@@ -43768,6 +43845,7 @@ Transform:
   - {fileID: 8591204204604825230}
   - {fileID: 1310565244802170829}
   - {fileID: 1561706862700214710}
+  - {fileID: 1281941119}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -48907,7 +48985,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8591204205010123122}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.21700008, y: -0.1200001, z: 0}
+  m_LocalPosition: {x: -0.21699995, y: -0.11133336, z: 0}
   m_LocalScale: {x: 0.033333335, y: 0.033333335, z: 1}
   m_Children: []
   m_Father: {fileID: 3279880535695792555}
@@ -48953,13 +49031,12 @@ SpriteRenderer:
   m_SortingLayerID: 756119877
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7134964571666765789, guid: 088abc7375fd22642803be2107637fca,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7c739602a0727de4f8ac4ca906e83002, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9444444, y: 0.9444444}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -49013,11 +49090,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunk: {fileID: 1962614393226834858, guid: 8e16bd53ff532284dbca00aa8a8b52b8, type: 3}
-  jumpHeight: 20
+  jumpHeight: 10
   radius: 3
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 2304
+    m_Bits: 6912
+  angle: {x: 35, y: 60}
+  strength: 10
 --- !u!50 &8591204205010123120
 Rigidbody2D:
   serializedVersion: 4
@@ -51909,8 +51988,10 @@ MonoBehaviour:
   - {fileID: 8591204203860564127}
   - {fileID: 8591204205714114635}
   waitTime: 4
+  idleTime: 0
   cascadeTime: 0
   isCascade: 0
+  isAlternate: 0
 --- !u!1 &8591204205252065222
 GameObject:
   m_ObjectHideFlags: 0
@@ -52182,8 +52263,10 @@ MonoBehaviour:
   - {fileID: 8591204204661297376}
   - {fileID: 8591204204245027607}
   waitTime: 5
+  idleTime: 0
   cascadeTime: 0
   isCascade: 0
+  isAlternate: 0
 --- !u!1 &8591204205313097747
 GameObject:
   m_ObjectHideFlags: 0
@@ -53217,7 +53300,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8591204205397506142}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.14799996, y: -0.19466694, z: 0}
+  m_LocalPosition: {x: 0.14800009, y: -0.17733346, z: 0}
   m_LocalScale: {x: 0.033333335, y: 0.06666667, z: 1}
   m_Children: []
   m_Father: {fileID: 2648625144079248101}
@@ -53263,13 +53346,12 @@ SpriteRenderer:
   m_SortingLayerID: 756119877
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7134964571666765789, guid: 088abc7375fd22642803be2107637fca,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7c739602a0727de4f8ac4ca906e83002, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9444444, y: 0.9444444}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -53323,11 +53405,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunk: {fileID: 1962614393226834858, guid: 8e16bd53ff532284dbca00aa8a8b52b8, type: 3}
-  jumpHeight: 20
+  jumpHeight: 10
   radius: 3
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 2304
+    m_Bits: 6912
+  angle: {x: 35, y: 60}
+  strength: 10
 --- !u!50 &8591204205397506140
 Rigidbody2D:
   serializedVersion: 4
@@ -80589,8 +80673,10 @@ MonoBehaviour:
   - {fileID: 8591204205206833432}
   - {fileID: 8591204203766124018}
   waitTime: 4
+  idleTime: 0
   cascadeTime: 0
   isCascade: 0
+  isAlternate: 0
 --- !u!1 &8591204205691104511
 GameObject:
   m_ObjectHideFlags: 0
@@ -81219,7 +81305,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8591204205716959158}
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.38333324, y: -0.18399994, z: 0}
+  m_LocalPosition: {x: 0.392, y: -0.184, z: 0}
   m_LocalScale: {x: 0.033333324, y: 0.033333324, z: 1}
   m_Children: []
   m_Father: {fileID: 2632513643474433622}
@@ -81265,13 +81351,12 @@ SpriteRenderer:
   m_SortingLayerID: 756119877
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7134964571666765789, guid: 088abc7375fd22642803be2107637fca,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7c739602a0727de4f8ac4ca906e83002, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9444444, y: 0.9444444}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -81329,7 +81414,9 @@ MonoBehaviour:
   radius: 3
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 2304
+    m_Bits: 6912
+  angle: {x: 35, y: 60}
+  strength: 10
 --- !u!50 &8591204205716959156
 Rigidbody2D:
   serializedVersion: 4
@@ -86025,7 +86112,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9128967258863417633}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.033666804, y: -0.25933355, z: 0}
+  m_LocalPosition: {x: -0.033666678, y: -0.24200007, z: 0}
   m_LocalScale: {x: 0.033333335, y: 0.06666667, z: 1}
   m_Children: []
   m_Father: {fileID: 9210235975212309150}
@@ -86071,13 +86158,12 @@ SpriteRenderer:
   m_SortingLayerID: 756119877
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7134964571666765789, guid: 088abc7375fd22642803be2107637fca,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7c739602a0727de4f8ac4ca906e83002, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9444444, y: 0.9444444}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -86131,11 +86217,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunk: {fileID: 1962614393226834858, guid: 8e16bd53ff532284dbca00aa8a8b52b8, type: 3}
-  jumpHeight: 20
+  jumpHeight: 10
   radius: 3
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 2304
+    m_Bits: 6912
+  angle: {x: 35, y: 60}
+  strength: 10
 --- !u!50 &9128967258863417639
 Rigidbody2D:
   serializedVersion: 4
