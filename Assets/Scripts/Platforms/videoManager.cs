@@ -5,7 +5,7 @@ using UnityEngine.Video;
 
 public class videoManager : MonoBehaviour
 {
-    private VideoPlayer video;
+    [HideInInspector] public VideoPlayer video;
     public VideoClip[] videos;
     public View[] views;
     public View video_canvas;

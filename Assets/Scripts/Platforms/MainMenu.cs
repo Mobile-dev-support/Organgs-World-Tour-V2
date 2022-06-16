@@ -287,21 +287,18 @@ public class MainMenu : MonoBehaviour
 
     public void Ending()
     {
-
-        if (!PlayerPrefs.HasKey("totem_key" + 16))
+        for (int i = 0; i < totemlandActivation.Instance.organgs.Length; i++)
         {
-            scroller_canvas.Show();
-            menu_item_canvas.Show();
-            ingameCanvas.Show();
-        }
-        else
-        {
-            if(PlayerPrefs.HasKey("totem_key" + 16) && !gameIsFinished)
+            if (PlayerPrefs.HasKey("totem_key" + 16) && !gameIsFinished
+                 && totemlandActivation.Instance.organgs[i].activeInHierarchy)
             {
                 videoManager.Instance.ShowVideo();
                 gameIsFinished = true;
             }
         }
+        scroller_canvas.Show();
+        menu_item_canvas.Show();
+        ingameCanvas.Show();
     }
 
     string ProgressText(float progress)
