@@ -17,6 +17,7 @@ public class Energy : MonoBehaviour, IStoreListener
     [SerializeField] private Button nonConsumableBtn;
     [SerializeField] private Button nonConsumableBtn2;
     [SerializeField] private Button AdButton;
+    [SerializeField] private View RewardSystem_canvas;
 
     private int restorDuration = 3;
     private DateTime nextLifeTime;
@@ -24,6 +25,7 @@ public class Energy : MonoBehaviour, IStoreListener
     private bool isRestoring = false;
     public int extraLife { get; set; }
     public int currentLife { get; set; }
+
     [SerializeField] private TextMeshProUGUI AdTimer;
     public EnergymaxLife maxLifeData;
 
@@ -67,6 +69,24 @@ public class Energy : MonoBehaviour, IStoreListener
         MobileAds.Initialize((initStatus => { }));
         this.RequestNewAds();
         Initialize();
+        RewardSystem();
+    }
+
+    private void RewardSystem()
+    {
+        if(DateTime.Now.DayOfWeek == DayOfWeek.Friday)
+        {
+            if (!PlayerPrefs.HasKey("reward"))
+            {
+                StartCoroutine(BuyLifePlus(50));
+                RewardSystem_canvas.Show();
+                PlayerPrefs.SetInt("reward", 1);
+            }
+        }
+        else
+        {
+            PlayerPrefs.DeleteKey("reward");
+        }
     }
 
     public void Initialize()
