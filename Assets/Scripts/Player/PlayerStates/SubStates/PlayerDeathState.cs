@@ -38,31 +38,18 @@ public class PlayerDeathState : PlayerGroundedState
             Fader.Instance.BGFader(true);
             CountdownTimer.Instance.enabled = false;
             player.isNotDrunk();
+
         }
-        if (Energy.Instance != null)
+
+        if(BasicLife.Instance.life > 0)
         {
-            Energy.Instance.UseLife();
-            if(Energy.Instance.extraLife > 0)
-            {
-                ScoringMechanism.Instance.NoOfLives = Energy.Instance.currentLife;
-                GameManager.Instance.Respawn();
-            }
-            else
-            {
-                if (Energy.Instance.currentLife > 0)
-                {
-                    ScoringMechanism.Instance.NoOfLives = Energy.Instance.currentLife;
-                    GameManager.Instance.Respawn();
-                }
-                else
-                {
-                    MainMenu.Instance.GameOverLevel();
-                }
-            }
+            BasicLife.Instance.life--;
+            GameManager.Instance.Respawn();
         }
         else
         {
-            GameManager.Instance.Respawn();
+            BasicLife.Instance.LifeLine();
+            MainMenu.Instance.Restart();
         }
     }
 

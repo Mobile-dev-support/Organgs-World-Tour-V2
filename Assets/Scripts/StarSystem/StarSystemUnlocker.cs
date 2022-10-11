@@ -70,14 +70,7 @@ public class StarSystemUnlocker : MonoBehaviour
     }
 
     public void PressSelection()//When we press this level, we can move to the corresponding Scene to play
-    {
-        if (unlocked && Energy.Instance.currentLife > 0)
-        {
-            MainMenu.Instance.LoadLevel(gameObject.name);
-        }
-        else
-        {
-            getlifeCanvas.Show();
-        }
+    { 
+       MainMenu.Instance.LoadLevel(gameObject.name);
     }
 }

@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private PlayerData playerData;
+    public DefaultValues defaultValues;
     #endregion
 
     #region Components
@@ -32,30 +33,27 @@ public class Player : MonoBehaviour
     public bool afterShock { get; private set; }
     public bool isDrinking { get; private set; }
     public bool IsStunned { get; private set; }
-    public bool isCandied { get; set; }
     public bool Stunned { get; set; }
-#endregion
+    #endregion
 
-#region Other Variables         
+    #region Other Variables         
     public GameObject drunk;
     public Animator statusEffect;
+    public ParticleSystem dust;
+
+    private Vector2 workspace;
+    private float candyTime;
+    private float afterShockTime;
     private int Candied = Animator.StringToHash("Candied");
     private int xState = Animator.StringToHash("xState");
     private int status = Animator.StringToHash("status");
-    public ParticleSystem dust;
-    private Vector2 workspace;
-    private bool isCheesed;
     #endregion
 
     #region Unity Callback Functions
     private void Awake()
     {
         Core = GetComponentInChildren<Core>();
-        if (Energy.Instance != null)
-        {
-            playerData.health = Energy.Instance.currentLife;
-        }
-
+        defaultValues = new DefaultValues();
         StateMachine = new PlayerStateMachine();
         IdleState = new PlayerIdleState(this, StateMachine, playerData, "idle");
         MoveState = new PlayerMoveState(this, StateMachine, playerData, "move");
@@ -71,23 +69,26 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+
         Anim = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
         RB = GetComponent<Rigidbody2D>();
         MovementCollider = GetComponent<BoxCollider2D>();
-        if (Energy.Instance != null)
-        {
-            ScoringMechanism.Instance.NoOfLives = Energy.Instance.currentLife;
-            ScoringMechanism.Instance.NumberOfLives();
-            DefaultControls();
-        }
-        isCheesed = false;
-        playerData.movementVelocity = playerData.NormalMovementVelocity;
-        playerData.jumpVelocity = playerData.defaultJumpVelocity;
-        playerData.wallJumpVelocity = playerData.defaultWallJumpVelocity;
+        StateMachine.Initialize(IdleState);
+        Initialize();
+    }
+
+    private void Initialize()
+    {
         Anim.SetFloat(xState, 0f);
         Anim.SetFloat(Candied, 0f);
-        StateMachine.Initialize(IdleState);
+        afterShockTime = playerData.afterShockTimer;
+        candyTime = playerData.candyTimer;
+        defaultValues.animationState = OliverStates.Normal;
+        defaultValues.jumpVelocity = playerData.defaultJumpVelocity;
+        defaultValues.wallJumpVelocity = playerData.defaultWallJumpVelocity;
+        defaultValues.movementVelocity = playerData.NormalMovementVelocity;
+        DefaultControls();
     }
 
     private void Update()
@@ -96,51 +97,71 @@ public class Player : MonoBehaviour
         StateMachine.CurrentState.LogicUpdate();
     }
 
-    private void EnemyCollisions()
+    private void PlayerAnimationStatusStates()
     {
-        if (isCheesed)
+        switch (defaultValues.animationState)
         {
-
-            playerData.cheeseTimer -= Time.deltaTime;
-            Anim.SetFloat(xState, 0.5f);
-            playerData.jumpVelocity = playerData.cheeseJumpVelocity;
-            playerData.wallJumpVelocity = playerData.cheeseWallJumpVelocity;
-
-            if (playerData.cheeseTimer < 0)
-            {
-                playerData.cheeseTimer = 2f;
-                playerData.jumpVelocity = playerData.defaultJumpVelocity;
-                playerData.wallJumpVelocity = playerData.defaultWallJumpVelocity;
-                Anim.SetFloat(xState, 0f);
-                isCheesed = false;
-            }
-        }
-        if (isCandied)
-        {
-            playerData.candyTimer -= Time.deltaTime;
-            playerData.movementVelocity = playerData.CandymovementVelocity;
-            Anim.SetFloat(Candied, 0.5f);
-            if (playerData.candyTimer < 0)
-            {
-                playerData.candyTimer = 5f;
-                playerData.movementVelocity = playerData.NormalMovementVelocity;
-                afterShock = true;
-            }
-        }
-        if (afterShock)
-        {
-            Anim.SetFloat(Candied, 1f);
-            Core.Movement.SetVelocityZero();
-            Core.Movement.CanSetVelocity = false;
-            playerData.afterShockTimer -= Time.deltaTime;
-            if (playerData.afterShockTimer < 0)
-            {
-                afterShock = false;
-                playerData.afterShockTimer = 2f;
-                Anim.SetFloat(Candied, 0f);
+            case OliverStates.Normal:
                 Core.Movement.CanSetVelocity = true;
-                isCandied = false;
-            }
+                defaultValues.jumpVelocity = playerData.defaultJumpVelocity;
+                defaultValues.wallJumpVelocity = playerData.defaultWallJumpVelocity;
+                defaultValues.movementVelocity = playerData.NormalMovementVelocity;
+                Anim.SetFloat(xState, 0f);
+                Anim.SetFloat(Candied, 0f);
+                break;
+            case OliverStates.Cheesed:
+                defaultValues.jumpVelocity = playerData.cheeseJumpVelocity;
+                defaultValues.wallJumpVelocity = playerData.cheeseWallJumpVelocity;
+                Anim.SetFloat(xState, 0.5f);
+                break;
+            case OliverStates.Candied:
+                defaultValues.movementVelocity = playerData.CandymovementVelocity;
+                Anim.SetFloat(Candied, 0.5f);
+                candyTime -= Time.deltaTime;
+                if (candyTime < 0)
+                {
+                    candyTime = playerData.candyTimer;
+                    defaultValues.animationState = OliverStates.AfterShock;
+                }
+                break;
+            case OliverStates.AfterShock:
+                Anim.SetFloat(Candied, 1f);
+                Core.Movement.SetVelocityZero();
+                Core.Movement.CanSetVelocity = false;
+                afterShockTime -= Time.deltaTime;
+                if (afterShockTime < 0)
+                {
+                    afterShockTime = playerData.afterShockTimer;
+                    defaultValues.animationState = OliverStates.Normal;
+                }
+                break;
+            case OliverStates.Drunk:
+                Debug.Log("Drunk");
+                break;
+        }
+    }
+
+    private IEnumerator CheeseStatusState()
+    {
+        defaultValues.animationState = OliverStates.Cheesed;
+        yield return new WaitForSeconds(playerData.cheeseTimer);
+        defaultValues.animationState = OliverStates.Normal;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.collider.CompareTag("Cheese"))
+        {
+            statusEffect.SetTrigger(status);
+            StartCoroutine(CheeseStatusState());
+        }
+        if (other.gameObject.CompareTag("Alcohol"))
+        {
+            drunk.SetActive(true);
+            statusEffect.SetTrigger(status);
+            DrunkControls();
+            isStunned();
+            isDrunk();
         }
     }
 
@@ -153,7 +174,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         StateMachine.CurrentState.PhysicsUpdate();
-        EnemyCollisions();
+        PlayerAnimationStatusStates();
     }
     #endregion
 
@@ -178,24 +199,6 @@ public class Player : MonoBehaviour
     public void isDrunk() => isDrinking = true;
     public void isNotStunned() => IsStunned = false;
     public void isStunned() => IsStunned = true;
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.collider.CompareTag("Cheese"))
-        {
-            playerData.cheeseTimer = 2f;
-            statusEffect.SetTrigger(status);
-            isCheesed = true;
-        }
-        if (other.gameObject.CompareTag("Alcohol"))
-        {
-            drunk.SetActive(true);
-            statusEffect.SetTrigger(status);
-            DrunkControls();
-            isStunned();
-            isDrunk();
-        }
-    }
 
     public void DrunkControls() 
     {

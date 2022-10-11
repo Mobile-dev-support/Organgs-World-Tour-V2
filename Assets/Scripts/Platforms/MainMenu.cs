@@ -105,7 +105,7 @@ public class MainMenu : MonoBehaviour
 
     private IEnumerator AdditionalLifeRespawn()
     {
-        CountdownTimer.Instance.isGameOver = false;
+        //CountdownTimer.Instance.isGameOver = false;
         yield return new WaitForEndOfFrame();
         GameManager.Instance.Respawn();
         statCanvas.Show();

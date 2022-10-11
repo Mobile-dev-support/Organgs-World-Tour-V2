@@ -22,9 +22,9 @@ public class PlayerIdleState : PlayerGroundedState
         player.dust.Stop();
         if (isSlippery && !isTouchingWall)
         {
-            playerData.movementVelocity = playerData.speedOnIce;
+            player.defaultValues.movementVelocity = playerData.speedOnIce;
             xInput = core.Movement.FacingDirection;
-            player.RB.AddForce(new Vector2(playerData.movementVelocity * xInput *
+            player.RB.AddForce(new Vector2(player.defaultValues.movementVelocity * xInput *
             playerData.slipperyMultiplier, player.RB.velocity.y));
             player.Anim.SetFloat(Candied, 0.01f);
         }

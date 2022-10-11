@@ -6,19 +6,14 @@ using UnityEngine;
 public class PlayerData : ScriptableObject
 {
     [Header("Move State")]
-    public float movementVelocity = 7f;
-    [HideInInspector]
+    public float defaultMovementVelocity = 7f;
     public float CandymovementVelocity = 12f;
     [Header("Jump State")]
-    public float jumpVelocity = 15f;
-    [HideInInspector]
-    public float defaultJumpVelocity = 17f;
+    public float defaultJumpVelocity = 15f;
     public float cheeseJumpVelocity = 7f;
     public int amountOfJumps = 1;
 
     [Header("Wall Jump State")]
-    public float wallJumpVelocity = 20;
-    [HideInInspector]
     public float defaultWallJumpVelocity = 20f;
     public float cheeseWallJumpVelocity = 10f;
     public float wallJumpTime = 0.4f;
@@ -83,3 +78,20 @@ public class PlayerData : ScriptableObject
     public float Stunned = 2f;
     public float afterShockTimer = 2f;
 }
+
+public struct DefaultValues {
+
+    public float jumpVelocity { get; set; }
+    public float wallJumpVelocity { get; set; }
+    public float movementVelocity { get; set; }
+    public OliverStates animationState { get; set; }
+}
+
+public enum OliverStates
+{
+    Normal,
+    Cheesed,
+    Candied,
+    AfterShock,
+    Drunk
+};

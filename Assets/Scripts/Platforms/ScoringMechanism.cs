@@ -16,7 +16,6 @@ public class ScoringMechanism : MonoBehaviour
     private float coinscore = 100f;
     private float timeMinusScore = 2f;
     public Image[] stars;
-    public float NoOfLives { get; set; }
     public float coinNo { get; set; }
     public float score { get; set; }
 
@@ -36,10 +35,6 @@ public class ScoringMechanism : MonoBehaviour
     }
 
     #region scoring
-    public void NumberOfLives()
-    {
-        livesText.SetText(NoOfLives.ToString());
-    }
 
     public void Scoring()
     {

@@ -31,7 +31,7 @@ public class PlayerMoveState : PlayerGroundedState
     {
         base.LogicUpdate();
         core.Movement.CheckIfShouldFlip(xInput);
-        core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
+        core.Movement.SetVelocityX(player.defaultValues.movementVelocity * xInput);
         SlideInput = player.InputHandler.SlideInput;
         if (!isExitingState)
         {

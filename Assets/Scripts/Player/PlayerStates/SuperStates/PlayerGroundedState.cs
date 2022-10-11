@@ -47,19 +47,14 @@ public class PlayerGroundedState : PlayerState
         isTouchingCeilingSolidPlatform = core.CollisionSenses.SolidPlatformCeiling;
         isSugarPlatform = core.CollisionSenses.SugarPlatform;
         player.Anim.SetBool(istouchingWall, isTouchingWall);
-        if (isSugarPlatform && !player.isCandied)
-        {
-            playerData.candyTimer = 5f;
-            player.isCandied = true;
-        }
 
         if (isSlippery && !isTouchingWall)
         {
-            playerData.movementVelocity = playerData.speedOnIce;
+            player.defaultValues.movementVelocity = playerData.speedOnIce;
         }
         else if(!isSlippery && !player.afterShock && !player.isDrinking)
         {
-            playerData.movementVelocity = playerData.NormalMovementVelocity;
+            player.defaultValues.movementVelocity = playerData.NormalMovementVelocity;
             player.Anim.SetFloat(xState, 0.0f);
             player.Anim.SetFloat(Candied, 0.0f);
         }
@@ -96,13 +91,14 @@ public class PlayerGroundedState : PlayerState
         {
             stateMachine.ChangeState(player.DeathState);
         }
-        /*else if (isTouchingWall && isTouchingWallBack && !isThroughPlatform && (isGrounded || isSlippery || isSugarPlatform))
-        {
-            Debug.Log("this");
-        }*/
         else if(player.isDrinking && !isDead)
         {
             DrunkState();
+        }
+
+        if (isSugarPlatform)
+        {
+            player.defaultValues.animationState = OliverStates.Candied;
         }
     }
 

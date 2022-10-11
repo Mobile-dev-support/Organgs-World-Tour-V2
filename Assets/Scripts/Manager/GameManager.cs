@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
             Fader.Instance.FadeImmediately();
             CountdownTimer.Instance.ResetTimer();
         }
-        if (ScoringMechanism.Instance != null)
+        if (ScoringMechanism. Instance != null)
         {
             ScoringMechanism.Instance.coinsText.SetText("0");
             ScoringMechanism.Instance.coinNo = 0;
@@ -98,8 +98,6 @@ public class GameManager : MonoBehaviour
             {
                 CountdownTimer.Instance.enabled = true;
             }
-
-            ScoringMechanism.Instance.NumberOfLives();
             Fader.Instance.BGFader(false);
         }
         yield return new WaitForEndOfFrame();
