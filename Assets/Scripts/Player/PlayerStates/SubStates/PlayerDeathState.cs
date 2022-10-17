@@ -41,7 +41,7 @@ public class PlayerDeathState : PlayerGroundedState
 
         }
 
-        if(BasicLife.Instance.life > 0)
+        if(BasicLife.Instance.life > 1)
         {
             BasicLife.Instance.life--;
             GameManager.Instance.Respawn();
