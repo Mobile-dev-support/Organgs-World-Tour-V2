@@ -276,7 +276,7 @@ TextureImporter:
       213: 5535351534901871845
     second: Character Sprite Idle-2_90
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -293,10 +293,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -306,8 +308,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -328,11 +330,15 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -344,6 +350,7 @@ TextureImporter:
     crunchedCompression: 1
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -356,6 +363,7 @@ TextureImporter:
     crunchedCompression: 1
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -368,6 +376,46 @@ TextureImporter:
     crunchedCompression: 1
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 100
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 100
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 100
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -2273,9 +2321,99 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      Character Sprite Idle-2_1: -6896604505004505842
+      Character Sprite Idle-2_10: -3907644854680988305
+      Character Sprite Idle-2_11: -6580840922119134440
+      Character Sprite Idle-2_12: -5303315029217286111
+      Character Sprite Idle-2_13: 4430432586804837641
+      Character Sprite Idle-2_14: 4953783793603737450
+      Character Sprite Idle-2_15: 8400922259976208123
+      Character Sprite Idle-2_16: 4918087544423758986
+      Character Sprite Idle-2_17: 6673151181952355744
+      Character Sprite Idle-2_18: 8460028479409316163
+      Character Sprite Idle-2_19: 5113603927549514225
+      Character Sprite Idle-2_2: -8042613992688510280
+      Character Sprite Idle-2_20: 8311338321098470244
+      Character Sprite Idle-2_21: -2531401544395143626
+      Character Sprite Idle-2_22: -8916582896454638638
+      Character Sprite Idle-2_23: 4327672960094225399
+      Character Sprite Idle-2_24: 7922020743497990259
+      Character Sprite Idle-2_25: 4965488426851755608
+      Character Sprite Idle-2_26: -3229934310532033862
+      Character Sprite Idle-2_27: -8286963056450582803
+      Character Sprite Idle-2_28: -91316786869475920
+      Character Sprite Idle-2_29: 795949305789900381
+      Character Sprite Idle-2_3: -5642332343812156877
+      Character Sprite Idle-2_30: 1486995501426533192
+      Character Sprite Idle-2_31: 6861184355014440324
+      Character Sprite Idle-2_32: 4702999043983949858
+      Character Sprite Idle-2_33: 1302562036726249251
+      Character Sprite Idle-2_34: 2416561186377166647
+      Character Sprite Idle-2_35: 6885236072979385430
+      Character Sprite Idle-2_36: 547736692836922332
+      Character Sprite Idle-2_37: 861373271197844400
+      Character Sprite Idle-2_38: -9027266686030970794
+      Character Sprite Idle-2_39: -618013186961104913
+      Character Sprite Idle-2_4: -5431163554630299077
+      Character Sprite Idle-2_40: -688199361594699079
+      Character Sprite Idle-2_41: 6204706566172071148
+      Character Sprite Idle-2_42: 3528128414791961555
+      Character Sprite Idle-2_43: 8643135463630550035
+      Character Sprite Idle-2_44: 2347429238307054602
+      Character Sprite Idle-2_45: 5862947716066469720
+      Character Sprite Idle-2_46: 1232813318366943928
+      Character Sprite Idle-2_47: 1956588344742982640
+      Character Sprite Idle-2_48: 4205005248920842957
+      Character Sprite Idle-2_49: -4635452785687155781
+      Character Sprite Idle-2_5: -1847601423407361920
+      Character Sprite Idle-2_50: -5392696333498537758
+      Character Sprite Idle-2_51: -2883542196470953569
+      Character Sprite Idle-2_52: -590186011623704796
+      Character Sprite Idle-2_53: -3604207631340489652
+      Character Sprite Idle-2_54: 7060437237645169046
+      Character Sprite Idle-2_55: -3767947263355957555
+      Character Sprite Idle-2_56: 2364147342628895645
+      Character Sprite Idle-2_57: 4225045427877114750
+      Character Sprite Idle-2_58: 7718600272846036702
+      Character Sprite Idle-2_59: -6843313283558763709
+      Character Sprite Idle-2_6: 6771412097816776664
+      Character Sprite Idle-2_60: 7430289078317855261
+      Character Sprite Idle-2_61: -3927357376226752473
+      Character Sprite Idle-2_62: 9080228143891009008
+      Character Sprite Idle-2_63: -5837953187815337841
+      Character Sprite Idle-2_64: 476982183477527834
+      Character Sprite Idle-2_65: 7804554929917752728
+      Character Sprite Idle-2_66: 7842026503527536294
+      Character Sprite Idle-2_67: 4040520586739438222
+      Character Sprite Idle-2_68: -7890521932146387619
+      Character Sprite Idle-2_69: 8122328291407321739
+      Character Sprite Idle-2_7: -6751158365529037428
+      Character Sprite Idle-2_70: -1076641805949288462
+      Character Sprite Idle-2_71: -8253228792558960311
+      Character Sprite Idle-2_72: 1410016388532690367
+      Character Sprite Idle-2_73: 6231692218058145793
+      Character Sprite Idle-2_74: -8302362667020357743
+      Character Sprite Idle-2_75: 7793060681289380980
+      Character Sprite Idle-2_76: 2536998847300328245
+      Character Sprite Idle-2_77: 956589296983171165
+      Character Sprite Idle-2_78: -3434529408316669699
+      Character Sprite Idle-2_79: -6579586166379383528
+      Character Sprite Idle-2_8: -6524345040858632122
+      Character Sprite Idle-2_80: -5761586238718574379
+      Character Sprite Idle-2_81: -2308335618300161720
+      Character Sprite Idle-2_82: 8727841186383160667
+      Character Sprite Idle-2_83: -8494156256709502265
+      Character Sprite Idle-2_84: -1599811614438662552
+      Character Sprite Idle-2_85: 150973600589963073
+      Character Sprite Idle-2_86: 5741774730794269463
+      Character Sprite Idle-2_87: 7218504960137690682
+      Character Sprite Idle-2_88: -3532620877570059974
+      Character Sprite Idle-2_89: -8689735685151407215
+      Character Sprite Idle-2_9: -2012712705563150475
+      Character Sprite Idle-2_90: 5535351534901871845
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
