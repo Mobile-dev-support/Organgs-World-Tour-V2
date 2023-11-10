@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace SimpleInputNamespace
 {
-	public class AxisInputUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+	public class AxisInputUI : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
 	{
 		public SimpleInput.AxisInput axis = new SimpleInput.AxisInput();
 		public float value = 1f;
@@ -26,14 +26,16 @@ namespace SimpleInputNamespace
 			axis.StopTracking();
 		}
 
-		public void OnPointerDown( PointerEventData eventData )
+		public void OnPointerEnter( PointerEventData eventData )
 		{
 			axis.value = value;
 		}
 
-		public void OnPointerUp( PointerEventData eventData )
+		public void OnPointerExit( PointerEventData eventData )
 		{
 			axis.value = 0f;
 		}
+
+		
 	}
 }
