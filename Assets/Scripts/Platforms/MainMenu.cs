@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using DG.Tweening;
 using System.Linq;
-
+using TMPro;
 public class MainMenu : MonoBehaviour
 {
     #region variables
