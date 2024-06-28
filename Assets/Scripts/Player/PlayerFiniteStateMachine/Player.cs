@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     public ParticleSystem dust;
 
     private Vector2 workspace;
-    private float candyTime;
+    //private float candyTime;
     private float afterShockTime;
     private int Candied = Animator.StringToHash("Candied");
     private int xState = Animator.StringToHash("xState");
@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
         Anim.SetFloat(xState, 0f);
         Anim.SetFloat(Candied, 0f);
         afterShockTime = playerData.afterShockTimer;
-        candyTime = playerData.candyTimer;
+        //candyTime = playerData.candyTimer;
         defaultValues.animationState = OliverStates.Normal;
         defaultValues.jumpVelocity = playerData.defaultJumpVelocity;
         defaultValues.wallJumpVelocity = playerData.defaultWallJumpVelocity;
@@ -117,10 +117,10 @@ public class Player : MonoBehaviour
             case OliverStates.Candied:
                 defaultValues.movementVelocity = playerData.CandymovementVelocity;
                 Anim.SetFloat(Candied, 0.5f);
-                candyTime -= Time.deltaTime;
-                if (candyTime < 0)
+                playerData.candyTimer -= Time.deltaTime;
+                if (playerData.candyTimer < 0)
                 {
-                    candyTime = playerData.candyTimer;
+                    playerData.candyTimer = 5;
                     defaultValues.animationState = OliverStates.AfterShock;
                 }
                 break;
@@ -128,10 +128,14 @@ public class Player : MonoBehaviour
                 Anim.SetFloat(Candied, 1f);
                 Core.Movement.SetVelocityZero();
                 Core.Movement.CanSetVelocity = false;
-                afterShockTime -= Time.deltaTime;
-                if (afterShockTime < 0)
+                playerData.afterShockTimer -= Time.deltaTime;
+                afterShock = true;
+                if (playerData.afterShockTimer < 0)
                 {
-                    afterShockTime = playerData.afterShockTimer;
+                    afterShock = false;
+                    playerData.afterShockTimer = 2f;
+                    Anim.SetFloat(Candied, 0f);
+                    Core.Movement.CanSetVelocity = true;
                     defaultValues.animationState = OliverStates.Normal;
                 }
                 break;
@@ -167,7 +171,7 @@ public class Player : MonoBehaviour
 
     private void OnDestroy()
     {
-        if(gameObject == null)
+        if (gameObject == null)
             StateMachine.Initialize(DeathState);
     }
 
@@ -189,7 +193,7 @@ public class Player : MonoBehaviour
 
         MovementCollider.size = workspace;
         MovementCollider.offset = center;
-    }   
+    }
 
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
 
@@ -200,7 +204,7 @@ public class Player : MonoBehaviour
     public void isNotStunned() => IsStunned = false;
     public void isStunned() => IsStunned = true;
 
-    public void DrunkControls() 
+    public void DrunkControls()
     {
         PlayerControls.Instance.left.value = 1;
         PlayerControls.Instance.right.value = -1;

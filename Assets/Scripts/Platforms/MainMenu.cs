@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using DG.Tweening;
 using System.Linq;
-
+using TMPro;
 public class MainMenu : MonoBehaviour
 {
     #region variables
