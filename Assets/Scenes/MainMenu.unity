@@ -7944,7 +7944,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 204835827}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: mainMenuFromSettings
         m_Mode: 1
@@ -9291,8 +9291,8 @@ GameObject:
   - component: {fileID: 204835824}
   - component: {fileID: 204835826}
   - component: {fileID: 204835825}
-  - component: {fileID: 204835827}
   - component: {fileID: 204835828}
+  - component: {fileID: 204835829}
   m_Layer: 5
   m_Name: settings_panel
   m_TagString: Untagged
@@ -9360,20 +9360,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 204835823}
   m_CullTransparentMesh: 0
---- !u!114 &204835827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 204835823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc2ee337e0a7e4a92b625f1528063a7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settings_panel: {fileID: 204835824}
-  HomeButton: {fileID: 140224907}
 --- !u!114 &204835828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9393,6 +9379,20 @@ MonoBehaviour:
   vibration: 5
   elasticity: 10
   state: 2
+--- !u!114 &204835829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204835823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef241519cd89d7a47beb864e5f5915a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings_panel: {fileID: 204835824}
+  HomeButton: {fileID: 140224907}
 --- !u!1 &207370715
 GameObject:
   m_ObjectHideFlags: 0
