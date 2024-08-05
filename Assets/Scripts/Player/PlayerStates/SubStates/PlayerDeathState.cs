@@ -48,8 +48,9 @@ public class PlayerDeathState : PlayerGroundedState
         }
         else
         {
-            BasicLife.Instance.LifeLine();
-            MainMenu.Instance.Restart();
+            /*BasicLife.Instance.LifeLine();
+            MainMenu.Instance.Restart();*/
+            MainMenu.Instance.GameOverLevel();
         }
     }
 

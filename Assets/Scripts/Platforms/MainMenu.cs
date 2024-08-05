@@ -6,6 +6,7 @@ using UnityEngine.Audio;
 using DG.Tweening;
 using System.Linq;
 using TMPro;
+using System.Numerics;
 public class MainMenu : MonoBehaviour
 {
     #region variables
@@ -162,6 +163,34 @@ public class MainMenu : MonoBehaviour
         isNextLevel = true;
         ingameCanvas.transform.SetParent(MenuCanvas.transform, false);
         ingameCanvas.transform.SetAsLastSibling();
+    }
+
+    public void HomeFromGameover()
+    {
+        gameOverCanvas.Hide();
+        BasicLife.Instance.LifeLine();
+        CountdownTimer.Instance.enabled = false;
+        MainMenu.Instance.mainMenu();
+    }
+
+    public void ForceRestart()
+    {
+        if (Fader.Instance != null)
+        {
+            Fader.Instance.BGFader(true);
+            CountdownTimer.Instance.enabled = false;
+
+        }
+        Time.timeScale = 1;
+        BasicLife.Instance.LifeLine();
+        Restart();
+    }
+
+    public void GameOverRestart()
+    {
+        Time.timeScale = 1;
+        BasicLife.Instance.LifeLine();
+        Restart();
     }
 
 

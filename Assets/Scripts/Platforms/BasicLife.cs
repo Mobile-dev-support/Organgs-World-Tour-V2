@@ -7,7 +7,7 @@ using TMPro;
 public class BasicLife : MonoBehaviour
 {
     public int life { get; set; }
-    private int currentLife = 20;
+    public int currentLife = 20;
     public TextMeshProUGUI lifeText;
     private static BasicLife _instance;
     public static BasicLife Instance { get { return _instance; } }

@@ -10,7 +10,7 @@ public class SettingsMenu : MonoBehaviour
     private GameObject gm;
     public Transform settings_panel;
     public Transform HomeButton;
-
+    public Transform RetryButton;
 
     private void Awake()
     {
@@ -24,12 +24,14 @@ public class SettingsMenu : MonoBehaviour
         {
             Time.timeScale = 0;
             HomeButton.gameObject.SetActive(true);
+            RetryButton.gameObject.SetActive(true);
             scene = SceneManager.GetActiveScene();
             sceneName = scene.name;
         }
         else
         {
             HomeButton.gameObject.SetActive(false);
+            RetryButton.gameObject.SetActive(false);
         }
     }
 
