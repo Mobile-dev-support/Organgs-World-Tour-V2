@@ -8,6 +8,7 @@ public class PlatformController : MonoBehaviour
 {
 
     public PlatformWaypoint currentWaypoint;
+    public PlatformWaypoint firstWaypoint;
     public float maxSpeed;
     public float accelerationDistance;
     public float decelerationDistance;
@@ -18,7 +19,7 @@ public class PlatformController : MonoBehaviour
     public bool spinning;
     public bool clockWise;
     public bool onlyPlayerCrumble;
-
+    private Vector3 initialPosition;
 
     private Vector2 speed = Vector2.zero;
     private float currentWaitTime = 0;
@@ -34,16 +35,30 @@ public class PlatformController : MonoBehaviour
     private static readonly string ANIMATION_CRUMBLE = "crumble";
     private static readonly string ANIMATION_RESTORE = "restore";
 
+    private 
+
 
     void OnEnable()
     {
         animator = GetComponent<Animator>();
         myCollider = GetComponent<Collider2D>();
+        if(currentWaypoint != null)
+        {
+            firstWaypoint = currentWaypoint;
+            initialPosition = transform.position;
+        }
     }
-
     void FixedUpdate()
     {
-
+        if (firstWaypoint != null)
+        {
+            if (GameManager.Instance.resetPlatforms == true)
+            {
+                transform.position = initialPosition;
+                currentWaitTime = 0.01f;
+                currentWaypoint = firstWaypoint;
+            }
+        }
         if (spinning)
         {
             if (!clockWise)

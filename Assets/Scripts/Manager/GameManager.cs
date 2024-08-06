@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
 
+    public bool resetPlatforms;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -81,11 +83,13 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(Spawnplayer());
             respawn = false;
+
         }
     }
 
     private IEnumerator Spawnplayer()
     {
+        resetPlatforms = true;
         Rplayer = Instantiate(player, respawnPoint);
         yield return new WaitForSeconds(0.01f);
         if(Fader.Instance != null)
@@ -104,5 +108,6 @@ public class GameManager : MonoBehaviour
         Rplayer.transform.parent = null;
         Rplayer.name = player.name;
         anim.SetTrigger("opening");
+        resetPlatforms = false;
     }
 }

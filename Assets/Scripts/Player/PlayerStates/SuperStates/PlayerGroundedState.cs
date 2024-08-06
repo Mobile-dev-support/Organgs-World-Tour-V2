@@ -93,6 +93,7 @@ public class PlayerGroundedState : PlayerState
         JumpInput = player.InputHandler.JumpInput;
         if (JumpInput && player.JumpState.CanJump() && !isDead && !player.afterShock && !player.IsStunned)
         {
+            player.slideCooldown = 0;
             stateMachine.ChangeState(player.JumpState);
         }
         else if (!isGrounded && !isSlippery && !isStickingToPlatform && !isThroughPlatform && !isSugarPlatform && !isDead)

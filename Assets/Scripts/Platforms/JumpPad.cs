@@ -46,7 +46,7 @@ public class JumpPad : MonoBehaviour
             }
             else
             {
-                /*coreP = core;
+                coreP = core;
                 Collider2D[] playerOnPlatform = Physics2D.OverlapCircleAll(rb.transform.position, rb.GetComponentInChildren<CollisionSenses>().DeathCheckY);
                 foreach (Collider2D collider in playerOnPlatform)
                 {
@@ -54,10 +54,7 @@ public class JumpPad : MonoBehaviour
                     {
                         Knockback(angle, strength, direction);
                     }
-                }*/
-                Vector2 velocity = rb.velocity;
-                velocity.x = bounce;
-                rb.velocity = velocity;
+                }
             }
         }
     }
@@ -104,7 +101,6 @@ public class JumpPad : MonoBehaviour
         if (isKnockbackActive && coreP.Movement.CurrentVelocity.y <= 0.01f && coreP.CollisionSenses.Ground)
         {
             isKnockbackActive = false;
-            coreP.Movement.CanSetVelocity = true;
         }
     }
 }

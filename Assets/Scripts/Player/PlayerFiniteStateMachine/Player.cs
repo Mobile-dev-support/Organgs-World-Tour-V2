@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public PlayerCrouchIdleState CrouchIdleState { get; private set; }
     public PlayerDeathState DeathState { get; private set; }
 
+    public float slideCooldown;
     [SerializeField]
     private PlayerData playerData;
     public DefaultValues defaultValues;

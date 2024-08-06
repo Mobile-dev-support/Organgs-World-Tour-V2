@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class PlayerIdleState : PlayerGroundedState
 {
     private bool SlideInput;
-
+    
     public PlayerIdleState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -41,7 +41,9 @@ public class PlayerIdleState : PlayerGroundedState
 
     public override void LogicUpdate()
     {
+        
         base.LogicUpdate();
+        Debug.Log("Existing Player State:" + isExitingState);
         SlideInput = player.InputHandler.SlideInput;
         if (!isExitingState)
         {
@@ -51,13 +53,16 @@ public class PlayerIdleState : PlayerGroundedState
                 {
                     stateMachine.ChangeState(player.MoveState);
                 }
-                else if (SlideInput && !isTouchingWall && Time.time >= startTime + playerData.slideAgainTimer)
+                else if (SlideInput && !isTouchingWall && Time.time >= startTime + player.slideCooldown)
                 {
+                    player.slideCooldown = playerData.slideAgainTimer;
                     stateMachine.ChangeState(player.CrouchIdleState);
                 }
             }
         }
     }
+
+
 
     public override void PhysicsUpdate()
     {
