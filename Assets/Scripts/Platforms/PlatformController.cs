@@ -48,7 +48,8 @@ public class PlatformController : MonoBehaviour
             initialPosition = transform.position;
         }
     }
-    void FixedUpdate()
+
+    private void Update()
     {
         if (firstWaypoint != null)
         {
@@ -59,6 +60,10 @@ public class PlatformController : MonoBehaviour
                 currentWaypoint = firstWaypoint;
             }
         }
+    }
+    void FixedUpdate()
+    {
+       
         if (spinning)
         {
             if (!clockWise)

@@ -317,11 +317,11 @@ public class MainMenu : MonoBehaviour
     {
         for (int i = 0; i < totemlandActivation.Instance.organgs.Length; i++)
         {
-            if (PlayerPrefs.HasKey("totem_key" + 16) && !gameIsFinished
+            if (PlayerPrefs.HasKey("totem_key" + 16) && !PlayerPrefs.HasKey("gameisfinished")
                  && totemlandActivation.Instance.organgs[i].activeInHierarchy)
             {
                 videoManager.Instance.ShowVideo();
-                gameIsFinished = true;
+                PlayerPrefs.SetInt("gameisfinished", 1);
             }
         }
         scroller_canvas.Show();

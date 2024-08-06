@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
-
+using TMPro;
 public class Player : MonoBehaviour
 {
     #region State Variables
@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
     public bool isDrinking { get; private set; }
     public bool IsStunned { get; private set; }
     public bool Stunned { get; set; }
+
+    public TextMeshPro candyText;
     #endregion
 
     #region Other Variables         
@@ -103,7 +105,6 @@ public class Player : MonoBehaviour
         switch (defaultValues.animationState)
         {
             case OliverStates.Normal:
-                Core.Movement.CanSetVelocity = true;
                 defaultValues.jumpVelocity = playerData.defaultJumpVelocity;
                 defaultValues.wallJumpVelocity = playerData.defaultWallJumpVelocity;
                 defaultValues.movementVelocity = playerData.NormalMovementVelocity;
@@ -119,31 +120,45 @@ public class Player : MonoBehaviour
                 defaultValues.movementVelocity = playerData.CandymovementVelocity;
                 Anim.SetFloat(Candied, 0.5f);
                 playerData.candyTimer -= Time.deltaTime;
+                candyText.gameObject.SetActive(true);
+                candyText.gameObject.transform.rotation = Quaternion.Euler(candyText.gameObject.transform.rotation.x, this.gameObject.transform.rotation.y, candyText.gameObject.transform.rotation.z);
+                candyText.text = Mathf.RoundToInt(playerData.candyTimer).ToString();
                 if (playerData.candyTimer < 0)
                 {
+                    candyText.gameObject.SetActive(false);
                     playerData.candyTimer = 5;
                     defaultValues.animationState = OliverStates.AfterShock;
                 }
                 break;
             case OliverStates.AfterShock:
                 Anim.SetFloat(Candied, 1f);
-                Core.Movement.SetVelocityZero();
+                Core.Movement.RB.velocity = new Vector2(0,RB.velocity.y);
                 Core.Movement.CanSetVelocity = false;
-                playerData.afterShockTimer -= Time.deltaTime;
+                
                 afterShock = true;
-                if (playerData.afterShockTimer < 0)
-                {
-                    afterShock = false;
-                    playerData.afterShockTimer = 2f;
-                    Anim.SetFloat(Candied, 0f);
-                    Core.Movement.CanSetVelocity = true;
-                    defaultValues.animationState = OliverStates.Normal;
-                }
                 break;
             case OliverStates.Drunk:
                 Debug.Log("Drunk");
                 break;
         }
+
+            if (playerData.afterShockTimer > 0 && afterShock == true)
+            {
+                playerData.afterShockTimer -= Time.deltaTime;
+            }
+            if (playerData.afterShockTimer <= 0 && afterShock == true)
+            {
+               
+                afterShock = false;
+                playerData.afterShockTimer = 2f;
+                Anim.SetFloat(Candied, 0f);
+                Core.Movement.CanSetVelocity = true;
+                defaultValues.animationState = OliverStates.Normal;
+            }
+
+         
+        
+       
     }
 
     private IEnumerator CheeseStatusState()
