@@ -17,6 +17,7 @@ public class Spawn : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Player died because of spawned enemy");
             other.gameObject.GetComponent<Player>().StateMachine.ChangeState(other.gameObject.GetComponent<Player>().DeathState);
             Instantiate(chunk, transform.position, chunk.transform.rotation);
             Pooler.AddToPool(gameObject);

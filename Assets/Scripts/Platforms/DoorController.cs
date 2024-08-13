@@ -63,7 +63,7 @@ public class DoorController : MonoBehaviour
             GetComponent<DoTweenFeatures>().OnClick();
         CountdownTimer.Instance.enabled = false;
         ScoringMechanism.Instance.coinsNumber.
-            SetText(ScoringMechanism.Instance.score.ToString());
+            SetText(ScoringMechanism.Instance.coinNo.ToString());
         GameManager.Instance.Rplayer.SetActive(false);
         NextLevelNotif();
     }

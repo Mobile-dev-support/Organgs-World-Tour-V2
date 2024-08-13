@@ -137,6 +137,7 @@ public class MainMenu : MonoBehaviour
     public void LoadLevel(string placeName)
     {
         StartCoroutine(FadeGame(0, placeName));
+        BasicLife.Instance.LifeLine();
     }
 
     public void NextLevel()
@@ -144,6 +145,7 @@ public class MainMenu : MonoBehaviour
         if(GameManager.Instance.sceneName != "48")
         {
             StartCoroutine(FadeGame(0, GameManager.Instance.nextScene));
+            BasicLife.Instance.LifeLine();
             UpdateMainMenu();
             isNextLevel = true;
             coverCanvas.Show();

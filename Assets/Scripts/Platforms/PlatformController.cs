@@ -60,6 +60,17 @@ public class PlatformController : MonoBehaviour
                 currentWaypoint = firstWaypoint;
             }
         }
+
+        if (crumbleTime > 0)
+        {
+            if (GameManager.Instance.resetPlatforms == true)
+            {
+                animator.Play("Base Layer.idle");
+                currentCrumbleTime = 0;
+                animator.SetTrigger(ANIMATION_RESTORE);
+                
+            }
+        }
     }
     void FixedUpdate()
     {

@@ -23,6 +23,7 @@ public class PlayerCrouchIdleState : PlayerGroundedState
 
     public override void Exit()
     {
+        Debug.Log("Exited");
         base.Exit();
         isCurrentlySliding = false;
         core.Movement.SetVelocityZero();
@@ -61,11 +62,14 @@ public class PlayerCrouchIdleState : PlayerGroundedState
         lastAIPos = player.transform.position;
     }
 
+    bool extended;
+    float extendedTime; 
     public override void PhysicsUpdate()
     {
+        SlideInput = player.InputHandler.SlideInput;
         base.PhysicsUpdate();
 
-        if (Time.time <= startTime + playerData.slideTime)
+        if (Time.time <= startTime + playerData.slideTime) 
         {
             CheckIfShouldPlaceAfterImage();
             if (core.Movement.FacingDirection == -1)
@@ -79,11 +83,34 @@ public class PlayerCrouchIdleState : PlayerGroundedState
         }
         else
         {
-            if (!isTouchingCeiling)
+            if (!isTouchingCeiling )
             {
-                stateMachine.ChangeState(player.IdleState);
-                core.Movement.SetVelocityZero();
-                startTime = Time.time;
+                if(extended)
+                {
+                    if(extendedTime > 0)
+                    {
+                        extendedTime -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        stateMachine.ChangeState(player.IdleState);
+                        core.Movement.SetVelocityZero();
+                        startTime = Time.time;
+
+                    }
+                }
+                else
+                {
+                    stateMachine.ChangeState(player.IdleState);
+                    core.Movement.SetVelocityZero();
+                    startTime = Time.time;
+                }
+               
+            }
+            else
+            {
+                extendedTime = 0.01f;
+                extended = true;
             }
             CheckIfShouldPlaceAfterImage();
         }

@@ -104,6 +104,7 @@ public class PlayerGroundedState : PlayerState
         else if (isDead || (!isCurrentlySliding && (isTouchingCeiling || isTouchingCeilingSolidPlatform) && (isGrounded || isSlippery || isStickingToPlatform || isSugarPlatform))
             || player.transform.rotation.z != 0)
         {
+            Debug.Log("Player died because of touching ceiling");
             stateMachine.ChangeState(player.DeathState);
         }
         else if(player.isDrinking && !isDead)

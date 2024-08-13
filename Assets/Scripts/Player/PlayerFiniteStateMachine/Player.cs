@@ -98,6 +98,10 @@ public class Player : MonoBehaviour
     {
         Core.LogicUpdate();
         StateMachine.CurrentState.LogicUpdate();
+        if(candyText.gameObject.active)
+        {
+            candyText.gameObject.transform.rotation = Quaternion.Euler(candyText.gameObject.transform.rotation.x, this.gameObject.transform.rotation.y, candyText.gameObject.transform.rotation.z);
+        }
     }
 
     private void PlayerAnimationStatusStates()
@@ -105,6 +109,7 @@ public class Player : MonoBehaviour
         switch (defaultValues.animationState)
         {
             case OliverStates.Normal:
+                candyText.gameObject.SetActive(false);
                 defaultValues.jumpVelocity = playerData.defaultJumpVelocity;
                 defaultValues.wallJumpVelocity = playerData.defaultWallJumpVelocity;
                 defaultValues.movementVelocity = playerData.NormalMovementVelocity;
@@ -112,6 +117,7 @@ public class Player : MonoBehaviour
                 Anim.SetFloat(Candied, 0f);
                 break;
             case OliverStates.Cheesed:
+                candyText.gameObject.SetActive(false);
                 defaultValues.jumpVelocity = playerData.cheeseJumpVelocity;
                 defaultValues.wallJumpVelocity = playerData.cheeseWallJumpVelocity;
                 Anim.SetFloat(xState, 0.5f);
@@ -121,7 +127,7 @@ public class Player : MonoBehaviour
                 Anim.SetFloat(Candied, 0.5f);
                 playerData.candyTimer -= Time.deltaTime;
                 candyText.gameObject.SetActive(true);
-                candyText.gameObject.transform.rotation = Quaternion.Euler(candyText.gameObject.transform.rotation.x, this.gameObject.transform.rotation.y, candyText.gameObject.transform.rotation.z);
+                
                 candyText.text = Mathf.RoundToInt(playerData.candyTimer).ToString();
                 if (playerData.candyTimer < 0)
                 {
@@ -148,7 +154,7 @@ public class Player : MonoBehaviour
             }
             if (playerData.afterShockTimer <= 0 && afterShock == true)
             {
-               
+                candyText.gameObject.SetActive(false);
                 afterShock = false;
                 playerData.afterShockTimer = 2f;
                 Anim.SetFloat(Candied, 0f);

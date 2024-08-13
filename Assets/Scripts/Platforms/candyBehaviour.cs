@@ -58,6 +58,7 @@ public class candyBehaviour : MonoBehaviour
         }
         if (other.collider.CompareTag("Player"))
         {
+            Debug.Log("Player died because of candy");
             other.gameObject.GetComponent<Player>().StateMachine.ChangeState(other.gameObject.GetComponent<Player>().DeathState);
             Instantiate(chunk, transform.position, chunk.transform.rotation);
             Destroy(gameObject, 0.15f);
