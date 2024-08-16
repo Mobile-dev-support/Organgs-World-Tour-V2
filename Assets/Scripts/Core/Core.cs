@@ -4,6 +4,20 @@ using UnityEngine;
 
 public class Core : MonoBehaviour
 {
+    [SerializeField]
+    private bool touchingSolidPlatform;
+
+    [SerializeField]
+    private bool touchingCeiling;
+    public void Update()
+    {
+        if(collisionSenses != null)
+        {
+            touchingSolidPlatform = collisionSenses.LedgeHorizontalBlock;
+            touchingCeiling = collisionSenses.Ceiling;
+        }
+
+    }
     public Movement Movement
     {
         get => GenericNotImplementedError<Movement>.TryGet(movement, transform.parent);

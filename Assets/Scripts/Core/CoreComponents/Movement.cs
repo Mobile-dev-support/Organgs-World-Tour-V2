@@ -28,7 +28,6 @@ public class Movement : CoreComponent
     {
         CurrentVelocity = RB.velocity;
     }
-
     #region Set Functions
 
     public void SetVelocityZero()

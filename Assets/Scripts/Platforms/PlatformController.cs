@@ -41,6 +41,10 @@ public class PlatformController : MonoBehaviour
     void OnEnable()
     {
         animator = GetComponent<Animator>();
+        if(crumbleTime > 0)
+        {
+            animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+        }
         myCollider = GetComponent<Collider2D>();
         if(currentWaypoint != null)
         {

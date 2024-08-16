@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -9,7 +10,19 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioSource music;
     [SerializeField] private AudioSource sfx;
+    void Start()
+    {
+        AudioSettings.OnAudioConfigurationChanged += OnAudioConfigurationChanged;
+    }
 
+    void OnAudioConfigurationChanged(bool deviceWasChanged)
+    {
+        Debug.Log(deviceWasChanged ? "Device was changed" : "Reset was called");
+        if (deviceWasChanged)
+        {
+            music.Play();
+        }
+    }
     private void Awake()
     {
         if (_instance != null && _instance != this)

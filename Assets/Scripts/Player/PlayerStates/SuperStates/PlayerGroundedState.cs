@@ -10,7 +10,9 @@ public class PlayerGroundedState : PlayerState
     [SerializeField]protected bool Stunned;
     [SerializeField] protected bool isTouchingCeiling;
     [SerializeField] protected bool isTouchingWall;
+    [SerializeField] protected bool isTouchingSolidPlatform;
     [SerializeField] protected bool isTouchingWallBack;
+    [SerializeField] protected bool isTouchingWallBackSolidPlatform;
     [SerializeField] protected bool isSlippery;
     [SerializeField] protected bool isSugarPlatform;
     protected bool isCurrentlySliding;
@@ -41,6 +43,8 @@ public class PlayerGroundedState : PlayerState
         isGrounded = core.CollisionSenses.Ground;
         isTouchingWall = core.CollisionSenses.WallFront;
         isTouchingWallBack = core.CollisionSenses.WallBack;
+        isTouchingWallBackSolidPlatform = core.CollisionSenses.WallBackSolidPlatform;
+        isTouchingSolidPlatform = core.CollisionSenses.WallSolidPlatform;
         isThroughPlatform = core.CollisionSenses.ThroughPlatform;
         isTouchingCeiling = core.CollisionSenses.Ceiling;
         isSlippery = core.CollisionSenses.SlipperyPlatform;
@@ -49,17 +53,41 @@ public class PlayerGroundedState : PlayerState
         isSugarPlatform = core.CollisionSenses.SugarPlatform;
         player.Anim.SetBool(istouchingWall, isTouchingWall);
 
-        if (isSugarPlatform && player.defaultValues.animationState != OliverStates.AfterShock)
+        if (isSugarPlatform)
         {
-            Debug.Log("Candied");
-            if (player.defaultValues.animationState != OliverStates.Candied)
+            if(player.defaultValues.animationState != OliverStates.Cheesed && player.defaultValues.animationState != OliverStates.Drunk && player.defaultValues.animationState != OliverStates.AfterShock)
             {
-                Debug.Log("Candied2");
-                playerData.candyTimer = 5f;
                 player.defaultValues.animationState = OliverStates.Candied;
-
+                player.Anim.SetFloat(Candied, 0.5f);
             }
-          
+            if (player.defaultValues.animationState != OliverStates.AfterShock)
+            {
+                    
+                    player.candyTime += Time.deltaTime;
+                    player.candyMeter.gameObject.SetActive(true);
+                    player.candyMeter.value = player.candyTime / playerData.candyTimer;
+                    if (player.candyTime >= playerData.candyTimer)
+                    {
+                        player.candyMeter.gameObject.SetActive(false);
+                        player.candyTime = 0;
+                        player.defaultValues.animationState = OliverStates.AfterShock;
+                    }
+            }
+        }
+        else if (!isSugarPlatform)
+        {
+            if (player.candyTime > 0)
+            {
+                player.candyMeter.value = player.candyTime / playerData.candyTimer;
+                player.candyTime -= Time.deltaTime;
+            }
+            else
+            {
+                player.candyMeter.gameObject.SetActive(false);
+            }
+
+            if (player.defaultValues.animationState != OliverStates.Cheesed && player.defaultValues.animationState != OliverStates.Drunk && player.defaultValues.animationState != OliverStates.AfterShock)
+                player.defaultValues.animationState = OliverStates.Normal;
         }
 
         if (isSlippery && !isTouchingWall)
@@ -87,6 +115,7 @@ public class PlayerGroundedState : PlayerState
 
     public override void LogicUpdate()
     {
+        Debug.Log("IstouchingCeiling:" + isTouchingCeiling);
         base.LogicUpdate();
         xInput = player.InputHandler.NormInputX;
         yInput = player.InputHandler.NormInputY;
@@ -102,38 +131,26 @@ public class PlayerGroundedState : PlayerState
             stateMachine.ChangeState(player.InAirState);
         }
         else if (isDead || (!isCurrentlySliding && (isTouchingCeiling || isTouchingCeilingSolidPlatform) && (isGrounded || isSlippery || isStickingToPlatform || isSugarPlatform))
-            || player.transform.rotation.z != 0)
+            || player.transform.rotation.z != 0 || isTouchingWall && isTouchingWallBack || isTouchingWall && isTouchingWallBackSolidPlatform || isTouchingSolidPlatform && isTouchingWallBack)
         {
             Debug.Log("Player died because of touching ceiling");
+            Debug.Log("isDead:" + isDead);
+            Debug.Log("IstouchingCeiling:" + isTouchingCeiling);
+            Debug.Log("isTouchingCeilingSolidPlatform:" + isTouchingCeilingSolidPlatform);
+            Debug.Log("isGrounded:" + isGrounded);
+            Debug.Log("isSlippery:" + isSlippery);
+            Debug.Log("isStickingToPlatform:" + isStickingToPlatform);
+            Debug.Log("isSugarPlatform:" + isSugarPlatform);
             stateMachine.ChangeState(player.DeathState);
         }
-        else if(player.isDrinking && !isDead)
-        {
-            DrunkState();
-        }
-
+        
         /*if (isSugarPlatform)
         {
             player.defaultValues.animationState = OliverStates.Candied;
         }*/
     }
 
-    public void DrunkState()
-    {
-        player.Anim.SetFloat(xState, 1.0f);
-        if (Time.time >= startTime + playerData.Stunned)
-        {
-            player.DrunkControls();
-            player.isNotStunned();
-            player.drunk.SetActive(false);
-            if (!Stunned && Time.time >= startTime + playerData.DrinkTimer)
-            {
-                player.isNotDrunk();
-                player.Anim.SetFloat(xState, 0.0f);
-                player.DefaultControls();
-            }
-        }
-    }
+    
 
     public override void PhysicsUpdate()
     {

@@ -9,6 +9,7 @@ public class PlayerTouchingWallState : PlayerState
     protected bool isTouchingWall;
     protected bool jumpInput;
     protected bool isTouchingLedge;
+    protected bool isTouchingSolidOverLedge;
     protected int xInput;
     protected int yInput;
     private bool isSolidPlatformCeiling;
@@ -35,6 +36,7 @@ public class PlayerTouchingWallState : PlayerState
         isTouchingWall = core.CollisionSenses.WallFront;
         isTouchingLedge = core.CollisionSenses.LedgeHorizontal;
         isSolidPlatformCeiling = core.CollisionSenses.SolidPlatformCeiling;
+        isTouchingSolidOverLedge = core.CollisionSenses.LedgeHorizontalBlock;
         if (isTouchingWall && !isTouchingLedge)
         {
             player.LedgeClimbState.SetDetectedPosition(player.transform.position);
@@ -77,7 +79,7 @@ public class PlayerTouchingWallState : PlayerState
         {
             stateMachine.ChangeState(player.InAirState);
         }
-        else if(isTouchingWall && !isTouchingLedge && !isSolidPlatformCeiling  && !isDead && !player.isDrinking)
+        else if(isTouchingWall && !isTouchingLedge && !isTouchingSolidOverLedge && !isSolidPlatformCeiling  && !isDead && !player.isDrinking)
         {
             stateMachine.ChangeState(player.LedgeClimbState);
         }

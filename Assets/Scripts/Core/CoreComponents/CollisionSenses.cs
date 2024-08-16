@@ -22,10 +22,21 @@ public class CollisionSenses : CoreComponent
         get => GenericNotImplementedError<Transform>.TryGet(wallCheck, core.transform.parent);
         private set => wallCheck = value;
     }
+    public Transform WallCheckBack
+    {
+        get => GenericNotImplementedError<Transform>.TryGet(wallCheckBack, core.transform.parent);
+        private set => wallCheckBack = value;
+    }
     public Transform LedgeCheckHorizontal
     {
         get => GenericNotImplementedError<Transform>.TryGet(ledgeCheckHorizontal, core.transform.parent);
         private set => ledgeCheckHorizontal = value;
+    }
+
+    public Transform LedgeCheckHorizontalBlock
+    {
+        get => GenericNotImplementedError<Transform>.TryGet(ledgeCheckHorizontalBlock, core.transform.parent);
+        private set => ledgeCheckHorizontalBlock = value;
     }
     public Transform LedgeCheckVertical
     {
@@ -46,13 +57,16 @@ public class CollisionSenses : CoreComponent
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform deathCheck;
     [SerializeField] private Transform wallCheck;
+    [SerializeField] private Transform wallCheckBack;
     [SerializeField] private Transform ledgeCheckHorizontal;
+    [SerializeField] private Transform ledgeCheckHorizontalBlock;
     [SerializeField] private Transform ledgeCheckVertical;
     [SerializeField] private Transform ceilingCheck;
 
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private float ceilingCheckRadius;
     [SerializeField] private float wallCheckDistance;
+    [SerializeField] private float solidLedgeCheckDistance;
     [SerializeField] private float deathCheckX;
     [SerializeField] private float deathCheckY;
 
@@ -116,6 +130,11 @@ public class CollisionSenses : CoreComponent
         get => Physics2D.Raycast(LedgeCheckHorizontal.position, Vector2.right * core.Movement.FacingDirection, wallCheckDistance, whatIsGround);
     }
 
+    public bool LedgeHorizontalBlock
+    {
+        get => Physics2D.Raycast(LedgeCheckHorizontalBlock.position, Vector2.right * core.Movement.FacingDirection, solidLedgeCheckDistance, whatIsSolidPlatform);
+    }
+
     public bool LedgeVertical
     {
         get => Physics2D.Raycast(LedgeCheckVertical.position, Vector2.down, wallCheckDistance, whatIsGround);
@@ -123,17 +142,28 @@ public class CollisionSenses : CoreComponent
 
     public bool WallBack
     {
-        get => Physics2D.Raycast(WallCheck.position, Vector2.right * -core.Movement.FacingDirection, wallCheckDistance, whatIsGround);
+        get => Physics2D.Raycast(WallCheckBack.position, Vector2.right * -core.Movement.FacingDirection, wallCheckDistance, whatIsGround);
+    }
+    public bool WallSolidPlatform
+    {
+        get => Physics2D.Raycast(WallCheck.position, Vector2.right * core.Movement.FacingDirection, wallCheckDistance, whatIsSolidPlatform);
+    }
+    public bool WallBackSolidPlatform
+    {
+        get => Physics2D.Raycast(WallCheckBack.position, Vector2.right * -core.Movement.FacingDirection, wallCheckDistance, whatIsSolidPlatform);
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Vector2 direction = Vector2.right * WallCheckDistance;
+        Vector2 solidCheckDirection = Vector2.right * solidLedgeCheckDistance;
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         Gizmos.DrawWireCube(deathCheck.position, new Vector2(deathCheckX, deathCheckY));
         Gizmos.DrawWireSphere(ceilingCheck.position, ceilingCheckRadius);
         Gizmos.DrawRay(wallCheck.position, direction);
+        Gizmos.DrawRay(wallCheckBack.position, -direction);
         Gizmos.DrawRay(ledgeCheckHorizontal.position, direction);
+        Gizmos.DrawRay(ledgeCheckHorizontalBlock.position, solidCheckDirection);
     }
 }

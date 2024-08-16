@@ -33,6 +33,7 @@ public class E1_DeadState : DeadState
         }
         else
         {
+            
             enemy.gameObject.SetActive(false);
         }
     }

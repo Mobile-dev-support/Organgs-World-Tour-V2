@@ -17,10 +17,13 @@ public class PlayerInAirState : PlayerState
     private bool oldIsTouchingWallBack;
     private bool isSolidPlatformCeiling;
     private bool isTouchingLedge;
+    private bool isTouchingSolidOverLedge;
     private bool isHittingPlatform;
     private bool isStickingToPlatform;
     private bool coyoteTime;
     private bool wallJumpCoyoteTime;
+    private bool isTouchingWallSolidPlatform;
+    private bool isTouchingWallBackSolidPlatform;
     private bool isJumping;
     private bool isDead;
     private bool isSlippery;
@@ -42,8 +45,11 @@ public class PlayerInAirState : PlayerState
         oldIsTouchingWallBack = isTouchingWallBack;
         isGrounded = core.CollisionSenses.Ground;
         isTouchingWall = core.CollisionSenses.WallFront;
+        isTouchingWallBackSolidPlatform = core.CollisionSenses.WallBackSolidPlatform;
+        isTouchingWallSolidPlatform = core.CollisionSenses.WallSolidPlatform;
         isTouchingWallBack = core.CollisionSenses.WallBack;
         isTouchingLedge = core.CollisionSenses.LedgeHorizontal;
+        isTouchingSolidOverLedge = core.CollisionSenses.LedgeHorizontalBlock;
         isHittingPlatform = core.CollisionSenses.ThroughPlatform;
         isStickingToPlatform = core.CollisionSenses.SolidPlatform;
         isSugarPlatform = core.CollisionSenses.SugarPlatform;
@@ -89,8 +95,9 @@ public class PlayerInAirState : PlayerState
         {            
             stateMachine.ChangeState(player.LandState);
         }
-        else if(isTouchingWall && !isTouchingLedge && !isSolidPlatformCeiling && (!isGrounded || !isSlippery || !isStickingToPlatform || !isHittingPlatform || !isSugarPlatform || !player.isDrinking) && !isDead)
+        else if(isTouchingWall && !isTouchingLedge && !isTouchingSolidOverLedge && !isSolidPlatformCeiling && (!isGrounded || !isSlippery || !isStickingToPlatform || !isHittingPlatform || !isSugarPlatform || !player.isDrinking) && !isDead)
         {
+            Debug.Log("Climbing Ledge");
             stateMachine.ChangeState(player.LedgeClimbState);
         }
         else if(jumpInput && !isDead && (isTouchingWall || isTouchingWallBack || wallJumpCoyoteTime))
@@ -106,10 +113,17 @@ public class PlayerInAirState : PlayerState
         }
         else if(isTouchingWall && xInput == core.Movement.FacingDirection && core.Movement.CurrentVelocity.y <= 0 && !isHittingPlatform && !isDead)
         {
-             stateMachine.ChangeState(player.WallSlideState);
+            stateMachine.ChangeState(player.WallSlideState);
+           
         }
-        else if (isDead || (isTouchingWall && isTouchingWallBack && !isHittingPlatform) || player.transform.rotation.z != 0)
+        else if (isDead || (isTouchingWall && isTouchingWallBack && !isHittingPlatform) || player.transform.rotation.z != 0 || isTouchingWall && isTouchingWallBack || isTouchingWall && isTouchingWallBackSolidPlatform || isTouchingWallSolidPlatform && isTouchingWallBack)
         {
+            Debug.Log("Death in air state");
+            Debug.Log("Player died because of touching ceiling");
+            Debug.Log("isDead:" + isDead);
+            Debug.Log("isTouchingWall:" + isTouchingWall);
+            Debug.Log("isTouchingWallBack:" + isTouchingWallBack);
+            Debug.Log("isHittingPlatform:" + isHittingPlatform);
             stateMachine.ChangeState(player.DeathState);
         }
         else

@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class SettingsMenu : MonoBehaviour
 {
     private string sceneName;
     private Scene scene;
     private GameObject gm;
+    public GameObject levelTitleContainer;
+    public TextMeshProUGUI levelTitle;
     public Transform settings_panel;
     public Transform HomeButton;
     public Transform RetryButton;
@@ -25,13 +28,16 @@ public class SettingsMenu : MonoBehaviour
             Time.timeScale = 0;
             HomeButton.gameObject.SetActive(true);
             RetryButton.gameObject.SetActive(true);
+            levelTitleContainer.SetActive(true);
             scene = SceneManager.GetActiveScene();
             sceneName = scene.name;
+            levelTitle.text = gm.GetComponent<GameManager>().levelName;
         }
         else
         {
             HomeButton.gameObject.SetActive(false);
             RetryButton.gameObject.SetActive(false);
+            levelTitleContainer.SetActive(false);
         }
     }
 

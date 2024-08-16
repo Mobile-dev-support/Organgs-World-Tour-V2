@@ -9,6 +9,11 @@ public class respawnPoint : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             GameManager.Instance.respawnPoint = gameObject.transform;
+            Collider collider = gameObject.GetComponent<Collider>();
+            if (collider != null)
+            {
+                collider.enabled = false;
+            }
         }
     }
 }

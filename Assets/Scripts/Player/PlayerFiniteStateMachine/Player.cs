@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using TMPro;
+using UnityEngine.UIElements;
+using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     #region State Variables
@@ -36,20 +38,25 @@ public class Player : MonoBehaviour
     public bool IsStunned { get; private set; }
     public bool Stunned { get; set; }
 
-    public TextMeshPro candyText;
+    
     #endregion
 
     #region Other Variables         
     public GameObject drunk;
     public Animator statusEffect;
     public ParticleSystem dust;
+    public UnityEngine.UI.Slider candyMeter;
+
+    private float startTime;
 
     private Vector2 workspace;
-    //private float candyTime;
+    public float candyTime;
     private float afterShockTime;
     private int Candied = Animator.StringToHash("Candied");
     private int xState = Animator.StringToHash("xState");
     private int status = Animator.StringToHash("status");
+
+    public GameObject playerModel;
     #endregion
 
     #region Unity Callback Functions
@@ -72,7 +79,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-
+        startTime = Time.time;
         Anim = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
         RB = GetComponent<Rigidbody2D>();
@@ -98,9 +105,16 @@ public class Player : MonoBehaviour
     {
         Core.LogicUpdate();
         StateMachine.CurrentState.LogicUpdate();
-        if(candyText.gameObject.active)
+        if(candyMeter.gameObject.active)
         {
-            candyText.gameObject.transform.rotation = Quaternion.Euler(candyText.gameObject.transform.rotation.x, this.gameObject.transform.rotation.y, candyText.gameObject.transform.rotation.z);
+            Vector3 pos = Camera.main.WorldToScreenPoint(new Vector3 (this.gameObject.transform.position.x, this.gameObject.transform.position.y+1, this.gameObject.transform.position.z));
+            candyMeter.transform.position = pos;
+           
+        }
+
+        if (isDrinking)
+        {
+            DrunkState();
         }
     }
 
@@ -109,7 +123,6 @@ public class Player : MonoBehaviour
         switch (defaultValues.animationState)
         {
             case OliverStates.Normal:
-                candyText.gameObject.SetActive(false);
                 defaultValues.jumpVelocity = playerData.defaultJumpVelocity;
                 defaultValues.wallJumpVelocity = playerData.defaultWallJumpVelocity;
                 defaultValues.movementVelocity = playerData.NormalMovementVelocity;
@@ -117,30 +130,20 @@ public class Player : MonoBehaviour
                 Anim.SetFloat(Candied, 0f);
                 break;
             case OliverStates.Cheesed:
-                candyText.gameObject.SetActive(false);
                 defaultValues.jumpVelocity = playerData.cheeseJumpVelocity;
                 defaultValues.wallJumpVelocity = playerData.cheeseWallJumpVelocity;
                 Anim.SetFloat(xState, 0.5f);
                 break;
             case OliverStates.Candied:
+                defaultValues.jumpVelocity = playerData.defaultJumpVelocity;
+                defaultValues.wallJumpVelocity = playerData.defaultWallJumpVelocity;
                 defaultValues.movementVelocity = playerData.CandymovementVelocity;
                 Anim.SetFloat(Candied, 0.5f);
-                playerData.candyTimer -= Time.deltaTime;
-                candyText.gameObject.SetActive(true);
-                
-                candyText.text = Mathf.RoundToInt(playerData.candyTimer).ToString();
-                if (playerData.candyTimer < 0)
-                {
-                    candyText.gameObject.SetActive(false);
-                    playerData.candyTimer = 5;
-                    defaultValues.animationState = OliverStates.AfterShock;
-                }
                 break;
             case OliverStates.AfterShock:
                 Anim.SetFloat(Candied, 1f);
                 Core.Movement.RB.velocity = new Vector2(0,RB.velocity.y);
                 Core.Movement.CanSetVelocity = false;
-                
                 afterShock = true;
                 break;
             case OliverStates.Drunk:
@@ -150,13 +153,15 @@ public class Player : MonoBehaviour
 
             if (playerData.afterShockTimer > 0 && afterShock == true)
             {
+                Anim.SetFloat(xState, 0f);
                 playerData.afterShockTimer -= Time.deltaTime;
+                Core.Movement.CanSetVelocity = false;
+                defaultValues.animationState = OliverStates.AfterShock;
             }
             if (playerData.afterShockTimer <= 0 && afterShock == true)
             {
-                candyText.gameObject.SetActive(false);
                 afterShock = false;
-                playerData.afterShockTimer = 2f;
+                playerData.afterShockTimer = 1.5f;
                 Anim.SetFloat(Candied, 0f);
                 Core.Movement.CanSetVelocity = true;
                 defaultValues.animationState = OliverStates.Normal;
@@ -183,6 +188,7 @@ public class Player : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Alcohol"))
         {
+            startTime = Time.time;  
             drunk.SetActive(true);
             statusEffect.SetTrigger(status);
             DrunkControls();
@@ -233,6 +239,24 @@ public class Player : MonoBehaviour
         PlayerControls.Instance.slide.button.Key = "Jump";
         PlayerControls.Instance.jump.button.Key = "Fire3";
     }
+    public void DrunkState()
+    {
+        Anim.SetFloat(xState, 1.0f);
+        Anim.SetFloat(Candied, 0.0f);
+        if (Time.time >= startTime + playerData.Stunned)
+        {
+            DrunkControls();
+            isNotStunned();
+            drunk.SetActive(false);
+            if (!Stunned && Time.time >= startTime + playerData.DrinkTimer)
+            {
+                isNotDrunk();
+                Anim.SetFloat(xState, 0.0f);
+                DefaultControls();
+            }
+        }
+    }
+
 
     public void DefaultControls()
     {

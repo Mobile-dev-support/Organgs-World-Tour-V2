@@ -4,6 +4,7 @@ using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
+    public string levelName;
     public string sceneName;
     public string nextScene;
     private GameObject firstDoor;
@@ -14,8 +15,7 @@ public class GameManager : MonoBehaviour
     private Animator anim;
 
     [Header("LEVEL MANAGER")]
-    [SerializeField]
-    private GameObject player;
+    public GameObject player;
     public Transform respawnPoint;
     public GameObject Rplayer { get; set; }
     
@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
             _instance = this;
         }
     }
+
 
     private void Start()
     {

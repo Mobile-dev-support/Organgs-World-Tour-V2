@@ -7,6 +7,7 @@ using DG.Tweening;
 using System.Linq;
 using TMPro;
 using System.Numerics;
+using UnityEngine.UIElements;
 public class MainMenu : MonoBehaviour
 {
     #region variables
@@ -32,7 +33,7 @@ public class MainMenu : MonoBehaviour
     [HideInInspector] public View expand_canvas;
     [HideInInspector] public View shop_canvas;
     [Header("MAIN MENU")]
-    public Slider slider;
+    public UnityEngine.UI.Slider slider;
     public TextMeshProUGUI textProgress;
     public AudioMixer audioMix;
     public GameObject cam;
@@ -41,8 +42,8 @@ public class MainMenu : MonoBehaviour
     private DoTweenFeatures tween;
     private bool isNextLevel;
     [Header("DIALOG CONTAINER")]
-    public Image portrait;
-    public Image portrait2;
+    public UnityEngine.UI.Image portrait;
+    public UnityEngine.UI.Image portrait2;
     public TextMeshProUGUI lines;
     public TextMeshProUGUI ActorName;
     public RectTransform choiceList;
@@ -61,6 +62,19 @@ public class MainMenu : MonoBehaviour
     public AudioClip win;
     private bool gameIsFinished;
     private static MainMenu _instance;
+
+    [SerializeField] private UnityEngine.UI.Slider musicSlider;
+    [SerializeField] private UnityEngine.UI.Slider sfxSlider;
+    [SerializeField] private UnityEngine.UI.Image musicImage;
+    [SerializeField] private UnityEngine.UI.Image sfxImage;
+    [SerializeField] private Sprite musicOn;
+    [SerializeField] private Sprite musicOff;
+    [SerializeField] private Sprite sfxOn;
+    [SerializeField] private Sprite sfxOff;
+    private float previousMusicVolume;
+    private float previousSFXVolume;
+    private bool musicMuted;
+    private bool sfxMuted;
     public static MainMenu Instance { get { return _instance; } }
     #endregion
 
@@ -370,28 +384,60 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void MuteVolume(bool mute)
+    public void MuteMusicVolume()
     {
-        if (mute)
-            audioMix.SetFloat("Master Volume", -80);
+        if (!musicMuted)
+        {
+            musicMuted = true;
+            musicImage.sprite = musicOff;
+            previousMusicVolume = musicSlider.value;
+            audioMix.SetFloat("Music Volume", -80);
+            musicSlider.value = -50;
+            musicSlider.interactable = false;
+        }
         else
-            audioMix.SetFloat("Master Volume", 0);
+        {
+            musicMuted = false;
+            musicImage.sprite = musicOn;
+            SetMusicVolume(previousMusicVolume);
+            musicSlider.value = previousMusicVolume;
+            musicSlider.interactable = true;
+        }
     }
+
+    public void MuteSFXVolume()
+    {
+        if (!sfxMuted)
+        {
+            sfxMuted = true;
+            previousSFXVolume = sfxSlider.value;
+            audioMix.SetFloat("SFX Volume", -80);
+            sfxImage.sprite = sfxOff;
+            sfxSlider.interactable = false;
+            sfxSlider.value = -50f;
+        }
+        else
+        {
+            sfxMuted = false;
+            sfxImage.sprite = sfxOn;
+            SetSfxVolume(previousSFXVolume);
+            sfxSlider.interactable = true;
+            sfxSlider.value = previousSFXVolume;
+        }    
+    }
+
     public void SetMusicVolume(float volume)
     {
         audioMix.SetFloat("Music Volume", volume);
-
         if (volume < -49.9f)
         {
             audioMix.SetFloat("Music Volume", -80);
         }
-
     }
 
     public void SetSfxVolume(float volume)
     {
         audioMix.SetFloat("SFX Volume", volume);
-
         if (volume < -49.9f)
         {
             audioMix.SetFloat("SFX Volume", -80);

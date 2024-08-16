@@ -14,6 +14,7 @@ public class PlayerLedgeClimbState : PlayerState
     private bool isClimbing;
     private bool jumpInput;
     private bool isTouchingCeiling;
+    private bool isTouchingSolidOverLedge;
     private int xInput;
     private int yInput;
     private bool isDead;
@@ -40,6 +41,7 @@ public class PlayerLedgeClimbState : PlayerState
     {
         base.DoChecks();
         isDead = core.CollisionSenses.Trap;
+        isTouchingSolidOverLedge = core.CollisionSenses.LedgeHorizontalBlock;
     }
 
     public override void Enter()
@@ -83,13 +85,14 @@ public class PlayerLedgeClimbState : PlayerState
         }
         else
         {
+            Debug.Log("Climbing");
             xInput = player.InputHandler.NormInputX;
             yInput = player.InputHandler.NormInputY;
             jumpInput = player.InputHandler.JumpInput;
 
             core.Movement.SetVelocityZero();
             player.transform.position = startPos;
-            if (prevxInput == core.Movement.FacingDirection && isHanging && !isClimbing)
+            if (prevxInput == core.Movement.FacingDirection && isHanging && !isClimbing && !isTouchingSolidOverLedge)
             {
                 CheckForSpace();
                 isClimbing = true;
@@ -106,8 +109,17 @@ public class PlayerLedgeClimbState : PlayerState
             }*/
             else if (isDead)
             {
+                Debug.Log("Death in ledge climb state");
                 stateMachine.ChangeState(player.DeathState);
             }
+            else if (isTouchingSolidOverLedge)
+            {
+                CheckForSpace();
+                player.Anim.SetBool("climbLedge", true);
+                isClimbing = false;
+            }
+
+
         }
     }
 

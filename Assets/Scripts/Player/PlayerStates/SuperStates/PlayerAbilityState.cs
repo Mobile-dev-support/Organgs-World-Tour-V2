@@ -57,6 +57,7 @@ public class PlayerAbilityState : PlayerState
         }
         else if (isDead)
         {
+            Debug.Log("Death in ability state");
             stateMachine.ChangeState(player.DeathState);
         }
     }
