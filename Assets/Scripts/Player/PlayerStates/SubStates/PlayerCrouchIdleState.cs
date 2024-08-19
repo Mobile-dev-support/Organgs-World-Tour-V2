@@ -83,7 +83,7 @@ public class PlayerCrouchIdleState : PlayerGroundedState
         }
         else
         {
-            if (!isTouchingCeiling )
+            if (!isTouchingCeiling && !isTouchingSolidPlatform)
             {
                 if(extended)
                 {
