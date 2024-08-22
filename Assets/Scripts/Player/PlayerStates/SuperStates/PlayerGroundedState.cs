@@ -15,6 +15,8 @@ public class PlayerGroundedState : PlayerState
     [SerializeField] protected bool isTouchingWallBackSolidPlatform;
     [SerializeField] protected bool isSlippery;
     [SerializeField] protected bool isSugarPlatform;
+    [SerializeField] protected bool isDetectingLedgeHorizontal;
+    [SerializeField] protected bool isTouchingCeilingSlide;
     protected bool isCurrentlySliding;
     protected int xState = Animator.StringToHash("xState");
     protected int Candied = Animator.StringToHash("Candied");
@@ -24,6 +26,7 @@ public class PlayerGroundedState : PlayerState
     [SerializeField] private bool isDead;
     [SerializeField] private bool isStickingToPlatform;
     private bool isTouchingCeilingSolidPlatform;
+    
     private int istouchingWall = Animator.StringToHash("isTouchingWall");
 
     private bool isThroughPlatform;
@@ -45,8 +48,10 @@ public class PlayerGroundedState : PlayerState
         isTouchingWallBack = core.CollisionSenses.WallBack;
         isTouchingWallBackSolidPlatform = core.CollisionSenses.WallBackSolidPlatform;
         isTouchingSolidPlatform = core.CollisionSenses.WallSolidPlatform;
+        isDetectingLedgeHorizontal = core.CollisionSenses.LedgeHorizontal;
         isThroughPlatform = core.CollisionSenses.ThroughPlatform;
         isTouchingCeiling = core.CollisionSenses.Ceiling;
+        isTouchingCeilingSlide = core.CollisionSenses.CeilingSlide;
         isSlippery = core.CollisionSenses.SlipperyPlatform;
         isStickingToPlatform = core.CollisionSenses.SolidPlatform;
         isTouchingCeilingSolidPlatform = core.CollisionSenses.SolidPlatformCeiling;
@@ -105,6 +110,7 @@ public class PlayerGroundedState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("Reset amount of Jumps");
         player.JumpState.ResetAmountOfJumpsLeft();
     }
 
@@ -115,7 +121,6 @@ public class PlayerGroundedState : PlayerState
 
     public override void LogicUpdate()
     {
-        Debug.Log("IstouchingCeiling:" + isTouchingCeiling);
         base.LogicUpdate();
         xInput = player.InputHandler.NormInputX;
         yInput = player.InputHandler.NormInputY;
@@ -130,17 +135,10 @@ public class PlayerGroundedState : PlayerState
             player.InAirState.StartCoyoteTime();
             stateMachine.ChangeState(player.InAirState);
         }
-        else if (isDead || (!isCurrentlySliding && (isTouchingCeiling || isTouchingCeilingSolidPlatform) && (isGrounded || isSlippery || isStickingToPlatform || isSugarPlatform))
+        else if (isDead|| (!isCurrentlySliding && (isTouchingCeiling || isTouchingCeilingSolidPlatform) && (isGrounded || isSlippery || isStickingToPlatform || isSugarPlatform))
             || player.transform.rotation.z != 0 || isTouchingWall && isTouchingWallBack || isTouchingWall && isTouchingWallBackSolidPlatform || isTouchingSolidPlatform && isTouchingWallBack)
         {
-            Debug.Log("Player died because of touching ceiling");
-            Debug.Log("isDead:" + isDead);
-            Debug.Log("IstouchingCeiling:" + isTouchingCeiling);
-            Debug.Log("isTouchingCeilingSolidPlatform:" + isTouchingCeilingSolidPlatform);
-            Debug.Log("isGrounded:" + isGrounded);
-            Debug.Log("isSlippery:" + isSlippery);
-            Debug.Log("isStickingToPlatform:" + isStickingToPlatform);
-            Debug.Log("isSugarPlatform:" + isSugarPlatform);
+           
             stateMachine.ChangeState(player.DeathState);
         }
         

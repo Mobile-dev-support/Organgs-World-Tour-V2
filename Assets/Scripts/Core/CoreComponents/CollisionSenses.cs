@@ -12,6 +12,12 @@ public class CollisionSenses : CoreComponent
         get => GenericNotImplementedError<Transform>.TryGet(groundCheck, core.transform.parent);
         private set => groundCheck = value;
     }
+    public Transform ThroughPlatformCheck
+    {
+        get => GenericNotImplementedError<Transform>.TryGet(throughPlatformCheck, core.transform.parent);
+        private set => throughPlatformCheck = value;
+    }
+
     public Transform DeathCheck //death
     {
         get => GenericNotImplementedError<Transform>.TryGet(deathCheck, core.transform.parent);
@@ -48,13 +54,21 @@ public class CollisionSenses : CoreComponent
         get => GenericNotImplementedError<Transform>.TryGet(ceilingCheck, core.transform.parent);
         private set => ceilingCheck = value;
     }
+
+    public Transform CeilingSlideCheck
+    {
+        get => GenericNotImplementedError<Transform>.TryGet(ceilingSlideCheck, core.transform.parent);
+        private set => ceilingSlideCheck = value;
+    }
     public float GroundCheckRadius { get => groundCheckRadius; set => groundCheckRadius = value; }
+    public float DeathCheckX { get => deathCheckX; set => deathCheckX = value; }
     public float DeathCheckY { get => deathCheckY; set => deathCheckY = value; }
     public float WallCheckDistance { get => wallCheckDistance; set => wallCheckDistance = value; }
     public LayerMask WhatIsGround { get => whatIsGround; set => whatIsGround = value; }
 
 
     [SerializeField] private Transform groundCheck;
+    [SerializeField] private Transform throughPlatformCheck;
     [SerializeField] private Transform deathCheck;
     [SerializeField] private Transform wallCheck;
     [SerializeField] private Transform wallCheckBack;
@@ -62,13 +76,18 @@ public class CollisionSenses : CoreComponent
     [SerializeField] private Transform ledgeCheckHorizontalBlock;
     [SerializeField] private Transform ledgeCheckVertical;
     [SerializeField] private Transform ceilingCheck;
+    [SerializeField] private Transform ceilingSlideCheck;
 
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private float ceilingCheckRadius;
+    [SerializeField] private float ceilingSlideCheckRadius;
     [SerializeField] private float wallCheckDistance;
     [SerializeField] private float solidLedgeCheckDistance;
     [SerializeField] private float deathCheckX;
     [SerializeField] private float deathCheckY;
+
+    [SerializeField] private float throughPlatformCheckX;
+    [SerializeField] private float throughPlatformCheckY;
 
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private LayerMask whatIsThroughPlatform;
@@ -84,6 +103,11 @@ public class CollisionSenses : CoreComponent
         get => Physics2D.OverlapCircle(CeilingCheck.position, ceilingCheckRadius, whatIsGround);
     }
 
+    public bool CeilingSlide
+    {
+        get => Physics2D.OverlapCircle(CeilingSlideCheck.position, ceilingSlideCheckRadius, whatIsGround);
+    }
+
     public bool SolidPlatformCeiling
     {
         get => Physics2D.OverlapCircle(CeilingCheck.position, ceilingCheckRadius, whatIsSolidPlatform);
@@ -96,7 +120,7 @@ public class CollisionSenses : CoreComponent
 
     public bool ThroughPlatform
     {
-        get => Physics2D.OverlapCircle(GroundCheck.position, groundCheckRadius, whatIsThroughPlatform);
+        get => Physics2D.OverlapBox(throughPlatformCheck.position, new Vector2(throughPlatformCheckX, throughPlatformCheckY), 0, whatIsThroughPlatform);
     }
 
     public bool SolidPlatform
@@ -160,7 +184,9 @@ public class CollisionSenses : CoreComponent
         Vector2 solidCheckDirection = Vector2.right * solidLedgeCheckDistance;
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         Gizmos.DrawWireCube(deathCheck.position, new Vector2(deathCheckX, deathCheckY));
+        Gizmos.DrawWireCube(throughPlatformCheck.position, new Vector2(throughPlatformCheckX, throughPlatformCheckY));
         Gizmos.DrawWireSphere(ceilingCheck.position, ceilingCheckRadius);
+        Gizmos.DrawWireSphere(ceilingSlideCheck.position, ceilingSlideCheckRadius);
         Gizmos.DrawRay(wallCheck.position, direction);
         Gizmos.DrawRay(wallCheckBack.position, -direction);
         Gizmos.DrawRay(ledgeCheckHorizontal.position, direction);

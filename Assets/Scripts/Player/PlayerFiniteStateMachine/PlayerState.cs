@@ -13,6 +13,7 @@ public class PlayerState
 
     protected bool isAnimationFinished;
     protected bool isExitingState;
+    protected bool isClimbing;
 
     protected float startTime;
 
@@ -50,8 +51,11 @@ public class PlayerState
 
     public virtual void PhysicsUpdate()
     {
+        Debug.Log(stateMachine.CurrentState);
         DoChecks();
     }
+
+
 
     public virtual void DoChecks() { }
 

@@ -98,7 +98,7 @@ public class JumpPad : MonoBehaviour
 
     private void CheckKnockback()
     {
-        if (isKnockbackActive && coreP.Movement.CurrentVelocity.y <= 0.01f && coreP.CollisionSenses.Ground)
+        if (isKnockbackActive && coreP.Movement.CurrentVelocity.y <= 0.01f && (coreP.CollisionSenses.Ground || coreP.CollisionSenses.SolidPlatform)) 
         {
             isKnockbackActive = false;
             coreP.Movement.CanSetVelocity = true;

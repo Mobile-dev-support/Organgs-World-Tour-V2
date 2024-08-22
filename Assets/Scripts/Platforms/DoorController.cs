@@ -79,7 +79,7 @@ public class DoorController : MonoBehaviour
             ScoringMechanism.Instance.NextLevelBtn.interactable = false;
         }
 
-        for (int i = 0; i < PlayerPrefs.GetInt("Lv" + GameManager.Instance.sceneName); i++)
+        for (int i = 0; i < currentStarsNum; i++)
         {
             ScoringMechanism.Instance.stars[i].sprite = ScoringMechanism.Instance.starSprite;
         }

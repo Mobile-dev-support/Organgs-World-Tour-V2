@@ -9,12 +9,32 @@ public class Core : MonoBehaviour
 
     [SerializeField]
     private bool touchingCeiling;
+
+    [SerializeField]
+    private bool touchingWall;
+    [SerializeField]
+    private bool touchingWallBack;
+    [SerializeField]
+    private bool touchingWallSolidPlatform;
+    [SerializeField]
+    private bool touchingWallSolidPlatformBack;
+    [SerializeField]
+    private bool canSetVelocity;
+    [SerializeField]
+    private bool grounded;
+    
     public void Update()
     {
         if(collisionSenses != null)
         {
             touchingSolidPlatform = collisionSenses.LedgeHorizontalBlock;
             touchingCeiling = collisionSenses.Ceiling;
+            touchingWall = collisionSenses.WallFront;
+            touchingWallBack = collisionSenses.WallBack;
+            touchingWallSolidPlatform = collisionSenses.WallSolidPlatform;
+            touchingWallSolidPlatformBack = collisionSenses.WallBackSolidPlatform;
+            canSetVelocity = movement.CanSetVelocity;
+            grounded = collisionSenses.Ground;
         }
 
     }

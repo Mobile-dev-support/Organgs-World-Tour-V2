@@ -236,6 +236,7 @@ public class Player : MonoBehaviour
     {
         PlayerControls.Instance.left.value = 1;
         PlayerControls.Instance.right.value = -1;
+       // PlayerControls.Instance.joystick.valueMultiplier = -1;
         PlayerControls.Instance.slide.button.Key = "Jump";
         PlayerControls.Instance.jump.button.Key = "Fire3";
     }
@@ -262,6 +263,7 @@ public class Player : MonoBehaviour
     {
         PlayerControls.Instance.left.value = -1;
         PlayerControls.Instance.right.value = 1;
+       // PlayerControls.Instance.joystick.valueMultiplier = 1;
         PlayerControls.Instance.jump.button.Key = "Jump";
         PlayerControls.Instance.slide.button.Key = "Fire3";
     }

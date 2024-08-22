@@ -21,6 +21,7 @@ public class pooledObject : MonoBehaviour
     float distYToPlayer;
     RaycastHit hit;
     Ray ray;
+    bool runOnce;
     private void Start()
     {
         anim = GetComponentInParent<Animator>();
@@ -55,18 +56,29 @@ public class pooledObject : MonoBehaviour
     {
         if (GameManager.Instance.resetPlatforms == true && spawnedObjects.Count != 0)
         {
-            foreach (GameObject obj in spawnedObjects)
+            if (!runOnce)
             {
-                AddToPool(obj);
+                runOnce = true;
+                foreach (GameObject obj in spawnedObjects)
+                {
+                    AddToPool(obj);
+                }
+                StopCoroutine(spawn);
+                spawn = StartCoroutine(SpawnTime());
+            }    
+        }
+        else
+        {
+            if(runOnce)
+            {
+                runOnce = false;
             }
-            StopCoroutine(spawn);
-            spawn = StartCoroutine(SpawnTime());
         }
     }
 
     void VerticalWarningIndicator()
     {
-        if (Mathf.Abs(distXToPlayer) <= 15f && distYToPlayer > -15f && warning.activeSelf)
+        if (Mathf.Abs(distXToPlayer) <= 15f && distYToPlayer > 0f && warning.activeSelf)
         {
             bool rendererIsVisible = this.GetComponentInParent<Renderer>().isVisible;
             Vector2 raycastOrigin = this.transform.position;

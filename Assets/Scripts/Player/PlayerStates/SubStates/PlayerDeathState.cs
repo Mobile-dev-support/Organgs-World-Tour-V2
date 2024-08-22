@@ -40,8 +40,11 @@ public class PlayerDeathState : PlayerGroundedState
             player.isNotDrunk();
 
         }
+#if UNITY_EDITOR || DEBUG
+        GameManager.Instance.Respawn();
 
-        if(BasicLife.Instance.life > 1)
+#else
+        if (BasicLife.Instance.life > 1)
         {
             BasicLife.Instance.life--;
             GameManager.Instance.Respawn();
@@ -52,6 +55,7 @@ public class PlayerDeathState : PlayerGroundedState
             MainMenu.Instance.Restart();*/
             MainMenu.Instance.GameOverLevel();
         }
+#endif
     }
 
     public override void PhysicsUpdate()

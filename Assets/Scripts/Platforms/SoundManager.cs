@@ -18,10 +18,8 @@ public class SoundManager : MonoBehaviour
     void OnAudioConfigurationChanged(bool deviceWasChanged)
     {
         Debug.Log(deviceWasChanged ? "Device was changed" : "Reset was called");
-        if (deviceWasChanged)
-        {
-            music.Play();
-        }
+        music.Play();
+       
     }
     private void Awake()
     {
@@ -68,7 +66,7 @@ public class SoundManager : MonoBehaviour
     #region Button
     public void ButtonSound(AudioClip clip)
     {
-        music.PlayOneShot(clip);
+        sfx.PlayOneShot(clip);
     }
     #endregion
 

@@ -11,13 +11,17 @@ public class PlayerLedgeClimbState : PlayerState
     private Vector2 workspace;
 
     private bool isHanging;
-    private bool isClimbing;
+
     private bool jumpInput;
     private bool isTouchingCeiling;
     private bool isTouchingSolidOverLedge;
     private int xInput;
     private int yInput;
     private bool isDead;
+    private bool isTouchingWall;
+    private bool isTouchingWallBack;
+    private bool isTouchingSolidPlatform;
+    private bool isTouchingSolidPlatformBack;
     private int prevxInput;
 
     public PlayerLedgeClimbState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
@@ -42,6 +46,10 @@ public class PlayerLedgeClimbState : PlayerState
         base.DoChecks();
         isDead = core.CollisionSenses.Trap;
         isTouchingSolidOverLedge = core.CollisionSenses.LedgeHorizontalBlock;
+        isTouchingWall = core.CollisionSenses.WallFront;
+        isTouchingWallBack = core.CollisionSenses.WallBack;
+        isTouchingSolidPlatform = core.CollisionSenses.WallSolidPlatform;
+        isTouchingSolidPlatformBack = core.CollisionSenses.WallBackSolidPlatform;
     }
 
     public override void Enter()
@@ -60,7 +68,8 @@ public class PlayerLedgeClimbState : PlayerState
     public override void Exit()
     {
         base.Exit();
-
+        var deathCheck = core.CollisionSenses.DeathCheck.transform.position;
+        deathCheck = new Vector3(deathCheck.x, 0);
         isHanging = false;
         if (isClimbing)
         {
@@ -89,7 +98,7 @@ public class PlayerLedgeClimbState : PlayerState
             xInput = player.InputHandler.NormInputX;
             yInput = player.InputHandler.NormInputY;
             jumpInput = player.InputHandler.JumpInput;
-
+            
             core.Movement.SetVelocityZero();
             player.transform.position = startPos;
             if (prevxInput == core.Movement.FacingDirection && isHanging && !isClimbing && !isTouchingSolidOverLedge)
@@ -107,7 +116,7 @@ public class PlayerLedgeClimbState : PlayerState
                 player.WallJumpState.DetermineWallJumpDirection(true);
                 stateMachine.ChangeState(player.WallJumpState);
             }*/
-            else if (isDead)
+            else if (isDead || isTouchingWallBack && isTouchingSolidPlatformBack || isTouchingWall && isTouchingSolidPlatform || isTouchingSolidPlatform && isTouchingSolidPlatformBack || isTouchingWall && isTouchingWallBack)
             {
                 Debug.Log("Death in ledge climb state");
                 stateMachine.ChangeState(player.DeathState);

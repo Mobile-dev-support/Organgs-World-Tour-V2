@@ -6,6 +6,7 @@ using SimpleInputNamespace;
 public class PlayerControls : MonoBehaviour
 {
     public AxisInputUI left, right;
+    public Joystick joystick;
     public ButtonInputUI slide, jump;
 
     private static PlayerControls _instance;

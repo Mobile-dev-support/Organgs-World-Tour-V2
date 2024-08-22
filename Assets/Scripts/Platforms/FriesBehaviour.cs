@@ -14,6 +14,8 @@ public class FriesBehaviour : MonoBehaviour
     private static readonly string ANIMATION_BUMP = "onJump";
 
     private Coroutine coroutineCycle;
+
+    bool runOnce;
     public void Awake()
     {
         ani = new List<Animator>();
@@ -22,29 +24,33 @@ public class FriesBehaviour : MonoBehaviour
             ani.Add(Fries[i].GetComponent<Animator>());
         }
     }
-    // Start is called before the first frame update
-    private void Start()
-    {
-        coroutineCycle = StartCoroutine(SpawnBlockOfFries());
-    }
     private void Update()
     {
         if (GameManager.Instance.resetPlatforms == true)
         {
-            StopCoroutine(coroutineCycle);
-            foreach (var fries in Fries)
+            if(coroutineCycle != null)
             {
-                fries.gameObject.SetActive(false);
+                StopCoroutine(coroutineCycle);
+                coroutineCycle = null;
+                foreach (var fries in Fries)
+                {
+                    fries.gameObject.SetActive(false);
+                    fries.gameObject.SetActive(true);
+                }
             }
-            foreach (var fries in Fries)
-            {
-                fries.gameObject.SetActive(true);
-            }
-            coroutineCycle = StartCoroutine(SpawnBlockOfFries());
+           
         }
-     
-    }
+        else
+        {
+            if (coroutineCycle == null)
+            {
+                coroutineCycle = StartCoroutine(SpawnBlockOfFries());
+            }
+            
+        }
 
+    }
+    // Start is called before the first frame update
     private void OnEnable()
     {
         coroutineCycle =  StartCoroutine(SpawnBlockOfFries());

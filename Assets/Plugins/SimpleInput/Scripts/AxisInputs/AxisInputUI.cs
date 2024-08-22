@@ -7,7 +7,8 @@ namespace SimpleInputNamespace
 	public class AxisInputUI : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
 	{
 		public SimpleInput.AxisInput axis = new SimpleInput.AxisInput();
-		public float value = 1f;
+		public float value;
+		bool moving;
 
 		private void Awake()
 		{
@@ -26,14 +27,26 @@ namespace SimpleInputNamespace
 			axis.StopTracking();
 		}
 
-		public void OnPointerEnter( PointerEventData eventData )
+        private void Update()
+        {
+            if(moving)
+			{
+                axis.value = value;
+            }
+			else
+			{
+                axis.value = 0;
+            }
+        }
+        public void OnPointerEnter( PointerEventData eventData )
 		{
-			axis.value = value;
-		}
+            moving = true;
+        }
+
 
 		public void OnPointerExit( PointerEventData eventData )
 		{
-			axis.value = 0f;
+           moving = false;
 		}
 
 		

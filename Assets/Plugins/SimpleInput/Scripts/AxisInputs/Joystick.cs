@@ -53,13 +53,18 @@ namespace SimpleInputNamespace
 		private Vector2 m_value = Vector2.zero;
 		public Vector2 Value { get { return m_value; } }
 
-		private void Awake()
+		[SerializeField]
+		private Vector2 originalPosition;
+
+        private void Awake()
 		{
 			joystickTR = (RectTransform) transform;
 			thumbTR = thumb.rectTransform;
 			background = GetComponent<Graphic>();
+			RectTransform rect = GetComponent<RectTransform>(); 
+            originalPosition = new Vector2(rect.anchoredPosition.x, rect.anchoredPosition.y);
 
-			if( isDynamicJoystick )
+            if ( isDynamicJoystick )
 			{
 				opacity = 0f;
 				thumb.raycastTarget = false;
@@ -193,8 +198,8 @@ namespace SimpleInputNamespace
 			joystickHeld = false;
 			m_value = Vector2.zero;
 
-			thumbTR.localPosition = Vector3.zero;
-			if( !isDynamicJoystick && canFollowPointer )
+            thumbTR.localPosition = Vector3.zero;
+			//if( !isDynamicJoystick && canFollowPointer )
 				joystickTR.anchoredPosition = joystickInitialPos;
 
 			xAxis.value = 0f;
@@ -206,7 +211,7 @@ namespace SimpleInputNamespace
 			if( !isDynamicJoystick )
 				return;
 
-			if( joystickHeld )
+            /*if( joystickHeld )
 				opacity = Mathf.Min( 1f, opacity + Time.unscaledDeltaTime * 4f );
 			else
 				opacity = Mathf.Max( 0f, opacity - Time.unscaledDeltaTime * 4f );
@@ -220,7 +225,7 @@ namespace SimpleInputNamespace
 				c = background.color;
 				c.a = opacity;
 				background.color = c;
-			}
-		}
-	}
+			}*/
+        }
+    }
 }

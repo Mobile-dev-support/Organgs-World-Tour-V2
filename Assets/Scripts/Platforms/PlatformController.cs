@@ -31,6 +31,8 @@ public class PlatformController : MonoBehaviour
     private Collider2D myCollider;
     private float rotZ;
 
+
+    bool runOnce;
     private static readonly string ANIMATION_CRUMBLING = "crumbling";
     private static readonly string ANIMATION_CRUMBLE = "crumble";
     private static readonly string ANIMATION_RESTORE = "restore";
@@ -59,9 +61,22 @@ public class PlatformController : MonoBehaviour
         {
             if (GameManager.Instance.resetPlatforms == true)
             {
-                transform.position = initialPosition;
-                currentWaitTime = 0.01f;
-                currentWaypoint = firstWaypoint;
+                if(!runOnce)
+                {
+                    runOnce = true;
+                    transform.position = initialPosition;
+                    currentWaitTime = 0.01f;
+                    currentWaypoint = firstWaypoint;
+                }
+            }
+               
+            else
+            {
+                if (runOnce)
+                {
+                    runOnce = false;
+                }
+
             }
         }
 
@@ -69,9 +84,22 @@ public class PlatformController : MonoBehaviour
         {
             if (GameManager.Instance.resetPlatforms == true)
             {
-                animator.Play("Base Layer.idle");
-                currentCrumbleTime = 0;
-                animator.SetTrigger(ANIMATION_RESTORE);
+                if (!runOnce)
+                {
+                    runOnce = true;
+                    animator.Play("Base Layer.idle");
+                    currentCrumbleTime = 0;
+                    animator.SetTrigger(ANIMATION_RESTORE);
+                }
+                else
+                {
+                    if (runOnce)
+                    {
+                        runOnce = false;
+                    }
+
+                }
+                
                 
             }
         }

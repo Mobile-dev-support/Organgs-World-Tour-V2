@@ -81,7 +81,12 @@ public class Movement : CoreComponent
     public void Flip()
     {
         FacingDirection *= -1;
+       
+        var dust = GameManager.Instance.player.GetComponent<Player>().dust.velocityOverLifetime;
+        int value = FacingDirection * 2;
+        dust.x = value;
         RB.transform.Rotate(0.0f, 180.0f, 0.0f);
+        Debug.Log("Flipped");
     }
 
     #endregion

@@ -71,6 +71,7 @@ public class PlayerCrouchIdleState : PlayerGroundedState
 
         if (Time.time <= startTime + playerData.slideTime) 
         {
+            Debug.Log("Sliding");
             CheckIfShouldPlaceAfterImage();
             if (core.Movement.FacingDirection == -1)
             {
@@ -83,20 +84,25 @@ public class PlayerCrouchIdleState : PlayerGroundedState
         }
         else
         {
-            if (!isTouchingCeiling && !isTouchingSolidPlatform)
+           
+            if (!isTouchingCeiling && !isTouchingCeilingSlide)
             {
                 if(extended)
                 {
                     if(extendedTime > 0)
                     {
+                        Debug.Log("Extended Time: "+ extendedTime);
                         extendedTime -= Time.deltaTime;
                     }
                     else
                     {
+                        Debug.Log("Extended Time Finished");
+                        extended = false;
+                        extendedTime = 0;
                         stateMachine.ChangeState(player.IdleState);
                         core.Movement.SetVelocityZero();
                         startTime = Time.time;
-
+                       
                     }
                 }
                 else
@@ -109,7 +115,7 @@ public class PlayerCrouchIdleState : PlayerGroundedState
             }
             else
             {
-                extendedTime = 0.01f;
+                extendedTime = 0.011f;
                 extended = true;
             }
             CheckIfShouldPlaceAfterImage();
