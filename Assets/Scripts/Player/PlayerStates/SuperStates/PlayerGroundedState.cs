@@ -79,21 +79,7 @@ public class PlayerGroundedState : PlayerState
                     }
             }
         }
-        else if (!isSugarPlatform)
-        {
-            if (player.candyTime > 0)
-            {
-                player.candyMeter.value = player.candyTime / playerData.candyTimer;
-                player.candyTime -= Time.deltaTime;
-            }
-            else
-            {
-                player.candyMeter.gameObject.SetActive(false);
-            }
-
-            if (player.defaultValues.animationState != OliverStates.Cheesed && player.defaultValues.animationState != OliverStates.Drunk && player.defaultValues.animationState != OliverStates.AfterShock)
-                player.defaultValues.animationState = OliverStates.Normal;
-        }
+       
 
         if (isSlippery && !isTouchingWall)
         {

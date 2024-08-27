@@ -14,6 +14,7 @@ public class CharacterAudio : MonoBehaviour
     public AudioClip coin;
     public AudioClip shard;
     public AudioClip breakable;
+    public AudioClip checkpoint;
     private AudioSource src;
 
     private static CharacterAudio _instance;
@@ -67,5 +68,10 @@ public class CharacterAudio : MonoBehaviour
     public void Land()
     {
         src.PlayOneShot(land);
+    }
+
+    public void Checkpoint()
+    {
+        src.PlayOneShot(checkpoint);
     }
 }

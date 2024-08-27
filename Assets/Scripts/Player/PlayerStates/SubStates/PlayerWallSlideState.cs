@@ -16,15 +16,5 @@ public class PlayerWallSlideState : PlayerTouchingWallState
         {
             core.Movement.SetVelocityY(-playerData.wallSlideVelocity);
         }
-
-        if (player.candyTime > 0)
-        {
-            player.candyMeter.value = player.candyTime / playerData.candyTimer;
-            player.candyTime -= Time.deltaTime/2;
-        }
-        else
-        {
-            player.candyMeter.gameObject.SetActive(false);
-        }
     }
 }

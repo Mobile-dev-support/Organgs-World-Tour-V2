@@ -53,9 +53,19 @@ namespace SimpleInputNamespace
 		private Vector2 m_value = Vector2.zero;
 		public Vector2 Value { get { return m_value; } }
 
+
 		[SerializeField]
 		private Vector2 originalPosition;
 
+
+		[SerializeField]
+		private GameObject leftIndicator;
+		[SerializeField]
+		private GameObject rightIndicator;
+        [SerializeField]
+        private GameObject upIndicator;
+        [SerializeField]
+        private GameObject downIndicator;
         private void Awake()
 		{
 			joystickTR = (RectTransform) transform;
@@ -191,7 +201,39 @@ namespace SimpleInputNamespace
 
 			xAxis.value = m_value.x;
 			yAxis.value = m_value.y;
-		}
+
+			if(xAxis.value > 0)
+			{
+				rightIndicator.SetActive(true);
+				leftIndicator.SetActive(false);
+			}
+			else if( xAxis.value < 0)
+			{
+                rightIndicator.SetActive(false);
+                leftIndicator.SetActive(true);
+            }
+			else
+			{
+                rightIndicator.SetActive(false);
+                leftIndicator.SetActive(false);
+            }
+
+            if (yAxis.value > 0.9)
+            {
+                upIndicator.SetActive(true);
+                downIndicator.SetActive(false);
+            }
+            else if (yAxis.value < -0.9)
+            {
+                upIndicator.SetActive(false);
+                downIndicator.SetActive(true);
+            }
+            else
+            {
+                upIndicator.SetActive(false);
+                downIndicator.SetActive(false);
+            }
+        }
 
 		public void OnPointerUp( PointerEventData eventData )
 		{
@@ -204,7 +246,12 @@ namespace SimpleInputNamespace
 
 			xAxis.value = 0f;
 			yAxis.value = 0f;
-		}
+            rightIndicator.SetActive(false);
+            leftIndicator.SetActive(false);
+
+            upIndicator.SetActive(false);
+            downIndicator.SetActive(false);
+        }
 
 		private void OnUpdate()
 		{

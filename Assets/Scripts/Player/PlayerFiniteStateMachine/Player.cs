@@ -5,6 +5,8 @@ using UnityEngine.Rendering;
 using TMPro;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
+using UnityEngine.SocialPlatforms.Impl;
+
 public class Player : MonoBehaviour
 {
     #region State Variables
@@ -38,7 +40,9 @@ public class Player : MonoBehaviour
     public bool IsStunned { get; private set; }
     public bool Stunned { get; set; }
 
-    
+    bool isSugarPlatform;
+    float sugarPlatformDecreaseMultiplier;
+
     #endregion
 
     #region Other Variables         
@@ -116,6 +120,58 @@ public class Player : MonoBehaviour
         {
             DrunkState();
         }
+
+        if (playerData.afterShockTimer > 0 && afterShock == true)
+        {
+            Anim.SetFloat(xState, 0f);
+            candyTime = 0;
+            candyMeter.gameObject.SetActive(false);
+            playerData.afterShockTimer -= Time.deltaTime;
+            Core.Movement.CanSetVelocity = false;
+            defaultValues.animationState = OliverStates.AfterShock;
+        }
+        if (playerData.afterShockTimer <= 0 && afterShock == true)
+        {
+            afterShock = false;
+            playerData.afterShockTimer = 1.5f;
+            Anim.SetFloat(Candied, 0f);
+            Core.Movement.CanSetVelocity = true;
+            defaultValues.animationState = OliverStates.Normal;
+        }
+
+      
+        isSugarPlatform = Core.CollisionSenses.SugarPlatform;
+        if (!isSugarPlatform)
+        {
+            if (candyTime > 0)
+            {
+                Debug.Log(StateMachine.CurrentState);
+                switch (StateMachine.CurrentState)
+                {
+                    
+                    case PlayerJumpState:
+                    case PlayerInAirState:
+                    case PlayerWallSlideState:
+                    case PlayerWallJumpState:
+                    case PlayerLandState:
+                    case PlayerLedgeClimbState:
+                        sugarPlatformDecreaseMultiplier = 2f;
+                        break;
+                    default:
+                        sugarPlatformDecreaseMultiplier = 1f;
+                        break;
+                }
+                candyMeter.value = candyTime / playerData.candyTimer;
+                candyTime -= Time.deltaTime/ sugarPlatformDecreaseMultiplier;
+            }
+            else
+            {
+                candyMeter.gameObject.SetActive(false);
+            }
+
+            if (defaultValues.animationState != OliverStates.Cheesed && defaultValues.animationState != OliverStates.Drunk && defaultValues.animationState != OliverStates.AfterShock)
+                defaultValues.animationState = OliverStates.Normal;
+        }
     }
 
     private void PlayerAnimationStatusStates()
@@ -151,21 +207,8 @@ public class Player : MonoBehaviour
                 break;
         }
 
-            if (playerData.afterShockTimer > 0 && afterShock == true)
-            {
-                Anim.SetFloat(xState, 0f);
-                playerData.afterShockTimer -= Time.deltaTime;
-                Core.Movement.CanSetVelocity = false;
-                defaultValues.animationState = OliverStates.AfterShock;
-            }
-            if (playerData.afterShockTimer <= 0 && afterShock == true)
-            {
-                afterShock = false;
-                playerData.afterShockTimer = 1.5f;
-                Anim.SetFloat(Candied, 0f);
-                Core.Movement.CanSetVelocity = true;
-                defaultValues.animationState = OliverStates.Normal;
-            }
+
+          
 
          
         
@@ -234,9 +277,9 @@ public class Player : MonoBehaviour
 
     public void DrunkControls() 
     {
-        PlayerControls.Instance.left.value = 1;
-        PlayerControls.Instance.right.value = -1;
-       // PlayerControls.Instance.joystick.valueMultiplier = -1;
+        //PlayerControls.Instance.left.value = 1;
+        //PlayerControls.Instance.right.value = -1;
+        PlayerControls.Instance.joystick.valueMultiplier = -1;
         PlayerControls.Instance.slide.button.Key = "Jump";
         PlayerControls.Instance.jump.button.Key = "Fire3";
     }
@@ -261,9 +304,9 @@ public class Player : MonoBehaviour
 
     public void DefaultControls()
     {
-        PlayerControls.Instance.left.value = -1;
-        PlayerControls.Instance.right.value = 1;
-       // PlayerControls.Instance.joystick.valueMultiplier = 1;
+        //PlayerControls.Instance.left.value = -1;
+        //PlayerControls.Instance.right.value = 1;
+        PlayerControls.Instance.joystick.valueMultiplier = 1;
         PlayerControls.Instance.jump.button.Key = "Jump";
         PlayerControls.Instance.slide.button.Key = "Fire3";
     }
