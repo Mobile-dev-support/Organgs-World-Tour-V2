@@ -27,7 +27,7 @@ public class Core : MonoBehaviour
     {
         if(collisionSenses != null)
         {
-            touchingSolidPlatform = collisionSenses.LedgeHorizontalBlock;
+            touchingSolidPlatform = collisionSenses.SolidPlatform;
             touchingCeiling = collisionSenses.Ceiling;
             touchingWall = collisionSenses.WallFront;
             touchingWallBack = collisionSenses.WallBack;

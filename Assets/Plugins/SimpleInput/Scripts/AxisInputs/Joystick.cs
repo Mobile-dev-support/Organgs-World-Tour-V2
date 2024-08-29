@@ -170,60 +170,96 @@ namespace SimpleInputNamespace
 				RectTransformUtility.ScreenPointToLocalPointInRectangle( joystickTR, eventData.position, eventData.pressEventCamera, out pointerInitialPos );
 		}
 
-		public void OnDrag( PointerEventData eventData )
-		{
-			Vector2 pointerPos;
-			RectTransformUtility.ScreenPointToLocalPointInRectangle( joystickTR, eventData.position, eventData.pressEventCamera, out pointerPos );
+        private void Update()
+        {
+            // Recalculate m_value with the updated valueMultiplier before updating indicators
+            RecalculateValue();
+            UpdateIndicators();
+        }
 
-			Vector2 direction = pointerPos - pointerInitialPos;
-			if( movementAxes == MovementAxes.X )
-				direction.y = 0f;
-			else if( movementAxes == MovementAxes.Y )
-				direction.x = 0f;
+        public void OnDrag(PointerEventData eventData)
+        {
+            Vector2 pointerPos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(joystickTR, eventData.position, eventData.pressEventCamera, out pointerPos);
 
-			if( direction.sqrMagnitude <= deadzoneRadiusSqr )
-				m_value.Set( 0f, 0f );
-			else
-			{
-				if( direction.sqrMagnitude > movementAreaRadiusSqr )
-				{
-					Vector2 directionNormalized = direction.normalized * movementAreaRadius;
-					if( canFollowPointer )
-						joystickTR.localPosition += (Vector3) ( direction - directionNormalized );
+            Vector2 direction = pointerPos - pointerInitialPos;
+            if (movementAxes == MovementAxes.X)
+                direction.y = 0f;
+            else if (movementAxes == MovementAxes.Y)
+                direction.x = 0f;
 
-					direction = directionNormalized;
-				}
+            if (direction.sqrMagnitude <= deadzoneRadiusSqr)
+                m_value.Set(0f, 0f);
+            else
+            {
+                if (direction.sqrMagnitude > movementAreaRadiusSqr)
+                {
+                    Vector2 directionNormalized = direction.normalized * movementAreaRadius;
+                    if (canFollowPointer)
+                        joystickTR.localPosition += (Vector3)(direction - directionNormalized);
 
-				m_value = direction * _1OverMovementAreaRadius * valueMultiplier;
-			}
+                    direction = directionNormalized;
+                }
 
-			thumbTR.localPosition = direction;
+                m_value = direction * _1OverMovementAreaRadius * valueMultiplier;
+            }
 
-			xAxis.value = m_value.x;
-			yAxis.value = m_value.y;
+            thumbTR.localPosition = direction;
 
-			if(xAxis.value > 0)
-			{
-				rightIndicator.SetActive(true);
-				leftIndicator.SetActive(false);
-			}
-			else if( xAxis.value < 0)
-			{
+            xAxis.value = m_value.x;
+            yAxis.value = m_value.y;
+
+
+            // Update the indicators
+            UpdateIndicators();
+        }
+
+        private void RecalculateValue()
+        {
+            // If needed, recalculate m_value based on the current state, including valueMultiplier
+            // Example: m_value = someVector * _1OverMovementAreaRadius * valueMultiplier;
+            // Assuming m_value needs recalculation based on the current multiplier and direction
+
+            Vector2 direction = thumbTR.localPosition; // This assumes thumbTR.localPosition holds the last calculated direction
+
+            if (direction.sqrMagnitude > 0)
+            {
+                m_value = direction * _1OverMovementAreaRadius * valueMultiplier;
+                xAxis.value = m_value.x;
+                yAxis.value = m_value.y;
+            }
+            else
+            {
+                m_value.Set(0f, 0f);
+                xAxis.value = 0f;
+                yAxis.value = 0f;
+            }
+        }
+
+        private void UpdateIndicators()
+        {
+            if (xAxis.value >= 0.5f)
+            {
+                rightIndicator.SetActive(true);
+                leftIndicator.SetActive(false);
+            }
+            else if (xAxis.value <= -0.5f)
+            {
                 rightIndicator.SetActive(false);
                 leftIndicator.SetActive(true);
             }
-			else
-			{
+            else
+            {
                 rightIndicator.SetActive(false);
                 leftIndicator.SetActive(false);
             }
 
-            if (yAxis.value > 0.9)
+            if (yAxis.value > 0.5)
             {
                 upIndicator.SetActive(true);
                 downIndicator.SetActive(false);
             }
-            else if (yAxis.value < -0.9)
+            else if (yAxis.value < -0.5)
             {
                 upIndicator.SetActive(false);
                 downIndicator.SetActive(true);
@@ -235,8 +271,9 @@ namespace SimpleInputNamespace
             }
         }
 
-		public void OnPointerUp( PointerEventData eventData )
+        public void OnPointerUp( PointerEventData eventData )
 		{
+			Debug.Log("Holding");
 			joystickHeld = false;
 			m_value = Vector2.zero;
 

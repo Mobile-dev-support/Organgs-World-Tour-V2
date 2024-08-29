@@ -47,7 +47,7 @@ public class ChangeConfiner : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().DOFade(0f, 1f);
             CamSizer();
             confiner.m_BoundingShape2D = polygon;
-            vcam.m_Follow = GameManager.Instance.Rplayer.transform;
+            vcam.m_Follow = GameManager.Instance.Rplayer.transform.GetChild(0);
             for (int i = 0; i < objs.Length; i++)
             {
                 objs[i].SetActive(true);

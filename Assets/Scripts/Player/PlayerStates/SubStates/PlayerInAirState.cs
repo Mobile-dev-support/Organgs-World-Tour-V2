@@ -16,6 +16,7 @@ public class PlayerInAirState : PlayerState
     private bool oldIsTouchingWall;
     private bool oldIsTouchingWallBack;
     private bool isSolidPlatformCeiling;
+    private bool isSolidPlatform;
     private bool isTouchingLedge;
     private bool isTouchingSolidOverLedge;
     private bool isHittingPlatform;
@@ -55,6 +56,7 @@ public class PlayerInAirState : PlayerState
         isSugarPlatform = core.CollisionSenses.SugarPlatform;
         isSlippery = core.CollisionSenses.SlipperyPlatform;
         isSolidPlatformCeiling = core.CollisionSenses.SolidPlatformCeiling;
+        isSolidPlatform = core.CollisionSenses.SolidPlatform;
         if (isTouchingWall && !isTouchingLedge)
         {
             player.LedgeClimbState.SetDetectedPosition(player.transform.position);
@@ -111,7 +113,7 @@ public class PlayerInAirState : PlayerState
         {
             stateMachine.ChangeState(player.JumpState);
         }
-        else if(isTouchingWall && xInput == core.Movement.FacingDirection && core.Movement.CurrentVelocity.y <= 0 && !isHittingPlatform && !isDead)
+        else if(isTouchingWall && !isSolidPlatform && xInput == core.Movement.FacingDirection && core.Movement.CurrentVelocity.y <= 0 && !isHittingPlatform && !isDead)
         {
             stateMachine.ChangeState(player.WallSlideState);
            

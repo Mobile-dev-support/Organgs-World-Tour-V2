@@ -13,7 +13,7 @@ public class PlayerTouchingWallState : PlayerState
     protected int xInput;
     protected int yInput;
     private bool isSolidPlatformCeiling;
-
+    private bool isSolidPlatform;
     public PlayerTouchingWallState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -36,6 +36,7 @@ public class PlayerTouchingWallState : PlayerState
         isTouchingWall = core.CollisionSenses.WallFront;
         isTouchingLedge = core.CollisionSenses.LedgeHorizontal;
         isSolidPlatformCeiling = core.CollisionSenses.SolidPlatformCeiling;
+        isSolidPlatform = core.CollisionSenses.SolidPlatform;
         isTouchingSolidOverLedge = core.CollisionSenses.LedgeHorizontalBlock;
         if (isTouchingWall && !isTouchingLedge)
         {
@@ -71,7 +72,7 @@ public class PlayerTouchingWallState : PlayerState
             player.WallJumpState.DetermineWallJumpDirection(isTouchingWall);
             stateMachine.ChangeState(player.WallJumpState);
         }
-        else if (isGrounded && !isDead)
+        else if (isGrounded || isSolidPlatform  && !isDead)
         {
             stateMachine.ChangeState(player.IdleState);
         }

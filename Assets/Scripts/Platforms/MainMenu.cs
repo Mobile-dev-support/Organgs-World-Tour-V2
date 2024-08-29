@@ -75,6 +75,8 @@ public class MainMenu : MonoBehaviour
     private float previousSFXVolume;
     private bool musicMuted;
     private bool sfxMuted;
+
+    public RectTransform CameraMovementPanel;
     public static MainMenu Instance { get { return _instance; } }
     #endregion
 
