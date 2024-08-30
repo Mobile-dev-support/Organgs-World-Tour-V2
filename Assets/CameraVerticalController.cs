@@ -29,7 +29,7 @@ public class CameraVerticalController : MonoBehaviour, IPointerDownHandler, IPoi
 
     private void Update()
     {
-        if(vCam != null)
+        if(vCam != null && vCam.Follow !=  null)
         {
             playerToCenter = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, Camera.main.transform.position.z)).y -  vCam.Follow.transform.position.y;
         }
@@ -37,7 +37,7 @@ public class CameraVerticalController : MonoBehaviour, IPointerDownHandler, IPoi
 
     public void SetCameras()
     {
-        vCam = FindObjectOfType<CinemachineVirtualCamera>();
+        vCam = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
         vCamTransposer = vCam.GetCinemachineComponent<CinemachineFramingTransposer>();
     }
 
@@ -74,7 +74,7 @@ public class CameraVerticalController : MonoBehaviour, IPointerDownHandler, IPoi
         vCamTransposer.m_LookaheadSmoothing = 0;
         // Calculate the maximum and minimum offset values
         float maxOffset = 3.5f * (vCam.m_Lens.OrthographicSize / 4.5f);
-        float minOffset = -2.5f * (vCam.m_Lens.OrthographicSize / 4.5f);
+        float minOffset = -3f * (vCam.m_Lens.OrthographicSize / 4.5f);
 
         // Scale the touch difference to be within the range [minOffset, maxOffset]
         float scaledOffset = Mathf.Clamp((touchPositionDifference / 80.0f * maxOffset) + playerToCenter, minOffset, maxOffset);

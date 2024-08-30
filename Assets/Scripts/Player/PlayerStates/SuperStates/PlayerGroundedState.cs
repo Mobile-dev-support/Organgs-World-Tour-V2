@@ -68,7 +68,7 @@ public class PlayerGroundedState : PlayerState
             if (player.defaultValues.animationState != OliverStates.AfterShock)
             {
                     
-                    player.candyTime += Time.deltaTime;
+                    player.candyTime += Time.deltaTime * 1;
                     player.candyMeter.gameObject.SetActive(true);
                     player.candyMeter.value = player.candyTime / playerData.candyTimer;
                     if (player.candyTime >= playerData.candyTimer)
@@ -121,11 +121,18 @@ public class PlayerGroundedState : PlayerState
             player.InAirState.StartCoyoteTime();
             stateMachine.ChangeState(player.InAirState);
         }
-        else if (isDead|| (!isCurrentlySliding && (isTouchingCeiling || isTouchingCeilingSolidPlatform) && (isGrounded || isSlippery || isStickingToPlatform || isSugarPlatform))
+        else if (isDead || (!isCurrentlySliding && (isTouchingCeiling || isTouchingCeilingSolidPlatform) && (isGrounded || isSlippery || isStickingToPlatform || isSugarPlatform))
             || player.transform.rotation.z != 0 || isTouchingWall && isTouchingWallBack || isTouchingWall && isTouchingWallBackSolidPlatform || isTouchingSolidPlatform && isTouchingWallBack)
         {
-           
-            stateMachine.ChangeState(player.DeathState);
+
+            Debug.Log("Death in Grounded state");
+            if ((!isCurrentlySliding && (isTouchingCeiling || isTouchingCeilingSolidPlatform) && (isGrounded || isSlippery || isStickingToPlatform || isSugarPlatform)))
+            {
+                Debug.Log("isTouching Celing:" + isTouchingCeiling);
+                Debug.Log("isTouchingCeilingSolidPlatform:" + isTouchingCeilingSolidPlatform);
+                Debug.Log("isGrounded:" + isGrounded);
+            }
+                stateMachine.ChangeState(player.DeathState);
         }
         
         /*if (isSugarPlatform)

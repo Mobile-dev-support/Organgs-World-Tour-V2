@@ -19,7 +19,6 @@ namespace Adnc.QuickParallax {
         bool _autoInit = true;
 
         [Tooltip("Manually assign a tracking object. Leaving this blank will follow the current main camera when started")]
-        [SerializeField]
         private Transform _trackingTarget;
 
         private List<ParallaxLayer> _layers = new List<ParallaxLayer>();
@@ -49,6 +48,7 @@ namespace Adnc.QuickParallax {
 
         private void Start () {
             if (_autoInit) {
+              
                 Play();
             }
         }

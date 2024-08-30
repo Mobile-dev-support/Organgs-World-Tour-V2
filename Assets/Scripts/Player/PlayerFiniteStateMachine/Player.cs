@@ -151,18 +151,23 @@ public class Player : MonoBehaviour
                     
                     case PlayerJumpState:
                     case PlayerInAirState:
+                        sugarPlatformDecreaseMultiplier = 0.01f;
+                        break;
                     case PlayerWallSlideState:
                     case PlayerWallJumpState:
                     case PlayerLandState:
                     case PlayerLedgeClimbState:
-                        sugarPlatformDecreaseMultiplier = 2f;
+                        sugarPlatformDecreaseMultiplier = 0.1f;
+                        break;
+                    case PlayerGroundedState:
+                        sugarPlatformDecreaseMultiplier = 1f;
                         break;
                     default:
-                        sugarPlatformDecreaseMultiplier = 1f;
+                        sugarPlatformDecreaseMultiplier = 0.2f;
                         break;
                 }
                 candyMeter.value = candyTime / playerData.candyTimer;
-                candyTime -= Time.deltaTime/ sugarPlatformDecreaseMultiplier;
+                candyTime -= Time.deltaTime * sugarPlatformDecreaseMultiplier;
             }
             else
             {

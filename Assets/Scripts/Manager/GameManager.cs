@@ -43,7 +43,11 @@ public class GameManager : MonoBehaviour
     {
         mCamera = Camera.main;
         firstDoor = GameObject.Find("door");
-        CameraVerticalController.Instance.SetCameras();
+        if (CameraVerticalController.Instance != null)
+        {
+            CameraVerticalController.Instance.SetCameras();
+        }
+
         anim = firstDoor.GetComponent<Animator>();
         if (Fader.Instance != null)
         {

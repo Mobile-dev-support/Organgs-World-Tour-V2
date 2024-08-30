@@ -7,6 +7,7 @@ public class CollisionSenses : CoreComponent
     #region Check Transforms
 
 
+   
     public Transform GroundCheck
     {
         get => GenericNotImplementedError<Transform>.TryGet(groundCheck, core.transform.parent);
@@ -78,6 +79,7 @@ public class CollisionSenses : CoreComponent
     [SerializeField] private Transform ceilingCheck;
     [SerializeField] private Transform ceilingSlideCheck;
 
+    [SerializeField] private float originalGroundCheckRadius;
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private float ceilingCheckRadius;
     [SerializeField] private float ceilingSlideCheckRadius;
@@ -97,7 +99,10 @@ public class CollisionSenses : CoreComponent
     [SerializeField] private LayerMask whatIsTrap;
 
     #endregion
-
+    private void Start()
+    {
+        originalGroundCheckRadius = groundCheckRadius;
+    }
     public bool Ceiling
     {
         get => Physics2D.OverlapCircle(CeilingCheck.position, ceilingCheckRadius, whatIsGround);
@@ -192,4 +197,6 @@ public class CollisionSenses : CoreComponent
         Gizmos.DrawRay(ledgeCheckHorizontal.position, direction);
         Gizmos.DrawRay(ledgeCheckHorizontalBlock.position, solidCheckDirection);
     }
+
+   
 }

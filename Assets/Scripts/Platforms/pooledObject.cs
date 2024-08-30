@@ -78,7 +78,7 @@ public class pooledObject : MonoBehaviour
 
     void VerticalWarningIndicator()
     {
-        if (Mathf.Abs(distXToPlayer) <= 15f && distYToPlayer > 0f && warning.activeSelf)
+        if (Mathf.Abs(distXToPlayer) <= 30f && distYToPlayer > 0f && warning.activeSelf)
         {
             bool rendererIsVisible = this.GetComponentInParent<Renderer>().isVisible;
             Vector2 raycastOrigin = this.transform.position;
@@ -109,7 +109,7 @@ public class pooledObject : MonoBehaviour
 
     void HorizontalWarningIndicator()
     {
-        if (Mathf.Abs(distXToPlayer) <= 15f && distXToPlayer > -15f && warning.activeSelf)
+        if (Mathf.Abs(distXToPlayer) <= 30f && distXToPlayer > -30f && warning.activeSelf)
         {
             bool rendererIsVisible = this.GetComponentInParent<Renderer>().isVisible;
             Vector3 cameraLeftEdge = Camera.main.ViewportToWorldPoint(new Vector3(0, 0.5f, Camera.main.nearClipPlane));

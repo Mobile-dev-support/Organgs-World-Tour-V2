@@ -8,10 +8,15 @@ using UnityEngine.UIElements;
 public class UIFocus : MonoBehaviour
 {
     public List<GameObject> CurrentLevel = new List<GameObject>();
+    public GameObject CurrentLevelSelected;
+
     private RectTransform rect;
     public ScrollRect scroller;
     public Transform UI_particle;
     private static UIFocus _instance;
+    public GameObject buttonLeftSelector;
+    public GameObject buttonRightSelector;
+
     public static UIFocus Instance { get { return _instance; } }
 
    
@@ -32,8 +37,10 @@ public class UIFocus : MonoBehaviour
         List<GameObject> objSortedList = CurrentLevel.OrderBy(o => o.name).ToList();
         CurrentLevel = objSortedList;
         rect = CurrentLevel.Last().GetComponent<RectTransform>();
+        CurrentLevelSelected = CurrentLevel.Last();
         StartCoroutine(ScrollViewFocusFunctions.FocusOnItemCoroutine(scroller, rect, 2f));
         UI_particle.SetPositionAndRotation(rect.position, Quaternion.identity);
+        ToggleButtons();
     }
 
     public void FocusOnObjectImmediately()
@@ -41,8 +48,10 @@ public class UIFocus : MonoBehaviour
         List<GameObject> objSortedList = CurrentLevel.OrderBy(o => o.name).ToList();
         CurrentLevel = objSortedList;
         rect = CurrentLevel.Last().GetComponent<RectTransform>();
+        CurrentLevelSelected = CurrentLevel.Last();
         ScrollViewFocusFunctions.FocusOnItem(scroller, rect);
         UI_particle.SetPositionAndRotation(rect.position, Quaternion.identity);
+        ToggleButtons();
     }
 
     public void FocusOnNearestObjectToCenter(float offset)
@@ -54,9 +63,53 @@ public class UIFocus : MonoBehaviour
         if (nearestObject != null)
         {
             CurrentLevel = CurrentLevel.OrderBy(o => o.name).ToList();
+            CurrentLevelSelected = nearestObject;
             rect = nearestObject.GetComponent<RectTransform>();
             StartCoroutine(ScrollViewFocusFunctions.FocusOnItemCoroutine(scroller, rect, 2f));
             UI_particle.SetPositionAndRotation(rect.position, Quaternion.identity);
+            ToggleButtons();
+        }
+    }
+
+    public void FocusOnNextOrPrevious(float direction)
+    {
+        int indexOfCurrent = CurrentLevel.IndexOf(CurrentLevelSelected);
+        switch (direction)
+        {
+            case 0:
+                rect = CurrentLevel[indexOfCurrent - 1].GetComponent<RectTransform>();
+                CurrentLevelSelected = CurrentLevel[indexOfCurrent - 1];
+                break;
+
+            case 1:
+                rect = CurrentLevel[indexOfCurrent + 1].GetComponent<RectTransform>();
+                CurrentLevelSelected = CurrentLevel[indexOfCurrent + 1];
+                break;
+        }
+        ScrollViewFocusFunctions.FocusOnItem(scroller, rect);
+        ToggleButtons();
+        UI_particle.SetPositionAndRotation(rect.position, Quaternion.identity);
+    }
+
+    private void ToggleButtons()
+    {
+        List<GameObject> objSortedList = CurrentLevel.OrderBy(o => o.name).ToList();
+        CurrentLevel = objSortedList;
+        int indexOfCurrent = CurrentLevel.IndexOf(CurrentLevelSelected);
+        if (indexOfCurrent == 0)
+        {
+            buttonLeftSelector.SetActive(false);
+            buttonRightSelector.SetActive(true);
+        }
+        else if (indexOfCurrent == CurrentLevel.Count - 1)
+        {
+            buttonLeftSelector.SetActive(true);
+            buttonRightSelector.SetActive(false);
+        }
+        else
+        {
+            buttonRightSelector.SetActive(true);
+            buttonLeftSelector.SetActive(true);
         }
     }
 }

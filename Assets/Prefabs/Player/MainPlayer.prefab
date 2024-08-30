@@ -230,7 +230,7 @@ Transform:
   m_GameObject: {fileID: 1713943240}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.075, y: 0, z: 0}
+  m_LocalPosition: {x: 0.0872491, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -429,7 +429,7 @@ Transform:
   m_GameObject: {fileID: 2751054236844376477}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.075, y: -0.525, z: 0}
+  m_LocalPosition: {x: 0.087, y: -0.525, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -806,7 +806,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.075, y: 0}
+  m_Offset: {x: 0.0872491, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -817,7 +817,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.45, y: 1.05}
+  m_Size: {x: 0.42550182, y: 1.05}
   m_EdgeRadius: 0.0002
 --- !u!1 &2751054237057519564
 GameObject:
@@ -870,6 +870,7 @@ MonoBehaviour:
   touchingCeiling: 0
   touchingWall: 0
   touchingWallBack: 0
+  touchingCelingSolidPlatform: 0
   touchingWallSolidPlatform: 0
   touchingWallSolidPlatformBack: 0
   canSetVelocity: 0
@@ -940,13 +941,14 @@ MonoBehaviour:
   ledgeCheckVertical: {fileID: 0}
   ceilingCheck: {fileID: 2751054236431387341}
   ceilingSlideCheck: {fileID: 2822496338800076339}
-  groundCheckRadius: 0.229
+  originalGroundCheckRadius: 0
+  groundCheckRadius: 0.205
   ceilingCheckRadius: 0.002
-  ceilingSlideCheckRadius: 0.229
-  wallCheckDistance: 0.1
+  ceilingSlideCheckRadius: 0.205
+  wallCheckDistance: 0.12
   solidLedgeCheckDistance: 0.42
-  deathCheckX: 0.47
-  deathCheckY: 1.13
+  deathCheckX: 0.4255018
+  deathCheckY: 1.05
   throughPlatformCheckX: 0.47
   throughPlatformCheckY: 0.15
   whatIsGround:
@@ -1036,7 +1038,7 @@ Transform:
   m_GameObject: {fileID: 3363345053702481162}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.075, y: 0.527, z: 0}
+  m_LocalPosition: {x: 0.087, y: 0.527, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2568,7 +2570,7 @@ ParticleSystem:
     x:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: -2
       minScalar: 0
       maxCurve:
         serializedVersion: 2

@@ -71,10 +71,16 @@ public class PlayerLedgeClimbState : PlayerState
         var deathCheck = core.CollisionSenses.DeathCheck.transform.position;
         deathCheck = new Vector3(deathCheck.x, 0);
         isHanging = false;
-        if (isClimbing)
+     
+        if (isClimbing && !isTouchingSolidOverLedge)
         {
+            Debug.Log("Exited");
             player.transform.position = stopPos;
             isClimbing = false;
+        }
+        else
+        {
+            Debug.Log("ExitedElse");
         }
     }
 
@@ -85,6 +91,7 @@ public class PlayerLedgeClimbState : PlayerState
         {
             if (isTouchingCeiling)
             {
+                Debug.Log("Finished Then Crouch Idle");
                 stateMachine.ChangeState(player.CrouchIdleState);
             }
             else

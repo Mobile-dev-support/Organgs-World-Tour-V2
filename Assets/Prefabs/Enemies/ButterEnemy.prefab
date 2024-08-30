@@ -451,6 +451,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   touchingSolidPlatform: 0
   touchingCeiling: 0
+  touchingWall: 0
+  touchingWallBack: 0
+  touchingWallSolidPlatform: 0
+  touchingWallSolidPlatformBack: 0
+  canSetVelocity: 0
+  grounded: 0
 --- !u!1 &6577987849140685698
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,6 +509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 4809765039379664173}
+  throughPlatformCheck: {fileID: 4809765039379664173}
   deathCheck: {fileID: 8148359322366408221}
   wallCheck: {fileID: 4248516542049809569}
   wallCheckBack: {fileID: 2860280856774153661}
@@ -510,12 +517,16 @@ MonoBehaviour:
   ledgeCheckHorizontalBlock: {fileID: 3920502844669912646}
   ledgeCheckVertical: {fileID: 3920502844669912646}
   ceilingCheck: {fileID: 8235749157565241549}
+  ceilingSlideCheck: {fileID: 8235749157565241549}
   groundCheckRadius: 0.09
   ceilingCheckRadius: 0.08
+  ceilingSlideCheckRadius: 0
   wallCheckDistance: 0.24
   solidLedgeCheckDistance: 0
   deathCheckX: 1.34
   deathCheckY: 0.95
+  throughPlatformCheckX: 0
+  throughPlatformCheckY: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256

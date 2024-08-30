@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
 {
     #region variables
     [HideInInspector] public View mainCanvas;
+    [HideInInspector] public View mainMenuCanvas;
     [HideInInspector] public View winCanvas;
     [HideInInspector] public View gameOverCanvas;
     [HideInInspector] public View statCanvas;
@@ -138,7 +139,7 @@ public class MainMenu : MonoBehaviour
 
     public void mainMenu()
     {
-        StartCoroutine(LoadGameAsync(true, GameManager.Instance.sceneName));
+        StartCoroutine(FadeGame(true,0, GameManager.Instance.sceneName));
         UpdateMainMenu();
         coverCanvas.Show();
     }
@@ -152,7 +153,7 @@ public class MainMenu : MonoBehaviour
 
     public void LoadLevel(string placeName)
     {
-        StartCoroutine(FadeGame(0, placeName));
+        StartCoroutine(FadeGame(false,0, placeName));
         BasicLife.Instance.LifeLine();
     }
 
@@ -160,7 +161,7 @@ public class MainMenu : MonoBehaviour
     {
         if(GameManager.Instance.sceneName != "48")
         {
-            StartCoroutine(FadeGame(0, GameManager.Instance.nextScene));
+            StartCoroutine(FadeGame(false, 0, GameManager.Instance.nextScene));
             BasicLife.Instance.LifeLine();
             UpdateMainMenu();
             isNextLevel = true;
@@ -176,7 +177,7 @@ public class MainMenu : MonoBehaviour
 
     public void Restart()
     {
-        StartCoroutine(FadeGame(0, GameManager.Instance.sceneName));
+        StartCoroutine(FadeGame(false, 0, GameManager.Instance.sceneName));
         UpdateMainMenu();
         isNextLevel = true;
         ingameCanvas.transform.SetParent(MenuCanvas.transform, false);
@@ -232,7 +233,7 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public IEnumerator FadeGame(float fadeVal, string loadSceneString)
+    public IEnumerator FadeGame(bool unload, float fadeVal, string loadSceneString)
     {
         slider.value = 0;
         loadingCanvas.Show();
@@ -242,7 +243,7 @@ public class MainMenu : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         CanvasFader(1, loadingCanvas.transform);
         yield return new WaitForSeconds(2f);
-        StartCoroutine(LoadGameAsync(false, loadSceneString));
+        StartCoroutine(LoadGameAsync(unload, loadSceneString));
     }
 
     void CanvasFader(float val, Transform canvas)
@@ -270,15 +271,24 @@ public class MainMenu : MonoBehaviour
         }
         else
         {
-            yield return new WaitForSeconds(1.2f);
             operation = SceneManager.UnloadSceneAsync(loadSceneString);
+            
         }
 
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / .9f);
-            slider.value = progress;
-            textProgress.text = ProgressText(progress);
+            if(!unload)
+            {
+                slider.value = progress;
+                textProgress.text = ProgressText(progress);
+            }
+            else
+            {
+                slider.value = 1f;
+                textProgress.text = ProgressText(1);
+            }
+            
             yield return null;
         }
 
@@ -324,7 +334,9 @@ public class MainMenu : MonoBehaviour
             UIFocus.Instance.FocusOnObjectImmediately();
             SoundManager.Instance.OutBGMusic(BGMusic.Instance.music);
             yield return new WaitForSeconds(1f);
+            loadingCanvas.Hide();
             SoundManager.Instance.SFXAudio(Map);
+            mainMenuCanvas.Hide();
             CanvasFader(1, mainCanvas.transform);
             SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainMenu"));
             Tutorial.Instance.TutorialOff();

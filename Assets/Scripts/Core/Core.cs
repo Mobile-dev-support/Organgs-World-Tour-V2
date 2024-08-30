@@ -15,6 +15,8 @@ public class Core : MonoBehaviour
     [SerializeField]
     private bool touchingWallBack;
     [SerializeField]
+    private bool touchingCelingSolidPlatform;
+    [SerializeField]
     private bool touchingWallSolidPlatform;
     [SerializeField]
     private bool touchingWallSolidPlatformBack;
@@ -35,6 +37,7 @@ public class Core : MonoBehaviour
             touchingWallSolidPlatformBack = collisionSenses.WallBackSolidPlatform;
             canSetVelocity = movement.CanSetVelocity;
             grounded = collisionSenses.Ground;
+            touchingCelingSolidPlatform = collisionSenses.SolidPlatformCeiling;
         }
 
     }

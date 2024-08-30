@@ -23,7 +23,6 @@ public class PlayerCrouchIdleState : PlayerGroundedState
 
     public override void Exit()
     {
-        Debug.Log("Exited");
         base.Exit();
         isCurrentlySliding = false;
         core.Movement.SetVelocityZero();

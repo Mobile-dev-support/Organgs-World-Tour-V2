@@ -79,7 +79,6 @@ public class cookieBehaviour : MonoBehaviour
     public void Knockback(Vector2 angle, float strength, int direction)
     {
         coreP.Movement.SetVelocity(strength, angle, direction);
-        coreP.Movement.Flip();
         coreP.Movement.CanSetVelocity = false;
     }
 
