@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Pusher : MonoBehaviour
 {
@@ -11,6 +12,11 @@ public class Pusher : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             GameManager.Instance.Rplayer.transform.position = new Vector2(respawnPoint.position.x, respawnPoint.position.y);
+            if (GameManager.Instance.Rplayer.transform.rotation != respawnPoint.rotation)
+            {
+                GameManager.Instance.Rplayer.GetComponent<Player>();
+                GameManager.Instance.Rplayer.GetComponentInChildren<Core>().Movement.Flip();
+            }
             enabled = false;
         }
     }

@@ -98,7 +98,11 @@ public class GameManager : MonoBehaviour
     private IEnumerator Spawnplayer()
     {
         resetPlatforms = true;
-        Rplayer = Instantiate(player, respawnPoint);
+        Rplayer = Instantiate(player, respawnPoint.transform.position, player.transform.rotation);
+        if(Rplayer.transform.rotation != respawnPoint.rotation)
+        {
+            Rplayer.GetComponentInChildren<Core>().Movement.Flip();
+        }
         yield return new WaitForSeconds(0.01f);
         if(Fader.Instance != null)
         {

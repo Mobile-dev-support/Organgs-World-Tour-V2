@@ -31,6 +31,12 @@ public class PlayerDeathState : PlayerGroundedState
     private void Die()
     {
         GameObject deathChunk = GameObject.Instantiate(playerData.deathChunk, player.transform.position, playerData.deathChunk.transform.rotation) as GameObject;
+
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.ButtonSound(deathChunk.GetComponent<AudioSource>().clip);
+        }
+       
         CameraShake.Instance.ShakeCamera(5f, .1f);
         Object.Destroy(player.gameObject);
         if (Fader.Instance != null)

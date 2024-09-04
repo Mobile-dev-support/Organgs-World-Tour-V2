@@ -51,7 +51,6 @@ public class PlayerState
 
     public virtual void PhysicsUpdate()
     {
-        Debug.Log(stateMachine.CurrentState);
         DoChecks();
     }
 

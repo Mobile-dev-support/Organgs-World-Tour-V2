@@ -237,7 +237,7 @@ public class PlatformController : MonoBehaviour
         if (obj && !objs.Contains(obj))
         {
             // doesn't attach to the obj if it's a 1 way platform and the obj is below it
-            if ((obj.transform.position.y < transform.position.y))
+            if ((obj.transform.position.y < transform.position.y + 0.5f))
             {
                 return;
             }

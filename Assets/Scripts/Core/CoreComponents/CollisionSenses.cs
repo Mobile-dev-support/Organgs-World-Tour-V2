@@ -98,6 +98,9 @@ public class CollisionSenses : CoreComponent
     [SerializeField] private LayerMask whatIsSugarPlatform;
     [SerializeField] private LayerMask whatIsTrap;
 
+
+    public bool isTouchingCeilingSolidPlatform;
+    public bool isTouchingCeilingGround;
     #endregion
     private void Start()
     {
@@ -105,7 +108,7 @@ public class CollisionSenses : CoreComponent
     }
     public bool Ceiling
     {
-        get => Physics2D.OverlapCircle(CeilingCheck.position, ceilingCheckRadius, whatIsGround);
+        get => isTouchingCeilingGround;
     }
 
     public bool CeilingSlide
@@ -115,9 +118,8 @@ public class CollisionSenses : CoreComponent
 
     public bool SolidPlatformCeiling
     {
-        get => Physics2D.OverlapCircle(CeilingCheck.position, ceilingCheckRadius, whatIsSolidPlatform);
+        get => isTouchingCeilingSolidPlatform;
     }
-
     public bool Ground
     {
         get => Physics2D.OverlapCircle(GroundCheck.position, groundCheckRadius, whatIsGround);
@@ -198,5 +200,9 @@ public class CollisionSenses : CoreComponent
         Gizmos.DrawRay(ledgeCheckHorizontalBlock.position, solidCheckDirection);
     }
 
-   
+ 
+
+
+
+
 }
