@@ -96,20 +96,29 @@ public class UIFocus : MonoBehaviour
         List<GameObject> objSortedList = CurrentLevel.OrderBy(o => o.name).ToList();
         CurrentLevel = objSortedList;
         int indexOfCurrent = CurrentLevel.IndexOf(CurrentLevelSelected);
-        if (indexOfCurrent == 0)
+        if(CurrentLevel.Count > 1)
         {
-            buttonLeftSelector.SetActive(false);
-            buttonRightSelector.SetActive(true);
-        }
-        else if (indexOfCurrent == CurrentLevel.Count - 1)
-        {
-            buttonLeftSelector.SetActive(true);
-            buttonRightSelector.SetActive(false);
+            if (indexOfCurrent == 0)
+            {
+                buttonLeftSelector.SetActive(false);
+                buttonRightSelector.SetActive(true);
+            }
+            else if (indexOfCurrent == CurrentLevel.Count - 1)
+            {
+                buttonLeftSelector.SetActive(true);
+                buttonRightSelector.SetActive(false);
+            }
+            else
+            {
+                buttonRightSelector.SetActive(true);
+                buttonLeftSelector.SetActive(true);
+            }
         }
         else
         {
-            buttonRightSelector.SetActive(true);
-            buttonLeftSelector.SetActive(true);
+            buttonRightSelector.SetActive(false);
+            buttonLeftSelector.SetActive(false);
         }
+        
     }
 }

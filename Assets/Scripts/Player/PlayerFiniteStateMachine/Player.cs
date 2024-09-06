@@ -245,15 +245,10 @@ public class Player : MonoBehaviour
             isStunned();
             isDrunk();
         }
-     
-    }
-
-    private void OnCollisionStay2D(Collision2D other)
-    {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             ContactPoint2D pointOfContact = other.contacts.FirstOrDefault(contact => contact.normal.y <= -1 && contact.collider.gameObject.layer == LayerMask.NameToLayer("Ground"));
-            if (pointOfContact.normal.y <= -1 && pointOfContact.point != Vector2.zero)
+            if (pointOfContact.normal.y <= -0.99f && pointOfContact.point != Vector2.zero)
             {
                 collisionSenses.isTouchingCeilingGround = true;
                 Debug.Log("Name:" + other.gameObject.name + " Contact:" + pointOfContact.ToString());
@@ -262,7 +257,31 @@ public class Player : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("SolidPlatform"))
         {
             var pointOfContact = other.contacts.FirstOrDefault(contact => contact.normal.y <= -1 && contact.collider.gameObject.layer == LayerMask.NameToLayer("SolidPlatform"));
-            if (pointOfContact.normal.y <= -1 && pointOfContact.point != Vector2.zero)
+            if (pointOfContact.normal.y <= -0.99f && pointOfContact.point != Vector2.zero)
+            {
+                collisionSenses.isTouchingCeilingSolidPlatform = true;
+                Debug.Log("Name:" + other.gameObject.name + " Contact:" + pointOfContact.ToString());
+            }
+
+        }
+
+    }
+
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            ContactPoint2D pointOfContact = other.contacts.FirstOrDefault(contact => contact.normal.y <= -1 && contact.collider.gameObject.layer == LayerMask.NameToLayer("Ground"));
+            if (pointOfContact.normal.y <= -0.99f && pointOfContact.point != Vector2.zero)
+            {
+                collisionSenses.isTouchingCeilingGround = true;
+                Debug.Log("Name:" + other.gameObject.name + " Contact:" + pointOfContact.ToString());
+            }
+        }
+        if (other.gameObject.layer == LayerMask.NameToLayer("SolidPlatform"))
+        {
+            var pointOfContact = other.contacts.FirstOrDefault(contact => contact.normal.y <= -1 && contact.collider.gameObject.layer == LayerMask.NameToLayer("SolidPlatform"));
+            if (pointOfContact.normal.y <= -0.99f && pointOfContact.point != Vector2.zero)
             {
                 collisionSenses.isTouchingCeilingSolidPlatform = true;
                 Debug.Log("Name:" + other.gameObject.name + " Contact:" + pointOfContact.ToString());
@@ -285,7 +304,7 @@ public class Player : MonoBehaviour
 
         if (other.gameObject.layer == LayerMask.NameToLayer("SolidPlatform"))
         {
-            if (collisionSenses.isTouchingCeilingGround == true)
+            if (collisionSenses.isTouchingCeilingSolidPlatform == true)
                 collisionSenses.isTouchingCeilingSolidPlatform = false;
 
         }

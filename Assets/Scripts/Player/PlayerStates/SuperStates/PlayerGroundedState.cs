@@ -121,7 +121,7 @@ public class PlayerGroundedState : PlayerState
             player.InAirState.StartCoyoteTime();
             stateMachine.ChangeState(player.InAirState);
         }
-        else if (isDead || (!isCurrentlySliding && (isTouchingCeiling || isTouchingCeilingSolidPlatform) && (isGrounded || isSlippery || isStickingToPlatform || isSugarPlatform))
+        else if (isDead || (!isCurrentlySliding && (isTouchingCeiling || isTouchingCeilingSolidPlatform) && (isGrounded || isThroughPlatform || isSlippery || isStickingToPlatform || isSugarPlatform))
             || player.transform.rotation.z != 0 || isTouchingWall && isTouchingWallBack || isTouchingWall && isTouchingWallBackSolidPlatform || isTouchingSolidPlatform && isTouchingWallBack)
         {
 
