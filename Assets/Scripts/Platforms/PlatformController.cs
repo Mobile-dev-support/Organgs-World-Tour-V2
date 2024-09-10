@@ -236,8 +236,9 @@ public class PlatformController : MonoBehaviour
         Player obj = other.gameObject.GetComponent<Player>();
         if (obj && !objs.Contains(obj))
         {
+            Debug.Log("Player Position:" + obj.transform.position.y + " Platform Position:" + transform.position.y + "Difference:" + (transform.position.y - obj.transform.position.y));
             // doesn't attach to the obj if it's a 1 way platform and the obj is below it
-            if ((obj.transform.position.y < transform.position.y + 0.5f))
+            if ((obj.transform.position.y < transform.position.y + 0.7f))
             {
                 return;
             }
