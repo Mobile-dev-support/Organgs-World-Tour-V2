@@ -164,7 +164,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.12027223}
+  m_Offset: {x: -0.021988869, y: 0.12027222}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -175,7 +175,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3, y: 0.7194555}
+  m_Size: {x: 1.0395164, y: 0.7194555}
   m_EdgeRadius: 0.02
 --- !u!50 &3077940595774156968
 Rigidbody2D:
@@ -453,10 +453,12 @@ MonoBehaviour:
   touchingCeiling: 0
   touchingWall: 0
   touchingWallBack: 0
+  touchingCelingSolidPlatform: 0
   touchingWallSolidPlatform: 0
   touchingWallSolidPlatformBack: 0
   canSetVelocity: 0
   grounded: 0
+  groundedThroughPlatform: 0
 --- !u!1 &6577987849140685698
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,6 +520,7 @@ MonoBehaviour:
   ledgeCheckVertical: {fileID: 3920502844669912646}
   ceilingCheck: {fileID: 8235749157565241549}
   ceilingSlideCheck: {fileID: 8235749157565241549}
+  originalGroundCheckRadius: 0
   groundCheckRadius: 0.09
   ceilingCheckRadius: 0.08
   ceilingSlideCheckRadius: 0
@@ -545,6 +548,9 @@ MonoBehaviour:
   whatIsTrap:
     serializedVersion: 2
     m_Bits: 1024
+  isTouchingThroughPlatform: 0
+  isTouchingCeilingSolidPlatform: 0
+  isTouchingCeilingGround: 0
 --- !u!1 &7725189152148157779
 GameObject:
   m_ObjectHideFlags: 0

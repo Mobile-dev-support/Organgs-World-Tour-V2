@@ -81,43 +81,16 @@ public class Tutorial : MonoBehaviour
             tutorialView = this.GetComponent<View>();
         }
 
-        bool debugMode = false;
-#if UNITY_EDITOR || DEBUG
-
-        debugMode = true;
-#endif
-
-        for (int i = 0; i<= controlsInstructionContent.Count()-1;i++)
+        if(!PlayerPrefs.HasKey("unlockedControlsInstruction0") || !PlayerPrefs.HasKey("unlockedCollectiblesInstruction0") || !PlayerPrefs.HasKey("unlockedPlatformsInstruction0") || !PlayerPrefs.HasKey("unlockedObstaclesInstruction0"))
         {
-            if(PlayerPrefs.GetInt("unlockedControlsInstruction"+i) == 1 || debugMode)
-            {
-                controlsInstructionContent[i].UNLOCKED = true;
-            }
+            UnlockTutorialsForOlderSaves();
+        }
+        else
+        {
+            UnlockInstructionPages();
         }
 
-        for (int i = 0; i <= collectiblesInstructionContent.Count()-1; i++)
-        {
-            if (PlayerPrefs.GetInt("unlockedCollectiblesInstruction" + i) == 1 || debugMode)
-            {
-                collectiblesInstructionContent[i].UNLOCKED = true;
-            }
-        }
-
-        for (int i = 0; i <= platformsInstructionContent.Count() - 1; i++)
-        {
-            if (PlayerPrefs.GetInt("unlockedPlatformsInstruction" + i) == 1 || debugMode)
-            {
-                platformsInstructionContent[i].UNLOCKED = true;
-            }
-        }
-
-        for (int i = 0; i <= obstaclesInstructionContent.Count()-1; i++)
-        {
-            if (PlayerPrefs.GetInt("unlockedObstaclesInstruction" + i) == 1 || debugMode)
-            {
-                obstaclesInstructionContent[i].UNLOCKED = true;
-            }
-        }
+       
 
        
     }
@@ -389,5 +362,102 @@ public class Tutorial : MonoBehaviour
         {
             obstaclesInstructionButton.SetActive(false);
         }
+    }
+
+    void UnlockTutorialsForOlderSaves()
+    {
+        int[] controlsUnlockValues = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
+        int[] collectiblesUnlockValues = { 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+        int[] platformsUnlockValues = { 2, 3, 3, 4, 5, 6, 7, 8, 9, 9, 9, 9 };
+        int[] enemiesUnlockValues = { -1, -1, -1, -1, -1, -1, -1, 1, 2, 3, 4, 5 };
+        string[] levelKeys = { "Lv1", "Lv2", "Lv3", "Lv4", "Lv5", "Lv8", "Lv11", "Lv13", "Lv16", "Lv19", "Lv22", "Lv25" };
+
+        int controlsUnlock = -1;
+        int collectiblesUnlock = -1;
+        int platformsUnlock = -1;
+        int enemiesUnlock = -1;
+
+        for (int i = 0; i < levelKeys.Length; i++)
+        {
+            if (PlayerPrefs.GetInt(levelKeys[i]) > 1)
+            {
+                controlsUnlock = controlsUnlockValues[i];
+                collectiblesUnlock = collectiblesUnlockValues[i];
+                platformsUnlock = platformsUnlockValues[i];
+                enemiesUnlock = enemiesUnlockValues[i];
+            }
+        }
+
+        if(controlsUnlock >= 0)
+        {
+            for(int i = 0; i <= controlsUnlock;i++)
+            {
+                PlayerPrefs.SetInt("unlockedControlsInstruction" + i, 1);
+            }
+        }
+        if (collectiblesUnlock >= 0)
+        {
+            for (int i = 0; i <= collectiblesUnlock; i++)
+            {
+                PlayerPrefs.SetInt("unlockedCollectiblesInstruction" + i, 1);
+            }
+        }
+        if (platformsUnlock >= 0)
+        {
+            for (int i = 0; i <= platformsUnlock; i++)
+            {
+                PlayerPrefs.SetInt("unlockedPlatformsInstruction" + i, 1);
+            }
+        }
+        if (enemiesUnlock >= 0)
+        {
+            for (int i = 0; i <= enemiesUnlock; i++)
+            {
+                PlayerPrefs.SetInt("unlockedObstaclesInstruction" + i, 1);
+            }
+        }
+        UnlockInstructionPages();
+    }
+
+    public void UnlockInstructionPages()
+    {
+        bool debugMode = false;
+
+        #if UNITY_EDITOR || DEBUG
+
+                debugMode = true;
+        #endif
+
+                for (int i = 0; i <= controlsInstructionContent.Count() - 1; i++)
+                {
+                    if (PlayerPrefs.GetInt("unlockedControlsInstruction" + i) == 1 || debugMode)
+                    {
+                        controlsInstructionContent[i].UNLOCKED = true;
+                    }
+                }
+
+                for (int i = 0; i <= collectiblesInstructionContent.Count() - 1; i++)
+                {
+                    if (PlayerPrefs.GetInt("unlockedCollectiblesInstruction" + i) == 1 || debugMode)
+                    {
+                        collectiblesInstructionContent[i].UNLOCKED = true;
+                    }
+                }
+
+                for (int i = 0; i <= platformsInstructionContent.Count() - 1; i++)
+                {
+                    if (PlayerPrefs.GetInt("unlockedPlatformsInstruction" + i) == 1 || debugMode)
+                    {
+                        platformsInstructionContent[i].UNLOCKED = true;
+                    }
+                }
+
+                for (int i = 0; i <= obstaclesInstructionContent.Count() - 1; i++)
+                {
+                    if (PlayerPrefs.GetInt("unlockedObstaclesInstruction" + i) == 1 || debugMode)
+                    {
+                        obstaclesInstructionContent[i].UNLOCKED = true;
+                    }
+                }
     }
 }

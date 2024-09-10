@@ -24,7 +24,9 @@ public class Core : MonoBehaviour
     private bool canSetVelocity;
     [SerializeField]
     private bool grounded;
-    
+    [SerializeField]
+    private bool groundedThroughPlatform;
+
     public void Update()
     {
         if(collisionSenses != null)
@@ -38,6 +40,7 @@ public class Core : MonoBehaviour
             canSetVelocity = movement.CanSetVelocity;
             grounded = collisionSenses.Ground;
             touchingCelingSolidPlatform = collisionSenses.SolidPlatformCeiling;
+            groundedThroughPlatform = collisionSenses.ThroughPlatform;
         }
 
     }

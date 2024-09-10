@@ -85,6 +85,7 @@ public class cheeseBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        if(other.transform.tag == "Player")
         isExploded = true;
     }
 }

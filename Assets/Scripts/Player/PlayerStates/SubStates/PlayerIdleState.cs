@@ -43,7 +43,6 @@ public class PlayerIdleState : PlayerGroundedState
     {
         
         base.LogicUpdate();
-        Debug.Log("Existing Player State:" + isExitingState);
         SlideInput = player.InputHandler.SlideInput;
         if (!isExitingState)
         {

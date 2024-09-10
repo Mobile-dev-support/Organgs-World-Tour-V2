@@ -247,7 +247,7 @@ public class Player : MonoBehaviour
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            ContactPoint2D pointOfContact = other.contacts.FirstOrDefault(contact => contact.normal.y <= -1 && contact.collider.gameObject.layer == LayerMask.NameToLayer("Ground"));
+            ContactPoint2D pointOfContact = other.contacts.FirstOrDefault(contact => contact.normal.y <= -0.99f && contact.collider.gameObject.layer == LayerMask.NameToLayer("Ground"));
             if (pointOfContact.normal.y <= -0.99f && pointOfContact.point != Vector2.zero)
             {
                 collisionSenses.isTouchingCeilingGround = true;
@@ -256,11 +256,21 @@ public class Player : MonoBehaviour
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("SolidPlatform"))
         {
-            var pointOfContact = other.contacts.FirstOrDefault(contact => contact.normal.y <= -1 && contact.collider.gameObject.layer == LayerMask.NameToLayer("SolidPlatform"));
+            var pointOfContact = other.contacts.FirstOrDefault(contact => contact.normal.y <= -0.99f && contact.collider.gameObject.layer == LayerMask.NameToLayer("SolidPlatform"));
             if (pointOfContact.normal.y <= -0.99f && pointOfContact.point != Vector2.zero)
             {
                 collisionSenses.isTouchingCeilingSolidPlatform = true;
                 Debug.Log("Name:" + other.gameObject.name + " Contact:" + pointOfContact.ToString());
+            }
+
+        }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("ThroughPlatform"))
+        {
+            var pointOfContact = other.contacts.FirstOrDefault(contact => contact.normal.y >= 0.99f && contact.collider.gameObject.layer == LayerMask.NameToLayer("ThroughPlatform"));
+            if (pointOfContact.normal.y >= 0.99f && pointOfContact.point != Vector2.zero && Mathf.Abs(other.gameObject.transform.position.y - transform.position.y) >= 0.8f)
+            { 
+                collisionSenses.isTouchingThroughPlatform = true;
             }
 
         }
@@ -271,7 +281,7 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            ContactPoint2D pointOfContact = other.contacts.FirstOrDefault(contact => contact.normal.y <= -1 && contact.collider.gameObject.layer == LayerMask.NameToLayer("Ground"));
+            ContactPoint2D pointOfContact = other.contacts.FirstOrDefault(contact => contact.normal.y <= -0.99f && contact.collider.gameObject.layer == LayerMask.NameToLayer("Ground"));
             if (pointOfContact.normal.y <= -0.99f && pointOfContact.point != Vector2.zero)
             {
                 collisionSenses.isTouchingCeilingGround = true;
@@ -280,11 +290,21 @@ public class Player : MonoBehaviour
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("SolidPlatform"))
         {
-            var pointOfContact = other.contacts.FirstOrDefault(contact => contact.normal.y <= -1 && contact.collider.gameObject.layer == LayerMask.NameToLayer("SolidPlatform"));
+            var pointOfContact = other.contacts.FirstOrDefault(contact => contact.normal.y <= -0.99f && contact.collider.gameObject.layer == LayerMask.NameToLayer("SolidPlatform"));
             if (pointOfContact.normal.y <= -0.99f && pointOfContact.point != Vector2.zero)
             {
                 collisionSenses.isTouchingCeilingSolidPlatform = true;
                 Debug.Log("Name:" + other.gameObject.name + " Contact:" + pointOfContact.ToString());
+            }
+
+        }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("ThroughPlatform"))
+        {
+            var pointOfContact = other.contacts.FirstOrDefault(contact => contact.normal.y >= 0.99f && contact.collider.gameObject.layer == LayerMask.NameToLayer("ThroughPlatform"));
+            if (pointOfContact.normal.y >= 0.99f && pointOfContact.point != Vector2.zero && Mathf.Abs(other.gameObject.transform.position.y - transform.position.y) >= 0.8f)
+            {
+                collisionSenses.isTouchingThroughPlatform = true;
             }
 
         }
@@ -306,6 +326,15 @@ public class Player : MonoBehaviour
         {
             if (collisionSenses.isTouchingCeilingSolidPlatform == true)
                 collisionSenses.isTouchingCeilingSolidPlatform = false;
+
+        }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("ThroughPlatform"))
+        {
+            if (collisionSenses.isTouchingThroughPlatform == true)
+            {
+                collisionSenses.isTouchingThroughPlatform = false;
+            }
 
         }
     }

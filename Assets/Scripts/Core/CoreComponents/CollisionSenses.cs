@@ -98,7 +98,7 @@ public class CollisionSenses : CoreComponent
     [SerializeField] private LayerMask whatIsSugarPlatform;
     [SerializeField] private LayerMask whatIsTrap;
 
-
+    public bool isTouchingThroughPlatform;
     public bool isTouchingCeilingSolidPlatform;
     public bool isTouchingCeilingGround;
     #endregion
@@ -127,7 +127,8 @@ public class CollisionSenses : CoreComponent
 
     public bool ThroughPlatform
     {
-        get => Physics2D.OverlapBox(throughPlatformCheck.position, new Vector2(throughPlatformCheckX, throughPlatformCheckY), 0, whatIsThroughPlatform);
+        //get => Physics2D.OverlapBox(throughPlatformCheck.position, new Vector2(throughPlatformCheckX, throughPlatformCheckY), 0, whatIsThroughPlatform);
+        get => isTouchingThroughPlatform;
     }
 
     public bool SolidPlatform
