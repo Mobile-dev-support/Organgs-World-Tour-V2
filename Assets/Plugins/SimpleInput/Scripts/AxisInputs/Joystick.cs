@@ -273,7 +273,6 @@ namespace SimpleInputNamespace
 
         public void OnPointerUp( PointerEventData eventData )
 		{
-			Debug.Log("Holding");
 			joystickHeld = false;
 			m_value = Vector2.zero;
 

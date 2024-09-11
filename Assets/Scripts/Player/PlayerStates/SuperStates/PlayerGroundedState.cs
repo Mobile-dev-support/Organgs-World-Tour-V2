@@ -96,7 +96,6 @@ public class PlayerGroundedState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Reset amount of Jumps");
         player.JumpState.ResetAmountOfJumpsLeft();
     }
 

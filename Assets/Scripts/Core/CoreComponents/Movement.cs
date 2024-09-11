@@ -86,7 +86,6 @@ public class Movement : CoreComponent
         int value = FacingDirection * 2;
         dust.x = value;
         RB.transform.Rotate(0.0f, 180.0f, 0.0f);
-        Debug.Log("Flipped");
     }
 
     #endregion

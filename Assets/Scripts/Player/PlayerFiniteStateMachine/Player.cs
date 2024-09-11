@@ -268,7 +268,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("ThroughPlatform"))
         {
             var pointOfContact = other.contacts.FirstOrDefault(contact => contact.normal.y >= 0.99f && contact.collider.gameObject.layer == LayerMask.NameToLayer("ThroughPlatform"));
-            if (pointOfContact.normal.y >= 0.99f && pointOfContact.point != Vector2.zero && Mathf.Abs(other.gameObject.transform.position.y - transform.position.y) >= 0.8f)
+            if (pointOfContact.normal.y >= 0.99f && pointOfContact.point != Vector2.zero && this.GetComponent<Collider2D>().Distance(other.collider).distance >= -0.05f)
             { 
                 collisionSenses.isTouchingThroughPlatform = true;
             }
@@ -302,7 +302,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("ThroughPlatform"))
         {
             var pointOfContact = other.contacts.FirstOrDefault(contact => contact.normal.y >= 0.99f && contact.collider.gameObject.layer == LayerMask.NameToLayer("ThroughPlatform"));
-            if (pointOfContact.normal.y >= 0.99f && pointOfContact.point != Vector2.zero && Mathf.Abs(other.gameObject.transform.position.y - transform.position.y) >= 0.8f)
+            if (pointOfContact.normal.y >= 0.99f && pointOfContact.point != Vector2.zero &&this.GetComponent<Collider2D>().Distance(other.collider).distance >= -0.05f)
             {
                 collisionSenses.isTouchingThroughPlatform = true;
             }

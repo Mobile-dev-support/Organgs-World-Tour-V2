@@ -211,7 +211,7 @@ public class PlatformController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if ((other.gameObject.CompareTag("Player") && other.contacts[0].normal.y <= -0.99f) && gameObject.layer != LayerMask.NameToLayer("Enemy"))
+        if (other.gameObject.tag == "Player" && other.contacts[0].normal.y <= -0.99f && this.myCollider.Distance(other.collider).distance >= -0.05f && gameObject.layer != LayerMask.NameToLayer("Enemy"))
         {
             AttachObject(other);
             other.collider.transform.SetParent(transform, true);
@@ -220,7 +220,7 @@ public class PlatformController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D other)
     {
-        if ((other.gameObject.CompareTag("Player") && other.contacts[0].normal.y <= -0.99f) && gameObject.layer != LayerMask.NameToLayer("Enemy") && crumbleTime == 0)
+        if (other.gameObject.tag == "Player" && other.contacts[0].normal.y <= -0.99f && this.myCollider.Distance(other.collider).distance >= -0.05f && gameObject.layer != LayerMask.NameToLayer("Enemy"))
         {
             AttachObject(other);
             other.collider.transform.SetParent(transform, true);
@@ -236,14 +236,11 @@ public class PlatformController : MonoBehaviour
         Player obj = other.gameObject.GetComponent<Player>();
         if (obj && !objs.Contains(obj))
         {
-            Debug.Log("Player Position:" + obj.transform.position.y + " Platform Position:" + transform.position.y + "Difference:" + (transform.position.y - obj.transform.position.y));
             // doesn't attach to the obj if it's a 1 way platform and the obj is below it
-            if ((obj.transform.position.y < transform.position.y + 0.7f))
-            {
-                return;
-            }
-            else
-            {
+                if ((obj.transform.position.y < transform.position.y + 0.7f) || this.myCollider.Distance(other.collider).distance < -0.006f)
+                {
+                    return;
+                }
                 objs.Add(obj);
                 if (crumbleTime > 0 && currentCrumbleTime <= 0)
                 {
@@ -253,7 +250,7 @@ public class PlatformController : MonoBehaviour
                         animator.SetTrigger(ANIMATION_CRUMBLING);
                     }
                 }
-            }
+            
         }
     }
 
@@ -261,6 +258,7 @@ public class PlatformController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && gameObject.layer != LayerMask.NameToLayer("Enemy"))
         {
+            Debug.Log("Exited Collider");
             other.collider.transform.SetParent(null);
             Player obj = other.gameObject.GetComponent<Player>();
             if (obj && objs.Contains(obj))
