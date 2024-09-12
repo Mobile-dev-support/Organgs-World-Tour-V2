@@ -8,6 +8,7 @@ using System.Linq;
 using TMPro;
 using System.Numerics;
 using UnityEngine.UIElements;
+using System;
 public class MainMenu : MonoBehaviour
 {
     #region variables
@@ -294,6 +295,7 @@ public class MainMenu : MonoBehaviour
 
         if (operation.isDone && !unload)
         {
+            Resources.UnloadUnusedAssets();
             coverCanvas.Hide();
             cam.SetActive(false);
             mainCanvas.Hide();
@@ -317,6 +319,7 @@ public class MainMenu : MonoBehaviour
         }
         else if (operation.isDone && unload)
         {
+            Resources.UnloadUnusedAssets();
             cam.SetActive(true);
             mainCanvas.Show();
             maingameCanvas.Hide();

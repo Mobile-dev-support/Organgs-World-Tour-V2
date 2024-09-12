@@ -66,7 +66,7 @@ public class CollisionSenses : CoreComponent
     public float DeathCheckY { get => deathCheckY; set => deathCheckY = value; }
     public float WallCheckDistance { get => wallCheckDistance; set => wallCheckDistance = value; }
     public LayerMask WhatIsGround { get => whatIsGround; set => whatIsGround = value; }
-
+    public LayerMask WhatIsSolidPlatform { get => whatIsSolidPlatform; set => whatIsSolidPlatform = value; }
 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform throughPlatformCheck;
@@ -101,6 +101,7 @@ public class CollisionSenses : CoreComponent
     public bool isTouchingThroughPlatform;
     public bool isTouchingCeilingSolidPlatform;
     public bool isTouchingCeilingGround;
+
     #endregion
     private void Start()
     {

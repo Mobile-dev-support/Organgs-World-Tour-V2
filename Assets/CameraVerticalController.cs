@@ -73,8 +73,8 @@ public class CameraVerticalController : MonoBehaviour, IPointerDownHandler, IPoi
         vCamTransposer.m_LookaheadTime = 0f;
         vCamTransposer.m_LookaheadSmoothing = 0;
         // Calculate the maximum and minimum offset values
-        float maxOffset = 3.5f * (vCam.m_Lens.OrthographicSize / 4.5f);
-        float minOffset = -3f * (vCam.m_Lens.OrthographicSize / 4.5f);
+        float maxOffset = 3.8f * (vCam.m_Lens.OrthographicSize / 4.5f);
+        float minOffset = -3.8f * (vCam.m_Lens.OrthographicSize / 4.5f);
 
         // Scale the touch difference to be within the range [minOffset, maxOffset]
         float scaledOffset = Mathf.Clamp((touchPositionDifference / 80.0f * maxOffset) + playerToCenter, minOffset, maxOffset);

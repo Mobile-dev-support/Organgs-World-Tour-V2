@@ -131,6 +131,10 @@ public class PlayerGroundedState : PlayerState
                 Debug.Log("isTouchingCeilingSolidPlatform:" + isTouchingCeilingSolidPlatform);
                 Debug.Log("isGrounded:" + isGrounded);
             }
+            else
+            {
+
+            }
                 stateMachine.ChangeState(player.DeathState);
         }
         

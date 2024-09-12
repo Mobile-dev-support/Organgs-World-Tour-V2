@@ -287,6 +287,14 @@ public class Player : MonoBehaviour
                 collisionSenses.isTouchingCeilingGround = true;
                 Debug.Log("Name:" + other.gameObject.name + " Contact:" + pointOfContact.ToString());
             }
+            else
+            {
+                if (collisionSenses.isTouchingCeilingGround == true)
+                {
+                    collisionSenses.isTouchingCeilingGround = false;
+                }
+                    
+            }
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("SolidPlatform"))
         {
@@ -296,6 +304,7 @@ public class Player : MonoBehaviour
                 collisionSenses.isTouchingCeilingSolidPlatform = true;
                 Debug.Log("Name:" + other.gameObject.name + " Contact:" + pointOfContact.ToString());
             }
+
 
         }
 
