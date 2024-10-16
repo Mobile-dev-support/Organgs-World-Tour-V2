@@ -78,6 +78,7 @@ public class ChangeConfiner : MonoBehaviour
         {
             if (confiner.m_BoundingShape2D != polygon)
             {
+
                 objs[i].SetActive(false);
             }
         }
