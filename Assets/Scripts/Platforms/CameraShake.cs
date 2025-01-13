@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
+using Unity.Cinemachine; 
 
 public class CameraShake : MonoBehaviour
 {
@@ -22,7 +22,7 @@ public class CameraShake : MonoBehaviour
         CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin =
             cinemachineVirtualCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
-        cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
+        cinemachineBasicMultiChannelPerlin.AmplitudeGain = intensity;
         shakeTimer = time;
     }
 
@@ -36,7 +36,7 @@ public class CameraShake : MonoBehaviour
                 CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin =
                     cinemachineVirtualCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
-                cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0f;
+                cinemachineBasicMultiChannelPerlin.AmplitudeGain = 0f;
             }
         }
     }

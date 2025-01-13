@@ -51,7 +51,7 @@ public class CombatDummyController : MonoBehaviour
     {
         knockback = true;
         knockbackStart = Time.time;
-        rbAlive.velocity = new Vector2(knockbackSpeedX * playerFacingDirection, knockbackSpeedY);
+        rbAlive.linearVelocity = new Vector2(knockbackSpeedX * playerFacingDirection, knockbackSpeedY);
     }
 
     private void CheckKnockback()
@@ -59,7 +59,7 @@ public class CombatDummyController : MonoBehaviour
         if(Time.time >= knockbackStart + knockbackDuration && knockback)
         {
             knockback = false;
-            rbAlive.velocity = new Vector2(0.0f, rbAlive.velocity.y);
+            rbAlive.linearVelocity = new Vector2(0.0f, rbAlive.linearVelocity.y);
         }
     }
 
@@ -72,8 +72,8 @@ public class CombatDummyController : MonoBehaviour
         brokenTopGO.transform.position = aliveGO.transform.position;
         brokenBotGO.transform.position = aliveGO.transform.position;
 
-        rbBrokenBot.velocity = new Vector2(knockbackSpeedX * playerFacingDirection, knockbackSpeedY);
-        rbBrokenTop.velocity = new Vector2(knockbackDeathSpeedX * playerFacingDirection, knockbackDeathSpeedY);
+        rbBrokenBot.linearVelocity = new Vector2(knockbackSpeedX * playerFacingDirection, knockbackSpeedY);
+        rbBrokenTop.linearVelocity = new Vector2(knockbackDeathSpeedX * playerFacingDirection, knockbackDeathSpeedY);
         rbBrokenTop.AddTorque(deathTorque * -playerFacingDirection, ForceMode2D.Impulse);
     }
 }

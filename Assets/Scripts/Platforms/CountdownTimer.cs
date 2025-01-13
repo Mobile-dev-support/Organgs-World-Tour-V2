@@ -44,15 +44,33 @@ public class CountdownTimer : MonoBehaviour
 
     private void OnEnable()
     {
+<<<<<<< Updated upstream
         time = true;
         StartCoroutine(NearTime());
         InvokeRepeating("ScoreDecreaser", 1, 1);
+=======
+        //InvokeRepeating("ScoreDecreaser", 1, 1);
+>>>>>>> Stashed changes
     }
 
     private void OnDisable()
     {
         CancelInvoke();
+<<<<<<< Updated upstream
         time = false;
+=======
+        timeFinishedText.SetText("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    public void ResetTimer()
+    {
+        timeValue = 300;
+    }
+
+    public void SetTimer(int time)
+    {
+        timeValue = time;
+>>>>>>> Stashed changes
     }
 
     public void ScoreDecreaser()
@@ -61,12 +79,18 @@ public class CountdownTimer : MonoBehaviour
 
         if (ScoringMechanism.Instance.score <= 0)
         {
+<<<<<<< Updated upstream
             ScoringMechanism.Instance.score = 0;
+=======
+            Debug.Log("BRUHHHH");
+            //ScoringMechanism.Instance.timeScore();
+>>>>>>> Stashed changes
         }
     }
 
     private void Update()
     {
+<<<<<<< Updated upstream
         if (!isGameOver)
         {
             if (timeValue > 0)
@@ -109,13 +133,30 @@ public class CountdownTimer : MonoBehaviour
             }
         }
         DisplayTime(timeValue);
+=======
+        DisplayTime(timeValue);  
+>>>>>>> Stashed changes
     }
 
     void DisplayTime(float timeToDisplay)
     {
+<<<<<<< Updated upstream
         if(timeToDisplay < 0)
+=======
+        timeValue -= Time.deltaTime;
+
+        if (timeToDisplay <= 0)
+>>>>>>> Stashed changes
         {
             timeToDisplay = 0;
+            if (Fader.Instance != null)
+            {
+                Fader.Instance.BGFader(true);
+                GameManager.Instance.Rplayer.SetActive(false);
+                CountdownTimer.Instance.enabled = false;
+                MainMenu.Instance.GameOverScreen(2);
+            }
+           
         }
         else if(timeToDisplay > 0)
         {

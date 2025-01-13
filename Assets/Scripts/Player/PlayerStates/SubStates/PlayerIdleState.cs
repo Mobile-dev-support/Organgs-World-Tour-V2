@@ -24,8 +24,13 @@ public class PlayerIdleState : PlayerGroundedState
         {
             playerData.movementVelocity = playerData.speedOnIce;
             xInput = core.Movement.FacingDirection;
+<<<<<<< Updated upstream
             player.RB.AddForce(new Vector2(playerData.movementVelocity * xInput *
             playerData.slipperyMultiplier, player.RB.velocity.y));
+=======
+            player.RB.AddForce(new Vector2(player.defaultValues.movementVelocity * xInput *
+            playerData.slipperyMultiplier, player.RB.linearVelocity.y));
+>>>>>>> Stashed changes
             player.Anim.SetFloat(Candied, 0.01f);
         }
 

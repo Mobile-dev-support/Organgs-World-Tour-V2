@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckIfWallSliding()
     {
-        if (isTouchingWall && movementInputDirection == facingDirection && rb.velocity.y < 0 && !canClimbLedge)
+        if (isTouchingWall && movementInputDirection == facingDirection && rb.linearVelocity.y < 0 && !canClimbLedge)
         {
             isWallSliding = true;
         }
@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
     {
         knockback = true;
         knockbackStartTime = Time.time;
-        rb.velocity = new Vector2(knockbackSpeed.x * direction, knockbackSpeed.y);
+        rb.linearVelocity = new Vector2(knockbackSpeed.x * direction, knockbackSpeed.y);
     }
 
     private void CheckKnockback()
@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour
         if(Time.time >= knockbackStartTime + knockbackDuration && knockback)
         {
             knockback = false;
-            rb.velocity = new Vector2(0.0f, rb.velocity.y);
+            rb.linearVelocity = new Vector2(0.0f, rb.linearVelocity.y);
         }
     }
 
@@ -200,7 +200,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckIfCanJump()
     {
-        if(isGrounded && rb.velocity.y <= 0.01f)
+        if(isGrounded && rb.linearVelocity.y <= 0.01f)
         {
             amountOfJumpsLeft = amountOfJumps;
         }
@@ -233,7 +233,7 @@ public class PlayerController : MonoBehaviour
             Flip();
         }
 
-        if(Mathf.Abs(rb.velocity.x) >= 0.01f)
+        if(Mathf.Abs(rb.linearVelocity.x) >= 0.01f)
         {
             isWalking = true;
         }
@@ -247,7 +247,7 @@ public class PlayerController : MonoBehaviour
     {
         anim.SetBool("isWalking", isWalking);
         anim.SetBool("isGrounded", isGrounded);
-        anim.SetFloat("yVelocity", rb.velocity.y);
+        anim.SetFloat("yVelocity", rb.linearVelocity.y);
         anim.SetBool("isWallSliding", isWallSliding);
     }
 
@@ -293,7 +293,7 @@ public class PlayerController : MonoBehaviour
         if (checkJumpMultiplier && !Input.GetButton("Jump"))
         {
             checkJumpMultiplier = false;
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * variableJumpHeightMultiplier);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * variableJumpHeightMultiplier);
         }
 
         if (Input.GetButtonDown("Dash"))
@@ -327,7 +327,7 @@ public class PlayerController : MonoBehaviour
             {
                 canMove = false;
                 canFlip = false;
-                rb.velocity = new Vector2(dashSpeed * facingDirection, 0.0f);
+                rb.linearVelocity = new Vector2(dashSpeed * facingDirection, 0.0f);
                 dashTimeLeft -= Time.deltaTime;
 
                 if (Mathf.Abs(transform.position.x - lastImageXpos) > distanceBetweenImages)
@@ -371,7 +371,7 @@ public class PlayerController : MonoBehaviour
         {
             if(hasWallJumped && movementInputDirection == -lastWallJumpDirection)
             {
-                rb.velocity = new Vector2(rb.velocity.x, 0.0f);
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0.0f);
                 hasWallJumped = false;
             }else if(wallJumpTimer <= 0)
             {
@@ -388,7 +388,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canNormalJump)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             amountOfJumpsLeft--;
             jumpTimer = 0;
             isAttemptingToJump = false;
@@ -400,7 +400,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canWallJump)
         {
-            rb.velocity = new Vector2(rb.velocity.x, 0.0f);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0.0f);
             isWallSliding = false;
             amountOfJumpsLeft = amountOfJumps;
             amountOfJumpsLeft--;
@@ -424,19 +424,19 @@ public class PlayerController : MonoBehaviour
 
         if (!isGrounded && !isWallSliding && movementInputDirection == 0 && !knockback)
         {
-            rb.velocity = new Vector2(rb.velocity.x * airDragMultiplier, rb.velocity.y);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x * airDragMultiplier, rb.linearVelocity.y);
         }
         else if(canMove && !knockback)
         {
-            rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
+            rb.linearVelocity = new Vector2(movementSpeed * movementInputDirection, rb.linearVelocity.y);
         }
         
 
         if (isWallSliding)
         {
-            if(rb.velocity.y < -wallSlideSpeed)
+            if(rb.linearVelocity.y < -wallSlideSpeed)
             {
-                rb.velocity = new Vector2(rb.velocity.x, -wallSlideSpeed);
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, -wallSlideSpeed);
             }
         }
     }

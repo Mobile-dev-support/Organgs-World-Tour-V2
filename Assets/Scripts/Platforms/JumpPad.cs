@@ -40,9 +40,15 @@ public class JumpPad : MonoBehaviour
             Rigidbody2D rb = other.GetComponent<Collider2D>().GetComponent<Rigidbody2D>();
             if (!isDeflector)
             {
+<<<<<<< Updated upstream
                 Vector2 velocity = rb.velocity;
+=======
+                coreP = core;
+                coreP.Movement.CanSetVelocity = true;
+                Vector2 velocity = rb.linearVelocity;
+>>>>>>> Stashed changes
                 velocity.y = bounce;
-                rb.velocity = velocity;
+                rb.linearVelocity = velocity;
             }
             else
             {
@@ -68,9 +74,15 @@ public class JumpPad : MonoBehaviour
             Rigidbody2D rb = other.GetComponent<Collider2D>().GetComponent<Rigidbody2D>();
             if (!isDeflector)
             {
+<<<<<<< Updated upstream
                 Vector2 velocity = rb.velocity;
+=======
+                coreP = core;
+                coreP.Movement.CanSetVelocity = true;
+                Vector2 velocity = rb.linearVelocity;
+>>>>>>> Stashed changes
                 velocity.y = bounce;
-                rb.velocity = velocity;
+                rb.linearVelocity = velocity;
             }
             else
             {

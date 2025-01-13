@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public PlayerIdleState IdleState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
+
     public PlayerInAirState InAirState { get; private set; }
     public PlayerLandState LandState { get; private set; }
     public PlayerWallSlideState WallSlideState { get; private set; }
@@ -112,6 +113,7 @@ public class Player : MonoBehaviour
                 playerData.jumpVelocity = playerData.defaultJumpVelocity;
                 playerData.wallJumpVelocity = playerData.defaultWallJumpVelocity;
                 Anim.SetFloat(xState, 0f);
+<<<<<<< Updated upstream
                 isCheesed = false;
             }
         }
@@ -124,6 +126,25 @@ public class Player : MonoBehaviour
             {
                 playerData.candyTimer = 5f;
                 playerData.movementVelocity = playerData.NormalMovementVelocity;
+=======
+                Anim.SetFloat(Candied, 0f);
+                break;
+            case OliverStates.Cheesed:
+                defaultValues.jumpVelocity = playerData.cheeseJumpVelocity;
+                defaultValues.wallJumpVelocity = playerData.cheeseWallJumpVelocity;
+                Anim.SetFloat(xState, 0.5f);
+                break;
+            case OliverStates.Candied:
+                defaultValues.jumpVelocity = playerData.defaultJumpVelocity;
+                defaultValues.wallJumpVelocity = playerData.defaultWallJumpVelocity;
+                defaultValues.movementVelocity = playerData.CandymovementVelocity;
+                Anim.SetFloat(Candied, 0.5f);
+                break;
+            case OliverStates.AfterShock:
+                Anim.SetFloat(Candied, 1f);
+                Core.Movement.RB.linearVelocity = new Vector2(0,RB.linearVelocity.y);
+                Core.Movement.CanSetVelocity = false;
+>>>>>>> Stashed changes
                 afterShock = true;
             }
         }

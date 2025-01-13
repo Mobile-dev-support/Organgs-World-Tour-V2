@@ -30,7 +30,7 @@ public class MainMenu : MonoBehaviour
     [HideInInspector] public View life50_canvas;
     [HideInInspector] public View life100_canvas;
     [HideInInspector] public View expand_canvas;
-    [HideInInspector] public View shop_canvas;
+    public View shop_canvas;
     [Header("MAIN MENU")]
     public Slider slider;
     public TextMeshProUGUI textProgress;
@@ -47,6 +47,15 @@ public class MainMenu : MonoBehaviour
     public TextMeshProUGUI ActorName;
     public RectTransform choiceList;
     public RectTransform dialog;
+    [Header("GAMEOVER MENU")]
+    public GameObject buttonCloseAccessingLevelWithNoLives;
+    public GameObject buttonWatchAdTimer;
+    public GameObject buttonWatchAdHomeLives;
+    public GameObject buttonWatchAdGameLives;
+    public GameObject buttonBuyLives;
+    public GameObject buttonHome;
+    public TextMeshProUGUI textGameOverMessage;
+    public TextMeshProUGUI textGameOverInstructions;
     [Header("DIALOGUE EFFECTS")]
     public float duration;
     public float strength;
@@ -127,23 +136,78 @@ public class MainMenu : MonoBehaviour
         coverCanvas.Show();
     }
 
-    public void GameOverLevel()
+    public void GameOverScreen(int type)
     {
-        statCanvas.Hide();
-        gameOverCanvas.Show();
+        if (type != 0)
+        {
+            statCanvas.Hide();
+        }
+        ShowGameOverCanvas(type);
         tween.OnClick();
     }
 
+    public void ShowGameOverCanvas(int type)
+    {
+        switch(type)
+        {
+            case 0:
+                //Trying to access level on 0 lives
+                buttonCloseAccessingLevelWithNoLives.gameObject.SetActive(true);
+                buttonBuyLives.SetActive(true);
+                buttonWatchAdHomeLives.SetActive(true);
+                buttonWatchAdGameLives.SetActive(false);
+                buttonWatchAdTimer.SetActive(false);
+                buttonHome.SetActive(false);
+                textGameOverMessage.text = "You're out of Lives!";
+                textGameOverInstructions.text = "Watch an ad to get a free life";
+                break;
+            case 1:
+                //Died on 0 lives
+                buttonCloseAccessingLevelWithNoLives.SetActive(false);
+                buttonBuyLives.SetActive(true);
+                buttonWatchAdHomeLives.SetActive(false);
+                buttonWatchAdGameLives.SetActive(true);
+                buttonWatchAdTimer.SetActive(false);
+                buttonHome.SetActive(true);
+                textGameOverMessage.text = "You're out of Lives!";
+                textGameOverInstructions.text = "Watch an ad to get a free life and continue the level";
+                break;
+            case 2:
+                //Reached Time Limit
+                buttonCloseAccessingLevelWithNoLives.SetActive(false);
+                buttonBuyLives.SetActive(false);
+                buttonWatchAdHomeLives.SetActive(false);
+                buttonWatchAdGameLives.SetActive(true);
+                buttonWatchAdTimer.SetActive(true);
+                buttonHome.SetActive(true);
+                textGameOverMessage.text = "You're out of Time!";
+                textGameOverInstructions.text = "Watch an ad to gain additional time";
+                break;
+        }
+        gameOverCanvas.Show();
+    }
+
+
     public void LoadLevel(string placeName)
     {
+<<<<<<< Updated upstream
         StartCoroutine(FadeGame(0, placeName));
+=======
+        StartCoroutine(FadeGame(false,0, placeName));
+        //BasicLife.Instance.LifeLine();
+>>>>>>> Stashed changes
     }
 
     public void NextLevel()
     {
         if(GameManager.Instance.sceneName != "48")
         {
+<<<<<<< Updated upstream
             StartCoroutine(FadeGame(0, GameManager.Instance.nextScene));
+=======
+            StartCoroutine(FadeGame(false, 0, GameManager.Instance.nextScene));
+            //BasicLife.Instance.LifeLine();
+>>>>>>> Stashed changes
             UpdateMainMenu();
             isNextLevel = true;
             coverCanvas.Show();
@@ -165,6 +229,37 @@ public class MainMenu : MonoBehaviour
         ingameCanvas.transform.SetAsLastSibling();
     }
 
+<<<<<<< Updated upstream
+=======
+    public void HomeFromGameover()
+    {
+        gameOverCanvas.Hide();
+        //BasicLife.Instance.LifeLine();
+        CountdownTimer.Instance.enabled = false;
+        MainMenu.Instance.mainMenu();
+    }
+
+    public void ForceRestart()
+    {
+        if (Fader.Instance != null)
+        {
+            Fader.Instance.BGFader(true);
+            CountdownTimer.Instance.enabled = false;
+
+        }
+        Time.timeScale = 1;
+        //BasicLife.Instance.LifeLine();
+        Restart();
+    }
+
+    public void GameOverRestart()
+    {
+        Time.timeScale = 1;
+        //BasicLife.Instance.LifeLine();
+        Restart();
+    }
+
+>>>>>>> Stashed changes
 
     public void GetAllLevels()
     {
@@ -207,6 +302,7 @@ public class MainMenu : MonoBehaviour
     public IEnumerator LoadGameAsync(bool unload, string loadSceneString)
     {
         textProgress.text = "Loading Asset Data... ";
+        Debug.Log("Loading");
         AsyncOperation operation;
         if (!unload)
         {
@@ -238,6 +334,12 @@ public class MainMenu : MonoBehaviour
 
         if (operation.isDone && !unload)
         {
+<<<<<<< Updated upstream
+=======
+            Debug.Log("Loaded");
+            Time.timeScale = 1;
+            Resources.UnloadUnusedAssets();
+>>>>>>> Stashed changes
             coverCanvas.Hide();
             cam.SetActive(false);
             mainCanvas.Hide();
@@ -252,7 +354,7 @@ public class MainMenu : MonoBehaviour
             ingameCanvas.transform.SetParent(maingameCanvas.transform, false);
             ingameCanvas.transform.SetSiblingIndex(1);
             SoundManager.Instance.StopMusicAudio(Main);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSecondsRealtime(0.5f);
             SoundManager.Instance.BGMusic(BGMusic.Instance.music);
             ingameCanvas.Show();
             loadingCanvas.Hide();
@@ -272,12 +374,17 @@ public class MainMenu : MonoBehaviour
             CanvasFader(1, loadingCanvas.transform);
             ingameCanvas.transform.SetParent(mainCanvas.transform, false);
             ingameCanvas.transform.SetSiblingIndex(3);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSecondsRealtime(1f);
             Ending();
             CanvasFader(0, loadingCanvas.transform);
             UIFocus.Instance.FocusOnObjectImmediately();
             SoundManager.Instance.OutBGMusic(BGMusic.Instance.music);
+<<<<<<< Updated upstream
             yield return new WaitForSeconds(1f);
+=======
+            yield return new WaitForSecondsRealtime(1f);
+            loadingCanvas.Hide();
+>>>>>>> Stashed changes
             SoundManager.Instance.SFXAudio(Map);
             CanvasFader(1, mainCanvas.transform);
             SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainMenu"));

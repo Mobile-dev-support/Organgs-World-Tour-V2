@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
-using Cinemachine;
+using Unity.Cinemachine;
 using DG.Tweening;
 using UnityEngine;
 using TMPro;

@@ -26,7 +26,7 @@ public class Movement : CoreComponent
 
     public void LogicUpdate()
     {
-        CurrentVelocity = RB.velocity;
+        CurrentVelocity = RB.linearVelocity;
     }
 
     #region Set Functions
@@ -66,7 +66,7 @@ public class Movement : CoreComponent
     {
         if (CanSetVelocity)
         {
-            RB.velocity = workspace;
+            RB.linearVelocity = workspace;
             CurrentVelocity = workspace;
         }        
     }

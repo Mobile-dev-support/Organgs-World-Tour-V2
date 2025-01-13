@@ -49,7 +49,7 @@ public class Entity : MonoBehaviour
         Core.LogicUpdate();
         stateMachine.currentState.LogicUpdate();
 
-        anim.SetFloat("yVelocity", Core.Movement.RB.velocity.y);
+        anim.SetFloat("yVelocity", Core.Movement.RB.linearVelocity.y);
 
         if(Time.time >= lastDamageTime + entityData.stunRecoveryTime)
         {
@@ -79,8 +79,8 @@ public class Entity : MonoBehaviour
 
     public virtual void DamageHop(float velocity)
     {
-        velocityWorkspace.Set(Core.Movement.RB.velocity.x, velocity);
-        Core.Movement.RB.velocity = velocityWorkspace;
+        velocityWorkspace.Set(Core.Movement.RB.linearVelocity.x, velocity);
+        Core.Movement.RB.linearVelocity = velocityWorkspace;
     }
 
     public virtual void ResetStunResistance()

@@ -111,8 +111,8 @@ public class BasicEnemyController : MonoBehaviour
         }
         else
         {
-            movement.Set(movementSpeed * facingDirection, aliveRb.velocity.y);
-            aliveRb.velocity = movement;
+            movement.Set(movementSpeed * facingDirection, aliveRb.linearVelocity.y);
+            aliveRb.linearVelocity = movement;
         }
     }
 
@@ -127,7 +127,7 @@ public class BasicEnemyController : MonoBehaviour
     {
         knockbackStartTime = Time.time;
         movement.Set(knockbackSpeed.x * damageDirection, knockbackSpeed.y);
-        aliveRb.velocity = movement;
+        aliveRb.linearVelocity = movement;
         aliveAnim.SetBool("Knockback", true);
     }
 
