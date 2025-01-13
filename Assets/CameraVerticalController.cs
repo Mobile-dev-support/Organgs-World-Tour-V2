@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine;
-using Cinemachine;
+using Unity.Cinemachine;
 using UnityEngine.UI;
 public class CameraVerticalController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerMoveHandler
 {

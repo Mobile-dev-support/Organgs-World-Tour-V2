@@ -12,7 +12,7 @@ public class StarSystemUnlocker : MonoBehaviour
     public Sprite starSprite;
     public View getlifeCanvas;
     public GameObject country;
- 
+
 
     private void Start()
     {
@@ -75,7 +75,16 @@ public class StarSystemUnlocker : MonoBehaviour
     }
 
     public void PressSelection()//When we press this level, we can move to the corresponding Scene to play
-    { 
-       MainMenu.Instance.LoadLevel(gameObject.name);
+    {
+
+        if (BasicLife.Instance.life > 0 || BasicLife.Instance.extraLife > 0)
+        {
+            MainMenu.Instance.LoadLevel(gameObject.name);
+        }
+        else
+        {
+            Debug.Log("GameOver");
+            MainMenu.Instance.GameOverScreen(0);
+        }
     }
 }

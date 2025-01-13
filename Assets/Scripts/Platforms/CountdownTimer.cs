@@ -30,7 +30,7 @@ public class CountdownTimer : MonoBehaviour
 
     private void OnEnable()
     {
-        InvokeRepeating("ScoreDecreaser", 1, 1);
+        //InvokeRepeating("ScoreDecreaser", 1, 1);
     }
 
     private void OnDisable()
@@ -41,29 +41,43 @@ public class CountdownTimer : MonoBehaviour
 
     public void ResetTimer()
     {
-        timeValue = 0;
+        timeValue = 300;
+    }
+
+    public void SetTimer(int time)
+    {
+        timeValue = time;
     }
 
     public void ScoreDecreaser()
     {
         if (ScoringMechanism.Instance.score >= 0)
         {
-            ScoringMechanism.Instance.timeScore();
+            Debug.Log("BRUHHHH");
+            //ScoringMechanism.Instance.timeScore();
         }
     }
 
     private void Update()
     {
-        DisplayTime(timeValue);
+        DisplayTime(timeValue);  
     }
 
     void DisplayTime(float timeToDisplay)
     {
-        timeValue += Time.deltaTime;
+        timeValue -= Time.deltaTime;
 
-        if (timeToDisplay < 0)
+        if (timeToDisplay <= 0)
         {
             timeToDisplay = 0;
+            if (Fader.Instance != null)
+            {
+                Fader.Instance.BGFader(true);
+                GameManager.Instance.Rplayer.SetActive(false);
+                CountdownTimer.Instance.enabled = false;
+                MainMenu.Instance.GameOverScreen(2);
+            }
+           
         }
         else if(timeToDisplay > 0)
         {

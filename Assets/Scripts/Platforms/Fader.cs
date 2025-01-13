@@ -33,6 +33,7 @@ public class Fader : MonoBehaviour
         if (fade)
         {
             Sequence mySequence = DOTween.Sequence();
+            mySequence.SetUpdate(true);
             mySequence.AppendInterval(0.5f);
             mySequence.Append(DOVirtual.Float(0, 1, duration, angle => {
                 gameObject.GetComponent<Image>().fillAmount = angle;

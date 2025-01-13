@@ -37,7 +37,7 @@ public class AlcoholBehaviour : MonoBehaviour
             if (jumpTimer < 0)
             {
                 anim.SetTrigger("jump");
-                RB.velocity = transform.up * jumpHeight;
+                RB.linearVelocity = transform.up * jumpHeight;
                 jumpTimer = JumpTimerDefault;
             }
         }

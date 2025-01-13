@@ -205,7 +205,7 @@ public class Player : MonoBehaviour
                 break;
             case OliverStates.AfterShock:
                 Anim.SetFloat(Candied, 1f);
-                Core.Movement.RB.velocity = new Vector2(0,RB.velocity.y);
+                Core.Movement.RB.linearVelocity = new Vector2(0,RB.linearVelocity.y);
                 Core.Movement.CanSetVelocity = false;
                 afterShock = true;
                 break;

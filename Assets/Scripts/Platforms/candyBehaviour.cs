@@ -43,7 +43,7 @@ public class candyBehaviour : MonoBehaviour
             jumpTimer -= Time.deltaTime;
             if (jumpTimer < 0)
             {
-                RB.velocity = transform.up * jumpHeight;
+                RB.linearVelocity = transform.up * jumpHeight;
                 jumpTimer = JumpTimerDefault;
             }
         }

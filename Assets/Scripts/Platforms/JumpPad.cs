@@ -42,9 +42,9 @@ public class JumpPad : MonoBehaviour
             {
                 coreP = core;
                 coreP.Movement.CanSetVelocity = true;
-                Vector2 velocity = rb.velocity;
+                Vector2 velocity = rb.linearVelocity;
                 velocity.y = bounce;
-                rb.velocity = velocity;
+                rb.linearVelocity = velocity;
             }
             else
             {
@@ -72,9 +72,9 @@ public class JumpPad : MonoBehaviour
             {
                 coreP = core;
                 coreP.Movement.CanSetVelocity = true;
-                Vector2 velocity = rb.velocity;
+                Vector2 velocity = rb.linearVelocity;
                 velocity.y = bounce;
-                rb.velocity = velocity;
+                rb.linearVelocity = velocity;
             }
             else
             {

@@ -25,7 +25,7 @@ public class PlayerIdleState : PlayerGroundedState
             player.defaultValues.movementVelocity = playerData.speedOnIce;
             xInput = core.Movement.FacingDirection;
             player.RB.AddForce(new Vector2(player.defaultValues.movementVelocity * xInput *
-            playerData.slipperyMultiplier, player.RB.velocity.y));
+            playerData.slipperyMultiplier, player.RB.linearVelocity.y));
             player.Anim.SetFloat(Candied, 0.01f);
         }
 
