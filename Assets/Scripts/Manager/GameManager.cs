@@ -79,9 +79,18 @@ public class GameManager : MonoBehaviour
         CheckRespawn();
     }
 
-    public void Respawn()
+    public void Respawn(bool respawnImmediately = false)
     {
-        respawnTimeStart = Time.time;
+        MainMenu.Instance.statCanvas.Show();
+        if(respawnImmediately)
+        {
+            respawnTimeStart = Time.time - respawnTime;
+        }
+        else
+        {
+            respawnTimeStart = Time.time;
+        }
+       
         respawn = true;
     }
 

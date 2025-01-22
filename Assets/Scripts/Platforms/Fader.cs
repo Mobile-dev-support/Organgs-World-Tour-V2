@@ -57,4 +57,10 @@ public class Fader : MonoBehaviour
     {
         gameObject.GetComponent<Image>().fillAmount = 1;
     }
+
+    public void FadeOffImmediately()
+    {
+        gameObject.GetComponent<Image>().fillAmount = 0;
+        HideView();
+    }
 }

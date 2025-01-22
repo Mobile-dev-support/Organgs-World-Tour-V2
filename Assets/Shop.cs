@@ -24,7 +24,6 @@ public class Shop : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     {
         scrollRect = GetComponent<ScrollRect>();
         scrollBar = scrollRect.horizontalScrollbar;
-        DisablePanel();
     }
 
     private void OnEnable()
@@ -44,10 +43,7 @@ public class Shop : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }  
     }
 
-    public void DisablePanel()
-    {
-        panel.SetActive(false);
-    }
+   
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -133,40 +129,7 @@ public class Shop : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
 
-    public void BuyRestoreLivesCompleted()
-    {
-        BasicLife.Instance.RestoreLivesToLimit();
-        MainMenu.Instance.shop_canvas.Hide();
-        DisablePanel();
-        MainMenu.Instance.gameOverCanvas.Hide();
-        if (GameManager.Instance != null)
-        {
-            //When in Game
-            GameManager.Instance.Respawn();
-        }
-
-    }
-
-    public void BuyExtraLivesCompleted(int livesToAdd)
-    {
-        BasicLife.Instance.AddExtraLife(livesToAdd);
-        MainMenu.Instance.shop_canvas.Hide();
-        DisablePanel();
-        MainMenu.Instance.gameOverCanvas.Hide();
-        if (GameManager.Instance != null)
-        {
-            //When in Game
-            GameManager.Instance.Respawn();
-        }
-
-    }
-
-    public void BuyExpandLivesCompleted()
-    {
-        BasicLife.Instance.SetLifeLimit(30);
-        MainMenu.Instance.shop_canvas.Hide();
-        DisablePanel();
-    }
+  
 
     public void ToggleButtons()
     {

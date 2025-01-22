@@ -9,6 +9,7 @@ using TMPro;
 using System.Numerics;
 using UnityEngine.UIElements;
 using System;
+using Image = UnityEngine.UI.Image;
 public class MainMenu : MonoBehaviour
 {
     #region variables
@@ -70,10 +71,18 @@ public class MainMenu : MonoBehaviour
     [Header("BUTTON SOUND")]
     public AudioClip ButtonSound;
     [Header("GAMEOVER/WIN PANEL SOUND")]
+    public GameObject ContinuePanel;
+    public GameObject GameoverContainer;
+    public UnityEngine.UI.Button ViewButton;
+    public Image ViewIcon;
+    public Sprite isVisible;
+    public Sprite isInvisible;
     public AudioClip win;
     private bool gameIsFinished;
     private static MainMenu _instance;
-
+    [Header("CONTROLS")]
+    public GameObject CountdownPanel;
+    public TextMeshProUGUI textCountDown;
     [SerializeField] private UnityEngine.UI.Slider musicSlider;
     [SerializeField] private UnityEngine.UI.Slider sfxSlider;
     [SerializeField] private UnityEngine.UI.Image musicImage;
@@ -109,7 +118,7 @@ public class MainMenu : MonoBehaviour
     {
         GetAllLevels();
         SoundManager.Instance.MusicAudio(Main);
-        level = gameOverCanvas.transform.GetChild(0).Find("level").gameObject;
+        level = gameOverCanvas.transform.GetChild(0).GetChild(0).Find("level").gameObject;
         tween = level.GetComponent<DoTweenFeatures>();
     }
 
@@ -164,9 +173,19 @@ public class MainMenu : MonoBehaviour
         tween.OnClick();
     }
 
+    public void ToggleCountdownPanel(bool on, string second = null)
+    {
+        CountdownPanel.SetActive(on);
+        if (second != null)
+        {
+            textCountDown.text = second;
+        }
+    }
+
     public void ShowGameOverCanvas(int type)
     {
-        switch(type)
+        ToggleContinuePanel(false);
+        switch (type)
         {
             case 0:
                 //Trying to access level on 0 lives
@@ -195,7 +214,7 @@ public class MainMenu : MonoBehaviour
                 buttonCloseAccessingLevelWithNoLives.SetActive(false);
                 buttonBuyLives.SetActive(false);
                 buttonWatchAdHomeLives.SetActive(false);
-                buttonWatchAdGameLives.SetActive(true);
+                buttonWatchAdGameLives.SetActive(false);
                 buttonWatchAdTimer.SetActive(true);
                 buttonHome.SetActive(true);
                 textGameOverMessage.text = "You're out of Time!";
@@ -241,9 +260,14 @@ public class MainMenu : MonoBehaviour
 
     public void HomeFromGameover()
     {
+        Time.timeScale = 1;
         gameOverCanvas.Hide();
         //BasicLife.Instance.LifeLine();
         CountdownTimer.Instance.enabled = false;
+        if (GameManager.Instance != null && GameManager.Instance.Rplayer != null)
+        {
+            GameManager.Instance.Rplayer.SetActive(false);
+        }
         MainMenu.Instance.mainMenu();
     }
 
@@ -308,6 +332,7 @@ public class MainMenu : MonoBehaviour
 
     public IEnumerator LoadGameAsync(bool unload, string loadSceneString)
     {
+        Time.timeScale = 1;
         textProgress.text = "Loading Asset Data... ";
         Debug.Log("Loading");
         AsyncOperation operation;
@@ -351,7 +376,6 @@ public class MainMenu : MonoBehaviour
         if (operation.isDone && !unload)
         {
             Debug.Log("Loaded");
-            Time.timeScale = 1;
             Resources.UnloadUnusedAssets();
             coverCanvas.Hide();
             cam.SetActive(false);
@@ -515,6 +539,25 @@ public class MainMenu : MonoBehaviour
         if (volume < -49.9f)
         {
             audioMix.SetFloat("SFX Volume", -80);
+        }
+    }
+
+    public void ToggleContinuePanel(bool viewIsOn)
+    {
+        ViewButton.gameObject.SetActive(viewIsOn);
+    }
+
+    public void ToggleViewButton()
+    {
+        if (GameoverContainer.active)
+        {
+            GameoverContainer.SetActive(false);
+            ViewIcon.sprite = isVisible;
+        }
+        else if (!GameoverContainer.active)
+        {
+            GameoverContainer.SetActive(true);
+            ViewIcon.sprite = isInvisible;
         }
     }
     #endregion

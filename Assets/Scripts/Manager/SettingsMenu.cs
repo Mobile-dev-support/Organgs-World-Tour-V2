@@ -50,6 +50,10 @@ public class SettingsMenu : MonoBehaviour
     {
         settings_panel.gameObject.SetActive(false);
         CountdownTimer.Instance.enabled = false;
+        if (GameManager.Instance != null && GameManager.Instance.Rplayer != null)
+        {
+            GameManager.Instance.Rplayer.SetActive(false);
+        }
         MainMenu.Instance.mainMenu();
     }
 }

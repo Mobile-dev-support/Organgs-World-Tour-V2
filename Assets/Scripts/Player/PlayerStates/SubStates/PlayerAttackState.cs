@@ -37,7 +37,11 @@ public class PlayerAttackState : PlayerAbilityState
     {
         base.LogicUpdate();
 
-        xInput = player.InputHandler.NormInputX;
+        if(Time.timeScale == 1)
+        {
+            xInput = player.InputHandler.NormInputX;
+        }
+        
 
         if (shouldCheckFlip)
         {

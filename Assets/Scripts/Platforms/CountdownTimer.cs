@@ -41,7 +41,7 @@ public class CountdownTimer : MonoBehaviour
 
     public void ResetTimer()
     {
-        timeValue = 300;
+        timeValue = 600;
     }
 
     public void SetTimer(int time)
@@ -73,7 +73,7 @@ public class CountdownTimer : MonoBehaviour
             if (Fader.Instance != null)
             {
                 Fader.Instance.BGFader(true);
-                GameManager.Instance.Rplayer.SetActive(false);
+                Time.timeScale = 0;
                 CountdownTimer.Instance.enabled = false;
                 MainMenu.Instance.GameOverScreen(2);
             }

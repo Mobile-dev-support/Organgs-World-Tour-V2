@@ -27,12 +27,14 @@ namespace SimpleInputNamespace
 
 		public void OnPointerDown( PointerEventData eventData )
 		{
-			button.value = true;
+			if(Time.timeScale > 0 )
+				button.value = true;
 		}
 
 		public void OnPointerUp( PointerEventData eventData )
 		{
-			button.value = false;
+            if (Time.timeScale > 0)
+                button.value = false;
 		}
 	}
 }
