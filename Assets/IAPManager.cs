@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class IAPManager : MonoBehaviour, IDetailedStoreListener
 {
-    IStoreController m_StoreController; // The Unity Purchasing system.
+    public IStoreController m_StoreController; // The Unity Purchasing system.
+    public static IAPManager _instance;
     public GameObject panel;
     //Your products IDs. They should match the ids of your products in your store.
     public string restoreLives = "com.purplebug.wt.restore";
@@ -16,6 +17,18 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener
     public string lives100 = "com.purplebug.wt.100lives";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
     void Start()
     {
         panel.SetActive(false);

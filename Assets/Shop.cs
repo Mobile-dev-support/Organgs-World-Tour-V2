@@ -6,10 +6,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Linq;
 using Debug = UnityEngine.Debug;
+using TMPro;
 public class Shop : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 {
     public GameObject panel;
     public List<GameObject> IAPCards = new List<GameObject>();
+    public List<TextMeshProUGUI> priceText = new List<TextMeshProUGUI>();
     public GameObject CurrentIAPCentered;
     private ScrollRect scrollRect;
     private Scrollbar scrollBar;
@@ -64,6 +66,7 @@ public class Shop : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         if (BasicLife.Instance.life <= (BasicLife.Instance.lifeLimit * 0.5f))
         {
             IAPCards[0].gameObject.SetActive(true);
+            priceText[0].text = IAPManager._instance.m_StoreController.products.WithID(IAPManager._instance.restoreLives).metadata.localizedPriceString;
         }
         else
         {
@@ -73,11 +76,16 @@ public class Shop : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         if(BasicLife.Instance.lifeLimit != 30)
         {
             IAPCards[1].gameObject.SetActive(true);
+            priceText[1].text = IAPManager._instance.m_StoreController.products.WithID(IAPManager._instance.expandLives).metadata.localizedPriceString;
         }
         else
         {
             IAPCards[1].gameObject.SetActive(false);
         }
+
+        priceText[2].text = IAPManager._instance.m_StoreController.products.WithID(IAPManager._instance.lives30).metadata.localizedPriceString;
+        priceText[3].text = IAPManager._instance.m_StoreController.products.WithID(IAPManager._instance.lives50).metadata.localizedPriceString;
+        priceText[4].text = IAPManager._instance.m_StoreController.products.WithID(IAPManager._instance.lives100).metadata.localizedPriceString;
     }
 
     public void FocusOnNearestObjectToCenter(float offset)

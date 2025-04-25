@@ -12,7 +12,7 @@ public class AdmobManager : MonoBehaviour
     private RewardedInterstitialAd rewardBasedInterstitialAd;
     public string androidRewardBasedInterstitialAdUnitID;
     public string IOSRewardBasedInterstitialAdUnitID;
-
+    private int adCompletionType = 0;
 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class AdmobManager : MonoBehaviour
     void Start()
     {
         MobileAds.SetiOSAppPauseOnBackground(true);
-
+        
         //testDeviceIDS.Add(AdRequest.TestDeviceSimulator);
 
         // Configure TagForChildDirectedTreatment and test device IDs.
@@ -91,6 +91,7 @@ public class AdmobManager : MonoBehaviour
                         + ad.GetResponseInfo());
 
               rewardBasedInterstitialAd = ad;
+              
           });
     }
 
@@ -99,10 +100,10 @@ public class AdmobManager : MonoBehaviour
         //if admob is initialized, rewarded ad is not empty, and it is loaded
         if (rewardBasedInterstitialAd != null && rewardBasedInterstitialAd.CanShowAd())
         {
-            rewardBasedInterstitialAd.OnAdFullScreenContentClosed += HandleRewardedAdClosed;
+            rewardBasedInterstitialAd.OnAdFullScreenContentClosed += OnAdClosed;
             rewardBasedInterstitialAd.Show((Reward reward) =>
             {
-                HandleUserEarnedReward(type);
+                adCompletionType = type;
             });
 
         }
@@ -113,22 +114,27 @@ public class AdmobManager : MonoBehaviour
         }
     }
 
-    public void HandleUserEarnedReward(int type)
+    public IEnumerator HandleUserEarnedReward()
     {
-        switch (type)
+        yield return new WaitForEndOfFrame();
+        switch (adCompletionType)
         {
-            case 0:
-                RewardsManager.instance.RewardedAdsForLivesComplete();
-                break;
             case 1:
+                adCompletionType = 0;
+                RewardsManager.instance.RewardedAdsForLivesComplete();
+                RequestRewardInterstitialAd();
+                break;
+            case 2:
+                adCompletionType = 0;
                 RewardsManager.instance.RewardedAdsForTimeComplete();
+                RequestRewardInterstitialAd();
                 break;
         }
-        RequestRewardInterstitialAd();
     }
 
-    public void HandleRewardedAdClosed()
+    public void OnAdClosed()
     {
+        StartCoroutine(HandleUserEarnedReward());
 
     }
 
