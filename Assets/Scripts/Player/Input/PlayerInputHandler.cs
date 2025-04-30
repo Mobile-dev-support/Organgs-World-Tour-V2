@@ -7,6 +7,7 @@ public class PlayerInputHandler : MonoBehaviour
 {
     //private PlayerInput playerInput;
     private Camera cam;
+    public static int MovementModifier = 1;
 
     public Vector2 RawMovementInput { get; private set; }
     public Vector2 RawDashDirectionInput { get; private set; }
@@ -43,7 +44,10 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void MovementControl()
     {
-        RawMovementInput = new Vector2(SimpleInput.GetAxisRaw("Horizontal"), SimpleInput.GetAxisRaw("Vertical"));
+        RawMovementInput = new Vector2(SimpleInput.GetAxisRaw("Horizontal"), SimpleInput.GetAxisRaw("Vertical")) * MovementModifier;
+
+        //print("RawMovementInput: " + RawMovementInput);
+
         if (SimpleInput.GetButtonDown("Jump"))
         {
             OnJumpInput();

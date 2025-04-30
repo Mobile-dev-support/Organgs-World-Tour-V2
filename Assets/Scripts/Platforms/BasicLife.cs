@@ -179,7 +179,7 @@ public class BasicLife : MonoBehaviour
 
                 // Get the total seconds
                 double totalSeconds = difference.TotalSeconds+1;
-                Debug.Log("Total Seconds" + totalSeconds);
+                //Debug.Log("Total Seconds" + totalSeconds);
                 //int hours = (int)totalSeconds / 3600;
                 int minutes = (int)(totalSeconds % 3600) / 60;
                 int seconds = (int)totalSeconds % 60;

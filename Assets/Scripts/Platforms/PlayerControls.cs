@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SimpleInputNamespace;
+using UnityEngine.Animations;
 
 public class PlayerControls : MonoBehaviour
 {
@@ -23,4 +24,5 @@ public class PlayerControls : MonoBehaviour
             _instance = this;
         }
     }
+
 }

@@ -61,6 +61,7 @@ public class Tutorial : MonoBehaviour
     private GameObject leftButton;
     [SerializeField]
     private GameObject rightButton;
+    public GameObject button_viewSign;
 
     [SerializeField]
     private Color selectedColor;
@@ -69,6 +70,15 @@ public class Tutorial : MonoBehaviour
 
     private int currentInstructionTypeIndex;
     private int currentPageIndex;
+
+    public class TutorialPageClassData
+    {
+        public int instructionType = 0;
+        public int instructionPage = 0;
+        public bool toggleNextOrPreviousButtons = false;
+    }
+    public TutorialPageClassData tutorialDataCurrent;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -154,7 +164,7 @@ public class Tutorial : MonoBehaviour
         }
     }
 
-    public void TutorialUnlockPage(int instructionType, int instructionPage, bool toggleNextOrPreviousButtons)
+    public void TutorialUnlockPage(int instructionType, int instructionPage, bool toggleNextOrPreviousButtons, bool overwrite = false)
     {
         controlsInstructionButton.SetActive(false);
         collectiblesInstructionButton.SetActive(false);
@@ -184,7 +194,8 @@ public class Tutorial : MonoBehaviour
                 break;
 
         }
-        if(!tutorialisOff.isOn)
+
+        if(!tutorialisOff.isOn || overwrite)
         {
             tutorialView.Show();
             tutorialPanel.SetActive(true);
@@ -197,6 +208,14 @@ public class Tutorial : MonoBehaviour
             LoadGuideContent(instructionType, instructionPage, toggleNextOrPreviousButtons);
         }
       
+    }
+
+    public void ButtonTutorialView()
+    {
+        if (tutorialDataCurrent != null)
+        {
+            TutorialUnlockPage(tutorialDataCurrent.instructionType, tutorialDataCurrent.instructionPage, tutorialDataCurrent.toggleNextOrPreviousButtons, true);
+        }
     }
 
     public void SetPlayerPrefs(string category, int page)

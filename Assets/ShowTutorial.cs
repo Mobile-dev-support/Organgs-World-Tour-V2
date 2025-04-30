@@ -20,6 +20,8 @@ public class ShowTutorial : MonoBehaviour
  
         if(collision != null && collision.gameObject.CompareTag("Player") )
         {
+            Tutorial.Instance.button_viewSign.SetActive(true);
+
             int categoryIndex = 0;
             string playerPrefsCode = string.Empty;
             switch (tutorialCategory)
@@ -43,12 +45,19 @@ public class ShowTutorial : MonoBehaviour
 
             }
 
-            colliderSelf.enabled = false;
+            //colliderSelf.enabled = false;
+            Tutorial.Instance.tutorialDataCurrent = new Tutorial.TutorialPageClassData() { instructionType = categoryIndex, instructionPage = tutorialPage, toggleNextOrPreviousButtons = toggleNextOrPrevious };
             if (Tutorial.Instance != null && PlayerPrefs.GetInt(playerPrefsCode+tutorialPage) == 0)
             {
-                Debug.Log("Player Entered");
                 Tutorial.Instance.TutorialUnlockPage(categoryIndex, tutorialPage, toggleNextOrPrevious);
             }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision != null && collision.gameObject.CompareTag("Player"))
+        {
+            Tutorial.Instance.button_viewSign.SetActive(false);
         }
     }
 

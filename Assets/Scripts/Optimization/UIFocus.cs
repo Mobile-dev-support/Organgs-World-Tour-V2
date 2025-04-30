@@ -56,7 +56,7 @@ public class UIFocus : MonoBehaviour
 
     public void FocusOnNearestObjectToCenter(float offset)
     {
-        Vector3 screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0);
+        Vector3 screenCenter = new(Screen.width / 2f, Screen.height / 2f, 0);
         screenCenter.x += offset;
         CurrentLevel = CurrentLevel.OrderBy(o => Vector2.Distance(o.transform.position, screenCenter)).ToList();
         var nearestObject = CurrentLevel.First();
