@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerGroundedState : PlayerState
 {
+    public static Vector2 velocity_latestPlatformCollide;
+
     protected int xInput;
     protected int yInput;
 
@@ -30,7 +32,6 @@ public class PlayerGroundedState : PlayerState
     private int istouchingWall = Animator.StringToHash("isTouchingWall");
 
     private bool isThroughPlatform;
-
 
 
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
@@ -120,22 +121,21 @@ public class PlayerGroundedState : PlayerState
             player.InAirState.StartCoyoteTime();
             stateMachine.ChangeState(player.InAirState);
         }
-        else if (isDead || (!isCurrentlySliding && (isTouchingCeiling || isTouchingCeilingSolidPlatform) && (isGrounded || isThroughPlatform || isSlippery || isStickingToPlatform || isSugarPlatform))
-            || player.transform.rotation.z != 0 || isTouchingWall && isTouchingWallBack || isTouchingWall && isTouchingWallBackSolidPlatform || isTouchingSolidPlatform && isTouchingWallBack)
+        else if (isDead || (/*!isCurrentlySliding &&*/ (isTouchingCeiling /*|| isTouchingCeilingSolidPlatform*/) && (isGrounded || isThroughPlatform || isSlippery || isStickingToPlatform || isSugarPlatform)) ||
+            (isGrounded && isTouchingCeilingSolidPlatform && !isCurrentlySliding && velocity_latestPlatformCollide.y < 0) || // C2_ Player is on Ground and Ceiling Platform touches
+            (isStickingToPlatform && isTouchingCeilingSolidPlatform && velocity_latestPlatformCollide.y < 0) // C3_ Player is on a Platform and Ceiling Platform touches
+            || player.transform.rotation.z != 0 || isTouchingWall && isTouchingWallBack || /*isTouchingWall && isTouchingWallBackSolidPlatform ||*/ isTouchingSolidPlatform && isTouchingWallBack)
         {
 
+            //Debug.Log("C2_: " + (isGrounded && isTouchingCeilingSolidPlatform && !isCurrentlySliding));
             Debug.Log("Death in Grounded state");
-            if ((!isCurrentlySliding && (isTouchingCeiling || isTouchingCeilingSolidPlatform) && (isGrounded || isSlippery || isStickingToPlatform || isSugarPlatform)))
-            {
-                Debug.Log("isTouching Celing:" + isTouchingCeiling);
-                Debug.Log("isTouchingCeilingSolidPlatform:" + isTouchingCeilingSolidPlatform);
-                Debug.Log("isGrounded:" + isGrounded);
-            }
-            else
-            {
+            Debug.Log("solidceil_ " + velocity_latestPlatformCollide);
 
-            }
-                stateMachine.ChangeState(player.DeathState);
+            Debug.Log("\nisTouchingCeling: " + isTouchingCeiling + "\nisTouchingCeilingSolidPlatform: " + isTouchingCeilingSolidPlatform + "\nisGrounded: " + isGrounded +
+                "\nisDead: " + isDead + "\nisStickingToPlatform: " + isStickingToPlatform + "\nisTouchingWall: " + isTouchingWall + "\nisTouchingWallBack: " + isTouchingWallBack +
+                "\nisTouchingWallBackSolidPlatform: " + isTouchingWallBackSolidPlatform + "\nisTouchingSolidPlatform: " + isTouchingSolidPlatform + "\nrotation.z != 0: " + (player.transform.rotation.z != 0));
+            //Debug.Log("PlayerRigid: " + player.RB.velo_Continue_here);
+            stateMachine.ChangeState(player.DeathState);
         }
         
         /*if (isSugarPlatform)

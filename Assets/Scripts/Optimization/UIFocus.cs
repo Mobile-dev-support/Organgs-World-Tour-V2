@@ -36,8 +36,18 @@ public class UIFocus : MonoBehaviour
     {
         List<GameObject> objSortedList = CurrentLevel.OrderBy(o => o.name).ToList();
         CurrentLevel = objSortedList;
+
+        GameObject comingsoonLevel = null;
+        if (CurrentLevel.Last().name.Equals("Z"))
+        {
+            comingsoonLevel = CurrentLevel.Last();
+            CurrentLevel.Remove(CurrentLevel.Last());
+        }
         rect = CurrentLevel.Last().GetComponent<RectTransform>();
         CurrentLevelSelected = CurrentLevel.Last();
+        if (comingsoonLevel != null)
+            CurrentLevel.Add(comingsoonLevel);
+
         StartCoroutine(ScrollViewFocusFunctions.FocusOnItemCoroutine(scroller, rect, 2f));
         UI_particle.SetPositionAndRotation(rect.position, Quaternion.identity);
         ToggleButtons();
@@ -47,8 +57,18 @@ public class UIFocus : MonoBehaviour
     {
         List<GameObject> objSortedList = CurrentLevel.OrderBy(o => o.name).ToList();
         CurrentLevel = objSortedList;
+
+        GameObject comingsoonLevel = null;
+        if (CurrentLevel.Last().name.Equals("Z"))
+        {
+            comingsoonLevel = CurrentLevel.Last();
+            CurrentLevel.Remove(CurrentLevel.Last());
+        }
         rect = CurrentLevel.Last().GetComponent<RectTransform>();
         CurrentLevelSelected = CurrentLevel.Last();
+        if (comingsoonLevel != null)
+            CurrentLevel.Add(comingsoonLevel);
+
         ScrollViewFocusFunctions.FocusOnItem(scroller, rect);
         UI_particle.SetPositionAndRotation(rect.position, Quaternion.identity);
         ToggleButtons();

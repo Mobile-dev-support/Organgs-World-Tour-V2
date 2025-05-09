@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Collider2D))]
@@ -22,6 +23,7 @@ public class PlatformController : MonoBehaviour
     private Vector3 initialPosition;
 
     private Vector2 speed = Vector2.zero;
+    public Vector2 velocity = Vector2.zero;
     private float currentWaitTime = 0;
     private float currentCrumbleTime = 0;
     private float currentRestoreTime = 0;
@@ -183,7 +185,7 @@ public class PlatformController : MonoBehaviour
                 }
                 Vector3 newPos = Vector2.MoveTowards(transform.position, currentWaypoint.transform.position,
                     speed.magnitude * Time.fixedDeltaTime);
-                Vector2 velocity = newPos - transform.position;
+                velocity = newPos - transform.position;
                 if (speed.y > 0)
                 {
                     transform.position = newPos;
@@ -211,7 +213,12 @@ public class PlatformController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Player" && other.contacts[0].normal.y <= -0.99f && this.myCollider.Distance(other.collider).distance >= -0.05f && gameObject.layer != LayerMask.NameToLayer("Enemy"))
+        if (other.gameObject.CompareTag("Player"))
+        {
+            //print(name + "_velocity: " + velocity); 
+            PlayerGroundedState.velocity_latestPlatformCollide = velocity;
+        }
+        if (other.gameObject.CompareTag("Player") && other.contacts[0].normal.y <= -0.99f && this.myCollider.Distance(other.collider).distance >= -0.05f && gameObject.layer != LayerMask.NameToLayer("Enemy"))
         {
             AttachObject(other);
             other.collider.transform.SetParent(transform, true);
@@ -220,7 +227,7 @@ public class PlatformController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Player" && other.contacts[0].normal.y <= -0.99f && this.myCollider.Distance(other.collider).distance >= -0.05f && gameObject.layer != LayerMask.NameToLayer("Enemy"))
+        if (other.gameObject.CompareTag("Player") && other.contacts[0].normal.y <= -0.99f && this.myCollider.Distance(other.collider).distance >= -0.05f && gameObject.layer != LayerMask.NameToLayer("Enemy"))
         {
             AttachObject(other);
             other.collider.transform.SetParent(transform, true);
@@ -258,7 +265,6 @@ public class PlatformController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && gameObject.layer != LayerMask.NameToLayer("Enemy"))
         {
-            Debug.Log("Exited Collider");
             other.collider.transform.SetParent(null);
             Player obj = other.gameObject.GetComponent<Player>();
             if (obj && objs.Contains(obj))

@@ -122,10 +122,7 @@ public class PlayerInAirState : PlayerState
         {
             Debug.Log("Death in air state");
             Debug.Log("Player died because of touching ceiling");
-            Debug.Log("isDead:" + isDead);
-            Debug.Log("isTouchingWall:" + isTouchingWall);
-            Debug.Log("isTouchingWallBack:" + isTouchingWallBack);
-            Debug.Log("isHittingPlatform:" + isHittingPlatform);
+            Debug.Log("isDead:" + isDead + "\nisTouchingWall:" + isTouchingWall + "\nisTouchingWallBack:" + isTouchingWallBack + "\nisHittingPlatform:" + isHittingPlatform + "\nisTouchingWallSolidPlatform:" + isTouchingWallSolidPlatform);
             stateMachine.ChangeState(player.DeathState);
         }
         else

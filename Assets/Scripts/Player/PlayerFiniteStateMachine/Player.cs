@@ -301,10 +301,13 @@ public class Player : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("SolidPlatform"))
         {
             var pointOfContact = other.contacts.FirstOrDefault(contact => contact.normal.y <= -0.99f && contact.collider.gameObject.layer == LayerMask.NameToLayer("SolidPlatform"));
-            if (pointOfContact.normal.y <= -0.99f && pointOfContact.point != Vector2.zero)
+            Vector2 velocity = other.gameObject.GetComponent<PlatformController>().velocity;
+
+
+            if (pointOfContact.normal.y <= -0.99f && pointOfContact.point != Vector2.zero && velocity.y != 0)
             {
                 collisionSenses.isTouchingCeilingSolidPlatform = true;
-                Debug.Log("Name:" + other.gameObject.name + " Contact:" + pointOfContact.ToString());
+                Debug.Log("Name:" + other.gameObject.name + " Contact:" + pointOfContact.ToString() + other.gameObject.GetComponent<PlatformController>().velocity);
             }
 
 
