@@ -124,7 +124,7 @@ public class PlayerGroundedState : PlayerState
         else if (isDead || (/*!isCurrentlySliding &&*/ (isTouchingCeiling /*|| isTouchingCeilingSolidPlatform*/) && (isGrounded || isThroughPlatform || isSlippery || isStickingToPlatform || isSugarPlatform)) ||
             (isGrounded && isTouchingCeilingSolidPlatform && !isCurrentlySliding && velocity_latestPlatformCollide.y < 0) || // C2_ Player is on Ground and Ceiling Platform touches
             (isStickingToPlatform && isTouchingCeilingSolidPlatform && velocity_latestPlatformCollide.y < 0) // C3_ Player is on a Platform and Ceiling Platform touches
-            || player.transform.rotation.z != 0 || isTouchingWall && isTouchingWallBack || /*isTouchingWall && isTouchingWallBackSolidPlatform ||*/ isTouchingSolidPlatform && isTouchingWallBack)
+            || player.transform.rotation.z != 0 || (isTouchingWall && isTouchingWallBack) || (isTouchingWall && isTouchingWallBackSolidPlatform) || isTouchingSolidPlatform && isTouchingWallBack)
         {
 
             //Debug.Log("C2_: " + (isGrounded && isTouchingCeilingSolidPlatform && !isCurrentlySliding));
