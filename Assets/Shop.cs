@@ -22,7 +22,10 @@ public class Shop : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     public GameObject LeftButton;
     public GameObject RightButton;
-    public void Awake()
+
+    [SerializeField] private View view;
+
+    private void Awake()
     {
         scrollRect = GetComponent<ScrollRect>();
         scrollBar = scrollRect.horizontalScrollbar;
@@ -174,4 +177,16 @@ public class Shop : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
     }
 
+    public void OnShopButton()
+    {
+        if (NetworkController.NETWORK_ONLINE)
+        {
+            view.Show();
+            panel.SetActive(true);
+        }
+        else
+        {
+            PopupController.Show("ERROR!", "Looks like you are not connected to the internet! \n\nPlease try again later.");
+        }
+    }
 }
