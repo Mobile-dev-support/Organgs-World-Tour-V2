@@ -12,7 +12,8 @@ public class CountdownTimer : MonoBehaviour
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI timeFinishedText;
 
-    private float timeValue;
+    public float timeValue;
+    public float timeScore;
     private static CountdownTimer _instance;
     public static CountdownTimer Instance { get { return _instance; } }
 
@@ -36,7 +37,12 @@ public class CountdownTimer : MonoBehaviour
     private void OnDisable()
     {
         CancelInvoke();
-        timeFinishedText.SetText("{0:00}:{1:00}", minutes, seconds);
+
+        timeScore = 600 - timeValue;
+        int minutes_ = Mathf.FloorToInt(timeScore / 60);
+        int seconds_ = Mathf.FloorToInt(timeScore % 60);
+        int milliseconds_ = Mathf.FloorToInt((timeScore * 1000) % 1000);
+        timeFinishedText.SetText("{0:0}:{1:00}:{2:000}", minutes_, seconds_, milliseconds_);
     }
 
     public void ResetTimer()

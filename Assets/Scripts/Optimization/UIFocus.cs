@@ -32,6 +32,11 @@ public class UIFocus : MonoBehaviour
         }
     }
 
+    private void ChecksIfComingSoon()
+    {
+        LeaderboardController.instance.button_leaderboard.SetActive(!CurrentLevelSelected.name.Equals("Z"));
+    }
+
     public void FocusOnObject()
     {
         List<GameObject> objSortedList = CurrentLevel.OrderBy(o => o.name).ToList();
@@ -47,6 +52,7 @@ public class UIFocus : MonoBehaviour
         CurrentLevelSelected = CurrentLevel.Last();
         if (comingsoonLevel != null)
             CurrentLevel.Add(comingsoonLevel);
+        ChecksIfComingSoon();
 
         StartCoroutine(ScrollViewFocusFunctions.FocusOnItemCoroutine(scroller, rect, 2f));
         UI_particle.SetPositionAndRotation(rect.position, Quaternion.identity);
@@ -89,6 +95,8 @@ public class UIFocus : MonoBehaviour
             UI_particle.SetPositionAndRotation(rect.position, Quaternion.identity);
             ToggleButtons();
         }
+
+        ChecksIfComingSoon();
     }
 
     public void FocusOnNextOrPrevious(float direction)
@@ -109,6 +117,7 @@ public class UIFocus : MonoBehaviour
         ScrollViewFocusFunctions.FocusOnItem(scroller, rect);
         ToggleButtons();
         UI_particle.SetPositionAndRotation(rect.position, Quaternion.identity);
+        ChecksIfComingSoon();
     }
 
     private void ToggleButtons()

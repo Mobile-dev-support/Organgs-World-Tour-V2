@@ -66,7 +66,7 @@ public class Shop : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     public void IAPAvailability()
     {
-        if (BasicLife.Instance.life <= (BasicLife.Instance.lifeLimit * 0.5f))
+        if (BasicLife.Instance.life <= (BasicLife.Instance.lifeLimit * 0.5f))   
         {
             IAPCards[0].gameObject.SetActive(true);
             priceText[0].text = IAPManager._instance.m_StoreController.products.WithID(IAPManager._instance.restoreLives).metadata.localizedPriceString;

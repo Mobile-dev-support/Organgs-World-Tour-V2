@@ -30,7 +30,7 @@ public class StarSystemUnlocker : MonoBehaviour
         unlocked = true;
         GetHighestLevel();
 #else
-        if (PlayerPrefs.GetInt("Lv" + previousLevelNum.ToString()) > 1)//If the firts level star is bigger than 0, second level can play
+        if (PlayerPrefs.GetInt("Lv" + previousLevelNum.ToString()) > 1)//If the firts level star is bigger than 1, second level can play
         {
             unlocked = true;
             GetHighestLevel();
