@@ -141,6 +141,7 @@ public class Tutorial : MonoBehaviour
     {
         ChangeCategory(0);
         tutorialPanel.SetActive(true);
+        instructionsCategoryTitle.text = "Controls";
         currentInstructionTypeIndex = 0;
         currentPageIndex = 0;
         ToggleCategoryButtons();
