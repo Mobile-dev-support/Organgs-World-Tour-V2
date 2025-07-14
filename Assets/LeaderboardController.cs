@@ -153,7 +153,7 @@ public class LeaderboardController : MonoBehaviour
         }
 
 
-        PopupController.Show("SUCCESS", "Player data has beed saved.");
+        PopupController.Show("SUCCESS", "Player data has been saved.");
         button_save.interactable = input_name.interactable = false;
         lastSaved = countdownTimer.timeScore;
     }
