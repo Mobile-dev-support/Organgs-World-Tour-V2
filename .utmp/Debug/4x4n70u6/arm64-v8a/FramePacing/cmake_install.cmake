@@ -1,4 +1,4 @@
-# Install script for directory: C:/WORK/PROJECTS_UNITY/Organgs World Tour/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/FramePacing
+# Install script for directory: C:/WORK/PROJECTS_UNITY/Organgs World Tour/Library/PramData/AndroidApplicationController/Cache/com.Purplebug.OrgangsWorldTour/gradle-project/unityLibrary/src/main/cpp/FramePacing
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

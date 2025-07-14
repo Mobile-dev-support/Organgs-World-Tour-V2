@@ -74,7 +74,7 @@ public class AdmobManager : MonoBehaviour
             return;
         }
 
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
         AdRequest request = CreateAdRequest();
 
         RewardedInterstitialAd.Load(adUnitId, request,
@@ -94,14 +94,14 @@ public class AdmobManager : MonoBehaviour
               rewardBasedInterstitialAd = ad;
               
           });
-#else
-        PopupController.Show("Sample Ad Request 2", "Rewarded Ad has loaded");
-#endif
+//#else
+//        PopupController.Show("Sample Ad Request 2", "Rewarded Ad has loaded");
+//#endif
     }
 
     public void ShowRewardedAd(int type)
     {
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
         //if admob is initialized, rewarded ad is not empty, and it is loaded
         if (rewardBasedInterstitialAd != null && rewardBasedInterstitialAd.CanShowAd())
         {
@@ -117,9 +117,9 @@ public class AdmobManager : MonoBehaviour
 
         }
 
-#else
-        PopupController.Show("Sample Ad Request 1 ", "Rewarded Ad has loaded");
-#endif
+//#else
+//        PopupController.Show("Sample Ad Request 1 ", "Rewarded Ad has loaded");
+//#endif
     }
 
     public IEnumerator HandleUserEarnedReward()

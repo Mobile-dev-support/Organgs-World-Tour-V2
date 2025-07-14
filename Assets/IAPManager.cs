@@ -4,7 +4,7 @@ using UnityEngine.Purchasing;
 using UnityEngine.Purchasing.Extension;
 using UnityEngine.UI;
 
-public class IAPManager : MonoBehaviour, IDetailedStoreListener
+public class IAPManager : MonoBehaviour, IStoreListener
 {
     public IStoreController m_StoreController; // The Unity Purchasing system.
     public static IAPManager _instance;
@@ -133,7 +133,11 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener
 
     public void BuyExpandLives()
     {
-        m_StoreController.InitiatePurchase(expandLives);
+        try { 
+        m_StoreController.InitiatePurchase(expandLives);}
+        catch {
+            PopupController.Show("ERROR!", "Error Occured. Please try again later!");
+        }
     }
 
     public void BuyExtraLives(int extraLives)

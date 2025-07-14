@@ -36,7 +36,7 @@ public class Shop : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         IAPAvailability();
         foreach (var IAPCard in IAPCards)
         {
-            if(IAPCard.gameObject.active == true)
+            if(IAPCard.gameObject.activeInHierarchy)
             {
                 CurrentIAPCentered = IAPCard;
                 rect = CurrentIAPCentered.GetComponent<RectTransform>();
