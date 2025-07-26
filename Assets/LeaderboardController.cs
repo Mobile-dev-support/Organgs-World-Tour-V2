@@ -54,6 +54,7 @@ public class LeaderboardController : MonoBehaviour
         UpdateLeaderboard();
     }
 
+    [ContextMenu("OpenLeaderboard")]
     public void OpenLeaderboard()
     {
         if (GameManager.Instance == null)
@@ -83,16 +84,20 @@ public class LeaderboardController : MonoBehaviour
         button_prev.interactable = (currentLevel_local > 1);
         button_next.interactable = (currentLevel_local < 3);
 
-        text_level.SetText(UIFocus.Instance.CurrentLevelSelected.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text + " - LEVEL " + currentLevel_local);
+        if (GameManager.Instance == null)
+            text_level.SetText(UIFocus.Instance.CurrentLevelSelected.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text + " - LEVEL " + currentLevel_local);
+        else
+            text_level.SetText(GameManager.Instance.levelName.Split("-")[0] + " - LEVEL " + currentLevel_local);
 
         // CLEARS SLOTS
         foreach (var i in slot_leaderboardPlace.Where(x => !x.Text_Time.Equals("-")))
         { i.UpdateSlot(0, "", 0, 0); }
 
-        string currentStage = UIFocus.Instance.CurrentLevelSelected.name;
-        if (PlayerPrefs.HasKey("scores_" + currentStage + currentLevel))
+        string currentStage = ((char)('A' + Mathf.Floor((currentLevel - 1) / 3))).ToString();
+        print($"update: stage_{currentStage}");
+        if (PlayerPrefs.HasKey("scores_" + currentStage + currentLevel_local))
         {
-            string rawLeaderboard = PlayerPrefs.GetString("scores_" + currentStage + currentLevel);
+            string rawLeaderboard = PlayerPrefs.GetString("scores_" + currentStage + currentLevel_local);
             string[] split_rawLb = rawLeaderboard.Split('/');
 
             List<Tuple<int, string, int, float>> scores = new List<Tuple<int, string, int, float>>();
@@ -117,6 +122,8 @@ public class LeaderboardController : MonoBehaviour
         panel_Leaderboard.SetActive(false);
         panel_SaveScore.SetActive(true);
 
+        currentLevel = int.Parse(GameManager.Instance.sceneName);
+
         if (lastSaved != countdownTimer.timeScore) //if not already saved/returned to save screen
         {
             button_save.interactable = input_name.interactable = true;
@@ -139,18 +146,19 @@ public class LeaderboardController : MonoBehaviour
         if (input_name.text.Equals("")) {
             PopupController.Show("ERROR", "Please enter a name to save your score!");
             return; }
-
-        int currentLevel_ = currentLevel = int.Parse(GameManager.Instance.sceneName) % 3 == 0 ? 3 : int.Parse(GameManager.Instance.sceneName) % 3;
-        string currentStage = UIFocus.Instance.CurrentLevelSelected.name;
-        if (PlayerPrefs.HasKey("scores_" + currentStage + currentLevel_))
+        
+        int currentLevel_local = (currentLevel % 3) == 0 ? 3 : (currentLevel % 3);
+        string currentStage = ((char)('A' + Mathf.Floor((currentLevel - 1) / 3))).ToString();
+        print($"currentStage: {currentStage}");
+        if (PlayerPrefs.HasKey("scores_" + currentStage + currentLevel_local))
         {
-            string rawLeaderboard = PlayerPrefs.GetString("scores_" + currentStage + currentLevel_);
+            string rawLeaderboard = PlayerPrefs.GetString("scores_" + currentStage + currentLevel_local);
             string[] split_rawLb = rawLeaderboard.Split('/');
 
             List<Tuple<int, string, int, float>> scores = new List<Tuple<int, string, int, float>>();
             foreach (var i in split_rawLb) { string[] parts = i.Split('-'); scores.Add(Tuple.Create(int.Parse(parts[0]), parts[1], int.Parse(parts[2]), float.Parse(parts[3]))); }
 
-            print($"coin is: {ScoringMechanism.Instance.coinNo}");
+            print($"level: {ScoringMechanism.Instance.coinNo}");
             scores.Add(Tuple.Create(index_profilepic, input_name.text, ((int)ScoringMechanism.Instance.coinNo), countdownTimer.timeScore));
             var sorted = scores.OrderBy(x => x.Item4).ToList();
             sorted = sorted.OrderByDescending(x => x.Item3).ToList();
@@ -163,14 +171,14 @@ public class LeaderboardController : MonoBehaviour
                 if (i + 1 < sorted.Count && i < 9)
                     s_ += "/";
             }
-            PlayerPrefs.SetString($"scores_{currentStage}{currentLevel_}", s_);
+            PlayerPrefs.SetString($"scores_{currentStage}{currentLevel_local}", s_);
 
             //print("s_: " + s_);
             newHiscore = sorted.FindIndex(x => x.Item3.Equals(countdownTimer.timeScore));
         }
         else
         {
-            PlayerPrefs.SetString($"scores_{currentStage}{currentLevel_}", $"{index_profilepic}-{input_name.text}-{ScoringMechanism.Instance.coinNo}-{countdownTimer.timeScore}");
+            PlayerPrefs.SetString($"scores_{currentStage}{currentLevel_local}", $"{index_profilepic}-{input_name.text}-{ScoringMechanism.Instance.coinNo}-{countdownTimer.timeScore}");
         }
 
 
