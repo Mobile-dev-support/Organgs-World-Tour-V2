@@ -38,38 +38,56 @@ public class LeaderboardController : MonoBehaviour
     public Sprite[] sprite_backgroundSelected; // 0-default; 1-selected
 
 
-    private int currentLevel = 1;
+    public int currentLevel = 1;
     private int newHiscore = -1; //-1 means no new update; 0-10 is the index for the next score
     private float lastSaved = -1;
     private int index_profilepic = 0;
 
     public void NextPage()
     {
-        if (currentLevel < 3) currentLevel++;
-        button_prev.interactable = (currentLevel > 1);
-        button_next.interactable = (currentLevel < 3);
-        OpenLeaderboard();
+        currentLevel++;
+        UpdateLeaderboard();
     }
     public void PrevPage()
     {
-        if (currentLevel > 1) currentLevel--;
-        button_prev.interactable = (currentLevel > 1);
-        button_next.interactable = (currentLevel < 3);
-        OpenLeaderboard();
+        currentLevel--;
+        UpdateLeaderboard();
     }
 
     public void OpenLeaderboard()
     {
+        if (GameManager.Instance == null)
+        { 
+            currentLevel = int.Parse(UIFocus.Instance.CurrentLevelSelected.transform.GetChild(1).name);
+        }
+        else
+        {
+            currentLevel = int.Parse(GameManager.Instance.sceneName);
+        }
+
+        print($"currentLevel_{currentLevel}");
+
         view.Show();
         panel_Leaderboard.SetActive(true);
         panel_SaveScore.SetActive(false);
         scrollbar_leaderboardList.value = 1;
 
-        text_level.SetText(UIFocus.Instance.CurrentLevelSelected.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text + " - LEVEL " + currentLevel);
+
+        UpdateLeaderboard();
+    }
+
+    public void UpdateLeaderboard()
+    {
+        int currentLevel_local = (currentLevel % 3) == 0 ? 3 : (currentLevel % 3);
+
+        button_prev.interactable = (currentLevel_local > 1);
+        button_next.interactable = (currentLevel_local < 3);
+
+        text_level.SetText(UIFocus.Instance.CurrentLevelSelected.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text + " - LEVEL " + currentLevel_local);
 
         // CLEARS SLOTS
         foreach (var i in slot_leaderboardPlace.Where(x => !x.Text_Time.Equals("-")))
-        { i.UpdateSlot(0, "", 0); }
+        { i.UpdateSlot(0, "", 0, 0); }
 
         string currentStage = UIFocus.Instance.CurrentLevelSelected.name;
         if (PlayerPrefs.HasKey("scores_" + currentStage + currentLevel))
@@ -77,17 +95,18 @@ public class LeaderboardController : MonoBehaviour
             string rawLeaderboard = PlayerPrefs.GetString("scores_" + currentStage + currentLevel);
             string[] split_rawLb = rawLeaderboard.Split('/');
 
-            List<Tuple<int, string, float>> scores = new List<Tuple<int, string, float>>();
-            foreach (var i in split_rawLb) { string[] parts = i.Split('-'); scores.Add(Tuple.Create(int.Parse(parts[0]), parts[1], float.Parse(parts[2]))); }
+            List<Tuple<int, string, int, float>> scores = new List<Tuple<int, string, int, float>>();
+            foreach (var i in split_rawLb) { string[] parts = i.Split('-'); scores.Add(Tuple.Create(int.Parse(parts[0]), parts[1], int.Parse(parts[2]), float.Parse(parts[3]))); }
 
-            for (int i = 0; i < scores.Count && i < 10; i++) {
-                slot_leaderboardPlace[i].UpdateSlot(scores[i].Item1, scores[i].Item2, scores[i].Item3, newHiscore == i);
+            for (int i = 0; i < scores.Count && i < 10; i++)
+            {
+                slot_leaderboardPlace[i].UpdateSlot(scores[i].Item1, scores[i].Item2, scores[i].Item3, scores[i].Item4, newHiscore == i);
             }
         }
     }
     public void CloseLeaderboard()
     {
-        currentLevel = 1;
+        //currentLevel = 1;
         view.Hide();
     }
 
@@ -121,35 +140,37 @@ public class LeaderboardController : MonoBehaviour
             PopupController.Show("ERROR", "Please enter a name to save your score!");
             return; }
 
-        int currentLevel_ = int.Parse(GameManager.Instance.sceneName) % 3 == 0 ? 3 : int.Parse(GameManager.Instance.sceneName) % 3;
+        int currentLevel_ = currentLevel = int.Parse(GameManager.Instance.sceneName) % 3 == 0 ? 3 : int.Parse(GameManager.Instance.sceneName) % 3;
         string currentStage = UIFocus.Instance.CurrentLevelSelected.name;
         if (PlayerPrefs.HasKey("scores_" + currentStage + currentLevel_))
         {
             string rawLeaderboard = PlayerPrefs.GetString("scores_" + currentStage + currentLevel_);
             string[] split_rawLb = rawLeaderboard.Split('/');
 
-            List<Tuple<int, string, float>> scores = new List<Tuple<int, string, float>>();
-            foreach (var i in split_rawLb) { string[] parts = i.Split('-'); scores.Add(Tuple.Create(int.Parse(parts[0]), parts[1], float.Parse(parts[2]))); }
+            List<Tuple<int, string, int, float>> scores = new List<Tuple<int, string, int, float>>();
+            foreach (var i in split_rawLb) { string[] parts = i.Split('-'); scores.Add(Tuple.Create(int.Parse(parts[0]), parts[1], int.Parse(parts[2]), float.Parse(parts[3]))); }
 
-            scores.Add(Tuple.Create(index_profilepic, input_name.text, countdownTimer.timeScore));
-            var sorted = scores.OrderBy(x => x.Item3).ToList();
+            print($"coin is: {ScoringMechanism.Instance.coinNo}");
+            scores.Add(Tuple.Create(index_profilepic, input_name.text, ((int)ScoringMechanism.Instance.coinNo), countdownTimer.timeScore));
+            var sorted = scores.OrderBy(x => x.Item4).ToList();
+            sorted = sorted.OrderByDescending(x => x.Item3).ToList();
 
             string s_ = "";
             for (int i = 0; i < sorted.Count && i < 10; i++)
             {
-                s_ += sorted[i].Item1 + "-" + sorted[i].Item2 + "-" + sorted[i].Item3;
+                s_ += sorted[i].Item1 + "-" + sorted[i].Item2 + "-" + sorted[i].Item3 + "-" + sorted[i].Item4;
 
                 if (i + 1 < sorted.Count && i < 9)
                     s_ += "/";
             }
-            PlayerPrefs.SetString("scores_" + currentStage + currentLevel_, s_);
+            PlayerPrefs.SetString($"scores_{currentStage}{currentLevel_}", s_);
 
             //print("s_: " + s_);
-            newHiscore = sorted.FindIndex(x => x.Item2.Equals(countdownTimer.timeScore));
+            newHiscore = sorted.FindIndex(x => x.Item3.Equals(countdownTimer.timeScore));
         }
         else
         {
-            PlayerPrefs.SetString("scores_" + currentStage + currentLevel_, index_profilepic + "-" + input_name.text + "-" + countdownTimer.timeScore);
+            PlayerPrefs.SetString($"scores_{currentStage}{currentLevel_}", $"{index_profilepic}-{input_name.text}-{ScoringMechanism.Instance.coinNo}-{countdownTimer.timeScore}");
         }
 
 
@@ -161,7 +182,7 @@ public class LeaderboardController : MonoBehaviour
 
     public void ClearLevel()
     {
-        currentLevel = 1;
+        //currentLevel = 1;
         newHiscore = -1;
     }
 

@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
         {
             Rplayer.GetComponentInChildren<Core>().Movement.Flip();
         }
-        yield return new WaitForSeconds(0.01f);
+        yield return null;
         if(Fader.Instance != null)
         {
             if (Tutorial.Instance.view.isVisible())
