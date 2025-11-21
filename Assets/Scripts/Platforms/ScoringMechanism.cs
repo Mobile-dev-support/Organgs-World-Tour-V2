@@ -13,6 +13,7 @@ public class ScoringMechanism : MonoBehaviour
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI coinsNumber;
     public Button NextLevelBtn;
+    public GameObject TextStarsRequirement;
     private float coinscore = 100f;
     private float timeMinusScore = 2f;
     public Image[] stars;

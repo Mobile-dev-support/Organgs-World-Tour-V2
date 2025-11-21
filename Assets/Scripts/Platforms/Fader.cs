@@ -28,6 +28,17 @@ public class Fader : MonoBehaviour
         view = GetComponent<View>();
     }
 
+    [ContextMenu("BGFader True")]
+    public void BGFaderTrue()
+    {
+        BGFader(true);
+    }
+
+    [ContextMenu("BGFader False")]
+    public void BGFaderFalse()
+    {
+        BGFader(false);
+    }
     public void BGFader(bool fade)
     {
         if (fade)
@@ -39,6 +50,9 @@ public class Fader : MonoBehaviour
                 gameObject.GetComponent<Image>().fillAmount = angle;
             }));
             view.Show();
+
+            Invoke(nameof(BGFaderFalse), 10);
+            
         }
         else
         {

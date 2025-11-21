@@ -10,6 +10,7 @@ using System.Numerics;
 using UnityEngine.UIElements;
 using System;
 using Image = UnityEngine.UI.Image;
+using Button = UnityEngine.UI.Button;
 public class MainMenu : MonoBehaviour
 {
     #region variables
@@ -83,6 +84,8 @@ public class MainMenu : MonoBehaviour
     [Header("CONTROLS")]
     public GameObject CountdownPanel;
     public TextMeshProUGUI textCountDown;
+    [SerializeField] private Button ButtonMusicVolume;
+    [SerializeField] private Button ButtonSFXVolume;
     [SerializeField] private UnityEngine.UI.Slider musicSlider;
     [SerializeField] private UnityEngine.UI.Slider sfxSlider;
     [SerializeField] private UnityEngine.UI.Image musicImage;
@@ -149,7 +152,7 @@ public class MainMenu : MonoBehaviour
     }
     #endregion
 
-    #region Pulbic Methods
+    #region Public Methods
 
     public void AddLife()
     {
@@ -482,46 +485,61 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
+    public void ButtonSFXRenable()
+    {
+        ButtonSFXVolume.interactable = true;
+        sfxSlider.interactable = true;
+    }
+
+    public void ButtonMusicRenable()
+    {
+        ButtonMusicVolume.interactable = true;
+        musicSlider.interactable = true;
+    }
+
     public void MuteMusicVolume()
     {
+        ButtonMusicVolume.interactable = musicSlider.interactable = false;
+        Invoke(nameof(ButtonMusicRenable), 0.3f);
+
         if (!musicMuted)
         {
-            musicMuted = true;
             musicImage.sprite = musicOff;
             previousMusicVolume = musicSlider.value;
             audioMix.SetFloat("Music Volume", -80);
             musicSlider.value = -50;
-            musicSlider.interactable = false;
         }
         else
         {
-            musicMuted = false;
             musicImage.sprite = musicOn;
             SetMusicVolume(previousMusicVolume);
             musicSlider.value = previousMusicVolume;
-            musicSlider.interactable = true;
         }
+
+        musicMuted = !musicMuted;
+        musicSlider.fillRect.transform.parent.gameObject.SetActive(!musicMuted);
     }
 
     public void MuteSFXVolume()
     {
+        ButtonSFXVolume.interactable = sfxSlider.interactable = false;
+        Invoke(nameof(ButtonSFXRenable), 0.3f);
         if (!sfxMuted)
         {
-            sfxMuted = true;
+            sfxImage.sprite = sfxOff;
             previousSFXVolume = sfxSlider.value;
             audioMix.SetFloat("SFX Volume", -80);
-            sfxImage.sprite = sfxOff;
-            sfxSlider.interactable = false;
             sfxSlider.value = -50f;
         }
         else
         {
-            sfxMuted = false;
             sfxImage.sprite = sfxOn;
             SetSfxVolume(previousSFXVolume);
-            sfxSlider.interactable = true;
             sfxSlider.value = previousSFXVolume;
-        }    
+        }
+
+        sfxMuted = !sfxMuted;
+        sfxSlider.fillRect.transform.parent.gameObject.SetActive(!sfxMuted);
     }
 
     public void SetMusicVolume(float volume)

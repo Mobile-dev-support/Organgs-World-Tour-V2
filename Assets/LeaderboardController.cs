@@ -143,48 +143,54 @@ public class LeaderboardController : MonoBehaviour
     }
     public void SaveScore()
     {
-        if (input_name.text.Equals("")) {
+        try
+        {
+            if (input_name.text.Equals("")) {
             PopupController.Show("ERROR", "Please enter a name to save your score!");
             return; }
         
-        int currentLevel_local = (currentLevel % 3) == 0 ? 3 : (currentLevel % 3);
-        string currentStage = ((char)('A' + Mathf.Floor((currentLevel - 1) / 3))).ToString();
-        print($"currentStage: {currentStage}");
-        if (PlayerPrefs.HasKey("scores_" + currentStage + currentLevel_local))
-        {
-            string rawLeaderboard = PlayerPrefs.GetString("scores_" + currentStage + currentLevel_local);
-            string[] split_rawLb = rawLeaderboard.Split('/');
-
-            List<Tuple<int, string, int, float>> scores = new List<Tuple<int, string, int, float>>();
-            foreach (var i in split_rawLb) { string[] parts = i.Split('-'); scores.Add(Tuple.Create(int.Parse(parts[0]), parts[1], int.Parse(parts[2]), float.Parse(parts[3]))); }
-
-            print($"level: {ScoringMechanism.Instance.coinNo}");
-            scores.Add(Tuple.Create(index_profilepic, input_name.text, ((int)ScoringMechanism.Instance.coinNo), countdownTimer.timeScore));
-            var sorted = scores.OrderBy(x => x.Item4).ToList();
-            sorted = sorted.OrderByDescending(x => x.Item3).ToList();
-
-            string s_ = "";
-            for (int i = 0; i < sorted.Count && i < 10; i++)
+            int currentLevel_local = (currentLevel % 3) == 0 ? 3 : (currentLevel % 3);
+            string currentStage = ((char)('A' + Mathf.Floor((currentLevel - 1) / 3))).ToString();
+            print($"currentStage: {currentStage}");
+            if (PlayerPrefs.HasKey("scores_" + currentStage + currentLevel_local))
             {
-                s_ += sorted[i].Item1 + "-" + sorted[i].Item2 + "-" + sorted[i].Item3 + "-" + sorted[i].Item4;
+                string rawLeaderboard = PlayerPrefs.GetString("scores_" + currentStage + currentLevel_local);
+                string[] split_rawLb = rawLeaderboard.Split('/');
 
-                if (i + 1 < sorted.Count && i < 9)
-                    s_ += "/";
+                List<Tuple<int, string, int, float>> scores = new List<Tuple<int, string, int, float>>();
+                foreach (var i in split_rawLb) { string[] parts = i.Split('-'); scores.Add(Tuple.Create(int.Parse(parts[0]), parts[1], int.Parse(parts[2]), float.Parse(parts[3]))); }
+
+                print($"level: {ScoringMechanism.Instance.coinNo}");
+                scores.Add(Tuple.Create(index_profilepic, input_name.text, ((int)ScoringMechanism.Instance.coinNo), countdownTimer.timeScore));
+                var sorted = scores.OrderBy(x => x.Item4).ToList();
+                sorted = sorted.OrderByDescending(x => x.Item3).ToList();
+
+                string s_ = "";
+                for (int i = 0; i < sorted.Count && i < 10; i++)
+                {
+                    s_ += sorted[i].Item1 + "-" + sorted[i].Item2 + "-" + sorted[i].Item3 + "-" + sorted[i].Item4;
+
+                    if (i + 1 < sorted.Count && i < 9)
+                        s_ += "/";
+                }
+                PlayerPrefs.SetString($"scores_{currentStage}{currentLevel_local}", s_);
+
+                //print("s_: " + s_);
+                newHiscore = sorted.FindIndex(x => x.Item3.Equals(countdownTimer.timeScore));
             }
-            PlayerPrefs.SetString($"scores_{currentStage}{currentLevel_local}", s_);
+            else
+            {
+                PlayerPrefs.SetString($"scores_{currentStage}{currentLevel_local}", $"{index_profilepic}-{input_name.text}-{ScoringMechanism.Instance.coinNo}-{countdownTimer.timeScore}");
+            }
 
-            //print("s_: " + s_);
-            newHiscore = sorted.FindIndex(x => x.Item3.Equals(countdownTimer.timeScore));
+            PopupController.Show("SUCCESS", "Player data has been saved.");
+            button_save.interactable = input_name.interactable = false;
+            lastSaved = countdownTimer.timeScore;
         }
-        else
+        catch
         {
-            PlayerPrefs.SetString($"scores_{currentStage}{currentLevel_local}", $"{index_profilepic}-{input_name.text}-{ScoringMechanism.Instance.coinNo}-{countdownTimer.timeScore}");
+            PopupController.Show("ERROR", "Error saving data.");
         }
-
-
-        PopupController.Show("SUCCESS", "Player data has been saved.");
-        button_save.interactable = input_name.interactable = false;
-        lastSaved = countdownTimer.timeScore;
     }
 
 

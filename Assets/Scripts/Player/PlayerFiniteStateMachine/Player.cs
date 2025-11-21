@@ -394,6 +394,7 @@ public class Player : MonoBehaviour
         //PlayerControls.Instance.right.value = -1;
         PlayerInputHandler.MovementModifier = -1;
         PlayerControls.Instance.joystick.valueMultiplier = -1;
+        PlayerControls.Instance.joystick.xAxis.value *= -1;
         PlayerControls.Instance.slide.button.Key = "Jump";
         PlayerControls.Instance.jump.button.Key = "Fire3";
     }

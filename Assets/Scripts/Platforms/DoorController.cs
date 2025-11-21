@@ -73,10 +73,12 @@ public class DoorController : MonoBehaviour
         if (PlayerPrefs.GetInt("Lv" + levelIndex) > 1)
         {
             ScoringMechanism.Instance.NextLevelBtn.interactable = true;
+            ScoringMechanism.Instance.TextStarsRequirement.SetActive(false);
         }
         else if((PlayerPrefs.GetInt("Lv" + levelIndex) <= 1) || (levelIndex == 48))
         {
             ScoringMechanism.Instance.NextLevelBtn.interactable = false;
+            ScoringMechanism.Instance.TextStarsRequirement.SetActive(true);
         }
 
         for (int i = 0; i < currentStarsNum; i++)
