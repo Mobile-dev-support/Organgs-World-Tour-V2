@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Unity.Cinemachine;
-using DG.Tweening;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ChangeConfiner : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class ChangeConfiner : MonoBehaviour
     public float RangeX;
     public float RangeY;
     private float previousOrthoSize;
+    private float currentOrthoSize;
     public GameObject[] objs;
     [Header("LAST CONFINER DIALOG")]
     public bool lastConfiner;
@@ -30,6 +32,26 @@ public class ChangeConfiner : MonoBehaviour
         for (int i = 0; i < objs.Length; i++)
         {
             objs[i].SetActive(false);
+        }
+    }
+
+    public void Update()
+    {
+        var transposer = vcam.GetCinemachineComponent<CinemachineFramingTransposer>();
+        if (Screen.orientation == ScreenOrientation.Portrait || Screen.orientation == ScreenOrientation.PortraitUpsideDown)
+        {
+            vcam.m_Lens.OrthographicSize = currentOrthoSize*1.8f;
+  
+
+            transposer.m_DeadZoneWidth = 0f;
+            transposer.m_DeadZoneHeight = 0f;
+        }
+        else if (Screen.orientation == ScreenOrientation.LandscapeLeft || Screen.orientation == ScreenOrientation.LandscapeRight)
+        {
+            vcam.m_Lens.OrthographicSize = currentOrthoSize;
+
+            transposer.m_DeadZoneWidth = 0f;
+            transposer.m_DeadZoneHeight = 0f;
         }
     }
 
@@ -92,13 +114,17 @@ public class ChangeConfiner : MonoBehaviour
             DOVirtual.Float(previousOrthoSize, 3.8f, 0.15f, angle =>
             {
                 vcam.m_Lens.OrthographicSize = angle;
+                setCurrentOrthoSize(angle);
             });
+            
+
         }
         else if (RangeX == 15 && RangeY == 30) // vertical
         {
             DOVirtual.Float(previousOrthoSize, 3.6f, 0.15f, angle =>
             {
                 vcam.m_Lens.OrthographicSize = angle;
+                setCurrentOrthoSize(angle);
             });
         }
         else if (RangeX == 30 && RangeY == 15) // horizontal
@@ -106,6 +132,7 @@ public class ChangeConfiner : MonoBehaviour
             DOVirtual.Float(previousOrthoSize, 4.5f, 0.15f, angle =>
             {
                 vcam.m_Lens.OrthographicSize = angle;
+                setCurrentOrthoSize(angle);
             });
         }
         else if (RangeX == 30 && RangeY == 30) // big cube
@@ -113,7 +140,15 @@ public class ChangeConfiner : MonoBehaviour
             DOVirtual.Float(previousOrthoSize, 5.05f, 0.15f, angle =>
             {
                 vcam.m_Lens.OrthographicSize = angle;
+                setCurrentOrthoSize(angle);
             });
         }
+
+     
+    }
+
+    private void setCurrentOrthoSize(float angle)
+    {
+        currentOrthoSize = angle;
     }
 }

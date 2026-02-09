@@ -51,7 +51,8 @@ namespace UnityEngine.UI
             set
             {
                 m_Group = value;
-#if UNITY_EDITOR
+#if UNITY_
+
                 if (Application.isPlaying)
 #endif
                 {

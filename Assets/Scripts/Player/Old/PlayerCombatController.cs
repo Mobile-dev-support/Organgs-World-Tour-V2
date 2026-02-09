@@ -104,7 +104,8 @@ public class PlayerCombatController : MonoBehaviour
     //    {
     //        int direction;
 
-    //        PS.DecreaseHealth(attackDetails.damageAmount);
+    //        PS.Decrease
+    //        (attackDetails.damageAmount);
 
     //        if (attackDetails.position.x < transform.position.x)
     //        {

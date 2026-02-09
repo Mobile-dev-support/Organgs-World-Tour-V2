@@ -28,7 +28,8 @@ namespace UnityEngine.UI.Extensions
         private RectTransform rectTrans;
 
 
-#if UNITY_EDITOR
+#if UNITY_
+
         protected override void OnValidate()
         {
             base.OnValidate();

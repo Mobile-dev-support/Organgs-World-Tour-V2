@@ -10,9 +10,11 @@ using System.Numerics;
 using UnityEngine.UIElements;
 using System;
 using Image = UnityEngine.UI.Image;
+using System.Runtime.CompilerServices;
 public class MainMenu : MonoBehaviour
 {
     #region variables
+
     [HideInInspector] public View mainCanvas;
     [HideInInspector] public View mainMenuCanvas;
     [HideInInspector] public View winCanvas;
@@ -97,6 +99,17 @@ public class MainMenu : MonoBehaviour
     private bool sfxMuted;
 
     public RectTransform CameraMovementPanel;
+
+    public CanvasScaler mainCanvasScaler;
+    public CanvasScaler tutorialCanvasScaler;
+    public CanvasScaler shopCanvasScaler;
+
+    private ScreenOrientation currentOrientation;
+    [SerializeField] private RectTransform inGameLifeContainer;
+    [SerializeField] private RectTransform inGameTotemContainer;
+    [SerializeField] private RectTransform tutorialPanel;
+    [SerializeField] private RectTransform bgLoadingScreen;
+    [SerializeField] private AspectRatioFitter bgLoadingScreenRatioFitter;
     public static MainMenu Instance { get { return _instance; } }
     #endregion
 
@@ -112,6 +125,9 @@ public class MainMenu : MonoBehaviour
         {
             _instance = this;
         }
+
+        currentOrientation = Screen.orientation;
+        changeScreenScalerbasedOnOrientation();
     }
 
     private void Start()
@@ -120,6 +136,67 @@ public class MainMenu : MonoBehaviour
         SoundManager.Instance.MusicAudio(Main);
         level = gameOverCanvas.transform.GetChild(0).GetChild(0).Find("level").gameObject;
         tween = level.GetComponent<DoTweenFeatures>();
+    }
+
+    private void Update()
+    {
+        if(currentOrientation != Screen.orientation)
+        {
+            changeScreenScalerbasedOnOrientation();
+        }
+    }
+
+    private void changeScreenScalerbasedOnOrientation()
+    {
+        switch (Screen.orientation)
+        {
+            case ScreenOrientation.Portrait:
+            case ScreenOrientation.PortraitUpsideDown:
+                mainCanvasScaler.referenceResolution = new UnityEngine.Vector2(1920, 1080);
+                mainCanvasScaler.matchWidthOrHeight = 0.8f;
+
+                tutorialCanvasScaler.referenceResolution = new UnityEngine.Vector2(1920, 1080);
+                tutorialCanvasScaler.matchWidthOrHeight = 0.8f;
+
+                shopCanvasScaler.referenceResolution = new UnityEngine.Vector2(1920, 1080);
+                shopCanvasScaler.matchWidthOrHeight = 0.8f;
+
+                inGameLifeContainer.anchoredPosition = new UnityEngine.Vector3(120.9f, -115.1f, 0);
+                inGameTotemContainer.anchorMin = new UnityEngine.Vector2(0, 1);
+                inGameTotemContainer.anchorMax = new UnityEngine.Vector2(0, 1);
+                inGameTotemContainer.anchoredPosition = new UnityEngine.Vector3(96.29999f, -178, 0);
+                tutorialPanel.localScale = new UnityEngine.Vector3(0.68f, 0.68f, 0.68f);
+
+                bgLoadingScreenRatioFitter.aspectMode = AspectRatioFitter.AspectMode.HeightControlsWidth;
+                bgLoadingScreen.anchoredPosition = new UnityEngine.Vector2(-500, 0);
+
+
+                break;
+            default:
+
+                mainCanvasScaler.referenceResolution = new UnityEngine.Vector2(960, 640);
+                mainCanvasScaler.matchWidthOrHeight = 1;
+
+                tutorialCanvasScaler.referenceResolution = new UnityEngine.Vector2(960, 640);
+                tutorialCanvasScaler.matchWidthOrHeight = 1;
+
+                shopCanvasScaler.referenceResolution = new UnityEngine.Vector2(960, 640);
+                shopCanvasScaler.matchWidthOrHeight = 1;
+
+                inGameLifeContainer.anchoredPosition = new UnityEngine.Vector3(329, -53, 0);
+                inGameTotemContainer.anchoredPosition = new UnityEngine.Vector3(-319, -41.1001f, 0);
+                inGameTotemContainer.anchorMin = new UnityEngine.Vector2(1, 1);
+                inGameTotemContainer.anchorMax = new UnityEngine.Vector2(1, 1);
+                tutorialPanel.localScale = new UnityEngine.Vector3(1, 1, 1);
+
+                bgLoadingScreenRatioFitter.aspectMode = AspectRatioFitter.AspectMode.EnvelopeParent;
+
+
+                break;
+
+
+        }
+        currentOrientation = Screen.orientation;
     }
 
     public void MainToMap()

@@ -27,8 +27,8 @@ public class StarSystemUnlocker : MonoBehaviour
         //if the current lv is 5, the pre should be 4
         int previousLevelNum = int.Parse(gameObject.name) - 1;
 #if UNITY_EDITOR||DEBUG
-        unlocked = true;
-        GetHighestLevel();
+        //unlocked = true;
+        //GetHighestLevel();
 #else
         if (PlayerPrefs.GetInt("Lv" + previousLevelNum.ToString()) > 1)//If the firts level star is bigger than 0, second level can play
         {

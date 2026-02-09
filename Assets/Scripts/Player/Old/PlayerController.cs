@@ -129,6 +129,11 @@ public class PlayerController : MonoBehaviour
         return isDashing;
     }
 
+    public int faceDirection()
+    {
+        return facingDirection;
+    }
+
     public void Knockback(int direction)
     {
         knockback = true;
