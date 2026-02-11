@@ -92,7 +92,7 @@ public class CameraVerticalController : MonoBehaviour, IPointerDownHandler, IPoi
         float normalizedX = touchDeltaX / Screen.width;
         float normalizedY = touchDeltaY / Screen.height;
 
-        float offsetX = Mathf.Clamp(normalizedX * maxOffset * 0.5f, -maxOffset, maxOffset);
+        float offsetX = Mathf.Clamp(normalizedX * maxOffset * 0.8f, -maxOffset, maxOffset);
 
         float offsetY = Mathf.Clamp(
             (normalizedY * maxOffset * 2f) + playerToCenterY,

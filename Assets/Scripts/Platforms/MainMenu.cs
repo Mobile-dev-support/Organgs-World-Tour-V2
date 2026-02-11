@@ -106,10 +106,14 @@ public class MainMenu : MonoBehaviour
 
     private ScreenOrientation currentOrientation;
     [SerializeField] private RectTransform inGameLifeContainer;
+    [SerializeField] private RectTransform mainMenuTotemContainer;
     [SerializeField] private RectTransform inGameTotemContainer;
     [SerializeField] private RectTransform tutorialPanel;
     [SerializeField] private RectTransform bgLoadingScreen;
     [SerializeField] private AspectRatioFitter bgLoadingScreenRatioFitter;
+
+    [SerializeField] private RectTransform char1Image;
+    [SerializeField] private RectTransform char2Image;
     public static MainMenu Instance { get { return _instance; } }
     #endregion
 
@@ -165,10 +169,14 @@ public class MainMenu : MonoBehaviour
                 inGameTotemContainer.anchorMin = new UnityEngine.Vector2(0, 1);
                 inGameTotemContainer.anchorMax = new UnityEngine.Vector2(0, 1);
                 inGameTotemContainer.anchoredPosition = new UnityEngine.Vector3(96.29999f, -178, 0);
+                mainMenuTotemContainer.anchoredPosition = new UnityEngine.Vector3(111, -138.4f, 0);
                 tutorialPanel.localScale = new UnityEngine.Vector3(0.68f, 0.68f, 0.68f);
 
                 bgLoadingScreenRatioFitter.aspectMode = AspectRatioFitter.AspectMode.HeightControlsWidth;
                 bgLoadingScreen.anchoredPosition = new UnityEngine.Vector2(-500, 0);
+
+                char1Image.anchoredPosition = new UnityEngine.Vector2(102.5f, 325);
+                char2Image.anchoredPosition = new UnityEngine.Vector2(-108.5f, 325);
 
 
                 break;
@@ -188,8 +196,11 @@ public class MainMenu : MonoBehaviour
                 inGameTotemContainer.anchorMin = new UnityEngine.Vector2(1, 1);
                 inGameTotemContainer.anchorMax = new UnityEngine.Vector2(1, 1);
                 tutorialPanel.localScale = new UnityEngine.Vector3(1, 1, 1);
-
+                mainMenuTotemContainer.anchoredPosition = new UnityEngine.Vector3(360, -54.10001f, 0);
                 bgLoadingScreenRatioFitter.aspectMode = AspectRatioFitter.AspectMode.EnvelopeParent;
+
+                char1Image.anchoredPosition = new UnityEngine.Vector2(102.5f, 118);
+                char2Image.anchoredPosition = new UnityEngine.Vector2(-108.5f, 127.5578f);
 
 
                 break;

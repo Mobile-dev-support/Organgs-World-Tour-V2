@@ -63,8 +63,8 @@ PlayerSettings:
   iosShowActivityIndicatorOnLoading: -1
   androidShowActivityIndicatorOnLoading: -1
   iosUseCustomAppBackgroundBehavior: 0
-  allowedAutorotateToPortrait: 0
-  allowedAutorotateToPortraitUpsideDown: 0
+  allowedAutorotateToPortrait: 1
+  allowedAutorotateToPortraitUpsideDown: 1
   allowedAutorotateToLandscapeRight: 1
   allowedAutorotateToLandscapeLeft: 1
   useOSAutorotation: 1
@@ -147,7 +147,8 @@ PlayerSettings:
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
   bundleVersion: 2.2.09
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 448762935538048434, guid: 13c81c3cb5e9dd940a1012227a27ba85, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -274,7 +275,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 2
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/WORK/FILES_EDGAR/FILES_UNITY/KEYSTORE/user.keystore
+  AndroidKeystoreName: '{dedicated}: user.keystore'
   AndroidKeyaliasName: purplebuggames
   AndroidEnableArmv9SecurityFeatures: 0
   AndroidEnableArm64MTE: 0
