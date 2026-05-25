@@ -152,6 +152,7 @@ public class MainMenu : MonoBehaviour
 
     private void changeScreenScalerbasedOnOrientation()
     {
+        bool isTablet = Mathf.Min(Screen.width, Screen.height) >= 1200;
         switch (Screen.orientation)
         {
             case ScreenOrientation.Portrait:
@@ -191,12 +192,26 @@ public class MainMenu : MonoBehaviour
                 shopCanvasScaler.referenceResolution = new UnityEngine.Vector2(960, 640);
                 shopCanvasScaler.matchWidthOrHeight = 1;
 
-                inGameLifeContainer.anchoredPosition = new UnityEngine.Vector3(329, -53, 0);
-                inGameTotemContainer.anchoredPosition = new UnityEngine.Vector3(-319, -41.1001f, 0);
-                inGameTotemContainer.anchorMin = new UnityEngine.Vector2(1, 1);
-                inGameTotemContainer.anchorMax = new UnityEngine.Vector2(1, 1);
-                tutorialPanel.localScale = new UnityEngine.Vector3(1, 1, 1);
-                mainMenuTotemContainer.anchoredPosition = new UnityEngine.Vector3(360, -54.10001f, 0);
+                if(isTablet)
+                {
+                    inGameLifeContainer.anchoredPosition = new UnityEngine.Vector3(120.9f, -115.1f, 0);
+                    inGameTotemContainer.anchorMin = new UnityEngine.Vector2(0, 1);
+                    inGameTotemContainer.anchorMax = new UnityEngine.Vector2(0, 1);
+                    inGameTotemContainer.anchoredPosition = new UnityEngine.Vector3(96.29999f, -178, 0);
+                    mainMenuTotemContainer.anchoredPosition = new UnityEngine.Vector3(111, -138.4f, 0);
+                    tutorialPanel.localScale = new UnityEngine.Vector3(0.85f, 0.85f, 0.85f);
+                }
+                else
+                {
+                    inGameLifeContainer.anchoredPosition = new UnityEngine.Vector3(329, -53, 0);
+                    inGameTotemContainer.anchoredPosition = new UnityEngine.Vector3(-319, -41.1001f, 0);
+                    inGameTotemContainer.anchorMin = new UnityEngine.Vector2(1, 1);
+                    inGameTotemContainer.anchorMax = new UnityEngine.Vector2(1, 1);
+                    tutorialPanel.localScale = new UnityEngine.Vector3(1, 1, 1);
+                    mainMenuTotemContainer.anchoredPosition = new UnityEngine.Vector3(360, -54.10001f, 0);
+                }
+              
+              
                 bgLoadingScreenRatioFitter.aspectMode = AspectRatioFitter.AspectMode.EnvelopeParent;
 
                 char1Image.anchoredPosition = new UnityEngine.Vector2(102.5f, 118);
