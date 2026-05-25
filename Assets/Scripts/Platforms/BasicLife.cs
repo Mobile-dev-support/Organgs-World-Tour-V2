@@ -92,20 +92,20 @@ public class BasicLife : MonoBehaviour
 
     public void SubtractLife(int lifeToSubtract)
     {
-#if DEBUG || UNITY_EDITOR
-#else
+//#if DEBUG || UNITY_EDITOR
+//#else
             life -= lifeToSubtract;
-#endif
+//#endif
 
         SaveCurrentLife();
     }
 
     public void SubtractExtraLife(int extraLifeToSubtract)
     {
-#if DEBUG || UNITY_EDITOR
-#else
+//#if DEBUG || UNITY_EDITOR
+//#else
              extraLife -= extraLifeToSubtract;
-#endif
+//#endif
 
         SaveCurrentExtraLife();
     }
@@ -161,46 +161,45 @@ public class BasicLife : MonoBehaviour
             PlayerPrefs.SetString("LastRecordedTime", DateTime.Now.ToString());
             if (life < lifeLimit)
             {
-                if(!PlayerPrefs.HasKey("LastTimeBelowLifeLimit"))
+                if (!PlayerPrefs.HasKey("LastTimeBelowLifeLimit"))
                 {
                     SetNextRegenerationDate();
                 }
                 else
                 {
-                  
-                    var lastRecordedTime = DateTime.Parse(PlayerPrefs.GetString("LastRecordedTime"));
+                    // Check if we need to recalculate lives from a time gap (e.g., app wasn't running)
                     var nextDateToRegenerate = DateTime.Parse(PlayerPrefs.GetString("NextTimeToRegenerate"));
-                    if(lastRecordedTime == nextDateToRegenerate)
-                    {
-                        AddLife(1);;
-                        SetNextRegenerationDate();
-                    }
-                    else
+                    if (DateTime.Now >= nextDateToRegenerate)
                     {
                         CalculateRegeneratedLivesInGameRun();
                     }
-
-                   
                 }
 
-                TimeSpan difference = DateTime.Parse(PlayerPrefs.GetString("NextTimeToRegenerate")) - DateTime.Now;
+                if (PlayerPrefs.HasKey("NextTimeToRegenerate"))
+                {
+                    TimeSpan difference = DateTime.Parse(PlayerPrefs.GetString("NextTimeToRegenerate")) - DateTime.Now;
 
-                // Get the total seconds
-                double totalSeconds = difference.TotalSeconds+1;
-                //Debug.Log("Total Seconds" + totalSeconds);
-                //int hours = (int)totalSeconds / 3600;
-                int minutes = (int)(totalSeconds % 3600) / 60;
-                int seconds = (int)totalSeconds % 60;
-                //string durationBeforeRegeneration = string.Format("{0:D2}:{1:D2}:{2:D2}", hours, minutes, seconds);
-                string durationBeforeRegeneration = string.Format("{0:D2}:{1:D2}", minutes, seconds);
-                lifeRegenerationDurationText.text = durationBeforeRegeneration;
-                lifeRegenerationDurationTextGame.text = durationBeforeRegeneration;
+                    // Get the total seconds
+                    double totalSeconds = difference.TotalSeconds + 1;
+                    //Debug.Log("Total Seconds" + totalSeconds);
+                    //int hours = (int)totalSeconds / 3600;
+                    int minutes = (int)(totalSeconds % 3600) / 60;
+                    int seconds = (int)totalSeconds % 60;
+                    //string durationBeforeRegeneration = string.Format("{0:D2}:{1:D2}:{2:D2}", hours, minutes, seconds);
+                    string durationBeforeRegeneration = string.Format("{0:D2}:{1:D2}", minutes, seconds);
+                    lifeRegenerationDurationText.text = durationBeforeRegeneration;
+                    lifeRegenerationDurationTextGame.text = durationBeforeRegeneration;
+                }
             }
             else
             {
-                if(PlayerPrefs.HasKey("LastTimeBelowLifeLimit"))
+                if (PlayerPrefs.HasKey("LastTimeBelowLifeLimit"))
                 {
                     PlayerPrefs.DeleteKey("LastTimeBelowLifeLimit");
+                }
+                if (PlayerPrefs.HasKey("NextTimeToRegenerate"))
+                {
+                    PlayerPrefs.DeleteKey("NextTimeToRegenerate");
                 }
                 lifeRegenerationDurationText.text = "";
                 lifeRegenerationDurationTextGame.text = "";
@@ -219,34 +218,34 @@ public class BasicLife : MonoBehaviour
 
     private void CalculateRegeneratedLivesInGameRun()
     {
-        
-        if (PlayerPrefs.HasKey("NextTimeToRegenerate") && (DateTime.Now > DateTime.Parse(PlayerPrefs.GetString("NextTimeToRegenerate"))))
+        if (!PlayerPrefs.HasKey("NextTimeToRegenerate") || life >= lifeLimit)
+            return;
+
+        if (!DateTime.TryParse(PlayerPrefs.GetString("NextTimeToRegenerate"), out var nextDateToRegenerate))
+            return;
+
+        var timeElapsed = DateTime.Now - nextDateToRegenerate;
+        if (timeElapsed.TotalSeconds < 0)
+            return; 
+        int livesToAdd = (int)(timeElapsed.TotalSeconds / secondsBetweenRegeneration) + 1;
+        livesToAdd = Math.Min(livesToAdd, lifeLimit - life);
+
+        life += livesToAdd;
+        SaveCurrentLife();
+
+        Debug.Log("Regenerated " + livesToAdd + " lives. Total life: " + life + "/" + lifeLimit);
+
+        if (life >= lifeLimit)
         {
-            if(life < lifeLimit)
-            {
-                var dateTimeToRegenerate = DateTime.Parse(PlayerPrefs.GetString("NextTimeToRegenerate"));
-                var timePassedSinceLastRegeneration = (DateTime.Now - dateTimeToRegenerate);
-                double totalSeconds = timePassedSinceLastRegeneration.TotalSeconds;
-                Debug.Log("Seconds passed since last record" + timePassedSinceLastRegeneration + " DateTimeNow:" + DateTime.Now + " DateTimeToRegenerate:" + dateTimeToRegenerate);
-                int livesToAdd = (int)(totalSeconds / secondsBetweenRegeneration);
-                if(life + livesToAdd < lifeLimit)
-                {
-                    AddLife(livesToAdd);
-                    PlayerPrefs.SetString("LastTimeBelowLifeLimit", dateTimeToRegenerate.AddSeconds(secondsBetweenRegeneration * livesToAdd).ToString());
-                    var nextDateToRegenerate = dateTimeToRegenerate.AddSeconds(secondsBetweenRegeneration * (livesToAdd + 1)).ToString();
-                    PlayerPrefs.SetString("NextTimeToRegenerate", nextDateToRegenerate);
-                }
-                else
-                {
-                    Debug.Log("Bruhhhh");
-                    RestoreLivesToLimit();
-                    PlayerPrefs.DeleteKey("LastTimeBelowLifeLimit");
-                    var nextDateToRegenerate = dateTimeToRegenerate.AddSeconds(secondsBetweenRegeneration * (livesToAdd + 1)).ToString();
-                    PlayerPrefs.DeleteKey("NextTimeToRegenerate");
-                }
-               
-            }
-          
+            RestoreLivesToLimit();
+            PlayerPrefs.DeleteKey("LastTimeBelowLifeLimit");
+            PlayerPrefs.DeleteKey("NextTimeToRegenerate");
+        }
+        else
+        {
+            // Update next regeneration time based on how many cycles completed
+            var newNextDateToRegenerate = nextDateToRegenerate.AddSeconds(secondsBetweenRegeneration * livesToAdd);
+            PlayerPrefs.SetString("NextTimeToRegenerate", newNextDateToRegenerate.ToString());
         }
     }
 }
