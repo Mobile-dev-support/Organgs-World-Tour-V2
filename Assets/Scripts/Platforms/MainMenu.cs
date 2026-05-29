@@ -152,7 +152,13 @@ public class MainMenu : MonoBehaviour
 
     private void changeScreenScalerbasedOnOrientation()
     {
-        bool isTablet = Mathf.Min(Screen.width, Screen.height) >= 1200;
+        float dpi = Screen.dpi;
+        float widthInInches = Screen.width / dpi;
+        float heightInInches = Screen.height / dpi;
+        float diagonalInInches = Mathf.Sqrt(widthInInches * widthInInches + heightInInches * heightInInches);
+
+        bool isTablet = diagonalInInches >= 7.0f; // typical tablet cutoff
+
         switch (Screen.orientation)
         {
             case ScreenOrientation.Portrait:
