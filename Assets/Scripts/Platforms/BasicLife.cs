@@ -92,20 +92,20 @@ public class BasicLife : MonoBehaviour
 
     public void SubtractLife(int lifeToSubtract)
     {
-//#if DEBUG || UNITY_EDITOR
-//#else
+        if (!Debug.isDebugBuild)
+        {
             life -= lifeToSubtract;
-//#endif
+        }
 
         SaveCurrentLife();
     }
 
     public void SubtractExtraLife(int extraLifeToSubtract)
     {
-//#if DEBUG || UNITY_EDITOR
-//#else
-             extraLife -= extraLifeToSubtract;
-//#endif
+        if (!Debug.isDebugBuild)
+        {
+            extraLife -= extraLifeToSubtract;
+        }
 
         SaveCurrentExtraLife();
     }

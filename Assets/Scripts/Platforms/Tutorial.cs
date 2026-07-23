@@ -215,6 +215,7 @@ public class Tutorial : MonoBehaviour
     {
         if (tutorialDataCurrent != null)
         {
+            currentPageIndex = 0;
             TutorialUnlockPage(tutorialDataCurrent.instructionType, tutorialDataCurrent.instructionPage, tutorialDataCurrent.toggleNextOrPreviousButtons, true);
         }
     }
@@ -390,20 +391,27 @@ public class Tutorial : MonoBehaviour
 
     void UnlockTutorialsForOlderSaves()
     {
+        // Check if DebugUnlocker has unlockAllTutorials enabled
+        if (DebugUnlocker.Instance != null && DebugUnlocker.Instance.unlockAllTutorials)
+        {
+            // Unlock all tutorial pages for all categories
+            for (int i = 0; i < 10; i++)
+            {
+                PlayerPrefs.SetInt("unlockedControlsInstruction" + i, 1);
+                PlayerPrefs.SetInt("unlockedCollectiblesInstruction" + i, 1);
+                PlayerPrefs.SetInt("unlockedPlatformsInstruction" + i, 1);
+                PlayerPrefs.SetInt("unlockedObstaclesInstruction" + i, 1);
+            }
+            PlayerPrefs.Save();
+            UnlockInstructionPages();
+            return;
+        }
 
         int controlsUnlock = -1;
         int collectiblesUnlock = -1;
         int platformsUnlock = -1;
         int enemiesUnlock = -1;
-        if (Debug.isDebugBuild)
-        {
-            controlsUnlock = 5;
-            collectiblesUnlock = 1;
-            platformsUnlock = 9;
-            enemiesUnlock = 6;
-        }
-        else
-        {
+  
             int[] controlsUnlockValues = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
             int[] collectiblesUnlockValues = { 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
             int[] platformsUnlockValues = { 2, 3, 3, 4, 5, 6, 7, 8, 9, 9, 9, 9, 9 };
@@ -422,7 +430,7 @@ public class Tutorial : MonoBehaviour
                 }
             }
 
-        }
+       
 
         if (controlsUnlock >= 0)
         {

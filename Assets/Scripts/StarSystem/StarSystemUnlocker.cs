@@ -26,16 +26,18 @@ public class StarSystemUnlocker : MonoBehaviour
     {
         //if the current lv is 5, the pre should be 4
         int previousLevelNum = int.Parse(gameObject.name) - 1;
-#if UNITY_EDITOR||DEBUG
-        unlocked = true;
-        GetHighestLevel();
-#else
-        if (PlayerPrefs.GetInt("Lv" + previousLevelNum.ToString()) > 1)//If the firts level star is bigger than 1, second level can play
+
+        // Check if DebugUnlocker is active and unlock all stages is enabled
+        if (DebugUnlocker.Instance != null && DebugUnlocker.Instance.unlockAllStages)
         {
             unlocked = true;
             GetHighestLevel();
         }
-#endif
+        else if (PlayerPrefs.GetInt("Lv" + previousLevelNum.ToString()) > 1)//If the firts level star is bigger than 1, second level can play
+        {
+            unlocked = true;
+            GetHighestLevel();
+        }
     }
 
     public void GetHighestLevel()
