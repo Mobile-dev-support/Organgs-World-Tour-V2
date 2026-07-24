@@ -69,7 +69,7 @@ public class Shop : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         if (BasicLife.Instance.life <= (BasicLife.Instance.lifeLimit * 0.5f))   
         {
             IAPCards[0].gameObject.SetActive(true);
-            priceText[0].text = IAPManager._instance.m_StoreController.products.WithID(IAPManager._instance.restoreLives).metadata.localizedPriceString;
+            priceText[0].text = IAPManager._instance.GetLocalizedPrice(IAPManager._instance.restoreLives);
         }
         else
         {
@@ -79,16 +79,16 @@ public class Shop : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         if(BasicLife.Instance.lifeLimit != 30)
         {
             IAPCards[1].gameObject.SetActive(true);
-            priceText[1].text = IAPManager._instance.m_StoreController.products.WithID(IAPManager._instance.expandLives).metadata.localizedPriceString;
+            priceText[1].text = IAPManager._instance.GetLocalizedPrice(IAPManager._instance.expandLives);
         }
         else
         {
             IAPCards[1].gameObject.SetActive(false);
         }
 
-        priceText[2].text = IAPManager._instance.m_StoreController.products.WithID(IAPManager._instance.lives30).metadata.localizedPriceString;
-        priceText[3].text = IAPManager._instance.m_StoreController.products.WithID(IAPManager._instance.lives50).metadata.localizedPriceString;
-        priceText[4].text = IAPManager._instance.m_StoreController.products.WithID(IAPManager._instance.lives100).metadata.localizedPriceString;
+        priceText[2].text = IAPManager._instance.GetLocalizedPrice(IAPManager._instance.lives30);
+        priceText[3].text = IAPManager._instance.GetLocalizedPrice(IAPManager._instance.lives50);
+        priceText[4].text = IAPManager._instance.GetLocalizedPrice(IAPManager._instance.lives100);
     }
 
     public void FocusOnNearestObjectToCenter(float offset)

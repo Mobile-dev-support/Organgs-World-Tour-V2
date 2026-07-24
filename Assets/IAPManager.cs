@@ -1,22 +1,23 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Purchasing;
-using UnityEngine.Purchasing.Extension;
-using UnityEngine.UI;
 
-public class IAPManager : MonoBehaviour, IStoreListener
+public class IAPManager : MonoBehaviour
 {
-    public IStoreController m_StoreController; // The Unity Purchasing system.
+    private StoreController m_StoreController;
     public static IAPManager _instance;
     public GameObject panel;
-    //Your products IDs. They should match the ids of your products in your store.
+
+    // Product IDs - must match your store product IDs
     public string restoreLives = "com.purplebug.wt.restore";
     public string expandLives = "com.purplebug.wt.expandlives";
     public string lives30 = "com.purplebug.wt.30lives";
     public string lives50 = "com.purplebug.wt.50lives";
     public string lives100 = "com.purplebug.wt.100lives";
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private const string expandLivesPref = "expandLivesPurchased";
 
     private void Awake()
     {
@@ -29,115 +30,193 @@ public class IAPManager : MonoBehaviour, IStoreListener
             _instance = this;
         }
     }
+
     void Start()
     {
         panel.SetActive(false);
-        InitializePurchasing();
+        InitializeIAP();
     }
 
-    void InitializePurchasing()
+    #region In-App Purchasing
+
+    async void InitializeIAP()
     {
-        var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
+        m_StoreController = UnityIAPServices.StoreController();
 
-        //Add products that will be purchasable and indicate its type.
-        builder.AddProduct(restoreLives, ProductType.Consumable);
-        builder.AddProduct(expandLives, ProductType.NonConsumable);
-        builder.AddProduct(lives30, ProductType.Consumable);
-        builder.AddProduct(lives50, ProductType.Consumable);
-        builder.AddProduct(lives100, ProductType.Consumable);
-        UnityPurchasing.Initialize(this, builder);
-    }
+        m_StoreController.OnPurchasePending += OnPurchasePending;
+        m_StoreController.OnPurchasesFetched += OnPurchasesFetched;
+        m_StoreController.OnPurchaseFailed += OnPurchaseFailed;
+        m_StoreController.OnProductsFetched += OnProductsFetched;
+        m_StoreController.OnProductsFetchFailed += OnProductsFetchFailed;
+        m_StoreController.OnStoreDisconnected += OnStoreDisconnected;
 
-    public void OnInitializeFailed(InitializationFailureReason error)
-    {
-        OnInitializeFailed(error, null);
-    }
-
-    public void OnInitializeFailed(InitializationFailureReason error, string message)
-    {
-        var errorMessage = $"Purchasing failed to initialize. Reason: {error}.";
-
-        if (message != null)
+        try
         {
-            errorMessage += $" More details: {message}";
+            await m_StoreController.Connect();
+            Debug.Log("In-App Purchasing successfully connected to store.");
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"IAP Connect failed: {ex.Message}");
+            return;
         }
 
-        Debug.Log(errorMessage);
+        var initialProductsToFetch = new List<ProductDefinition>
+        {
+            new(restoreLives, ProductType.Consumable),
+            new(expandLives, ProductType.NonConsumable),
+            new(lives30, ProductType.Consumable),
+            new(lives50, ProductType.Consumable),
+            new(lives100, ProductType.Consumable)
+        };
+
+        m_StoreController.FetchProducts(initialProductsToFetch);
     }
 
-    public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
+    void OnProductsFetched(List<Product> products)
     {
-        //Retrieve the purchased product
-        var product = args.purchasedProduct;
+        Debug.Log($"Products fetched: {products.Count}");
+        m_StoreController.FetchPurchases();
+    }
 
-        //Add the purchased product to the players inventory
-        if (product.definition.id == restoreLives)
+    void OnProductsFetchFailed(ProductFetchFailed failure)
+    {
+        Debug.LogError($"OnProductsFetchFailed: {failure}");
+    }
+
+    void OnPurchasesFetched(Orders orders)
+    {
+        // Restore non-consumable purchases (expandLives)
+        foreach (var confirmedOrder in orders.ConfirmedOrders)
+        {
+            var item = confirmedOrder.CartOrdered.Items().FirstOrDefault();
+            if (item != null && item.Product.definition.id == expandLives)
+            {
+                Debug.Log($"Restored entitlement for {expandLives}");
+                BasicLife.Instance.SetLifeLimit(30);
+                PlayerPrefs.SetInt(expandLivesPref, 1);
+                PlayerPrefs.Save();
+            }
+        }
+
+        // Process any pending orders
+        foreach (var pendingOrder in orders.PendingOrders)
+        {
+            OnPurchasePending(pendingOrder);
+        }
+    }
+
+    void OnPurchasePending(PendingOrder pendingOrder)
+    {
+        var item = pendingOrder.CartOrdered.Items().FirstOrDefault();
+        if (item == null) return;
+
+        var productId = item.Product.definition.id;
+
+        if (productId == restoreLives)
         {
             BuyRestoreLivesCompleted();
         }
-        else if (product.definition.id == expandLives)
+        else if (productId == expandLives)
         {
             BuyExpandLivesCompleted();
         }
-        else if (product.definition.id == lives30)
+        else if (productId == lives30)
         {
             BuyExtraLivesCompleted(30);
         }
-        else if (product.definition.id == lives50)
+        else if (productId == lives50)
         {
             BuyExtraLivesCompleted(50);
         }
-        else if (product.definition.id == lives100)
+        else if (productId == lives100)
         {
             BuyExtraLivesCompleted(100);
         }
-   
-        Debug.Log($"Purchase Complete - Product: {product.definition.id}");
+        else
+        {
+            Debug.Log($"OnPurchasePending: Unrecognized product: '{productId}'");
+        }
 
-        //We return Complete, informing IAP that the processing on our side is done and the transaction can be closed.
-        return PurchaseProcessingResult.Complete;
+        Debug.Log($"Purchase Complete - Product: {productId}");
+        m_StoreController.ConfirmPurchase(pendingOrder);
     }
 
-    public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
+    void OnPurchaseFailed(FailedOrder failedOrder)
     {
-        Debug.Log($"Purchase failed - Product: '{product.definition.id}', PurchaseFailureReason: {failureReason}");
+        var item = failedOrder.CartOrdered.Items().FirstOrDefault();
+        string productId = item?.Product.definition.id ?? "unknown";
+        Debug.Log($"OnPurchaseFailed: Product: '{productId}', Reason: {failedOrder.FailureReason}");
     }
 
-    public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription)
+    void OnStoreDisconnected(StoreConnectionFailureDescription failure)
     {
-        Debug.Log($"Purchase failed - Product: '{product.definition.id}'," +
-            $" Purchase failure reason: {failureDescription.reason}," +
-            $" Purchase failure details: {failureDescription.message}");
+        Debug.LogError($"Store disconnected: {failure}");
     }
 
-    public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
+    void BuyProductID(string productId)
     {
-        extensions.GetExtension<IAppleExtensions>().RestoreTransactions((result, error) => {
-            if (result)
+        if (m_StoreController == null)
+        {
+            Debug.Log("BuyProductID FAIL. StoreController not available.");
+            return;
+        }
+
+        var products = m_StoreController.GetProducts();
+        var product = products?.FirstOrDefault(p => p.definition.id == productId);
+
+        if (product != null && product.availableToPurchase)
+        {
+            Debug.Log($"Purchasing product: '{product.definition.id}'");
+            m_StoreController.PurchaseProduct(product);
+        }
+        else
+        {
+            Debug.Log("BuyProductID: FAIL. Product not found or not available.");
+        }
+    }
+
+    /// <summary>
+    /// Returns the localized price string for a product, or empty string if unavailable.
+    /// </summary>
+    public string GetLocalizedPrice(string productId)
+    {
+        if (m_StoreController != null)
+        {
+            var products = m_StoreController.GetProducts();
+            var product = products?.FirstOrDefault(p => p.definition.id == productId);
+            if (product != null)
             {
-
+                return product.metadata.localizedPriceString;
             }
-            else
-            {
-
-            }
-        });
-        Debug.Log("In-App Purchasing successfully initialized");
-        m_StoreController = controller;
+        }
+        return "";
     }
+
+    public void RestorePurchases()
+    {
+        if (m_StoreController == null)
+        {
+            Debug.Log("RestorePurchases FAIL. StoreController not available.");
+            return;
+        }
+
+        Debug.Log("RestorePurchases: Fetching purchases to restore entitlements...");
+        m_StoreController.FetchPurchases();
+    }
+
+    #endregion
+
+    #region Purchase Actions
+
     public void BuyRestoreLives()
     {
-        m_StoreController.InitiatePurchase(restoreLives);
-
+        BuyProductID(restoreLives);
     }
 
     public void BuyExpandLives()
     {
-        try { 
-        m_StoreController.InitiatePurchase(expandLives);}
-        catch {
-            PopupController.Show("ERROR!", "Error Occured. Please try again later!");
-        }
+        BuyProductID(expandLives);
     }
 
     public void BuyExtraLives(int extraLives)
@@ -145,16 +224,20 @@ public class IAPManager : MonoBehaviour, IStoreListener
         switch (extraLives)
         {
             case 30:
-                m_StoreController.InitiatePurchase(lives30);
+                BuyProductID(lives30);
                 break;
             case 50:
-                m_StoreController.InitiatePurchase(lives50);
+                BuyProductID(lives50);
                 break;
             case 100:
-                m_StoreController.InitiatePurchase(lives100);
+                BuyProductID(lives100);
                 break;
         }
     }
+
+    #endregion
+
+    #region Purchase Fulfillment
 
     public void BuyRestoreLivesCompleted()
     {
@@ -164,10 +247,8 @@ public class IAPManager : MonoBehaviour, IStoreListener
         MainMenu.Instance.gameOverCanvas.Hide();
         if (GameManager.Instance != null)
         {
-            //When in Game
             GameManager.Instance.Respawn(true);
         }
-
     }
 
     public void BuyExtraLivesCompleted(int livesToAdd)
@@ -178,21 +259,36 @@ public class IAPManager : MonoBehaviour, IStoreListener
         MainMenu.Instance.gameOverCanvas.Hide();
         if (GameManager.Instance != null)
         {
-            //When in Game
             GameManager.Instance.Respawn(true);
         }
-
     }
 
     public void BuyExpandLivesCompleted()
     {
         BasicLife.Instance.SetLifeLimit(30);
+        PlayerPrefs.SetInt(expandLivesPref, 1);
+        PlayerPrefs.Save();
         MainMenu.Instance.shop_canvas.Hide();
         DisablePanel();
     }
 
+    #endregion
+
     public void DisablePanel()
     {
         panel.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        if (m_StoreController != null)
+        {
+            m_StoreController.OnPurchasePending -= OnPurchasePending;
+            m_StoreController.OnPurchasesFetched -= OnPurchasesFetched;
+            m_StoreController.OnPurchaseFailed -= OnPurchaseFailed;
+            m_StoreController.OnProductsFetched -= OnProductsFetched;
+            m_StoreController.OnProductsFetchFailed -= OnProductsFetchFailed;
+            m_StoreController.OnStoreDisconnected -= OnStoreDisconnected;
+        }
     }
 }

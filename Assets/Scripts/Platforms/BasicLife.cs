@@ -92,7 +92,7 @@ public class BasicLife : MonoBehaviour
 
     public void SubtractLife(int lifeToSubtract)
     {
-        if (!Debug.isDebugBuild)
+        if (DebugUnlocker.Instance == null || !DebugUnlocker.Instance.unlimitedLives)
         {
             life -= lifeToSubtract;
         }
@@ -102,7 +102,7 @@ public class BasicLife : MonoBehaviour
 
     public void SubtractExtraLife(int extraLifeToSubtract)
     {
-        if (!Debug.isDebugBuild)
+        if (DebugUnlocker.Instance == null || !DebugUnlocker.Instance.unlimitedLives)
         {
             extraLife -= extraLifeToSubtract;
         }
